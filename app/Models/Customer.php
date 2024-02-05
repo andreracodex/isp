@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     use HasFactory;
+
+    public function location()
+    {
+        return $this->hasMany(Location::class, 'id', 'location_id');
+    }
+
+    public function paket()
+    {
+        return $this->hasMany(Paket::class, 'id', 'paket_id');
+    }
 }

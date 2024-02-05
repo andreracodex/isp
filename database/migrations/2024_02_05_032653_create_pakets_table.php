@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama_paket');
             $table->string('jenis_paket');
             $table->float('harga_paket');
-            $table->integer('disc');
+            $table->integer('disc')->default(0);
             $table->timestamps();
         });
     }
