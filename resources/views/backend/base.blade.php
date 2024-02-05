@@ -54,7 +54,7 @@
                 <div class="page-header">
                     <div class="page-block">
                         <div class="row align-items-center">
-                            @include()
+                            @include('backend.pages.breadcrumbs')
                         </div>
                     </div>
                 </div>
@@ -912,6 +912,8 @@
         </div>
         @include('backend.components.footer')
     @endauth
+
+    @yield('contentlogin')
     <!-- [ Main Content ] end -->
 
     <div class="pct-c-btn">
