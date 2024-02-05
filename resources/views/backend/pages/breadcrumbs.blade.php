@@ -1,5 +1,5 @@
 @unless ($breadcrumbs->isEmpty())
-    <ol class="breadcrumb">
+    <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
         @foreach ($breadcrumbs as $breadcrumb)
 
@@ -10,5 +10,5 @@
             @endif
 
         @endforeach
-    </ol>
+    </ul>
 @endunless

@@ -18,4 +18,9 @@ class Customer extends Model
     {
         return $this->hasMany(Paket::class, 'id', 'paket_id');
     }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class, 'id');
+    }
 }

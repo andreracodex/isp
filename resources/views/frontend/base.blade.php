@@ -56,6 +56,15 @@
                 background-position: var(--bg-size) 0;
             }
         }
+
+        .wabutton {
+            width: 70px;
+            height: 70px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
     </style>
 </head>
 

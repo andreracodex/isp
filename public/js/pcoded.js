@@ -481,10 +481,10 @@ function layout_change(layout) {
     dark_flag = false;
     if (control) {
       if (document.querySelector('.pc-sidebar .m-header .logo-lg')) {
-        document.querySelector(".pc-sidebar .m-header .logo-lg").setAttribute('src', '../assets/images/logo-dark.svg');
+        document.querySelector(".pc-sidebar .m-header .logo-lg").setAttribute('src', '../assets/images/logo.png');
       }
       if (document.querySelector('.auth-header')) {
-        document.querySelector(".auth-header img").setAttribute('src', '../assets/images/logo-dark.svg');
+        document.querySelector(".auth-header img").setAttribute('src', '../assets/images/logo.png');
       }
     }
     var control = document.querySelector('.theme-layout .btn.active');

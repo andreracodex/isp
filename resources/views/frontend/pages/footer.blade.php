@@ -2,9 +2,8 @@
     <div class="container title mb-0">
         <div class="row align-items-center wow fadeInUp" data-wow-delay="0.2s">
             <div class="col-md-8">
-                <h2 class="mb-3">Stay connected with us</h2>
-                <p class="mb-4 mb-md-0">Simply submit your email, we share you the top news related to Able Pro
-                    feature updates, roadmap, and news.</p>
+                <h2 class="mb-3">Tetap terhubung bersama kami</h2>
+                <p class="mb-4 mb-md-0">Cukup kirimkan email Anda, kami membagikan berita teratas terkait pelayanan kami</p>
             </div>
             <div class="col-md-4">
                 <div class="row">
@@ -19,10 +18,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
-                    <img src="{{ asset('/images/logo-dark.svg') }}" alt="image" class="img-fluid mb-3" />
-                    <p class="mb-4">Phoenixcoded has gained the trust of over 5.5K customers since 2015, thanks
-                        to our commitment to delivering high-quality
-                        products. Our experienced team players are responsible for managing Able Pro.</p>
+                    <img src="{{ asset('/images/logo.png') }}" width="150" alt="image" class="img-fluid mb-3" />
+                    <p class="mb-4"><b>PT. Global Data Network</b></p><p>Jaringan Internet Fiber Optic tercepat dan terhandal di Indonesia yang menggunakan teknologi terkini sehingga dapat melayani layanan Data (Internet atau Komunikasi Data).</p>
                 </div>
                 <div class="col-md-8">
                     <div class="row">
@@ -32,8 +29,6 @@
                                 <li><a href="#"
                                         target="_blank">Profile</a></li>
                                 <li><a href="#"
-                                        target="_blank">Portfolio</a></li>
-                                <li><a href="#"
                                         target="_blank">Follow Us</a></li>
                                 <li><a href="#" target="_blank">Website</a></li>
                             </ul>
@@ -42,19 +37,15 @@
                             <h5 class="mb-4">Help & Support</h5>
                             <ul class="list-unstyled footer-link">
                                 <li><a href="#"
-                                        target="_blank">Documentation</a></li>
+                                        target="_blank">Create Ticket</a></li>
                                 <li><a href="#"
-                                        target="_blank">Feature Request</a></li>
-                                Explore Com<li><a href="#"
-                                        target="_blank">RoadMap</a></li>ponents
-                                <li><a href="#" target="_blank">Support</a>
-                                </li>
+                                        target="_blank">Upgrade Paket & Layanan</a></li>
                                 <li><a href="#"
                                         target="_blank">Email Us</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-4 wow fadeInUp" data-wow-delay="1s">
-                            <h5 class="mb-4">Useful Resources</h5>
+                            <h5 class="mb-4">FAQ</h5>
                             <ul class="list-unstyled footer-link">
                                 <li><a href="#"
                                         target="_blank">Support Policy</a></li>
