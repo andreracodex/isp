@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('nomor_akun_rekening');
             $table->integer('payment_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('payment_methode_name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

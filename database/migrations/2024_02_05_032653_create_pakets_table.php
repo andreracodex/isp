@@ -18,6 +18,7 @@ return new class extends Migration
             $table->float('harga_paket');
             $table->integer('disc')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('penanggung_jawab_locations');
             $table->string('kontak_penanggung_jawab_locations');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
