@@ -25,26 +25,26 @@
                         </div>
 
                         <form class="needs-validation" novalidate method="POST" action="{{ route('login') }}">
-                            @csrf
+                        @csrf
                             <div class="form-group mb-3">
                                 <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                    id="floatingInput" placeholder="Email Address" required>
+                                    name="email" id="email" placeholder="Email Address" required>
                                 @error('email')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                    id="floatingInput1" placeholder="Password" required>
+                                    name="password" id="password" placeholder="Password" required>
                                 @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="d-flex mt-1 justify-content-between align-items-center">
                                 <div class="form-check">
-                                    <input class="form-check-input input-primary" type="checkbox" id="customCheckc1"
-                                        checked="">
-                                    <label class="form-check-label text-muted" for="customCheckc1">Remember me?</label>
+                                    <input class="form-check-input input-primary" type="checkbox" id="check"
+                                        checked="" required>
+                                    <label class="form-check-label text-muted" for="check">Remember me?</label>
                                 </div>
                                 <a class="text-secondary f-w-400 mb-0" href="{{ route('forgotpassword') }}">Forgot
                                     Password?</a>

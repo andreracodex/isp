@@ -1,3 +1,4 @@
+ini dashboard
 @extends('layouts.backend.base')
 
 @section('styles')
