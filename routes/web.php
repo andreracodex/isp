@@ -21,6 +21,9 @@ Route::get('/', [HomeController::class, 'index'])->name('frontend');
 Route::get('/forgot-password', [HomeController::class, 'forgotpass'])->name('forgotpassword');
 Route::post('/send-mail', [HomeController::class, 'sendmail'])->name('sendmail');
 
+// Route::get('auth/google', [GoogleSocialiteController::class, 'redirectToGoogle']);
+// Route::get('callback/google', [GoogleSocialiteController::class, 'handleCallback']);
+
 Route::middleware('auth','has.role','auth.session')->group(function()
 {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -27,7 +27,7 @@ class HomeController extends Controller
 
     public function forgotpass(Request $request)
     {
-        return view('auth.forgot-password');
+        return view('backend.auth.forgot-password');
     }
 
     public function sendmail(Request $request)

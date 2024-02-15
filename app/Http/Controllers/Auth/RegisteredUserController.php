@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -20,7 +21,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        return view('backend.auth.register');
     }
 
     /**
@@ -30,22 +31,32 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+        // dd($request->confirmed);
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'min:5', 'max:25'],
+            'username' => ['required', 'string', 'min:5', 'max:25'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:100', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        if (!$validated) {
+            return redirect('register')->with('info', 'Mungkin ada input kamu yang salah');
+        } else {
 
-        event(new Registered($user));
+            $user = User::create([
+                'name' => $request->name,
+                'user_name' => $request->username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
 
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
+            Session::flush();
+            Auth::logoutOtherDevices($request->password);
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            return redirect('/')
+            ->with('success','User Registration Success');
+        }
     }
 }

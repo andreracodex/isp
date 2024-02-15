@@ -3,7 +3,7 @@
 <!-- [Head] start -->
 
 <head>
-    <title>Home | Able Pro Dashboard Template</title>
+    <title>GNet | Internet Provider Kesayangan Kamu </title>
     <!-- [Meta] -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -42,7 +42,7 @@
             <div class="loader-fill"></div>
         </div>
     </div>
-
+    @include('flash')
     {{-- Load Component if Auth --}}
     @auth
         @include('backend.components.sidebar')
@@ -1099,11 +1099,15 @@
     </div>
 
     <!-- [Page Specific JS] start -->
+    @auth
     <script src="{{ asset('/js/plugins/apexcharts.min.js') }}"></script>
     <script src="{{ asset('/js/pages/dashboard-default.js') }}"></script>
+    @endauth
     <!-- [Page Specific JS] end -->
     <!-- Required Js -->
+    <script src="{{ asset('/js/jquery.min.js') }}"></script>
     <script src="{{ asset('/js/plugins/popper.min.js') }}"></script>
+    <script src="{{ asset('/js/plugins/notify.min.js') }}"></script>
     <script src="{{ asset('/js/plugins/simplebar.min.js') }}"></script>
     <script src="{{ asset('/js/plugins/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/js/fonts/custom-font.js') }}"></script>

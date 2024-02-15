@@ -1,4 +1,4 @@
-@extends('layouts.backend.base')
+@extends('backend.base')
 
 @push('script')
 @endpush

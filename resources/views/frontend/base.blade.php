@@ -58,8 +58,8 @@
         }
 
         .wabutton {
-            width: 70px;
-            height: 70px;
+            width: 50px;
+            height: 50px;
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -77,7 +77,7 @@
         </div>
     </div>
     {{-- Pre Loader End --}}
-
+    @include('flash')
     {{-- Header Start --}}
     @include('frontend.pages.header')
     {{-- Header End --}}
@@ -94,6 +94,7 @@
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
     <!-- Required Js -->
     <script src="{{ asset('/js/plugins/popper.min.js') }}"></script>
+    <script src="{{ asset('/js/plugins/notify.min.js') }}"></script>
     <script src="{{ asset('/js/plugins/simplebar.min.js') }}"></script>
     <script src="{{ asset('/js/plugins/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/js/fonts/custom-font.js') }}"></script>
