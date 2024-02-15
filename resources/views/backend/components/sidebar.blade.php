@@ -15,8 +15,8 @@
                                 class="user-avtar wid-45 rounded-circle" />
                         </div>
                         <div class="flex-grow-1 ms-3 me-2">
-                            <h6 class="mb-0">Jonh Smith</h6>
-                            <small>Administrator</small>
+                            <h6 class="mb-0">{{Auth::user()->name}}</h6>
+                            <small>{{Auth::user()->user_name}}</small>
                         </div>
                         <a class="btn btn-icon btn-link-secondary avtar-s" data-bs-toggle="collapse"
                             href="#pc_sidebar_userlink">
@@ -50,7 +50,7 @@
 
             <ul class="pc-navbar">
                 <li class="pc-item pc-caption">
-                    <label>Navigation</label>
+                    <label>Home</label>
                     <i class="ti ti-dashboard"></i>
                 </li>
                 <li class="pc-item pc-hasmenu">
@@ -61,13 +61,7 @@
                             </svg>
                         </span>
                         <span class="pc-mtext">Dashboard</span>
-                        <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
-                        <span class="pc-badge">2</span>
                     </a>
-                    <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="../dashboard/index.html">Default</a></li>
-                        <li class="pc-item"><a class="pc-link" href="../dashboard/analytics.html">Analytics</a></li>
-                    </ul>
                 </li>
                 <li class="pc-item pc-caption">
                     <label>Widget</label>
