@@ -20,7 +20,7 @@
                         </div>
                         <div class="flex-grow-1 ms-3 me-2">
                             <h6 class="mb-0">{{ Auth::user()->name }}</h6>
-                            <small>{{ Auth::user()->user_name }}</small>
+                            <small>{{ Auth::user()->email }}</small>
                         </div>
                         <a class="btn btn-icon btn-link-secondary avtar-s" data-bs-toggle="collapse"
                             href="#pc_sidebar_userlink">
@@ -43,10 +43,15 @@
                                 <i class="ti ti-lock"></i>
                                 <span>Lock Screen</span>
                             </a>
-                            <a href="#!">
+                            @method('POST') @csrf
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="ti ti-power"></i>
                                 <span>Logout</span>
                             </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
                         </div>
                     </div>
                 </div>

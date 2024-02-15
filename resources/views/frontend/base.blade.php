@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description"
-        content="Able Pro is trending dashboard template made using Bootstrap 5 design framework. Able Pro is available in Bootstrap, React, CodeIgniter, Angular,  and .net Technologies." />
+        content="{{$profile[42]->value}}"/>
     <meta name="keywords"
-        content="Bootstrap admin template, Dashboard UI Kit, Dashboard Template, Backend Panel, react dashboard, angular dashboard" />
-    <meta name="author" content="Phoenixcoded" />
+        content="{{$profile[43]->value}}"/>
+    <meta name="author" content="{{$profile[5]->value}}"/>
 
     <!-- [Favicon] icon -->
     <link rel="icon" href="{{ asset('/images/favicon.svg') }}" type="image/x-icon" />

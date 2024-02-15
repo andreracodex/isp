@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comments;
 use App\Models\LandingPost;
+use App\Models\Setting;
 use App\Models\Slider;
 // use App\Models\Setting;
 use App\Models\UserSetting;
@@ -17,7 +18,8 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        return view('frontend.base');
+        $profile = Setting::all();
+        return view('frontend.base', compact('profile'));
     }
 
     public function about(Request $request)
