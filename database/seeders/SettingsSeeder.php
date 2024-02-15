@@ -28,32 +28,37 @@ class SettingsSeeder extends Seeder
         Setting::insert(array(
             array(
                 'name' => "company_logo",
-                'value' => '/front/dist/images/logos/logo-mely-horizontal.png',
+                'value' => '/images/logo.png',
+                'created_by' => 1,
+            ),
+            array(
+                'name' => "company_logo_dark",
+                'value' => '/images/logo-dark.png',
                 'created_by' => 1,
             ),
             array(
                 'name' => "company_favicon",
-                'value' => '/front/dist/images/logos/favicon.svg',
+                'value' => '/images/favicon.svg',
                 'created_by' => 1,
             ),
             array(
-                'name' => "company_side_logo_dark",
-                'value' => '/back/dist/images/logos/logo-mely-horizontal.webp',
+                'name' => "company_sidebar_logo",
+                'value' => '/images/logo.png',
                 'created_by' => 1,
             ),
-            // array(
-            //     'name' => "company_side_logo_dark",
-            //     'value' => '/front/dist/images/logos/logo-dark.svg',
-            //     'created_by' => 1,
-            // ),
             array(
-                'name' => "company_side_logo_white",
-                'value' => '/front/dist/images/logos/logo-white.svg',
+                'name' => "company_sidebar_logo_dark",
+                'value' =>  '/images/logo-dark.png',
                 'created_by' => 1,
             ),
             array(
                 'name' => "title_text",
-                'value' => 'Evarindo',
+                'value' => 'GNet',
+                'created_by' => 1,
+            ),
+            array(
+                'name' => "subtitle_text",
+                'value' => 'Internet Provider Kesayangan Kamu',
                 'created_by' => 1,
             ),
             array(
@@ -102,7 +107,7 @@ class SettingsSeeder extends Seeder
                 'created_by' => 1,
             ),
             array(
-                'name' => "vender_prefix",
+                'name' => "vendor_prefix",
                 'value' => ' ',
                 'created_by' => 1,
             ),
@@ -113,7 +118,7 @@ class SettingsSeeder extends Seeder
             ),
             array(
                 'name' => "footer_title_notes",
-                'value' => ' ',
+                'value' => '',
                 'created_by' => 1,
             ),
             array(
@@ -133,27 +138,27 @@ class SettingsSeeder extends Seeder
             ),
             array(
                 'name' => "company_name",
-                'value' => 'PT. Evarindo',
+                'value' => 'PT. Global Data Network',
                 'created_by' => 1,
             ),
             array(
                 'name' => "company_address",
-                'value' => 'Jalan Raya Cangkringmalang km. 40, Beji',
+                'value' => 'Jl. Dinoyo Tenun No.109, Keputran, Kec. Tegalsari',
                 'created_by' => 1,
             ),
             array(
                 'name' => "company_city",
-                'value' => 'Pasuruan',
+                'value' => 'Surabaya',
                 'created_by' => 1,
             ),
             array(
                 'name' => "company_state",
-                'value' => 'East Java',
+                'value' => 'Jawa Timur',
                 'created_by' => 1,
             ),
             array(
                 'name' => "company_zipcode",
-                'value' => '67154',
+                'value' => '60265',
                 'created_by' => 1,
             ),
             array(
@@ -163,17 +168,17 @@ class SettingsSeeder extends Seeder
             ),
             array(
                 'name' => "company_telephone",
-                'value' => '0343656288',
+                'value' => '(+62)857 3177 0730',
                 'created_by' => 1,
             ),
             array(
                 'name' => "company_email",
-                'value' => 'contact@evarindo.com',
+                'value' => 'admin@gnet.co.id',
                 'created_by' => 1,
             ),
             array(
                 'name' => "company_email_from_name",
-                'value' => 'notif@evarindo.com',
+                'value' => 'admin@gnet.co.id',
                 'created_by' => 1,
             ),
             array(
@@ -183,7 +188,27 @@ class SettingsSeeder extends Seeder
             ),
             array(
                 'name' => "tax_type",
-                'value' => ' ',
+                'value' => 'enabled',
+                'created_by' => 1,
+            ),
+            array(
+                'name' => "tax_fee",
+                'value' => 11, // Nilai besaran pajak
+                'created_by' => 1,
+            ),
+            array(
+                'name' => "tax_tempo_date",
+                'value' => 20, // Tanggal jatuh tempo tagihan
+                'created_by' => 1,
+            ),
+            array(
+                'name' => "tax_date_line",
+                'value' => 2, // Tagihan dibuat sebelum hari
+                'created_by' => 1,
+            ),
+            array(
+                'name' => "isolir",
+                'value' => 1, // Default = 0 Tidak Aktif, 1 = Aktif
                 'created_by' => 1,
             ),
             array(
@@ -198,12 +223,12 @@ class SettingsSeeder extends Seeder
             ),
             array(
                 'name' => "title_text_option",
-                'value' => 'PT. Evarindo',
+                'value' => 'PT. Global Data Network',
                 'created_by' => 1,
             ),
             array(
                 'name' => "footer_text_option",
-                'value' => 'PT. Evarindo',
+                'value' => 'PT. Global Data Network',
                 'created_by' => 1,
             ),
             array(
@@ -213,42 +238,17 @@ class SettingsSeeder extends Seeder
             ),
             array(
                 'name' => "meta_description",
-                'value' => 'PT Evarindo merupakan produsen manufaktur sendal merek melly.',
+                'value' => 'PT. Global Data Network - ISP Kesayangan Kamu',
                 'created_by' => 1,
             ),
             array(
                 'name' => "meta_keywords",
-                'value' => 'sandal, local, local pride, melly, sandal masa kini,',
-                'created_by' => 1,
-            ),
-            array(
-                'name' => "setting_profile_url",
-                'value' => 'profile.index',
+                'value' => 'internet, global, data, network, isp, kesayangan, kamu',
                 'created_by' => 1,
             ),
             array(
                 'name' => "foot_note_remarks",
-                'value' => 'Dev Team',
-                'created_by' => 1,
-            ),
-            array(
-                'name' => "head_office_address",
-                'value' => 'Jl. Argopuro No. 42 Sawahan	1',
-                'created_by' => 1,
-            ),
-            array(
-                'name' => "head_office_city",
-                'value' => 'Surabaya',
-                'created_by' => 1,
-            ),
-            array(
-                'name' => "head_office_postal_code",
-                'value' => '60252',
-                'created_by' => 1,
-            ),
-            array(
-                'name' => "head_office_state",
-                'value' => 'East Java',
+                'value' => 'https://berdikari.web.id',
                 'created_by' => 1,
             ),
         ));
@@ -407,7 +407,13 @@ class SettingsSeeder extends Seeder
                 'email' => 'admin@isp.com',
                 'is_active' => 1,
                 'password' => bcrypt(12345678),
+                'path' => '',
                 'user_type' => 'admin',
+            ),
+        );
+        UserSetting::insert(
+            array(
+                'user_id' => 1,
             ),
         );
         User::insert(
@@ -417,10 +423,15 @@ class SettingsSeeder extends Seeder
                 'email' => 'user@isp.com',
                 'is_active' => 1,
                 'password' => bcrypt(12345678),
+                'path' => '',
                 'user_type' => 'user',
             ),
         );
-
+        UserSetting::insert(
+            array(
+                'user_id' => 2,
+            ),
+        );
         User::insert(
             array(
                 'name' => 'user',
@@ -428,7 +439,13 @@ class SettingsSeeder extends Seeder
                 'email' => 'user@gmail.com',
                 'is_active' => 1,
                 'password' => bcrypt(12345678),
+                'path' => '',
                 'user_type' => 'user',
+            ),
+        );
+        UserSetting::insert(
+            array(
+                'user_id' => 3,
             ),
         );
 

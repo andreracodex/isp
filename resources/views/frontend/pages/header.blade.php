@@ -2,7 +2,7 @@
     <!-- [ Nav ] start -->
     <nav class="navbar navbar-expand-md navbar-light default">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{{ route('frontend') }}">
                 <img src="{{ asset('/images/logo.png') }}" width="100" alt="logo" />
             </a>
             <button class="navbar-toggler rounded" type="button" data-bs-toggle="collapse"
@@ -15,6 +15,10 @@
                     <li class="nav-item">
                         <a class="btn btn btn-primary" target="_blank" href="{{ route('login') }}">Member Area<i
                                 class="ti ti-door-enter"></i></a>
+                        @auth
+                        <a class="btn btn btn-outline-primary" target="_blank" href="{{ route('dashboard') }}">Dashboard<i
+                            class="ti ti-door-enter"></i></a>
+                        @endauth
                     </li>
                 </ul>
             </div>

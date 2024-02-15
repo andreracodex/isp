@@ -14,9 +14,8 @@
                     </a>
                 </li>
                 <li class="dropdown pc-h-item">
-                    <a class="pc-head-link dropdown-toggle arrow-none m-0 trig-drp-search"
-                        data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
-                        aria-expanded="false">
+                    <a class="pc-head-link dropdown-toggle arrow-none m-0 trig-drp-search" data-bs-toggle="dropdown"
+                        href="#" role="button" aria-haspopup="false" aria-expanded="false">
                         <svg class="pc-icon">
                             <use xlink:href="#custom-search-normal-1"></use>
                         </svg>
@@ -34,8 +33,8 @@
         <div class="ms-auto">
             <ul class="list-unstyled">
                 <li class="dropdown pc-h-item">
-                    <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown"
-                        href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"
+                        role="button" aria-haspopup="false" aria-expanded="false">
                         <svg class="pc-icon">
                             <use xlink:href="#custom-sun-1"></use>
                         </svg>
@@ -62,8 +61,8 @@
                     </div>
                 </li>
                 <li class="dropdown pc-h-item">
-                    <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown"
-                        href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"
+                        role="button" aria-haspopup="false" aria-expanded="false">
                         <svg class="pc-icon">
                             <use xlink:href="#custom-setting-2"></use>
                         </svg>
@@ -100,8 +99,8 @@
                     </a>
                 </li>
                 <li class="dropdown pc-h-item">
-                    <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown"
-                        href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"
+                        role="button" aria-haspopup="false" aria-expanded="false">
                         <svg class="pc-icon">
                             <use xlink:href="#custom-notification"></use>
                         </svg>
@@ -213,10 +212,9 @@
                     </div>
                 </li>
                 <li class="dropdown pc-h-item header-user-profile">
-                    <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown"
-                        href="#" role="button" aria-haspopup="false" data-bs-auto-close="outside"
-                        aria-expanded="false">
-                        <img src="{{asset('/images/user/avatar-2.jpg') }}" alt="user-image" class="user-avtar" />
+                    <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"
+                        role="button" aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false">
+                        <img src="{{ asset('/images/user/avatar-2.jpg') }}" alt="user-image" class="user-avtar" />
                     </a>
                     <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
                         <div class="dropdown-header d-flex align-items-center justify-content-between">
@@ -227,12 +225,12 @@
                                 style="max-height: calc(100vh - 225px)">
                                 <div class="d-flex mb-1">
                                     <div class="flex-shrink-0">
-                                        <img src="{{asset('/images/user/avatar-2.jpg') }}" alt="user-image"
+                                        <img src="{{ asset('/images/user/avatar-2.jpg') }}" alt="user-image"
                                             class="user-avtar wid-35" />
                                     </div>
                                     <div class="flex-grow-1 ms-3">
-                                        <h6 class="mb-1">Carson Darrin 🖖</h6>
-                                        <span>carson.darrin@company.io</span>
+                                        <h6 class="mb-1">{{Auth::user()->name}}</h6>
+                                        <span>{{Auth::user()->email}}</span>
                                     </div>
                                 </div>
                                 <hr class="border-secondary border-opacity-50" />
@@ -276,93 +274,17 @@
                                     </span>
                                 </a>
                                 <hr class="border-secondary border-opacity-50" />
-                                <p class="text-span">Team</p>
-                                <a href="#" class="dropdown-item">
-                                    <span>
-                                        <svg class="pc-icon text-muted me-2">
-                                            <use xlink:href="#custom-profile-2user-outline"></use>
-                                        </svg>
-                                        <span>UI Design team</span>
-                                    </span>
-                                    <div class="user-group">
-                                        <img src="{{asset('/images/user/avatar-1.jpg') }}" alt="user-image"
-                                            class="avtar" />
-                                        <span class="avtar bg-danger text-white">K</span>
-                                        <span class="avtar bg-success text-white">
-                                            <svg class="pc-icon m-0">
-                                                <use xlink:href="#custom-user"></use>
-                                            </svg>
-                                        </span>
-                                        <span class="avtar bg-light-primary text-primary">+2</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item">
-                                    <span>
-                                        <svg class="pc-icon text-muted me-2">
-                                            <use xlink:href="#custom-profile-2user-outline"></use>
-                                        </svg>
-                                        <span>Friends Groups</span>
-                                    </span>
-                                    <div class="user-group">
-                                        <img src="{{asset('/images/user/avatar-1.jpg') }}" alt="user-image"
-                                            class="avtar" />
-                                        <span class="avtar bg-danger text-white">K</span>
-                                        <span class="avtar bg-success text-white">
-                                            <svg class="pc-icon m-0">
-                                                <use xlink:href="#custom-user"></use>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item">
-                                    <span>
-                                        <svg class="pc-icon text-muted me-2">
-                                            <use xlink:href="#custom-add-outline"></use>
-                                        </svg>
-                                        <span>Add new</span>
-                                    </span>
-                                    <div class="user-group">
-                                        <span class="avtar bg-primary text-white">
-                                            <svg class="pc-icon m-0">
-                                                <use xlink:href="#custom-add-outline"></use>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </a>
-                                <hr class="border-secondary border-opacity-50" />
                                 <div class="d-grid mb-3">
-                                    <button class="btn btn-primary">
-                                        <svg class="pc-icon me-2">
-                                            <use xlink:href="#custom-logout-1-outline"></use>
-                                        </svg>Logout
-                                    </button>
-                                </div>
-                                <div class="card border-0 shadow-none drp-upgrade-card mb-0"
-                                    style="background-image: url({{asset('/images/layout/img-profile-card.jpg') }})">
-                                    <div class="card-body">
-                                        <div class="user-group">
-                                            <img src="{{asset('/images/user/avatar-1.jpg') }}" alt="user-image"
-                                                class="avtar" />
-                                            <img src="{{asset('/images/user/avatar-2.jpg') }}" alt="user-image"
-                                                class="avtar" />
-                                            <img src="{{asset('/images/user/avatar-3.jpg') }}" alt="user-image"
-                                                class="avtar" />
-                                            <img src="{{asset('/images/user/avatar-4.jpg') }}" alt="user-image"
-                                                class="avtar" />
-                                            <img src="{{asset('/images/user/avatar-5.jpg') }}" alt="user-image"
-                                                class="avtar" />
-                                            <span class="avtar bg-light-primary text-primary">+20</span>
-                                        </div>
-                                        <h3 class="my-3 text-dark">245.3k <small
-                                                class="text-muted">Followers</small></h3>
-                                        <div class="btn btn btn-warning">
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button class="btn btn-primary" type="submit">
                                             <svg class="pc-icon me-2">
                                                 <use xlink:href="#custom-logout-1-outline"></use>
-                                            </svg>
-                                            Upgrade to Business
-                                        </div>
-                                    </div>
+                                            </svg>Logout
+                                        </button>
+                                    </form>
                                 </div>
+
                             </div>
                         </div>
                     </div>
