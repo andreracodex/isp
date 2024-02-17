@@ -14,7 +14,7 @@
     <meta name="author" content="{{$profile[5]->value}}"/>
 
     <!-- [Favicon] icon -->
-    <link rel="icon" href="{{ asset('/images/favicon.svg') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('/favicon.ico') }}" type="image/x-icon" />
 
     <!-- [Page specific CSS] start -->
     <link href="{{ asset('/css/plugins/animate.min.css') }}" rel="stylesheet" type="text/css" />
