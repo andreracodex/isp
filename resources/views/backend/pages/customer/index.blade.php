@@ -57,7 +57,7 @@
                     [10, 25, 50, "All"]
                 ],
                 order: [
-                    [2, 'asc']
+                    [3, 'asc']
                 ],
                 select: {
                     style: 'multi',
@@ -72,16 +72,18 @@
                 },
                 columnDefs: [{
                         targets: 0,
-                        className: 'control'
+                        className: 'control',
+                        orderable: false,
+                        searchable: false,
                     },
                     {
                         targets: 1,
-                        className: 'select-checkbox'
+                        orderable: false,
+                        searchable: false,
+                        checkboxes: {
+                            selectRow: true
+                        }
                     },
-                    {
-                        targets: [0, 1],
-                        orderable: false
-                    }
                 ],
                 // Ini Option supaya semua
                 columns: [
@@ -217,7 +219,7 @@
                         <table id="customer" class="table compact table-striped table-hover table-bordered wrap" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th></th>
+                                    <th>#</th>
                                     <th>#</th>
                                     <th>Nama</th>
                                     <th>Nomor Layanan</th>
