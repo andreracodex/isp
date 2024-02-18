@@ -1,4 +1,4 @@
-@extends('layouts.backend.base')
+@extends('backend.base')
 
 @section('styles')
 @endsection
@@ -59,6 +59,7 @@
                             columns: ':visible'
                         },
                     },
+                    'colvis'
                 ],
                 lengthMenu: [
                     [10, 25, 50, -1],
@@ -123,55 +124,40 @@
 @endpush
 
 @section('isi')
-    <div class="card bg-light-info shadow-none position-relative overflow-hidden">
-        <div class="card-body px-4 py-3">
+    {{-- Breadcrumbs --}}
+    <div class="page-header">
+        <div class="page-block">
             <div class="row align-items-center">
-                <div class="col-9">
-                    <h4 class="fw-semibold mb-8">Customer</h4>
+                <div class="col-md-12">
                     {{ Breadcrumbs::render() }}
                 </div>
-                <div class="col-3">
-                    <div class="text-center mb-n5">
-                        <img src="{{ asset('back/dist/images/breadcrumb/customer.webp') }}" alt=""
-                            class="img-fluid mb-n4">
+                <div class="col-md-12">
+                    <div class="page-header-title">
+                        <h2 class="mb-0">Pelanggan</h2>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    @can('add customer')
-    <div class="card">
-        <div class="card-header">
-            <h5>Create New Customer</h5>
-        </div>
-        <div class="card-body">
-            <form action="{{ route('customer.create') }}" enctype="multipart/form-data" method="POST"
-                class="needs-validation" novalidate="">
-                @csrf
-                @include('layouts.backend.pages.customer.partials.form-control-product', [
-                    'submit' => 'Create',
-                ])
-            </form>
-        </div>
-    </div>
-    @endcan
-
-    <section class="datatables">
-        <div class="row">
+    <div class="row">
+        <div class="col-sm-12">
             <div class="card">
+                <div class="card-header">
+                    <h5>Data Pelanggan</h5>
+                    <small>Data pelanggan.</small>
+                </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="customer" style="width:100%"
-                            class="table table-hover table-bordered datatable-select-inputs text-nowrap">
+                    <div class="dt-responsive table-responsive">
+                        <table id="customer" class="table table-striped table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Cust. Code</th>
-                                    <th>Nama Customer</th>
-                                    <th>Kota Customer</th>
-                                    <th>Active</th>
-                                    <th>Action</th>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Office</th>
+                                    <th>Age</th>
+                                    <th>Start date</th>
+                                    <th>Salary</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -181,5 +167,5 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 @endsection

@@ -3,10 +3,11 @@ use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
 
-Breadcrumbs::for('errors.404', function (BreadcrumbTrail $trail) {
-    $trail->parent('dashboard');
-    $trail->push('Page Not Found');
+Breadcrumbs::for('dashboard', function (BreadcrumbTrail $trail): void {
+    $trail->push('Home', route('dashboard'));
 });
-Breadcrumbs::for('dashboard', function (BreadcrumbTrail $trail) {
-    $trail->push('Dashboard', route('dashboard'));
+// Customers
+Breadcrumbs::for('customer.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Pelanggan', route('customer.index'));
 });

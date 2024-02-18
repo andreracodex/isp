@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -28,8 +29,19 @@ Route::post('/send-mail', [HomeController::class, 'sendmail'])->name('sendmail')
 Route::middleware('auth','has.role','auth.session')->group(function()
 {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // PROFILE
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Customer
+    Route::prefix('customer')->group(function(){
+        Route::get('', [CustomerController::class, 'index'])->name('customer.index');
+        Route::post('', [CustomerController::class, 'store'])->name('customer.store');
+        Route::get('{role}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
+        Route::put('{role}/edit', [CustomerController::class, 'update']);
+    });
+
 });
 

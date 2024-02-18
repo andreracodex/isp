@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Setting;
+use App\Models\UserSetting;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -12,7 +14,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $profile = Setting::all();
+        return view('backend.pages.customer.customer', compact('profile'));
     }
 
     /**

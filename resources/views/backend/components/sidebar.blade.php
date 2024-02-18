@@ -77,7 +77,7 @@
                     <i class="ti ti-chart-arcs"></i>
                 </li>
                 <li class="pc-item">
-                    <a href="#" class="pc-link">
+                    <a href="{{ route('customer.index') }}" class="pc-link">
                         <span class="pc-micon">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-story"></use>

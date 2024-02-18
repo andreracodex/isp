@@ -51,15 +51,15 @@
     {{-- Pre Loader End --}}
     @include('flash')
     {{-- Header Start --}}
-    @include('frontend.pages.header')
+    @include('frontend.components.header')
     {{-- Header End --}}
 
     {{-- Content Start --}}
-    @include('frontend.pages.content')
+    @include('frontend.components.content')
     {{-- Content End --}}
 
     <!-- [ footer apps ] start -->
-    @include('frontend.pages.footer')
+    @include('frontend.components.footer')
     <!-- [ footer apps ] End -->
 
     <!-- [ Main Content ] end -->
