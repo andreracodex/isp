@@ -31,6 +31,10 @@
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" id="main-style-link" />
     <link rel="stylesheet" href="{{ asset('/css/style-preset.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/plugins/notifier.css') }}" />
+    @auth
+    <link rel="stylesheet" href="{{ asset('/css/plugins/dataTables.bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/plugins/buttons.bootstrap5.min.css') }}">
+    @endauth
     @stack('styles')
 </head>
 <!-- [Head] end -->

@@ -12,29 +12,20 @@
                 }
             });
             var table = $('#customer').DataTable({
-                dom: "<'row'<'col-sm-12 col-md-6'Bl><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                dom : "<'row'<'col-sm-12 col-md-6'Bl><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 deferRender: true,
                 processing: true,
                 serverSide: true,
-                autoWidth: true,
-                scrollX: true,
+                autoWidth: false,
+                scrollX: false,
                 ajax: "{{ route('customer.index') }}",
-                buttons: [{
-                        extend: 'copyHtml5',
-                        text: '<i class="fa fa-clipboard"></i>',
-                        title: 'Data Customer',
-                        titleAttr: 'Copy Clipboard',
-                        className: 'btn btn-rounded btn-secondary',
-                        exportOptions: {
-                            columns: ':visible'
-                        },
-                    },
+                buttons: [
                     {
                         extend: 'print',
                         text: '<i class="fa fa-print"></i>',
                         title: 'Data Customer',
                         titleAttr: 'Cetak Print',
-                        className: 'btn btn-rounded btn-warning',
+                        className: 'btn btn-sm btn-rounded btn-primary',
                         exportOptions: {
                             columns: ':visible'
                         }
@@ -44,7 +35,7 @@
                         text: '<i class="fa fa-file-excel"></i>',
                         title: 'Data Customer',
                         titleAttr: 'Export Excel',
-                        className: 'btn btn-rounded btn-success',
+                        className: 'btn btn-sm btn-rounded btn-primary',
                         exportOptions: {
                             columns: ':visible'
                         },
@@ -54,7 +45,7 @@
                         text: '<i class="fa fa-file-pdf"></i>',
                         title: 'Data Customer',
                         titleAttr: 'Export PDF',
-                        className: 'btn btn-rounded btn-primary',
+                        className: 'btn btn-sm btn-rounded btn-primary',
                         exportOptions: {
                             columns: ':visible'
                         },
@@ -70,16 +61,8 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'kode_customer',
-                        name: 'kode_customer'
-                    },
-                    {
                         data: 'nama_customer',
                         name: 'nama_customer'
-                    },
-                    {
-                        data: 'kota_customer',
-                        name: 'kota_customer'
                     },
                     {
                         data: 'is_active',
@@ -119,6 +102,22 @@
 
                 }
             });
+            table.button().add(3, {
+                action: function(e, dt, button, config) {
+                    dt.ajax.reload();
+                },
+                text: '<i class="fa fa-sync-alt"></i>',
+                className: 'btn btn-sm btn-rounded btn-primary',
+                titleAttr: 'Refresh Table',
+            });
+            table.button().add(5, {
+                action: function(e, dt, button, config) {
+
+                },
+                text: '<i class="fa fa-plus"></i>',
+                className: 'btn btn-sm btn-rounded btn-info',
+                titleAttr: 'Add Customer',
+            });
         });
     </script>
 @endpush
@@ -152,12 +151,10 @@
                         <table id="customer" class="table table-striped table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th>ID</th>
+                                    <th>Nama</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
