@@ -38,7 +38,7 @@ class SettingsSeeder extends Seeder
             ),
             array(
                 'name' => "company_favicon",
-                'value' => '/images/favicon.svg',
+                'value' => '/images/favicon.ico',
                 'created_by' => 1,
             ),
             array(

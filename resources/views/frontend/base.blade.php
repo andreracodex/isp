@@ -14,7 +14,7 @@
     <meta name="author" content="{{$profile[5]->value}}"/>
 
     <!-- [Favicon] icon -->
-    <link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ asset($profile[2]->value) }}" type="image/x-icon" />
 
     <!-- [Page specific CSS] start -->
     <link href="{{ asset('/css/plugins/animate.min.css') }}" rel="stylesheet" type="text/css" />
@@ -37,35 +37,7 @@
 
     <link rel="stylesheet" href="{{ asset('/css/landing.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/plugins/owl.carousel.min.css') }}" />
-    <!-- Gradient Text Animation CSS -->
-    <style>
-        .hero-text-gradient {
-            --bg-size: 400%;
-            --color-one: rgb(37, 161, 244);
-            --color-two: rgb(249, 31, 169);
 
-            background: linear-gradient(90deg, var(--color-one), var(--color-two), var(--color-one)) 0 0 / var(--bg-size) 100%;
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-            animation: move-bg 24s infinite linear;
-        }
-
-        @keyframes move-bg {
-            to {
-                background-position: var(--bg-size) 0;
-            }
-        }
-
-        .wabutton {
-            width: 50px;
-            height: 50px;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 100;
-        }
-    </style>
 </head>
 
 <body class="landing-page">

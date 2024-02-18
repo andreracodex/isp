@@ -15,7 +15,7 @@
     @endauth
 
     <!-- [Favicon] icon -->
-    <link rel="icon" href="{{ asset('/images/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset($profile[2]->value) }}" type="image/x-icon">
     <!-- [Font] Family -->
     <link rel="stylesheet" href="{{ asset('/fonts/inter/inter.css') }}" id="main-font-link" />
 
