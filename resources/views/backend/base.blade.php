@@ -3,7 +3,7 @@
 <!-- [Head] start -->
 
 <head>
-    <title>GNet | Internet Provider Kesayangan Kamu </title>
+    <title>GNet | @yield('title')</title>
     <!-- [Meta] -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -15,7 +15,7 @@
     @endauth
 
     <!-- [Favicon] icon -->
-    <link rel="icon" href="{{ asset('/images/favicon.svg') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('/images/favicon.ico') }}" type="image/x-icon">
     <!-- [Font] Family -->
     <link rel="stylesheet" href="{{ asset('/fonts/inter/inter.css') }}" id="main-font-link" />
 
