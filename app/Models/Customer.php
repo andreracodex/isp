@@ -28,14 +28,14 @@ class Customer extends Model
         'is_active',
     ];
 
-    public function location()
+    public function coordinate()
     {
-        return $this->hasMany(Location::class, 'id', 'location_id');
+        return $this->hasOne(Coordinate::class, 'id', 'location_id');
     }
 
     public function paket()
     {
-        return $this->hasMany(Paket::class, 'id', 'paket_id');
+        return $this->hasOne(Paket::class, 'id', 'paket_id');
     }
 
     public function tickets()

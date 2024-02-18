@@ -12,10 +12,11 @@
         <meta name="description" content="{{ $profile[42]->value }}" />
         <meta name="keywords" content="{{ $profile[43]->value }}" />
         <meta name="author" content="{{ $profile[5]->value }}" />
+        <!-- [Favicon] icon -->
+        <link rel="icon" href="{{ asset($profile[2]->value) }}" type="image/x-icon">
+
     @endauth
 
-    <!-- [Favicon] icon -->
-    <link rel="icon" href="{{ asset($profile[2]->value) }}" type="image/x-icon">
     <!-- [Font] Family -->
     <link rel="stylesheet" href="{{ asset('/fonts/inter/inter.css') }}" id="main-font-link" />
 

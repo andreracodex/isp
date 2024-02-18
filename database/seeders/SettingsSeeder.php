@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Comments;
 use App\Models\LandingPost;
+use App\Models\Paket;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\UserSetting;
@@ -425,6 +426,38 @@ class SettingsSeeder extends Seeder
                 'password' => bcrypt(12345678),
                 'path' => '',
                 'user_type' => 'user',
+            ),
+        );
+        Paket::insert(
+            array(
+                'nama_paket'=> '1',
+                'jenis_paket'=> '1 Mbps',
+                'harga_paket'=> rand(100000, 150000),
+                'disc'=> 0,
+            ),
+        );
+        Paket::insert(
+            array(
+                'nama_paket'=> '2',
+                'jenis_paket'=> '2 Mbps',
+                'harga_paket'=> rand(100000, 150000),
+                'disc'=> 0,
+            ),
+        );
+        Paket::insert(
+            array(
+                'nama_paket'=> '3',
+                'jenis_paket'=> '3 Mbps',
+                'harga_paket'=> rand(100000, 150000),
+                'disc'=> 0,
+            ),
+        );
+        Paket::insert(
+            array(
+                'nama_paket'=> '4',
+                'jenis_paket'=> '4 Mbps',
+                'harga_paket'=> rand(100000, 150000),
+                'disc'=> 0,
             ),
         );
         UserSetting::insert(

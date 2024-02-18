@@ -23,9 +23,9 @@ class CustomerController extends Controller
             ->editColumn('cust_id', function (Customer $cust) {
                 return $cust->id;
             })
-            ->editColumn('harga', function (Customer $cust) {
-                return $cust->paket->harga_paket;
-            })
+            // ->editColumn('harga', function (Customer $cust) {
+            //     return $cust->paket->harga_paket;
+            // })
             ->addColumn('action', function (Customer $cust) {
                 return "
                 <a href=". route('customer.edit', $cust->id) ." class='btn btn-sm btn-warning' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-pencil-alt'></i></a>

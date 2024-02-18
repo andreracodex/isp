@@ -4,6 +4,7 @@
 @endsection
 
 @push('script')
+    <script src="{{ asset('/js/plugins/dataTables.responsive.min.js') }}"></script>
     <script type="text/javascript">
         $(function() {
             $.ajaxSetup({
@@ -16,7 +17,7 @@
                 deferRender: true,
                 processing: true,
                 serverSide: true,
-                autoWidth: true,
+                responsive: true,
                 ajax: "{{ route('customer.index') }}",
                 buttons: [
                     'colvis',
@@ -58,8 +59,33 @@
                 order: [
                     [2, 'asc']
                 ],
+                select: {
+                    style: 'multi',
+                    selector: '.select-checkbox',
+                    items: 'row',
+                },
+                responsive: {
+                    details: {
+                        type: 'column',
+                        target: 0
+                    }
+                },
+                columnDefs: [{
+                        targets: 0,
+                        className: 'control'
+                    },
+                    {
+                        targets: 1,
+                        className: 'select-checkbox'
+                    },
+                    {
+                        targets: [0, 1],
+                        orderable: false
+                    }
+                ],
                 // Ini Option supaya semua
-                columns: [{
+                columns: [
+                    {
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex'
                     },
@@ -115,14 +141,6 @@
                         orderable: false
                     },
                 ],
-                columnDefs: [{
-                    targets: 0,
-                    orderable: false,
-                    searchable: false,
-                    checkboxes: {
-                        selectRow: true
-                    }
-                }],
                 "initComplete": function() {
                     $(".dataTables_filter input")
                         .unbind() // Unbind previous default bindings
@@ -196,7 +214,7 @@
                 </div>
                 <div class="card-body">
                     <div class="dt-responsive table-responsive">
-                        <table id="customer" class="table compact table-bordered nowrap">
+                        <table id="customer" class="table compact table-striped table-hover table-bordered wrap" style="width:100%">
                             <thead>
                                 <tr>
                                     <th></th>

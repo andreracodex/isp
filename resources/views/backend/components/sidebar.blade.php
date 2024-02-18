@@ -4,9 +4,9 @@
             <a href="{{ route('frontend') }}" class="b-brand text-primary">
                 <!-- ========   Change your logo from here   ============ -->
                 @if (session()->has('isDark'))
-                <img src="{{ asset($profile[1]->value) }}" width="100" />
+                <img src="{{ asset($profile[1]->value) }}" width="100" height="40" />
                 @else
-                <img src="{{ asset($profile[0]->value) }}" width="100" />
+                <img src="{{ asset($profile[0]->value) }}" width="100" height="40" />
                 @endif
             </a>
         </div>
