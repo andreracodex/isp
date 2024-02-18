@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('customer_id');
             $table->string('keluhan_id');
+            $table->integer('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

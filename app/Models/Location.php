@@ -17,6 +17,7 @@ class Location extends Model
         'alamat_locations',
         'penanggung_jawab_locations',
         'kontak_penanggung_jawab_locations',
+        'is_active',
     ];
 
     public function locationcustomer()

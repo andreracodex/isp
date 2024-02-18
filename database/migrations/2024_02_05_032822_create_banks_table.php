@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nama_akun');
             $table->integer('nomor_akun_rekening');
             $table->integer('payment_id');
+            $table->integer('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

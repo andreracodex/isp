@@ -14,6 +14,7 @@ class PaymentType extends Model
 
     protected $fillable = [
         'payment_methode_name',
+        'is_active',
     ];
 
     public function paymentbank()

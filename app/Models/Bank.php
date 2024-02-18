@@ -17,6 +17,7 @@ class Bank extends Model
         'nama_akun',
         'nomor_akun_rekening',
         'payment_id',
+        'is_active',
     ];
 
     public function paymenttype()

@@ -17,6 +17,7 @@ class Paket extends Model
         'jenis_paket',
         'harga_paket',
         'disc',
+        'is_active',
     ];
 
     public function paketcustomer()

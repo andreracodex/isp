@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('coordinates', function (Blueprint $table) {
             $table->id();
+            $table->text('longitude')->nullable();
+            $table->text('latitude')->nullable();
+            $table->integer('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });
