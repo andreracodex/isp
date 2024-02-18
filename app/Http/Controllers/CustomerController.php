@@ -20,11 +20,11 @@ class CustomerController extends Controller
         if ($request->ajax()){
             return DataTables::of($data_table)
             ->addIndexColumn()
-            ->editColumn('nama_customer', function (Customer $cust) {
-                return $cust->nama_customer;
+            ->editColumn('cust_id', function (Customer $cust) {
+                return $cust->id;
             })
-            ->editColumn('is_active', function (Customer $cust) {
-                return $cust->is_active;
+            ->editColumn('harga', function (Customer $cust) {
+                return $cust->paket->harga_paket;
             })
             ->addColumn('action', function (Customer $cust) {
                 return "

@@ -11,15 +11,15 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            var table = $('#customer').DataTable({
-                dom : "<'row'<'col-sm-12 col-md-6'Bl><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            let table = $('#customer').DataTable({
+                dom: "<'row'<'col-sm-12 col-md-6'Bl><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 deferRender: true,
                 processing: true,
                 serverSide: true,
-                autoWidth: false,
-                scrollX: false,
+                autoWidth: true,
                 ajax: "{{ route('customer.index') }}",
                 buttons: [
+                    'colvis',
                     {
                         extend: 'print',
                         text: '<i class="fa fa-print"></i>',
@@ -50,19 +50,50 @@
                             columns: ':visible'
                         },
                     },
-                    'colvis'
                 ],
                 lengthMenu: [
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
-                ], // Ini Option supaya semua
+                ],
+                order: [
+                    [2, 'asc']
+                ],
+                // Ini Option supaya semua
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex'
                     },
                     {
+                        data: 'cust_id',
+                        name: 'cust_id'
+                    },
+                    {
                         data: 'nama_customer',
                         name: 'nama_customer'
+                    },
+                    {
+                        data: 'nomor_layanan',
+                        name: 'nomor_layanan'
+                    },
+                    {
+                        data: 'location_id',
+                        name: 'location_id'
+                    },
+                    {
+                        data: 'alamat_customer',
+                        name: 'alamat_customer'
+                    },
+                    {
+                        data: 'nomor_telephone',
+                        name: 'nomor_telephone'
+                    },
+                    {
+                        data: 'paket_id',
+                        name: 'paket_id'
+                    },
+                    {
+                        data: 'harga',
+                        name: 'harga'
                     },
                     {
                         data: 'is_active',
@@ -84,6 +115,14 @@
                         orderable: false
                     },
                 ],
+                columnDefs: [{
+                    targets: 0,
+                    orderable: false,
+                    searchable: false,
+                    checkboxes: {
+                        selectRow: true
+                    }
+                }],
                 "initComplete": function() {
                     $(".dataTables_filter input")
                         .unbind() // Unbind previous default bindings
@@ -110,13 +149,23 @@
                 className: 'btn btn-sm btn-rounded btn-primary',
                 titleAttr: 'Refresh Table',
             });
-            table.button().add(5, {
-                action: function(e, dt, button, config) {
-                    window.location.href = "/customer/create";
-                },
-                text: '<i class="fa fa-plus"></i>',
-                className: 'btn btn-sm btn-rounded btn-info',
-                titleAttr: 'Add Customer',
+            table.on("click", "th.select-checkbox", function() {
+                if ($("th.select-checkbox").hasClass("selected")) {
+                    example.rows().deselect();
+                    $("th.select-checkbox").removeClass("selected");
+                } else {
+                    example.rows().select();
+                    $("th.select-checkbox").addClass("selected");
+                }
+            }).on("select deselect", function() {
+                ("Some selection or deselection going on")
+                if (example.rows({
+                        selected: true
+                    }).count() !== example.rows().count()) {
+                    $("th.select-checkbox").removeClass("selected");
+                } else {
+                    $("th.select-checkbox").addClass("selected");
+                }
             });
         });
     </script>
@@ -143,16 +192,22 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>Data Pelanggan</h5>
-                    <small>Data pelanggan.</small>
+                    <h5 class="mb-0">Data Pelanggan</h5>
                 </div>
                 <div class="card-body">
                     <div class="dt-responsive table-responsive">
-                        <table id="customer" class="table table-striped table-bordered nowrap">
+                        <table id="customer" class="table compact table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th></th>
+                                    <th>#</th>
                                     <th>Nama</th>
+                                    <th>Nomor Layanan</th>
+                                    <th>Lokasi Server</th>
+                                    <th>Alamat</th>
+                                    <th>Telpon</th>
+                                    <th>Paket</th>
+                                    <th>Harga</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>

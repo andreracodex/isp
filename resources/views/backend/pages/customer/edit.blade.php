@@ -1,32 +1,6 @@
 @extends('layouts.backend.base')
 
 @section('styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('back/dist/libs/cropper/dist/cropper.min.css') }}">
-    <style type="text/css">
-        #image {
-            display: block;
-            max-width: 100%;
-        }
-
-        .preview {
-            overflow: hidden;
-            width: 160px;
-            height: 160px;
-            margin: 10px;
-            border: 1px solid red;
-            border-radius: 50%;
-        }
-
-        .modal-lg {
-            margin-top: 10%;
-            max-width: 1100px !important;
-        }
-
-        .cropper-view-box,
-        .cropper-face {
-            border-radius: 50%;
-        }
-    </style>
 @endsection
 
 @section('isi')

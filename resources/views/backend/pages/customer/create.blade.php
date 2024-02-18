@@ -25,8 +25,6 @@
 
     <div class="row">
         <div class="col-md-12">
-
-
             <div class="card">
                 <div class="card-header">
                     <h5>Tambah Pelanggan Form</h5>
@@ -40,7 +38,6 @@
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 @endsection

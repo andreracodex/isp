@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="{{ asset('/css/plugins/notifier.css') }}" />
     @auth
     <link rel="stylesheet" href="{{ asset('/css/plugins/dataTables.bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/plugins/dataTables.checkboxes.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/plugins/buttons.bootstrap5.min.css') }}">
     @endauth
     @stack('styles')
@@ -120,6 +121,7 @@
         <script src="{{ asset('/js/plugins/vfs_fonts.js') }}"></script>
         <script src="{{ asset('/js/plugins/buttons.html5.min.js') }}"></script>
         <script src="{{ asset('/js/plugins/buttons.bootstrap5.min.js') }}"></script>
+        <script src="{{ asset('/js/plugins/dataTables.checkboxes.min.js') }}"></script>
     @endauth
     @stack('script')
 </body>
