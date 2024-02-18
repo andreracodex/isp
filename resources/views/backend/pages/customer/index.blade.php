@@ -112,7 +112,7 @@
             });
             table.button().add(5, {
                 action: function(e, dt, button, config) {
-
+                    window.location.href = "/customer/create";
                 },
                 text: '<i class="fa fa-plus"></i>',
                 className: 'btn btn-sm btn-rounded btn-info',

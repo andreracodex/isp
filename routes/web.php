@@ -38,6 +38,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     // Customer
     Route::prefix('customer')->group(function(){
         Route::get('', [CustomerController::class, 'index'])->name('customer.index');
+        Route::get('/create', [CustomerController::class, 'create'])->name('customer.create');
         Route::post('', [CustomerController::class, 'store'])->name('customer.store');
         Route::get('{role}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
         Route::put('{role}/edit', [CustomerController::class, 'update']);

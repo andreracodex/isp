@@ -16,7 +16,6 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         $profile = Setting::all();
-        $customer = new Customer;
         $data_table = Customer::orderBy('nama_customer', 'ASC')->get();
         if ($request->ajax()){
             return DataTables::of($data_table)
@@ -34,7 +33,7 @@ class CustomerController extends Controller
             })
             ->make(true);
         }
-        return view('backend.pages.customer.customer', compact('profile', 'customer'));
+        return view('backend.pages.customer.index', compact('profile'));
     }
 
     /**
@@ -42,7 +41,9 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        $customer = new Customer;
+        $profile = Setting::all();
+        return view('backend.pages.customer.create', compact('profile', 'customer'));
     }
 
     /**
