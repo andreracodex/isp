@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('value');
             $table->string('created_by');
+            $table->integer('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

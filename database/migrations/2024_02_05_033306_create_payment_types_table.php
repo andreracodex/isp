@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('payment_types', function (Blueprint $table) {
             $table->id();
             $table->string('payment_methode_name');
+            $table->integer('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

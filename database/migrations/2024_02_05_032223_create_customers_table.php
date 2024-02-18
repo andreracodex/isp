@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_customer');
-            $table->string('jenis_kelamin');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('nama_customer', 100);
+            $table->string('gender');
             $table->string('nomor_layanan');
-            $table->string('location_id');
+            $table->unsignedBigInteger('location_id')->nullable();
+            $table->foreign('location_id')->references('id')->on('coordinates');
             $table->string('alamat_customer');
             $table->string('kecamatan_customer');
             $table->string('desa_customer');
@@ -24,7 +27,7 @@ return new class extends Migration
             $table->string('nomor_telephone');
             $table->string('paket_id');
             $table->string('ip_config');
-            $table->integer('is_active')->default(1);;
+            $table->integer('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -12,6 +12,13 @@ class Keluhan extends Model
 
     protected $table = 'keluhans';
 
+    protected $fillable = [
+        'deskripsi',
+        'image',
+        'created_by',
+        'is_active',
+    ];
+
     public function tickets()
     {
         return $this->hasMany(Ticket::class, 'id');

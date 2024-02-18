@@ -11,4 +11,11 @@ class Setting extends Model
 
     protected $table = 'setting';
 
+    protected $fillable = [
+        'name',
+        'value',
+        'created_by',
+        'is_active',
+    ];
+
 }

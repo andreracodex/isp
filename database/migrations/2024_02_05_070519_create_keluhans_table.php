@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('keluhans', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->text('deskripsi_customer');
+            $table->text('image_customer')->nullable();
+            $table->text('deskripsi_tim');
+            $table->text('image_tim')->nullable();
+            $table->integer('status')->default(0);
+            $table->integer('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });
