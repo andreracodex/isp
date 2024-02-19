@@ -21,8 +21,6 @@ return new class extends Migration
             $table->foreign('paket_id')->references('id')->on('pakets');
             $table->unsignedBigInteger('coordinates_id')->nullable();
             $table->foreign('coordinates_id')->references('id')->on('coordinates');
-            $table->unsignedBigInteger('coordinates_id')->nullable();
-            $table->foreign('coordinates_id')->references('id')->on('coordinates');
             $table->float('diskon')->default(0);
             $table->text('path_ktp')->nullable();
             $table->text('path_image_rumah')->nullable();

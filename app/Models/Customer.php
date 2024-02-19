@@ -17,26 +17,14 @@ class Customer extends Model
         'nama_customer',
         'gender',
         'nomor_layanan',
-        'location_id',
         'alamat_customer',
         'kecamatan_customer',
         'desa_customer',
         'kodepos_customer',
         'nomor_telephone',
-        'paket_id',
         'ip_config',
         'is_active',
     ];
-
-    public function location()
-    {
-        return $this->hasOne(Location::class, 'id', 'location_id');
-    }
-
-    public function paket()
-    {
-        return $this->hasOne(Paket::class, 'id', 'paket_id');
-    }
 
     public function tickets()
     {

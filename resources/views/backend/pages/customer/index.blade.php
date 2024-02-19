@@ -93,24 +93,12 @@
                         name: 'nomor_layanan'
                     },
                     {
-                        data: 'location',
-                        name: 'location'
-                    },
-                    {
                         data: 'alamat_customer',
                         name: 'alamat_customer'
                     },
                     {
                         data: 'nomor_telephone',
                         name: 'nomor_telephone'
-                    },
-                    {
-                        data: 'nama_paket',
-                        name: 'nama_paket'
-                    },
-                    {
-                        data: 'harga',
-                        name: 'harga'
                     },
                     {
                         data: 'is_active',
@@ -236,11 +224,8 @@
                                     <th></th>
                                     <th>Nama</th>
                                     <th>Nomor Layanan</th>
-                                    <th>Lokasi Server</th>
                                     <th>Alamat</th>
                                     <th>Telpon</th>
-                                    <th>Paket</th>
-                                    <th>Harga</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
