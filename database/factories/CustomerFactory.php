@@ -19,8 +19,8 @@ class CustomerFactory extends Factory
         return [
             "nama_customer" => $this->faker->name(),
             "nomor_layanan" => $this->faker->phoneNumber,
-            "location_id" => $this->faker->numberBetween(1, 4),
-            "paket_id" => $this->faker->numberBetween(1, 4),
+            // "location_id" => $this->faker->numberBetween(1, 4),
+            // "paket_id" => $this->faker->numberBetween(1, 4),
             "ip_config" => $this->faker->numberBetween(1, 5),
             "gender" => $this->faker->randomElement([
                 "male",
