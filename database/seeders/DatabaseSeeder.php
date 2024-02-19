@@ -12,9 +12,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Customer::factory(100)->create();
         $this->call([
             SettingsSeeder::class,
         ]);
+        \App\Models\Customer::factory(100)->create();
     }
 }

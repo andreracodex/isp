@@ -87,7 +87,7 @@
                     </a>
                 </li>
                 <li class="pc-item">
-                    <a href="#" class="pc-link">
+                    <a href="{{ route('paket.index') }}" class="pc-link">
                         <span class="pc-micon">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-fatrows"></use>
@@ -97,7 +97,7 @@
                     </a>
                 </li>
                 <li class="pc-item">
-                    <a href="#" class="pc-link">
+                    <a href="{{ route('location.index') }}" class="pc-link">
                         <span class="pc-micon">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-presentation-chart"></use>

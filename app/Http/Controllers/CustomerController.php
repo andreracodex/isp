@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Setting;
-use App\Models\UserSetting;
+use Illuminate\Support\Number;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -23,9 +23,19 @@ class CustomerController extends Controller
             ->editColumn('cust_id', function (Customer $cust) {
                 return $cust->id;
             })
+            ->editColumn('location', function (Customer $cust) {
+                return $cust->location->nama_locations;
+            })
+            ->editColumn('nama_paket', function (Customer $cust) {
+                return $cust->paket->nama_paket;
+            })
+            ->editColumn('harga', function (Customer $cust) {
+                return Number::currency($cust->paket->harga_paket, in: 'IDR', locale: 'us');
+            })
             ->addColumn('action', function (Customer $cust) {
                 return "
-                <a href=". route('customer.edit', $cust->id) ." class='btn btn-sm btn-warning' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-pencil-alt'></i></a>
+                <a href=". route('customer.edit', $cust->id) ." class='btn btn-sm btn-warning d-inline-flex' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-pencil-alt'></i></a>
+                <a href=". route('customer.edit', $cust->id) ." class='btn btn-sm btn-danger d-inline-flex' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-trash-alt'></i></a>
             ";
             })
             ->make(true);

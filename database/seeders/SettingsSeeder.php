@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Comments;
 use App\Models\LandingPost;
+use App\Models\Location;
 use App\Models\Paket;
 use App\Models\Setting;
 use App\Models\User;
@@ -428,9 +429,10 @@ class SettingsSeeder extends Seeder
                 'user_type' => 'user',
             ),
         );
+        // Insert Paket
         Paket::insert(
             array(
-                'nama_paket'=> '1',
+                'nama_paket'=> 'Lancar',
                 'jenis_paket'=> '1 Mbps',
                 'harga_paket'=> rand(100000, 150000),
                 'disc'=> 0,
@@ -438,7 +440,7 @@ class SettingsSeeder extends Seeder
         );
         Paket::insert(
             array(
-                'nama_paket'=> '2',
+                'nama_paket'=> 'Cepat',
                 'jenis_paket'=> '2 Mbps',
                 'harga_paket'=> rand(100000, 150000),
                 'disc'=> 0,
@@ -446,7 +448,7 @@ class SettingsSeeder extends Seeder
         );
         Paket::insert(
             array(
-                'nama_paket'=> '3',
+                'nama_paket'=> 'Kilat',
                 'jenis_paket'=> '3 Mbps',
                 'harga_paket'=> rand(100000, 150000),
                 'disc'=> 0,
@@ -454,10 +456,59 @@ class SettingsSeeder extends Seeder
         );
         Paket::insert(
             array(
-                'nama_paket'=> '4',
+                'nama_paket'=> 'Whooosh',
                 'jenis_paket'=> '4 Mbps',
                 'harga_paket'=> rand(100000, 150000),
                 'disc'=> 0,
+            ),
+        );
+        Paket::insert(
+            array(
+                'nama_paket'=> 'Lightning',
+                'jenis_paket'=> '5 Mbps',
+                'harga_paket'=> rand(100000, 150000),
+                'disc'=> 0,
+            ),
+        );
+        // Locations
+        Location::insert(
+            array(
+                'nama_locations'=> 'Lokasi 1',
+                'alamat_locations'=> 'Jl. test 1',
+                'penanggung_jawab_locations'=> '1',
+                'kontak_penanggung_jawab_locations'=> '1',
+            ),
+        );
+        Location::insert(
+            array(
+                'nama_locations'=> 'Lokasi 2',
+                'alamat_locations'=> 'Jl. test 2',
+                'penanggung_jawab_locations'=> '1',
+                'kontak_penanggung_jawab_locations'=> '1',
+            ),
+        );
+        Location::insert(
+            array(
+                'nama_locations'=> 'Lokasi 3',
+                'alamat_locations'=> 'Jl. test 3',
+                'penanggung_jawab_locations'=> '1',
+                'kontak_penanggung_jawab_locations'=> '1',
+            ),
+        );
+        Location::insert(
+            array(
+                'nama_locations'=> 'Lokasi 4',
+                'alamat_locations'=> 'Jl. test 4',
+                'penanggung_jawab_locations'=> '1',
+                'kontak_penanggung_jawab_locations'=> '1',
+            ),
+        );
+        Location::insert(
+            array(
+                'nama_locations'=> 'Lokasi 5',
+                'alamat_locations'=> 'Jl. test 5',
+                'penanggung_jawab_locations'=> '1',
+                'kontak_penanggung_jawab_locations'=> '1',
             ),
         );
         UserSetting::insert(

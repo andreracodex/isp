@@ -14,17 +14,19 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')   ;
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('nama_customer', 100);
             $table->string('gender');
             $table->string('nomor_layanan');
-            $table->integer('location_id');
+            $table->unsignedBigInteger('location_id')->nullable();
+            $table->foreign('location_id')->references('id')->on('locations');
             $table->string('alamat_customer');
             $table->string('kecamatan_customer');
             $table->string('desa_customer');
             $table->string('kodepos_customer');
             $table->string('nomor_telephone');
-            $table->integer('paket_id');
+            $table->unsignedBigInteger('paket_id')->nullable();
+            $table->foreign('paket_id')->references('id')->on('pakets');
             $table->string('ip_config');
             $table->integer('is_active')->default(1);
             $table->timestamps();

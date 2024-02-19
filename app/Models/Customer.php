@@ -28,9 +28,9 @@ class Customer extends Model
         'is_active',
     ];
 
-    public function coordinate()
+    public function location()
     {
-        return $this->hasOne(Coordinate::class, 'id', 'location_id');
+        return $this->hasOne(Location::class, 'id', 'location_id');
     }
 
     public function paket()

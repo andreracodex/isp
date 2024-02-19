@@ -12,13 +12,13 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            let table = $('#customer').DataTable({
+            let table = $('#location').DataTable({
                 dom: "<'row'<'col-sm-12 col-md-6'Bl><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 deferRender: true,
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                ajax: "{{ route('customer.index') }}",
+                ajax: "{{ route('location.index') }}",
                 buttons: [
                     'colvis',
                     {
@@ -62,7 +62,7 @@
                 },
                 columnDefs: [{
                         targets: 0,
-                        className: 'customer',
+                        className: 'paket',
                         orderable: false,
                         searchable: false,
                     },
@@ -81,36 +81,24 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'cust_id',
-                        name: 'cust_id'
+                        data: 'location_id',
+                        name: 'location_id'
                     },
                     {
-                        data: 'nama_customer',
-                        name: 'nama_customer'
+                        data: 'nama_locations',
+                        name: 'nama_locations'
                     },
                     {
-                        data: 'nomor_layanan',
-                        name: 'nomor_layanan'
+                        data: 'alamat_locations',
+                        name: 'alamat_locations'
                     },
                     {
-                        data: 'location',
-                        name: 'location'
+                        data: 'penanggung_jawab_locations',
+                        name: 'penanggung_jawab_locations'
                     },
                     {
-                        data: 'alamat_customer',
-                        name: 'alamat_customer'
-                    },
-                    {
-                        data: 'nomor_telephone',
-                        name: 'nomor_telephone'
-                    },
-                    {
-                        data: 'nama_paket',
-                        name: 'nama_paket'
-                    },
-                    {
-                        data: 'harga',
-                        name: 'harga'
+                        data: 'kontak_penanggung_jawab_locations',
+                        name: 'kontak_penanggung_jawab_locations'
                     },
                     {
                         data: 'is_active',
@@ -198,7 +186,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Pelanggan</h2>
+                        <h2 class="mb-0">Lokasi Server</h2>
                     </div>
                 </div>
             </div>
@@ -211,10 +199,9 @@
                 <div class="card-header">
                     <div class="headerbutton">
                         <div>
-                            <a href="{{ route('customer.create') }}" type="button" class="btn btn-sm btn-outline-primary d-inline-flex"><i
-                                    class="ti ti-plus me-1"></i>Pelanggan</a>
-                            <button type="button" class="btn btn-sm btn-outline-success d-inline-flex"><i
-                                    class="ti ti-inbox me-1"></i>Import Excel</button>
+                            <a href="{{ route('customer.create') }}" type="button"
+                                class="btn btn-sm btn-outline-primary d-inline-flex"><i
+                                    class="ti ti-plus me-1"></i>Server</a>
                         </div>
                         <div>
                             <button type="button" class="btn btn-sm btn-outline-danger d-inline-flex"><i
@@ -228,19 +215,16 @@
                 </div>
                 <div class="card-body">
                     <div class="dt-responsive table-responsive">
-                        <table id="customer" class="table compact table-striped table-hover table-bordered wrap"
+                        <table id="location" class="table compact table-striped table-hover table-bordered wrap"
                             style="width:100%">
                             <thead>
                                 <tr>
                                     <th style="width: 10px;">#</th>
                                     <th></th>
-                                    <th>Nama</th>
-                                    <th>Nomor Layanan</th>
-                                    <th>Lokasi Server</th>
-                                    <th>Alamat</th>
-                                    <th>Telpon</th>
-                                    <th>Paket</th>
-                                    <th>Harga</th>
+                                    <th>Nama Lokasi Server</th>
+                                    <th>Alamat Lokasi Server</th>
+                                    <th>Penanggung Jawab</th>
+                                    <th>Kontak Penanggung Jawab</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
