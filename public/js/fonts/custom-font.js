@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 // =======================================================
 // Custom icon js start

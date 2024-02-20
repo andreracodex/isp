@@ -39,3 +39,15 @@ Breadcrumbs::for('location.create', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Tambah Lokasi Server', route('location.create'));
 });
+
+
+// Wa Page
+Breadcrumbs::for('wa.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Whatsapp Bot', route('wa.index'));
+});
+
+Breadcrumbs::for('wa.create', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Tambah Whatsapp Bot', route('wa.create'));
+});

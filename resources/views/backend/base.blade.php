@@ -31,6 +31,7 @@
     <!-- [Template CSS Files] -->
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" id="main-style-link" />
     <link rel="stylesheet" href="{{ asset('/css/style-preset.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/css/uikit.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/plugins/notifier.css') }}" />
     @auth
     <link rel="stylesheet" href="{{ asset('/css/plugins/dataTables.bootstrap5.min.css') }}">
@@ -82,7 +83,34 @@
     <script src="{{ asset('/js/config.js') }}"></script>
     <script src="{{ asset('/js/pcoded.js') }}"></script>
     <script src="{{ asset('/js/plugins/feather.min.js') }}"></script>
+    <script src="{{ asset('/js/component.js') }}"></script>
     @auth
+        <script>
+            var animateModal = document.getElementById('animateModal');
+            animateModal.addEventListener('show.bs.modal', function(event) {
+                var button = event.relatedTarget;
+                var recipient = button.getAttribute('data-pc-animate');
+                var modalTitle = animateModal.querySelector('.modal-title');
+                modalTitle.textContent = 'Animate Modal : ' + recipient;
+                animateModal.classList.add('anim-' + recipient);
+                if (recipient == 'let-me-in' || recipient == 'make-way' || recipient == 'slip-from-top') {
+                    document.body.classList.add('anim-' + recipient);
+                }
+            });
+            animateModal.addEventListener('hidden.bs.modal', function(event) {
+                removeClassByPrefix(animateModal, 'anim-');
+                removeClassByPrefix(document.body, 'anim-');
+            });
+
+            function removeClassByPrefix(node, prefix) {
+                for (let i = 0; i < node.classList.length; i++) {
+                    let value = node.classList[i];
+                    if (value.startsWith(prefix)) {
+                        node.classList.remove(value);
+                    }
+                }
+            }
+        </script>
         <script>
             // Example starter JavaScript for disabling form submissions if there are invalid fields
             (function() {
