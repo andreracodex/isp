@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('wa', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_device');
-            $table->string('nomor_device');
-            $table->string('token_device')->max(10);
-            $table->integer('pin')->max(6);
-            $table->integer('is_active');
+            $table->string('device_name');
+            $table->string('device_number')->unique('device_number');
+            $table->string('token_device')->max(10)->nullable();
+            $table->integer('pin')->max(6)->default(rand(111111, 999999));
+            $table->integer('is_active')->default(1);
+            $table->unsignedBigInteger('paket_wa_id')->nullable();
+            $table->foreign('paket_wa_id')->references('id')->on('paket_wa');
             $table->boolean('connection_state')->default(false);
             $table->timestamps();
         });

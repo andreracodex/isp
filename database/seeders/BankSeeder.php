@@ -17,7 +17,7 @@ class BankSeeder extends Seeder
             'nama_bank' => 'BRI',
             'nama_akun' => 'PUTUT WAHYUDI',
             'nomor_akun_rekening' => '319201004897506',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now(),
         ]);
 
         DB::table('banks')->insert([
@@ -26,7 +26,7 @@ class BankSeeder extends Seeder
             'nama_bank' => 'BNI',
             'nama_akun' => 'PUTUT WAHYUDI',
             'nomor_akun_rekening' => '1255306543',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now(),
         ]);
 
         DB::table('banks')->insert([
@@ -35,7 +35,7 @@ class BankSeeder extends Seeder
             'nama_bank' => 'BCA',
             'nama_akun' => 'PUTUT WAHYUDI',
             'nomor_akun_rekening' => '8220725511',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now(),
         ]);
 
         DB::table('banks')->insert([
@@ -44,7 +44,7 @@ class BankSeeder extends Seeder
             'nama_bank' => 'Mandiri',
             'nama_akun' => 'PUTUT WAHYUDI',
             'nomor_akun_rekening' => '1410014462964',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now(),
         ]);
     }
 }

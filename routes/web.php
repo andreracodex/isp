@@ -45,6 +45,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::post('', [CustomerController::class, 'store'])->name('customer.store');
         Route::get('{customer}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
         Route::put('{customer}/edit', [CustomerController::class, 'update']);
+        Route::delete('', [CustomerController::class, 'delete'])->name('customer.delete');
     });
 
     // Paket
@@ -67,9 +68,11 @@ Route::middleware('auth','has.role','auth.session')->group(function()
 
     Route::prefix('wa')->group(function(){
         Route::get('', [WhatsappController::class, 'index'])->name('wa.index');
+        Route::get('/create', [WhatsappController::class, 'create'])->name('wa.create');
         Route::post('', [WhatsappController::class, 'store'])->name('wa.store');
         Route::get('{wa}/edit', [WhatsappController::class, 'edit'])->name('wa.edit');
         Route::put('{wa}/edit', [WhatsappController::class, 'update']);
+        Route::delete('', [WhatsappController::class, 'delete'])->name('wa.delete');;
     });
 });
 

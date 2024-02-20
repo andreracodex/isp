@@ -51,3 +51,8 @@ Breadcrumbs::for('wa.create', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Tambah Whatsapp Bot', route('wa.create'));
 });
+
+Breadcrumbs::for('wa.store', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Tambah Whatsapp Bot', route('wa.store'));
+});

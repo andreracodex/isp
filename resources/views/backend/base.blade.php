@@ -12,10 +12,10 @@
         <meta name="description" content="{{ $profile[42]->value }}" />
         <meta name="keywords" content="{{ $profile[43]->value }}" />
         <meta name="author" content="{{ $profile[5]->value }}" />
+        <!-- [Favicon] icon -->
+        <link rel="icon" href="{{ asset($profile[2]->value) }}" type="image/x-icon">
+
     @endauth
-        
-    <!-- [Favicon] icon -->
-    <link rel="icon" href="{{ asset($profile[2]->value) }}" type="image/x-icon">
 
     <!-- [Font] Family -->
     <link rel="stylesheet" href="{{ asset('/fonts/inter/inter.css') }}" id="main-font-link" />
@@ -89,8 +89,8 @@
             var animateModal = document.getElementById('animateModal');
             animateModal.addEventListener('show.bs.modal', function(event) {
                 var button = event.relatedTarget;
+                var recipient = button.getAttribute('data-pc-animate');
                 var modalTitle = animateModal.querySelector('.modal-title');
-                modalTitle.textContent = 'Add : ' + modalTitle';
                 animateModal.classList.add('anim-' + recipient);
                 if (recipient == 'let-me-in' || recipient == 'make-way' || recipient == 'slip-from-top') {
                     document.body.classList.add('anim-' + recipient);
