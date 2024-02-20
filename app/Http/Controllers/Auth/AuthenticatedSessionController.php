@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Setting;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
@@ -20,7 +21,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('backend.auth.login');
+        $profile = Setting::all();
+        return view('backend.auth.login', compact('profile'));
     }
 
     /**

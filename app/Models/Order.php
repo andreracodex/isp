@@ -7,20 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    public function location()
+    protected $table = 'orders';
+
+    protected $fillable = [
+        'customer_id',
+        'location_id',
+        'paket_id',
+        'coordinates_id',
+        'payment_id',
+        'diskon',
+        'path_ktp',
+        'path_image_rumah',
+        'order_date',
+        'is_active',
+    ];
+
+    public function paymentType()
     {
-        return $this->hasMany(Location::class, 'id', 'location_id');
+        return $this->belongsTo(PaymentType::class, 'payment_id', 'id');
     }
 
-    public function paket()
-    {
-        return $this->hasMany(Paket::class, 'id', 'paket_id');
-    }
-
-    public function customer()
-    {
-        return $this->hasMany(Customer::class, 'id', 'customer_id');
-    }
 }

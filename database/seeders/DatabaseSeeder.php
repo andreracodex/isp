@@ -7,13 +7,12 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
         $this->call([
             SettingsSeeder::class,
+            BankSeeder::class,
+            PaketSeeder::class,
         ]);
         \App\Models\Customer::factory(100)->create();
     }

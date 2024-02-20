@@ -13,6 +13,7 @@ class Bank extends Model
     protected $table = 'banks';
 
     protected $fillable = [
+        'kode_bank',
         'nama_bank',
         'nama_akun',
         'nomor_akun_rekening',
@@ -20,8 +21,8 @@ class Bank extends Model
         'is_active',
     ];
 
-    public function paymenttype()
+    public function paymentType()
     {
-        return $this->hasMany(PaymentType::class, 'id', 'payment_id');
+        return $this->belongsTo(PaymentType::class, 'payment_id', 'id');
     }
 }

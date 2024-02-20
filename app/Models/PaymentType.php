@@ -17,8 +17,13 @@ class PaymentType extends Model
         'is_active',
     ];
 
-    public function paymentbank()
+    public function banks()
     {
-        return $this->belongsTo(Bank::class, 'payment_id', 'id');
+        return $this->hasMany(Bank::class, 'payment_id', 'id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'payment_id', 'id');
     }
 }
