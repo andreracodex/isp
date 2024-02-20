@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             SettingsSeeder::class,
+            PaymentTypeSeeder::class,
             BankSeeder::class,
         ]);
         \App\Models\Customer::factory(100)->create();

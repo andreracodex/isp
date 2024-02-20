@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreign('payment_id')->references('id')->on('payment_types');
             $table->string('kode_bank');
             $table->string('nama_bank');
-            $table->string('nama_akun');
-            $table->integer('nomor_akun_rekening');
+            $table->string('nama_akun', 150);
+            $table->string('nomor_akun_rekening', 100);
             $table->integer('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();

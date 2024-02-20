@@ -26,7 +26,7 @@ return new class extends Migration
             $table->float('diskon')->default(0);
             $table->text('path_ktp')->nullable();
             $table->text('path_image_rumah')->nullable();
-            $table->date('order_date')->default(0);
+            $table->date('order_date');
             $table->integer('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();
