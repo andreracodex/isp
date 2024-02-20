@@ -3,6 +3,7 @@
 @push('script')
 @endpush
 
+@section('title', 'Sign Up')
 
 @section('contentlogin')
     <div class="auth-main">
@@ -67,14 +68,15 @@
                             </div>
                             <div class="form-group mb-3">
                                 <input type="password" name="password" :value="old('password')"
-                                    class="form-control @error('password') is-invalid @enderror"
-                                    placeholder="Password" required>
+                                    class="form-control @error('password') is-invalid @enderror" placeholder="Password"
+                                    required>
                                 @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <input type="password" name="password_confirmation" :value="old('password_confirmation')" id="password_confirmation"
+                                <input type="password" name="password_confirmation" :value="old('password_confirmation')"
+                                    id="password_confirmation"
                                     class="form-control @error('password_confirmation') is-invalid @enderror"
                                     placeholder="Confirm Password">
                                 @error('password_confirmation')

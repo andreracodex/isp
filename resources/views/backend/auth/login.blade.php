@@ -1,5 +1,7 @@
 @extends('backend.base')
 
+@section('title', 'Sign In')
+
 @section('contentlogin')
     <div class="auth-main">
         <div class="auth-wrapper v2">
