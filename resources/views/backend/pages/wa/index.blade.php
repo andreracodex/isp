@@ -8,28 +8,13 @@
 @endpush
 
 @section('isi')
-    {{-- Modal --}}
-<form>
-    <div class="modal fade modal-animate" id="animateModal" tabindex="-1" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add Device</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
-                </div>
-                <div class="modal-body">
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary shadow-2">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-    {{-- End Modal --}}
-
+    <form method="POST" action="{{ route('wa.store') }}" class="needs-validation" novalidate>
+    @csrf
+    @include('backend.pages.wa.partials.form-control-wa', [
+        'submit' => 'Create',
+    ])
+    </form>
     {{-- Breadcrumbs --}}
     <div class="page-header">
         <div class="page-block">

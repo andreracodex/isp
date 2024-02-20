@@ -89,9 +89,8 @@
             var animateModal = document.getElementById('animateModal');
             animateModal.addEventListener('show.bs.modal', function(event) {
                 var button = event.relatedTarget;
-                var recipient = button.getAttribute('data-pc-animate');
                 var modalTitle = animateModal.querySelector('.modal-title');
-                modalTitle.textContent = 'Animate Modal : ' + recipient;
+                modalTitle.textContent = 'Add : ' + modalTitle';
                 animateModal.classList.add('anim-' + recipient);
                 if (recipient == 'let-me-in' || recipient == 'make-way' || recipient == 'slip-from-top') {
                     document.body.classList.add('anim-' + recipient);
