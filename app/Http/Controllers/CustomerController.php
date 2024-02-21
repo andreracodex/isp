@@ -50,8 +50,30 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'nama_customer' => 'required',
+            'nomor_layanan' => 'required',
+            'nomor_telephone' => 'required|min:10|max:14',
+        ]);
+
         $post = new Customer();
-        $post->create($request->all());
+        $post->nama_customer = $request->input('nama_customer');
+        $post->gender = $request->input('gender');
+        $post->nomor_layanan = $request->input('nomor_layanan');
+        $post->alamat_customer = $request->input('alamat_customer');
+        $post->kecamatan_customer = $request->input('kecamatan_customer');
+        $post->desa_customer = $request->input('desa_customer');
+        $post->kodepos_customer = $request->input('kodepos_customer');
+        $post->nomor_telephone = $request->input('nomor_telephone');
+        $active = $request->input('is_active');
+
+        if($active == 'ON' || $active == 'on'){
+            $post->is_active = 1;
+        }else{
+            $post->is_active = 0;
+        }
+
+        $post->save();
         $profile = Setting::all();
         return view('backend.pages.customer.index', compact('profile'));
     }

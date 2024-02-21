@@ -85,7 +85,7 @@
     <script src="{{ asset('/js/plugins/feather.min.js') }}"></script>
     <script src="{{ asset('/js/component.js') }}"></script>
     @auth
-        <script>
+        {{-- <script>
             var animateModal = document.getElementById('animateModal');
             animateModal.addEventListener('show.bs.modal', function(event) {
                 var button = event.relatedTarget;
@@ -109,7 +109,7 @@
                     }
                 }
             }
-        </script>
+        </script> --}}
         <script>
             // Example starter JavaScript for disabling form submissions if there are invalid fields
             (function() {

@@ -44,12 +44,12 @@
         <div class="card-body px-4 py-3">
             <div class="row align-items-center">
                 <div class="col-9">
-                    <h4 class="fw-semibold mb-8">Slider Edit</h4>
+                    <h4 class="fw-semibold mb-8">Product Category</h4>
                     {{ Breadcrumbs::render() }}
                 </div>
                 <div class="col-3">
                     <div class="text-center mb-n5">
-                        <img src="{{ asset('back/dist/images/breadcrumb/desktop.webp') }}" alt=""
+                        <img src="{{ asset('back/dist/images/breadcrumb/products.webp') }}" alt=""
                             class="img-fluid mb-n4">
                     </div>
                 </div>
@@ -57,17 +57,17 @@
         </div>
     </div>
 
-    @can('edit slider')
+    @can('edit category')
         <div class="card">
             <div class="card-header">
-                <h5>Edit Slider</h5>
+                <h5>Edit Product Category</h5>
             </div>
             <div class="card-body">
-                <form action="{{ route('slider.update', $slider->id) }}" enctype="multipart/form-data" method="POST"
+                <form action="{{ route('productcategory.update', $category->id) }}" enctype="multipart/form-data" method="POST"
                     class="needs-validation" novalidate="">
                     @csrf
                     @method('PUT')
-                    @include('layouts.backend.pages.setting.slider.partials.form-control-slider', [
+                    @include('layouts.backend.pages.category.partials.form-control-product', [
                         'submit' => 'Update',
                     ])
                 </form>

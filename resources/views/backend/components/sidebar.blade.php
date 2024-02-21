@@ -107,7 +107,7 @@
                 </li>
 
                 <li class="pc-item">
-                    <a href="#" class="pc-link"><span class="pc-micon">
+                    <a href="{{route('inve.index')}}" class="pc-link"><span class="pc-micon">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-presentation-chart"></use>
                             </svg> </span><span class="pc-mtext">Inventaris</span></a>

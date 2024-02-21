@@ -33,7 +33,7 @@
                     <form action="{{ route('paket.store') }}" enctype="multipart/form-data" method="POST"
                     class="needs-validation" novalidate="">
                         @csrf
-                        @include('backend.pages.paket.partials.form-control-paket', [
+                        @include('backend.pages.inventaris.partials.form-control-inventaris', [
                             'submit' => 'Create',
                         ])
                     </form>

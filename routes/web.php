@@ -3,6 +3,7 @@
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InventarisController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\ProfileController;
@@ -66,6 +67,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::put('{location}/edit', [LocationController::class, 'update']);
     });
 
+    // WA
     Route::prefix('wa')->group(function(){
         Route::get('', [WhatsappController::class, 'index'])->name('wa.index');
         Route::get('/create', [WhatsappController::class, 'create'])->name('wa.create');
@@ -74,6 +76,15 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::get('{wa}/edit', [WhatsappController::class, 'edit'])->name('wa.edit');
         Route::put('{wa}/edit', [WhatsappController::class, 'update']);
         Route::delete('', [WhatsappController::class, 'delete'])->name('wa.delete');;
+    });
+
+    // Inventaris
+    Route::prefix('inve')->group(function(){
+        Route::get('', [InventarisController::class, 'index'])->name('inve.index');
+        Route::get('/create', [InventarisController::class, 'create'])->name('inve.create');
+        Route::post('', [InventarisController::class, 'store'])->name('inve.store');
+        Route::get('{inve}/edit', [InventarisController::class, 'edit'])->name('inve.edit');
+        Route::put('{inve}/edit', [InventarisController::class, 'update']);
     });
 });
 

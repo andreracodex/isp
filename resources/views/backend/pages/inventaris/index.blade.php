@@ -12,13 +12,13 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            let table = $('#paket').DataTable({
+            let table = $('#inve').DataTable({
                 dom: "<'row'<'col-sm-12 col-md-6'Bl><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 deferRender: true,
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                ajax: "{{ route('paket.index') }}",
+                ajax: "{{ route('inve.index') }}",
                 buttons: [
                     'colvis',
                     {
@@ -81,20 +81,24 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'paket_id',
-                        name: 'paket_id'
+                        data: 'inve_id',
+                        name: 'inve_id'
                     },
                     {
-                        data: 'nama_paket',
-                        name: 'nama_paket'
+                        data: 'nama_barang',
+                        name: 'nama_barang'
                     },
                     {
-                        data: 'jenis_paket',
-                        name: 'jenis_paket'
+                        data: 'jenis_barang',
+                        name: 'jenis_barang'
                     },
                     {
-                        data: 'harga_paket',
-                        name: 'harga_paket'
+                        data: 'jumlah_barang',
+                        name: 'jumlah_barang'
+                    },
+                    {
+                        data: 'satuan_barang',
+                        name: 'satuan_barang'
                     },
                     {
                         data: 'is_active',
@@ -182,7 +186,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Paket Internet</h2>
+                        <h2 class="mb-0">Inventaris Barang</h2>
                     </div>
                 </div>
             </div>
@@ -195,9 +199,9 @@
                 <div class="card-header">
                     <div class="headerbutton">
                         <div>
-                            <a href="{{ route('paket.create') }}" type="button"
+                            <a href="{{ route('inve.create') }}" type="button"
                                 class="btn btn-sm btn-outline-primary d-inline-flex"><i
-                                    class="ti ti-plus me-1"></i>Paket</a>
+                                    class="ti ti-plus me-1"></i>Inventaris</a>
                         </div>
                         <div>
                             <button type="button" class="btn btn-sm btn-outline-danger d-inline-flex"><i
@@ -211,16 +215,16 @@
                 </div>
                 <div class="card-body">
                     <div class="dt-responsive table-responsive">
-                        <table id="paket" class="table compact table-striped table-hover table-bordered wrap"
+                        <table id="inve" class="table compact table-striped table-hover table-bordered wrap"
                             style="width:100%">
                             <thead>
                                 <tr>
                                     <th style="width: 10px;">#</th>
                                     <th></th>
-                                    <th>Nama Paket</th>
-                                    <th>Jenis Paket Layanan</th>
-                                    <th>Harga Paket Layanan</th>
-                                    <th>Status</th>
+                                    <th>Nama Barang</th>
+                                    <th>Jenis Barang</th>
+                                    <th>Jumlah Barang</th>
+                                    <th>Satuan</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

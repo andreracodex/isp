@@ -48,7 +48,9 @@ class PaketController extends Controller
      */
     public function create()
     {
-        //
+        $paket = new Paket;
+        $profile = Setting::all();
+        return view('backend.pages.paket.create', compact('profile', 'paket'));
     }
 
     /**
@@ -56,7 +58,28 @@ class PaketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validated = $request->validate([
+            'nama_paket' => 'required',
+            'jenis_paket' => 'required',
+            'harga_paket' => 'required',
+        ]);
+
+        $post = new Paket();
+        $post->nama_paket = $request->input('nama_paket');
+        $post->jenis_paket = $request->input('jenis_paket');
+        $post->harga_paket = $request->input('harga_paket');
+        $post->disc = $request->input('disc');
+
+        $active = $request->input('is_active');
+        if($active == 'ON' || $active == 'on'){
+            $post->is_active = 1;
+        }else{
+            $post->is_active = 0;
+        }
+        $post->save();
+        $profile = Setting::all();
+        return view('backend.pages.paket.index', compact('profile'));
     }
 
     /**
