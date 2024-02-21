@@ -478,51 +478,190 @@ class SettingsSeeder extends Seeder
                 'jenis_paket'=> 'Free',
                 'harga_paket'=> 0,
                 'disc'=> 0,
-                'jumlah_pesan' => 1000,
+                'jumlah_pesan' => 600,
+                'is_active' => 1
+            ),
+        );
+        // MIcro
+        PaketWa::insert(
+            array(
+                'nama_paket'=> 'Micro Bussiness',
+                'jenis_paket'=> 'Year',
+                'harga_paket'=> 250000,
+                'duration'=> 12,
+                'disc'=> 0,
+                'jumlah_pesan' => 5000,
                 'is_active' => 1
             ),
         );
         PaketWa::insert(
             array(
-                'nama_paket'=> 'Free',
-                'jenis_paket'=> 'Free',
-                'harga_paket'=> 0,
+                'nama_paket'=> 'Micro Bussiness',
+                'jenis_paket'=> '6 Bulan',
+                'harga_paket'=> 170000,
+                'duration'=> 6,
                 'disc'=> 0,
-                'jumlah_pesan' => 1000,
+                'jumlah_pesan' => 5000,
                 'is_active' => 1
             ),
         );
         PaketWa::insert(
             array(
-                'nama_paket'=> 'Free',
-                'jenis_paket'=> 'Free',
-                'harga_paket'=> 0,
+                'nama_paket'=> 'Micro Bussiness',
+                'jenis_paket'=> '3 Bulan',
+                'harga_paket'=> 100000,
+                'duration'=> 3,
                 'disc'=> 0,
-                'jumlah_pesan' => 1000,
+                'jumlah_pesan' => 5000,
                 'is_active' => 1
             ),
         );
         PaketWa::insert(
             array(
-                'nama_paket'=> 'Free',
-                'jenis_paket'=> 'Free',
-                'harga_paket'=> 0,
+                'nama_paket'=> 'Micro Bussiness',
+                'jenis_paket'=> '1 Bulan',
+                'harga_paket'=> 35000,
+                'duration'=> 1,
                 'disc'=> 0,
-                'jumlah_pesan' => 1000,
+                'jumlah_pesan' => 5000,
+                'is_active' => 1
+            ),
+        );
+        //Small
+        PaketWa::insert(
+            array(
+                'nama_paket'=> 'Small Bussiness',
+                'jenis_paket'=> 'Year',
+                'harga_paket'=> 500000,
+                'duration'=> 12,
+                'disc'=> 0,
+                'jumlah_pesan' => 10000,
                 'is_active' => 1
             ),
         );
         PaketWa::insert(
             array(
-                'nama_paket'=> 'Free',
-                'jenis_paket'=> 'Free',
-                'harga_paket'=> 0,
+                'nama_paket'=> 'Small Bussiness',
+                'jenis_paket'=> '6 Bulan',
+                'harga_paket'=> 340000,
+                'duration'=> 6,
                 'disc'=> 0,
-                'jumlah_pesan' => 1000,
+                'jumlah_pesan' => 10000,
                 'is_active' => 1
             ),
         );
-
+        PaketWa::insert(
+            array(
+                'nama_paket'=> 'Small Bussiness',
+                'jenis_paket'=> '3 Bulan',
+                'harga_paket'=> 204000,
+                'duration'=> 3,
+                'disc'=> 0,
+                'jumlah_pesan' => 10000,
+                'is_active' => 1
+            ),
+        );
+        PaketWa::insert(
+            array(
+                'nama_paket'=> 'Small Bussiness',
+                'jenis_paket'=> '1 Bulan',
+                'harga_paket'=> 75000,
+                'duration'=> 1,
+                'disc'=> 0,
+                'jumlah_pesan' => 10000,
+                'is_active' => 1
+            ),
+        );
+        // Medium
+        PaketWa::insert(
+            array(
+                'nama_paket'=> 'Medium Bussiness',
+                'jenis_paket'=> 'Year',
+                'harga_paket'=> 580000,
+                'duration'=> 12,
+                'disc'=> 0,
+                'jumlah_pesan' => 999999,
+                'is_active' => 1
+            ),
+        );
+        PaketWa::insert(
+            array(
+                'nama_paket'=> 'Medium Bussiness',
+                'jenis_paket'=> '6 Bulan',
+                'harga_paket'=> 400000,
+                'duration'=> 6,
+                'disc'=> 0,
+                'jumlah_pesan' => 999999,
+                'is_active' => 1
+            ),
+        );
+        PaketWa::insert(
+            array(
+                'nama_paket'=> 'Medium Bussiness',
+                'jenis_paket'=> '3 Bulan',
+                'harga_paket'=> 240000,
+                'duration'=> 3,
+                'disc'=> 0,
+                'jumlah_pesan' => 999999,
+                'is_active' => 1
+            ),
+        );
+        PaketWa::insert(
+            array(
+                'nama_paket'=> 'Medium Bussiness',
+                'jenis_paket'=> '1 Bulan',
+                'harga_paket'=> 80000,
+                'duration'=> 1,
+                'disc'=> 0,
+                'jumlah_pesan' => 999999,
+                'is_active' => 1
+            ),
+        );
+        // Enteprise
+        PaketWa::insert(
+            array(
+                'nama_paket'=> 'Enterprise Bussiness',
+                'jenis_paket'=> 'Year',
+                'harga_paket'=> 1000000,
+                'duration'=> 12,
+                'disc'=> 0,
+                'jumlah_pesan' => 999999,
+                'is_active' => 1
+            ),
+        );
+        PaketWa::insert(
+            array(
+                'nama_paket'=> 'Enterprise Bussiness',
+                'jenis_paket'=> '6 Bulan',
+                'harga_paket'=> 650000,
+                'duration'=> 6,
+                'disc'=> 0,
+                'jumlah_pesan' => 999999,
+                'is_active' => 1
+            ),
+        );
+        PaketWa::insert(
+            array(
+                'nama_paket'=> 'Enterprise Bussiness',
+                'jenis_paket'=> '3 Bulan',
+                'harga_paket'=> 400000,
+                'duration'=> 3,
+                'disc'=> 0,
+                'jumlah_pesan' => 999999,
+                'is_active' => 1
+            ),
+        );
+        PaketWa::insert(
+            array(
+                'nama_paket'=> 'Enterprise Bussiness',
+                'jenis_paket'=> '1 Bulan',
+                'harga_paket'=> 150000,
+                'duration'=> 1,
+                'disc'=> 0,
+                'jumlah_pesan' => 999999,
+                'is_active' => 1
+            ),
+        );
         // Locations
         Location::insert(
             array(

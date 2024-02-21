@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('token_device')->max(10)->nullable();
             $table->integer('pin')->max(6)->default(rand(111111, 999999));
             $table->integer('is_active')->default(1);
-            $table->unsignedBigInteger('wa_paket_id')->nullable();
+            $table->unsignedBigInteger('wa_paket_id')->default(1);
             $table->foreign('wa_paket_id')->references('id')->on('wa_paket');
             $table->boolean('connection_state')->default(false);
             $table->timestamps();

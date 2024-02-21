@@ -93,8 +93,8 @@
                         name: 'device_number'
                     },
                     {
-                        data: 'paket_wa_id',
-                        name: 'paket_wa_id'
+                        data: 'wa_paket',
+                        name: 'wa_paket'
                     },
                     {
                         data: 'connection_state',

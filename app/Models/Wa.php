@@ -19,4 +19,9 @@ class Wa extends Model
         'is_active',
         'connection_state',
     ];
+
+    public function paketwa()
+    {
+        return $this->hasOne(PaketWa::class, 'id', 'wa_paket_id');
+    }
 }

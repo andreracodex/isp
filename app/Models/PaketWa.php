@@ -9,13 +9,19 @@ class PaketWa extends Model
 {
     use HasFactory;
 
-    protected $table = 'paket_wa';
+    protected $table = 'wa_paket';
 
     protected $fillable = [
         'nama_paket',
         'jenis_paket',
         'harga_paket',
+        'duration',
         'jumlah_pesan',
         'disc',
     ];
+
+    public function wa()
+    {
+        return $this->belongsTo(Wa::class, 'id');
+    }
 }

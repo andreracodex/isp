@@ -20,6 +20,9 @@ class WhatsappController extends Controller
             ->editColumn('wa_id', function (Wa $wa) {
                 return $wa->id;
             })
+            ->editColumn('wa_paket', function (Wa $wa) {
+                return $wa->paketwa->nama_paket;
+            })
             ->addColumn('action', function (Wa $wa) {
                 return "
                 <a href='#' class='btn btn-sm btn-success d-inline-flex' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Linked Device'><i class='fa fa-link'>&nbsp;</i></a>
