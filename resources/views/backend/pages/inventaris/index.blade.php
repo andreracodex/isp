@@ -12,7 +12,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            let table = $('#inve').DataTable({
+            let table = $('#inven').DataTable({
                 dom: "<'row'<'col-sm-12 col-md-6'Bl><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 deferRender: true,
                 processing: true,
@@ -204,8 +204,8 @@
                                     class="ti ti-plus me-1"></i>Inventaris</a>
                         </div>
                         <div>
-                            <button type="button" class="btn btn-sm btn-outline-danger d-inline-flex"><i
-                                    class="fa fa-file-pdf">&nbsp;</i>Exspor PDF</button>
+                            <a href="{{ route('pdf.inventaris') }}"  type="button" class="btn btn-sm btn-outline-danger d-inline-flex"><i
+                                    class="fa fa-file-pdf">&nbsp;</i>Exspor PDF</a>
                             <button type="button" class="btn btn-sm btn-outline-success d-inline-flex"><i
                                     class="fa fa-file-excel">&nbsp;</i>Exspor Excel</button>
                             <button type="button" class="btn btn-sm btn-outline-warning d-inline-flex"><i
@@ -215,7 +215,7 @@
                 </div>
                 <div class="card-body">
                     <div class="dt-responsive table-responsive">
-                        <table id="inve" class="table compact table-striped table-hover table-bordered wrap"
+                        <table id="inven" class="table compact table-striped table-hover table-bordered wrap"
                             style="width:100%">
                             <thead>
                                 <tr>
@@ -225,6 +225,7 @@
                                     <th>Jenis Barang</th>
                                     <th>Jumlah Barang</th>
                                     <th>Satuan</th>
+                                    <th>Active</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

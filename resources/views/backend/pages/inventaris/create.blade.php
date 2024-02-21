@@ -30,7 +30,7 @@
                     <h5>Tambah Paket Form</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('paket.store') }}" enctype="multipart/form-data" method="POST"
+                    <form action="{{ route('inve.store') }}" enctype="multipart/form-data" method="POST"
                     class="needs-validation" novalidate="">
                         @csrf
                         @include('backend.pages.inventaris.partials.form-control-inventaris', [

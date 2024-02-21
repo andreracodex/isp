@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Inventaris;
 use App\Models\Setting;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Yajra\DataTables\Facades\DataTables;
 
 class InventarisController extends Controller
@@ -32,7 +34,9 @@ class InventarisController extends Controller
     }
 
     public function create(){
-
+        $inve = new Inventaris;
+        $profile = Setting::all();
+        return view('backend.pages.inventaris.create', compact('profile', 'inve'));
     }
 
     public function store(Request $request){
