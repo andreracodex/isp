@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('desa_customer');
             $table->string('kodepos_customer');
             $table->string('nomor_telephone');
-            $table->string('ip_config');
+            $table->string('ip_config')->nullable();
             $table->integer('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();

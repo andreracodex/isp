@@ -30,10 +30,11 @@
                     <h5>Tambah Pelanggan Form</h5>
                 </div>
                 <div class="card-body">
-                    <form class="needs-validation" novalidate>
+                    <form action="{{ route('customer.store') }}" enctype="multipart/form-data" method="POST"
+                    class="needs-validation" novalidate="">
                         @csrf
                         @include('backend.pages.customer.partials.form-control-customer', [
-                            'submit' => 'Create',
+                            'submit' => 'Tambah Pelanggan',
                         ])
                     </form>
                 </div>

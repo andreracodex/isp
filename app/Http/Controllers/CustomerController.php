@@ -50,7 +50,10 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Customer();
+        $post->create($request->all());
+        $profile = Setting::all();
+        return view('backend.pages.customer.index', compact('profile'));
     }
 
     /**

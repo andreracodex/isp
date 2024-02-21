@@ -107,25 +107,25 @@
                 </li>
 
                 <li class="pc-item">
-                    <a href="#" class="pc-link" target="_blank"><span class="pc-micon">
+                    <a href="#" class="pc-link"><span class="pc-micon">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-presentation-chart"></use>
                             </svg> </span><span class="pc-mtext">Inventaris</span></a>
                 </li>
                 <li class="pc-item pc-hasmenu">
-                    <a href="#" class="pc-link" target="_blank"><span class="pc-micon">
+                    <a href="#" class="pc-link"><span class="pc-micon">
                         <svg class="pc-icon">
                             <use xlink:href="#custom-dollar-square"></use>
                         </svg> </span><span class="pc-mtext">Tagihan</span></a>
                 </li>
                 <li class="pc-item pc-hasmenu">
-                    <a href="#" class="pc-link" target="_blank"><span class="pc-micon">
+                    <a href="#" class="pc-link"><span class="pc-micon">
                         <svg class="pc-icon">
                             <use xlink:href="#custom-fatrows"></use>
                         </svg> </span><span class="pc-mtext">Arus Kas</span></a>
                 </li>
                 <li class="pc-item pc-hasmenu">
-                    <a href="#" class="pc-link" target="_blank"><span class="pc-micon">
+                    <a href="#" class="pc-link"><span class="pc-micon">
                         <svg class="pc-icon">
                             <use xlink:href="#custom-graph"></use>
                         </svg> </span><span class="pc-mtext">Laporan</span></a>
@@ -136,13 +136,13 @@
                     <i class="ti ti-chart-arcs"></i>
                 </li>
                 <li class="pc-item pc-hasmenu">
-                    <a href="#" class="pc-link" target="_blank"><span class="pc-micon">
+                    <a href="#" class="pc-link"><span class="pc-micon">
                         <svg class="pc-icon">
                             <use xlink:href="#custom-setting-2"></use>
                         </svg> </span><span class="pc-mtext">Pengaturan</span></a>
                 </li>
                 <li class="pc-item pc-hasmenu">
-                    <a href="{{ route('wa.index') }}" class="pc-link" target="_blank"><span class="pc-micon">
+                    <a href="{{ route('wa.index') }}" class="pc-link"><span class="pc-micon">
                         <svg class="pc-icon">
                             <use xlink:href="#custom-message-2"></use>
                         </svg> </span><span class="pc-mtext">WhatsApp Gateway</span></a>
