@@ -6,6 +6,7 @@ use App\Models\Comments;
 use App\Models\LandingPost;
 use App\Models\Location;
 use App\Models\Paket;
+use App\Models\PaketWa;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\UserSetting;
@@ -470,6 +471,58 @@ class SettingsSeeder extends Seeder
                 'disc'=> 0,
             ),
         );
+        // Paket WA
+        PaketWa::insert(
+            array(
+                'nama_paket'=> 'Free',
+                'jenis_paket'=> 'Free',
+                'harga_paket'=> 0,
+                'disc'=> 0,
+                'jumlah_pesan' => 1000,
+                'is_active' => 1
+            ),
+        );
+        PaketWa::insert(
+            array(
+                'nama_paket'=> 'Free',
+                'jenis_paket'=> 'Free',
+                'harga_paket'=> 0,
+                'disc'=> 0,
+                'jumlah_pesan' => 1000,
+                'is_active' => 1
+            ),
+        );
+        PaketWa::insert(
+            array(
+                'nama_paket'=> 'Free',
+                'jenis_paket'=> 'Free',
+                'harga_paket'=> 0,
+                'disc'=> 0,
+                'jumlah_pesan' => 1000,
+                'is_active' => 1
+            ),
+        );
+        PaketWa::insert(
+            array(
+                'nama_paket'=> 'Free',
+                'jenis_paket'=> 'Free',
+                'harga_paket'=> 0,
+                'disc'=> 0,
+                'jumlah_pesan' => 1000,
+                'is_active' => 1
+            ),
+        );
+        PaketWa::insert(
+            array(
+                'nama_paket'=> 'Free',
+                'jenis_paket'=> 'Free',
+                'harga_paket'=> 0,
+                'disc'=> 0,
+                'jumlah_pesan' => 1000,
+                'is_active' => 1
+            ),
+        );
+
         // Locations
         Location::insert(
             array(

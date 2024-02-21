@@ -93,12 +93,16 @@
                         name: 'device_number'
                     },
                     {
+                        data: 'paket_wa_id',
+                        name: 'paket_wa_id'
+                    },
+                    {
                         data: 'connection_state',
                         name: 'connection_state',
                         render: function(data, type, row) {
-                            if (row.is_active == 0) {
-                                return '<span class="mb-1 badge rounded-pill bg-primary"> Not Active </span>';
-                            } else if (row.is_active == 1) {
+                            if (row.connection_state == 0) {
+                                return '<span class="mb-1 badge rounded-pill bg-danger"> Not Active </span>';
+                            } else if (row.connection_state == 1) {
                                 return '<span class="mb-1 badge rounded-pill bg-success"> Active </span>';
                             } else {
                                 return '<span class="mb-1 badge rounded-pill bg-secondary"> - </span>';
