@@ -69,6 +69,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     Route::prefix('wa')->group(function(){
         Route::get('', [WhatsappController::class, 'index'])->name('wa.index');
         Route::get('/create', [WhatsappController::class, 'create'])->name('wa.create');
+        Route::get('/qr', [WhatsappController::class, 'link'])->name('wa.link');
         Route::post('', [WhatsappController::class, 'store'])->name('wa.store');
         Route::get('{wa}/edit', [WhatsappController::class, 'edit'])->name('wa.edit');
         Route::put('{wa}/edit', [WhatsappController::class, 'update']);

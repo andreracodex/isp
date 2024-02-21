@@ -25,7 +25,7 @@ class WhatsappController extends Controller
             })
             ->addColumn('action', function (Wa $wa) {
                 return "
-                <a href='#' class='btn btn-sm btn-success d-inline-flex' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Linked Device'><i class='fa fa-link'>&nbsp;</i></a>
+                <a href='#' data-pc-animate='blur' data-bs-toggle='modal' data-bs-target='#qrModal' class='btn btn-sm btn-success d-inline-flex' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Linked Device'><i class='fa fa-link'>&nbsp;</i></a>
                 <a href='#' class='btn btn-sm btn-secondary d-inline-flex' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Token'><i class='fa fa-lock'>&nbsp;</i></a>
                 <a href=". route('wa.edit', $wa->id) ." class='btn btn-sm btn-warning d-inline-flex' type='button' data-bs-toggle='tooltip' data-bs-placement='top' data-bs-original-title='tooltip on top' title='Edit Data'><i class='fa fa-pencil-alt'></i></a>
                 <a href=". route('wa.delete', $wa->id) ." class='btn btn-sm btn-danger d-inline-flex' type='button' data-bs-toggle='tooltip' data-bs-placement='top' data-bs-original-title='tooltip on top' title='Delete Data'><i class='fa fa-trash-alt'></i></a>
@@ -60,6 +60,10 @@ class WhatsappController extends Controller
     }
     public function store(Request $request)
     {
+
+    }
+
+    public function link(Request $request){
 
     }
 }

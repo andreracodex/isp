@@ -4,7 +4,24 @@
 @endsection
 
 @push('script')
-<script src="{{ asset('/js/plugins/dataTables.responsive.min.js') }}"></script>
+    <script type="text/javascript">
+        // QR Modal
+        var qrModal = document.getElementById('qrModal');
+        qrModal.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget;
+            var recipient = button.getAttribute('data-pc-animate');
+            var modalTitle = qrModal.querySelector('.modal-title');
+            qrModal.classList.add('anim-' + recipient);
+            if (recipient == 'let-me-in' || recipient == 'make-way' || recipient == 'slip-from-top') {
+                document.body.classList.add('anim-' + recipient);
+            }
+        });
+        qrModal.addEventListener('hidden.bs.modal', function(event) {
+            removeClassByPrefix(qrModal, 'anim-');
+            removeClassByPrefix(document.body, 'anim-');
+        });
+    </script>
+    <script src="{{ asset('/js/plugins/dataTables.responsive.min.js') }}"></script>
     <script type="text/javascript">
         $(function() {
             $.ajaxSetup({
@@ -173,12 +190,19 @@
 @endpush
 
 @section('isi')
-
     <form method="GET" action="{{ route('wa.create') }}" class="needs-validation" novalidate>
-    @csrf
-    @include('backend.pages.wa.partials.form-control-wa', [
-        'submit' => 'Create',
-    ])
+        @csrf
+        @include('backend.pages.wa.partials.form-control-wa', [
+            'submit' => 'Create',
+        ])
+    </form>
+
+
+    <form method="GET" action="{{ route('wa.link') }}" class="needs-validation" novalidate>
+        @csrf
+        @include('backend.pages.wa.partials.form-control-qr', [
+            'submit' => 'Create',
+        ])
     </form>
     {{-- Breadcrumbs --}}
     <div class="page-header">
@@ -202,7 +226,8 @@
                 <div class="card-header">
                     <div class="headerbutton">
                         <div>
-                            <a href="#" data-pc-animate="blur" type="button" class="btn btn-sm btn-outline-primary d-inline-flex" data-bs-toggle="modal"
+                            <a href="#" data-pc-animate="blur" type="button"
+                                class="btn btn-sm btn-outline-primary d-inline-flex" data-bs-toggle="modal"
                                 data-bs-target="#animateModal">
                                 <i class="ti ti-plus me-1"></i> Add Number
                             </a>
