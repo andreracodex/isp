@@ -86,11 +86,14 @@
                     },
                     {
                         data: 'nama_customer',
-                        name: 'nama_customer'
-                    },
-                    {
-                        data: 'nomor_layanan',
-                        name: 'nomor_layanan'
+                        name: 'nama_customer',
+                        render: function(data, type, row) {
+                            if (row.nama_customer != null) {
+                                return '<div class="row"><div class="col-auto pe-0"><img src="images/user/avatar-3.jpg" alt="user-image" class="wid-40 rounded-circle"></div><div class="col"><h6 class="mb-0">'+row.nama_customer+'</h6><p class="text-muted f-12 mb-0">'+row.nomor_layanan+'</p></div></div>';
+                            } else {
+                                return '<div class="row"><div class="col-auto pe-0"><img src="images/user/avatar-3.jpg" alt="user-image" class="wid-40 rounded-circle"></div><div class="col"><h6 class="mb-0">Alberta Robbins</h6><p class="text-muted f-12 mb-0">miza@gmail.com</p></div></div>';
+                            }
+                        }
                     },
                     {
                         data: 'alamat_customer',
@@ -105,11 +108,11 @@
                         name: 'is_active',
                         render: function(data, type, row) {
                             if (row.is_active == 0) {
-                                return '<span class="mb-1 badge rounded-pill bg-primary"> Not Active </span>';
+                                return '<span class="badge bg-light-danger rounded-pill f-12"> Not Active </span>';
                             } else if (row.is_active == 1) {
-                                return '<span class="mb-1 badge rounded-pill bg-success"> Active </span>';
+                                return '<span class="badge bg-light-success rounded-pill f-12"> Active </span>';
                             } else {
-                                return '<span class="mb-1 badge rounded-pill bg-secondary"> - </span>';
+                                return '<span class="badge bg-light-primary rounded-pill f-12"> - </span>';
                             }
                         }
                     },
@@ -222,8 +225,7 @@
                                 <tr>
                                     <th style="width: 10px;">#</th>
                                     <th></th>
-                                    <th>Nama</th>
-                                    <th>Nomor Layanan</th>
+                                    <th>Nama - ID</th>
                                     <th>Alamat</th>
                                     <th>Telpon</th>
                                     <th>Status</th>

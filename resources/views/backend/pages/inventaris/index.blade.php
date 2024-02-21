@@ -105,11 +105,11 @@
                         name: 'is_active',
                         render: function(data, type, row) {
                             if (row.is_active == 0) {
-                                return '<span class="mb-1 badge rounded-pill bg-primary"> Not Active </span>';
+                                return '<span class="badge bg-light-danger rounded-pill f-12"> Not Active </span>';
                             } else if (row.is_active == 1) {
-                                return '<span class="mb-1 badge rounded-pill bg-success"> Active </span>';
+                                return '<span class="badge bg-light-success rounded-pill f-12"> Active </span>';
                             } else {
-                                return '<span class="mb-1 badge rounded-pill bg-secondary"> - </span>';
+                                return '<span class="badge bg-light-primary rounded-pill f-12"> - </span>';
                             }
                         }
                     },

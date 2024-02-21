@@ -154,7 +154,7 @@
                                                         class="mb-0">{{ \Carbon\Carbon::parse($proses->created_at)->format('d/M/Y') }}</span>
                                                 </td>
                                                 <td class="ps-0">
-                                                    <span class="mb-1 badge rounded-pill bg-primary">
+                                                    <span class="badge bg-light-danger rounded-pill f-12">
                                                         Proses
                                                     </span>
                                                 </td>
@@ -218,7 +218,7 @@
                                                             Dikirim
                                                         </span>
                                                     @elseif ($kirim->status == 2)
-                                                        <span class="mb-1 badge rounded-pill bg-secondary">
+                                                        <span class="badge bg-light-primary rounded-pill f-12">
                                                             Dikirim
                                                         </span>
                                                     @else
