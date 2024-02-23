@@ -1,0 +1,7 @@
+[0221/155732.978:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'ambient-light-sensor'.", source:  (0)
+[0221/155846.876:INFO:CONSOLE(39)] "Uncaught (in promise) Error: Cannot set headers after they are sent to the client", source: pptr:;CdpFrame.%3Canonymous%3E%20(C%3A%5CLaragon%5Cwww%5Cisp%5Cwa%5Cnode_modules%5Cpuppeteer-core%5Clib%5Ccjs%5Cpuppeteer%5Cutil%5Cdecorators.js%3A98%3A27) (39)
+[0221/155903.230:WARNING:dns_config_service_win.cc(585)] Failed to read DnsConfig.
+[0221/155916.510:WARNING:dns_config_service_win.cc(585)] Failed to read DnsConfig.
+[0221/155921.533:WARNING:dns_config_service_win.cc(585)] Failed to read DnsConfig.
+[0221/155931.566:WARNING:dns_config_service_win.cc(585)] Failed to read DnsConfig.
+[0221/155951.582:WARNING:dns_config_service_win.cc(585)] Failed to read DnsConfig.

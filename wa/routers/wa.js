@@ -9,7 +9,7 @@ const client = new Client({
         dataPath: '../wa-client/auth/'
     }),
     puppeteer: {
-        headless:true,
+        headless: 'new',
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
     },
 });
@@ -18,7 +18,7 @@ const client = new Client({
 router.get("/client", function (req, res) {
     try{
         client.on('qr', (qr) => {
-            res.send(qr);
+            res.json({ 'qr' : qr });
         });
         client.on('ready', () => {
             res.send('Ready');
