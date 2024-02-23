@@ -13,6 +13,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "spatie/laravel-permission": "^6.3",
+        "stevebauman/location": "^7.1",
         "yajra/laravel-datatables": "10.0"
     },
     "require-dev": {
@@ -31,7 +32,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Helpers/CustomHelper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

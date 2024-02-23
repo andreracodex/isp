@@ -8,6 +8,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WhatsappController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,10 +37,13 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // PROFILE
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
+    Route::prefix('settings')->group(function(){
+        Route::get('', [SettingsController::class, 'index'])->name('settings.index');
+        Route::get('/create', [ProfileController::class, 'create'])->name('settings.profile-show');
+        Route::post('', [ProfileController::class, 'store'])->name('settings.profile-store');
+        Route::put('/profile', [ProfileController::class, 'update'])->name('settings.profile-update');
+        Route::delete('', [ProfileController::class, 'destroy'])->name('settings.profile-destroy');
+    });
     // Customer
     Route::prefix('customer')->group(function(){
         Route::get('', [CustomerController::class, 'index'])->name('customer.index');

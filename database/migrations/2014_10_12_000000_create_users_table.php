@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('is_active')->default(1);
             $table->string('path')->nullable('');
-            $table->string('real_path')->default('/images/profile/user-1.jpg');
+            $table->string('real_path')->default('images/user/avatar-1.jpg');
             $table->string('user_type')->default('user');
             $table->string('pin')->nullable();
             $table->rememberToken();

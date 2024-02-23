@@ -31,7 +31,7 @@
                     </div>
                     <div class="collapse pc-user-links" id="pc_sidebar_userlink">
                         <div class="pt-3">
-                            <a href="#!">
+                            <a href="{{ route('settings.profile-show') }}">
                                 <i class="ti ti-user"></i>
                                 <span>My Account</span>
                             </a>
@@ -136,19 +136,11 @@
                     <i class="ti ti-chart-arcs"></i>
                 </li>
                 <li class="pc-item pc-hasmenu">
-                    <a href="#" class="pc-link"><span class="pc-micon">
+                    <a href="{{ route('settings.index') }}" class="pc-link"><span class="pc-micon">
                         <svg class="pc-icon">
                             <use xlink:href="#custom-setting-2"></use>
                         </svg> </span><span class="pc-mtext">Pengaturan</span></a>
                 </li>
-                <li class="pc-item pc-hasmenu">
-                    <a href="{{ route('wa.index') }}" class="pc-link"><span class="pc-micon">
-                        <svg class="pc-icon">
-                            <use xlink:href="#custom-message-2"></use>
-                        </svg> </span><span class="pc-mtext">WhatsApp Gateway</span></a>
-                </li>
-
-
             </ul>
         </div>
     </div>

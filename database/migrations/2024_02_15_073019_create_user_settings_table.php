@@ -16,12 +16,12 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('status')->default('New');
-            $table->string('dashboard_profile_type')->nullable();
             $table->string('layout_type')->default('ltr');
-            $table->string('sidebar_type')->nullable();
-            $table->string('dark_mode')->nullable();
-            $table->string('value')->nullable();
-            $table->integer('cookie_remember')->default(0);
+            $table->boolean('dark_mode')->default(true);
+            $table->boolean('secure_login')->default(true);
+            $table->boolean('login_notif')->default(true);
+            $table->boolean('login_approved')->default(true);
+            $table->integer('cookie_remember')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });
