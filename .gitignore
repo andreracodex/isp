@@ -6,6 +6,7 @@
 /storage/*.key
 /vendor
 /wa/node_modules
+/wa-client
 .env
 .env.backup
 .env.production

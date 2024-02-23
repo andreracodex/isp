@@ -6,7 +6,7 @@ const { Client, LocalAuth, MessageMedia } = require("whatsapp-web.js");
 const axios = require("axios");
 const client = new Client({
     authStrategy: new LocalAuth({
-        dataPath: '../wa-client/auth/'
+        dataPath: '../wa-client/client/'
     }),
     puppeteer: {
         headless: 'new',
