@@ -15,7 +15,7 @@
                             </div>
                             <div class="form-check form-switch p-0">
                                 <input class="form-check-input h4 position-relative m-0" type="checkbox" role="switch"
-                                @if($usersetting[0]->secure_login == 1) checked @else @endif>
+                                    @if ($usersetting[0]->secure_login == 1) checked @else @endif>
                             </div>
                         </div>
                     </li>
@@ -28,7 +28,7 @@
                             </div>
                             <div class="form-check form-switch p-0">
                                 <input class="form-check-input h4 position-relative m-0" type="checkbox" role="switch"
-                                @if($usersetting[0]->login_notif == 1) checked @else @endif>
+                                    @if ($usersetting[0]->login_notif == 1) checked @else @endif>
                             </div>
                         </div>
                     </li>
@@ -42,7 +42,7 @@
                             </div>
                             <div class="form-check form-switch p-0">
                                 <input class="form-check-input h4 position-relative m-0" type="checkbox" role="switch"
-                                @if($usersetting[0]->login_approved == 1) checked @else @endif>
+                                    @if ($usersetting[0]->login_approved == 1) checked @else @endif>
                             </div>
                         </div>
                     </li>
@@ -98,8 +98,16 @@
                                     <p class="mb-0 text-muted">{{ $session->user_agent }}</p>
                                 </div>
                                 @method('POST') @csrf
-                                <a href="{{ route('settings.profile-logout') }}" id="logout" onclick="event.preventDefault(); document.getElementById('logout').submit();"
-                                    class="btn btn-link-danger">Logout</a>
+                                <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('session-logout').submit();">
+                                    <i class="ti ti-power"></i>
+                                    <span>Logout</span>
+                                </a>
+
+                                <form id="session-logout" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                             </div>
                         </li>
                     @endforeach

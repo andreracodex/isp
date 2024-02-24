@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use App\Models\Sessions;
 use App\Models\Setting;
 use App\Models\UserSetting;
@@ -23,6 +24,8 @@ class SettingsController extends Controller
         $profile = Setting::all();
         $usersetting = UserSetting::all();
         $sess = Sessions::where('user_id', Auth::user()->id)->get();
-        return view('backend.pages.setting.profile.profile', compact('profile', 'usersetting', 'sess', 'ip'));
+        $employee = Employee::all();
+        $emp_active = Employee::where('is_active', 1)->count();
+        return view('backend.pages.setting.profile.profile', compact('profile', 'usersetting', 'sess', 'ip', 'employee', 'emp_active'));
     }
 }

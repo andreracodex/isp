@@ -44,12 +44,12 @@
                                 <span>Lock Screen</span>
                             </a>
                             @method('POST') @csrf
-                            <a href="{{ route('logout') }}" id="sidebar" onclick="event.preventDefault(); document.getElementById('sidebar').submit();">
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('sidebar-logout').submit();">
                                 <i class="ti ti-power"></i>
                                 <span>Logout</span>
                             </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            <form id="sidebar-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}
                             </form>
                         </div>

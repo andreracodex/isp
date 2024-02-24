@@ -1,9 +1,9 @@
 <div class="card">
     <div class="card-header">
-        <h5>Invite Team Members</h5>
+        <h5>Team Members of - {{$profile[22]->value}}</h5>
     </div>
     <div class="card-body">
-        <h4>5/10 <small>members available in your plan.</small></h4>
+        <h4>{{ $emp_active }}/{{ count($employee) }} <small>members available in your team.</small></h4>
         <hr class="my-3">
         <div class="row">
             <div class="col-md-8">
@@ -33,6 +33,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                @foreach ( $employee as $emp)
                     <tr>
                         <td>
                             <div class="row">
@@ -52,161 +53,7 @@
                                 class="avtar avtar-s btn-link-secondary"><i
                                     class="ti ti-dots f-18"></i></a></td>
                     </tr>
-                    <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col-auto pe-0">
-                                    <img src="../assets/images/user/avatar-4.jpg" alt="user-image"
-                                        class="wid-40 rounded-circle">
-                                </div>
-                                <div class="col">
-                                    <h5 class="mb-0">Agnes McGee</h5>
-                                    <p class="text-muted f-12 mb-0">heba@gmail.com</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-light-info">Manager</span></td>
-                        <td class="text-end"><a href="#" class="btn btn-link-danger">Resend</a>
-                            <span class="badge bg-light-success">Invited</span></td>
-                        <td class="text-end"><a href="#"
-                                class="avtar avtar-s btn-link-secondary"><i
-                                    class="ti ti-dots f-18"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col-auto pe-0">
-                                    <img src="../assets/images/user/avatar-5.jpg" alt="user-image"
-                                        class="wid-40 rounded-circle">
-                                </div>
-                                <div class="col">
-                                    <h5 class="mb-0">Agnes McGee</h5>
-                                    <p class="text-muted f-12 mb-0">heba@gmail.com</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-light-warning">Staff</span></td>
-                        <td class="text-end"><span class="badge bg-success">Joined</span></td>
-                        <td class="text-end"><a href="#"
-                                class="avtar avtar-s btn-link-secondary"><i
-                                    class="ti ti-dots f-18"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col-auto pe-0">
-                                    <img src="../assets/images/user/avatar-1.jpg" alt="user-image"
-                                        class="wid-40 rounded-circle">
-                                </div>
-                                <div class="col">
-                                    <h5 class="mb-0">Addie Bass</h5>
-                                    <p class="text-muted f-12 mb-0">mareva@gmail.com</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-primary">Owner</span></td>
-                        <td class="text-end"><span class="badge bg-success">Joined</span></td>
-                        <td class="text-end"><a href="#"
-                                class="avtar avtar-s btn-link-secondary"><i
-                                    class="ti ti-dots f-18"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col-auto pe-0">
-                                    <img src="../assets/images/user/avatar-4.jpg" alt="user-image"
-                                        class="wid-40 rounded-circle">
-                                </div>
-                                <div class="col">
-                                    <h5 class="mb-0">Agnes McGee</h5>
-                                    <p class="text-muted f-12 mb-0">heba@gmail.com</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-light-info">Manager</span></td>
-                        <td class="text-end"><a href="#" class="btn btn-link-danger">Resend</a>
-                            <span class="badge bg-light-success">Invited</span></td>
-                        <td class="text-end"><a href="#"
-                                class="avtar avtar-s btn-link-secondary"><i
-                                    class="ti ti-dots f-18"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col-auto pe-0">
-                                    <img src="../assets/images/user/avatar-5.jpg" alt="user-image"
-                                        class="wid-40 rounded-circle">
-                                </div>
-                                <div class="col">
-                                    <h5 class="mb-0">Agnes McGee</h5>
-                                    <p class="text-muted f-12 mb-0">heba@gmail.com</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-light-warning">Staff</span></td>
-                        <td class="text-end"><span class="badge bg-success">Joined</span></td>
-                        <td class="text-end"><a href="#"
-                                class="avtar avtar-s btn-link-secondary"><i
-                                    class="ti ti-dots f-18"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col-auto pe-0">
-                                    <img src="../assets/images/user/avatar-1.jpg" alt="user-image"
-                                        class="wid-40 rounded-circle">
-                                </div>
-                                <div class="col">
-                                    <h5 class="mb-0">Addie Bass</h5>
-                                    <p class="text-muted f-12 mb-0">mareva@gmail.com</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-primary">Owner</span></td>
-                        <td class="text-end"><span class="badge bg-success">Joined</span></td>
-                        <td class="text-end"><a href="#"
-                                class="avtar avtar-s btn-link-secondary"><i
-                                    class="ti ti-dots f-18"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col-auto pe-0">
-                                    <img src="../assets/images/user/avatar-4.jpg" alt="user-image"
-                                        class="wid-40 rounded-circle">
-                                </div>
-                                <div class="col">
-                                    <h5 class="mb-0">Agnes McGee</h5>
-                                    <p class="text-muted f-12 mb-0">heba@gmail.com</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-light-info">Manager</span></td>
-                        <td class="text-end"><a href="#" class="btn btn-link-danger">Resend</a>
-                            <span class="badge bg-light-success">Invited</span></td>
-                        <td class="text-end"><a href="#"
-                                class="avtar avtar-s btn-link-secondary"><i
-                                    class="ti ti-dots f-18"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col-auto pe-0">
-                                    <img src="../assets/images/user/avatar-5.jpg" alt="user-image"
-                                        class="wid-40 rounded-circle">
-                                </div>
-                                <div class="col">
-                                    <h5 class="mb-0">Agnes McGee</h5>
-                                    <p class="text-muted f-12 mb-0">heba@gmail.com</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-light-warning">Staff</span></td>
-                        <td class="text-end"><span class="badge bg-success">Joined</span></td>
-                        <td class="text-end"><a href="#"
-                                class="avtar avtar-s btn-link-secondary"><i
-                                    class="ti ti-dots f-18"></i></a></td>
-                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>

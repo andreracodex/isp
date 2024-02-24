@@ -50,13 +50,13 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label class="form-label">Kode POS</label>
-                            <input type="number" name="kodepos_customer" class="form-control" value="@if(Auth::user()->customer != null){{Auth::user()->customer->kodepos_customer}}@else @endif">
+                            <input type="number" name="kodepos_customer" class="form-control" value="@if(Auth::user()->customer != null){{Auth::user()->customer->kodepos_customer}}@else{{0}}@endif">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label class="form-label">Nomor Telephone</label>
-                            <input type="number" name="nomor_telephone" class="form-control" value="@if(Auth::user()->customer != null){{Auth::user()->customer->nomor_telephone}}@else @endif">
+                            <input type="number" name="nomor_telephone" class="form-control" value="@if(Auth::user()->customer != null){{Auth::user()->customer->nomor_telephone}}@else{{0}}@endif">
                         </div>
                     </div>
                     <div class="col-sm-12">

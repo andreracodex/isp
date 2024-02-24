@@ -40,13 +40,13 @@
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="profile-tab-5" data-bs-toggle="tab" href="#profile-5" role="tab"
                                 aria-selected="false" tabindex="-1">
-                                <i class="ti ti-users me-2"></i>Role
+                                <i class="ti ti-box me-2"></i>Role & Hak Akses
                             </a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="profile-tab-6" data-bs-toggle="tab" href="#profile-6" role="tab"
                                 aria-selected="false" tabindex="-1">
-                                <i class="ti ti-settings me-2"></i>Settings
+                                <i class="ti ti-users me-2"></i>Employee
                             </a>
                         </li>
                     </ul>
