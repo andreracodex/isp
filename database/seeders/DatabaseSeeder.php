@@ -14,6 +14,12 @@ class DatabaseSeeder extends Seeder
             PaymentTypeSeeder::class,
             BankSeeder::class,
         ]);
+
         \App\Models\Customer::factory(100)->create();
+        \App\Models\Employee::factory(20)->create();
+
+        $this->call([
+            LocationSeeder::class,
+        ]);
     }
 }

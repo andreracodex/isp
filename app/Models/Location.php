@@ -15,8 +15,7 @@ class Location extends Model
     protected $fillable = [
         'nama_locations',
         'alamat_locations',
-        'penanggung_jawab_locations',
-        'kontak_penanggung_jawab_locations',
+        'employee_id',
         'is_active',
     ];
 

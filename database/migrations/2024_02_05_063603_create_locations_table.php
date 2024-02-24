@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nama_locations');
             $table->string('alamat_locations');
-            $table->string('penanggung_jawab_locations');
-            $table->string('kontak_penanggung_jawab_locations');
+            $table->unsignedBigInteger('employee_id')->nullable();
+            $table->foreign('employee_id')->references('id')->on('employees');
             $table->integer('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();

@@ -662,47 +662,6 @@ class SettingsSeeder extends Seeder
                 'is_active' => 1
             ),
         );
-        // Locations
-        Location::insert(
-            array(
-                'nama_locations'=> 'Lokasi 1',
-                'alamat_locations'=> 'Jl. test 1',
-                'penanggung_jawab_locations'=> '1',
-                'kontak_penanggung_jawab_locations'=> '1',
-            ),
-        );
-        Location::insert(
-            array(
-                'nama_locations'=> 'Lokasi 2',
-                'alamat_locations'=> 'Jl. test 2',
-                'penanggung_jawab_locations'=> '1',
-                'kontak_penanggung_jawab_locations'=> '1',
-            ),
-        );
-        Location::insert(
-            array(
-                'nama_locations'=> 'Lokasi 3',
-                'alamat_locations'=> 'Jl. test 3',
-                'penanggung_jawab_locations'=> '1',
-                'kontak_penanggung_jawab_locations'=> '1',
-            ),
-        );
-        Location::insert(
-            array(
-                'nama_locations'=> 'Lokasi 4',
-                'alamat_locations'=> 'Jl. test 4',
-                'penanggung_jawab_locations'=> '1',
-                'kontak_penanggung_jawab_locations'=> '1',
-            ),
-        );
-        Location::insert(
-            array(
-                'nama_locations'=> 'Lokasi 5',
-                'alamat_locations'=> 'Jl. test 5',
-                'penanggung_jawab_locations'=> '1',
-                'kontak_penanggung_jawab_locations'=> '1',
-            ),
-        );
         UserSetting::insert(
             array(
                 'user_id' => 2,
