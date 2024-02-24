@@ -44,7 +44,7 @@
                                 <span>Lock Screen</span>
                             </a>
                             @method('POST') @csrf
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a href="{{ route('logout') }}" id="sidebar" onclick="event.preventDefault(); document.getElementById('sidebar').submit();">
                                 <i class="ti ti-power"></i>
                                 <span>Logout</span>
                             </a>

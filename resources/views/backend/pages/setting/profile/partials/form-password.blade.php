@@ -1,3 +1,14 @@
+@push('script')
+<script text="text/javascript">
+    // Replace these with your actual password input field and icons
+    const passwordInput = document.getElementById('password');
+    // Event listener for password input
+    passwordInput.addEventListener('input', () => {
+        const password = passwordInput.value;
+        console.log(password);
+    });
+</script>
+@endpush
 <div class="card">
     <div class="card-header">
         <h5>Change Password</h5>
@@ -8,11 +19,11 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label class="form-label">New Password</label>
-                    <input type="password" class="form-control">
+                    <input name="password" id="password" type="password" class="form-control">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control">
+                    <input name="confirm_password" id="confirm_password" type="password" class="form-control">
                 </div>
             </div>
             <div class="col-sm-6">

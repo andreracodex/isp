@@ -147,7 +147,7 @@
                     @include('backend.pages.setting.profile.partials.form-roles')
                 </div>
                 <div class="tab-pane" id="profile-6" role="tabpanel" aria-labelledby="profile-tab-6">
-
+                    @include('backend.pages.setting.profile.partials.form-employees')
                 </div>
             </div>
         </div>

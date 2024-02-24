@@ -98,7 +98,7 @@
                                     <p class="mb-0 text-muted">{{ $session->user_agent }}</p>
                                 </div>
                                 @method('POST') @csrf
-                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                <a href="{{ route('settings.profile-logout') }}" id="logout" onclick="event.preventDefault(); document.getElementById('logout').submit();"
                                     class="btn btn-link-danger">Logout</a>
                             </div>
                         </li>

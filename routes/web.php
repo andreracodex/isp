@@ -43,6 +43,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::post('', [ProfileController::class, 'store'])->name('settings.profile-store');
         Route::put('/profile', [ProfileController::class, 'update'])->name('settings.profile-update');
         Route::delete('', [ProfileController::class, 'destroy'])->name('settings.profile-destroy');
+        Route::post('/logout', [ProfileController::class, 'logout'])->name('settings.profile-logout');
     });
     // Customer
     Route::prefix('customer')->group(function(){
