@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Tambah Paket Internet</h2>
+                        <h2 class="mb-0">Tambah Inventaris</h2>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>Tambah Paket Form</h5>
+                    <h5>Form Tambah Inventaris</h5>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('inve.store') }}" enctype="multipart/form-data" method="POST"

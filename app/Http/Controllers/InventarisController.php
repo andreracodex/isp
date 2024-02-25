@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inventaris;
+use App\Models\Location;
 use App\Models\Setting;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -21,6 +22,9 @@ class InventarisController extends Controller
             ->editColumn('inve_id', function (Inventaris $inve) {
                 return $inve->id;
             })
+            ->editColumn('jumlah_barang', function (Inventaris $inve) {
+                return number_format($inve->jumlah_barang, 0, ',', '.');
+            })
             ->addColumn('action', function (Inventaris $inve) {
                 return "
                 <a href=".$inve->id." class='btn btn-sm btn-secondary d-inline-flex' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
@@ -35,8 +39,12 @@ class InventarisController extends Controller
 
     public function create(){
         $inve = new Inventaris;
+        $locations = Location::all();
         $profile = Setting::all();
-        return view('backend.pages.inventaris.create', compact('profile', 'inve'));
+
+        return view('backend.pages.inventaris.create',
+            compact('profile', 'inve', 'locations')
+        );
     }
 
     public function store(Request $request){
