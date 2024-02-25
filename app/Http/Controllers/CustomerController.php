@@ -10,9 +10,6 @@ use Yajra\DataTables\Facades\DataTables;
 
 class CustomerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $profile = Setting::all();
@@ -35,9 +32,6 @@ class CustomerController extends Controller
         return view('backend.pages.customer.index', compact('profile'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $customer = new Customer;
@@ -45,9 +39,6 @@ class CustomerController extends Controller
         return view('backend.pages.customer.create', compact('profile', 'customer'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -78,33 +69,21 @@ class CustomerController extends Controller
         return view('backend.pages.customer.index', compact('profile'));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Customer $customer)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Customer $customer)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Customer $customer)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Customer $customer)
     {
         //

@@ -88,9 +88,10 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     Route::prefix('inve')->group(function(){
         Route::get('', [InventarisController::class, 'index'])->name('inve.index');
         Route::get('/create', [InventarisController::class, 'create'])->name('inve.create');
-        Route::post('', [InventarisController::class, 'store'])->name('inve.store');
+        Route::post('/store', [InventarisController::class, 'store'])->name('inve.store');
         Route::get('{inve}/edit', [InventarisController::class, 'edit'])->name('inve.edit');
-        Route::put('{inve}/edit', [InventarisController::class, 'update']);
+        Route::put('{inve}/update', [InventarisController::class, 'update'])->name('inve.update');
+        Route::delete('{inve}/delete', [InventarisController::class, 'delete'])->name('inve.delete');
     });
 
     Route::get('/pdf', [PDFController::class, 'PDFInventaris'])->name('pdf.inventaris');

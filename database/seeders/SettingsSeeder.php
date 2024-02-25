@@ -712,6 +712,9 @@ class SettingsSeeder extends Seeder
         ModelsPermission::create(['name' => 'add slider']);
         ModelsPermission::create(['name' => 'edit slider']);
         ModelsPermission::create(['name' => 'view slider']);
+        ModelsPermission::create(['name' => 'view inventaris']);
+        ModelsPermission::create(['name' => 'add inventaris']);
+        ModelsPermission::create(['name' => 'edit inventaris']);
 
         $role2 = Role::find(2);
         $role2->givePermissionTo('menu dashboard');

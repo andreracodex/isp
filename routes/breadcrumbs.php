@@ -74,6 +74,9 @@ Breadcrumbs::for('inve.create', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Tambah Inventaris', route('inve.create'));
 });
+Breadcrumbs::for('inve.edit', function (BreadcrumbTrail $trail): void {
+    $trail->push('Edit Inventaris', route('inve.edit', 'inve'));
+});
 
 Breadcrumbs::for('inve.store', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
