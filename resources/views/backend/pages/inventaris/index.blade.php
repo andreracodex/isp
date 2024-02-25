@@ -1,5 +1,7 @@
 @extends('backend.base')
 
+@section('title', 'Inventory Data')
+
 @section('styles')
 @endsection
 
@@ -204,7 +206,8 @@
                                     class="ti ti-plus me-1"></i>Inventaris</a>
                         </div>
                         <div>
-                            <a href="{{ route('pdf.inventaris') }}"  type="button" class="btn btn-sm btn-outline-danger d-inline-flex"><i
+                            <a href="{{ route('pdf.inventaris') }}" type="button"
+                                class="btn btn-sm btn-outline-danger d-inline-flex"><i
                                     class="fa fa-file-pdf">&nbsp;</i>Exspor PDF</a>
                             <button type="button" class="btn btn-sm btn-outline-success d-inline-flex"><i
                                     class="fa fa-file-excel">&nbsp;</i>Exspor Excel</button>

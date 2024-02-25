@@ -1,5 +1,7 @@
 @extends('layouts.backend.base')
 
+@section('title', 'Assign Permission Edit')
+
 @section('styles')
 @endsection
 
@@ -50,8 +52,8 @@
                 <div class="mb-2">
                     <div class="col-md-12">
                         <label class="col-form-label">Choose Permission :</label></br>
-                        <select name="permission[]" id="permission" class="select2 form-control"
-                            multiple="multiple" required aria-placeholder="Select Permissions">
+                        <select name="permission[]" id="permission" class="select2 form-control" multiple="multiple"
+                            required aria-placeholder="Select Permissions">
                             @foreach ($permission as $permi)
                                 <option {{ $role->permissions()->find($permi->id) ? 'selected' : '' }}
                                     value="{{ $permi->id }}">{{ $permi->name }}</option>

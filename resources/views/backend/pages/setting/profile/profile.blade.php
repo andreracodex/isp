@@ -1,5 +1,7 @@
 @extends('backend.base')
 
+@section('title', 'My Profile')
+
 @section('styles')
 @endsection
 
@@ -63,19 +65,42 @@
                                     </div>
                                     <div class="text-center mt-3">
                                         <div class="chat-avtar d-inline-flex mx-auto">
-                                            <img class="rounded-circle img-fluid wid-70"
-                                                src="{{ Auth::user()->real_path }}" alt="User image">
+                                            <img class="rounded-circle img-fluid wid-70" src="{{ Auth::user()->real_path }}"
+                                                alt="User image">
                                         </div>
-                                        <h5 class="mb-0">@if(Auth::user()->customer != null) {{ Auth::user()->customer->nama_customer }} @else - @endif</h5>
-                                        <p class="text-muted text-sm">ID:@if(Auth::user()->customer != null) {{ Auth::user()->customer->nomor_layanan }} @else - @endif</p>
+                                        <h5 class="mb-0">
+                                            @if (Auth::user()->customer != null)
+                                                {{ Auth::user()->customer->nama_customer }}
+                                            @else
+                                                -
+                                            @endif
+                                        </h5>
+                                        <p class="text-muted text-sm">ID:@if (Auth::user()->customer != null)
+                                                {{ Auth::user()->customer->nomor_layanan }}
+                                            @else
+                                                -
+                                            @endif
+                                        </p>
                                         <hr class="my-3 border border-secondary-subtle">
                                         <div class="d-inline-flex align-items-center justify-content-start w-100 mb-3">
                                             <i class="ti ti-mail me-2"></i>
-                                            <p class="mb-0">@if(Auth::user()->customer != null) {{ Auth::user()->email }} @else - @endif</p>
+                                            <p class="mb-0">
+                                                @if (Auth::user()->customer != null)
+                                                    {{ Auth::user()->email }}
+                                                @else
+                                                    -
+                                                @endif
+                                            </p>
                                         </div>
                                         <div class="d-inline-flex align-items-center justify-content-start w-100 mb-3">
                                             <i class="ti ti-phone me-2"></i>
-                                            <p class="mb-0">@if(Auth::user()->customer != null) {{ Auth::user()->customer->nomor_telephone }} @else - @endif</p>
+                                            <p class="mb-0">
+                                                @if (Auth::user()->customer != null)
+                                                    {{ Auth::user()->customer->nomor_telephone }}
+                                                @else
+                                                    -
+                                                @endif
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -92,11 +117,23 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <p class="mb-1 text-muted">Full Name</p>
-                                                    <p class="mb-0">@if(Auth::user()->customer != null) {{ Auth::user()->customer->nama_customer}} @else - @endif</p>
+                                                    <p class="mb-0">
+                                                        @if (Auth::user()->customer != null)
+                                                            {{ Auth::user()->customer->nama_customer }}
+                                                        @else
+                                                            -
+                                                        @endif
+                                                    </p>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <p class="mb-1 text-muted">Gender</p>
-                                                    <p class="mb-0">@if(Auth::user()->customer != null) {{ Auth::user()->customer->gender}} @else - @endif</p>
+                                                    <p class="mb-0">
+                                                        @if (Auth::user()->customer != null)
+                                                            {{ Auth::user()->customer->gender }}
+                                                        @else
+                                                            -
+                                                        @endif
+                                                    </p>
                                                 </div>
                                             </div>
                                         </li>
@@ -104,11 +141,23 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <p class="mb-1 text-muted">Phone</p>
-                                                    <p class="mb-0">@if(Auth::user()->customer != null) {{ Auth::user()->customer->nomor_telephone }} @else - @endif</p>
+                                                    <p class="mb-0">
+                                                        @if (Auth::user()->customer != null)
+                                                            {{ Auth::user()->customer->nomor_telephone }}
+                                                        @else
+                                                            -
+                                                        @endif
+                                                    </p>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <p class="mb-1 text-muted">Kode POS</p>
-                                                    <p class="mb-0">@if(Auth::user()->customer != null) {{ Auth::user()->customer->kodepos_customer }} @else - @endif</p>
+                                                    <p class="mb-0">
+                                                        @if (Auth::user()->customer != null)
+                                                            {{ Auth::user()->customer->kodepos_customer }}
+                                                        @else
+                                                            -
+                                                        @endif
+                                                    </p>
                                                 </div>
                                             </div>
                                         </li>
@@ -116,17 +165,35 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <p class="mb-1 text-muted">Kecamatan</p>
-                                                    <p class="mb-0">@if(Auth::user()->customer != null) {{ Auth::user()->customer->kecamatan_customer }} @else - @endif</p>
+                                                    <p class="mb-0">
+                                                        @if (Auth::user()->customer != null)
+                                                            {{ Auth::user()->customer->kecamatan_customer }}
+                                                        @else
+                                                            -
+                                                        @endif
+                                                    </p>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <p class="mb-1 text-muted">Desa</p>
-                                                    <p class="mb-0">@if(Auth::user()->customer != null) {{ Auth::user()->customer->desa_customer }} @else - @endif</p>
+                                                    <p class="mb-0">
+                                                        @if (Auth::user()->customer != null)
+                                                            {{ Auth::user()->customer->desa_customer }}
+                                                        @else
+                                                            -
+                                                        @endif
+                                                    </p>
                                                 </div>
                                             </div>
                                         </li>
                                         <li class="list-group-item px-0 pb-0">
                                             <p class="mb-1 text-muted">Alamat</p>
-                                            <p class="mb-0">@if(Auth::user()->customer != null) {{ Auth::user()->customer->alamat_customer}} @else - @endif</p>
+                                            <p class="mb-0">
+                                                @if (Auth::user()->customer != null)
+                                                    {{ Auth::user()->customer->alamat_customer }}
+                                                @else
+                                                    -
+                                                @endif
+                                            </p>
                                         </li>
                                     </ul>
                                 </div>

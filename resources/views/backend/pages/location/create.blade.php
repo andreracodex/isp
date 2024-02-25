@@ -1,5 +1,7 @@
 @extends('backend.base')
 
+@section('title', 'Location Add')
+
 @section('styles')
 @endsection
 

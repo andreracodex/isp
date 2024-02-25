@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('disc')->default(0);
             $table->integer('is_active')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

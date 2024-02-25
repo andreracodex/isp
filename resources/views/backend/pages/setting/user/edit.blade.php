@@ -1,5 +1,7 @@
 @extends('layouts.backend.base')
 
+@section('title', 'User Edit')
+
 @section('styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/select2.css') }}">
 @endsection

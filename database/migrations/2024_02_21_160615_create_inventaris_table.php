@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('inventaris', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_barang');
+            $table->unsignedBigInteger('location_id')->nullable();
+            $table->foreign('location_id')->references('id')->on('locations');
+            $table->string('nama_barang', 100);
             $table->string('jenis_barang');
-            $table->string('jumlah_barang');
+            $table->integer('jumlah_barang')->default(1);
             $table->string('satuan_barang');
             $table->integer('is_active')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

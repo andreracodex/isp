@@ -1,4 +1,7 @@
 @extends('layouts.backend.base')
+
+@section('title', 'Permission Data')
+
 @section('styles')
 @endsection
 
@@ -114,8 +117,10 @@
         </div>
         <div class="card-body">
             <form action="{{ route('permission.create') }}" method="POST" class="needs-validation" novalidate="">
-            @csrf
-            @include('layouts.backend.pages.setting.permission.partials.form-control-permission', ['submit' => 'Create'])
+                @csrf
+                @include('layouts.backend.pages.setting.permission.partials.form-control-permission', [
+                    'submit' => 'Create',
+                ])
             </form>
         </div>
     </div>

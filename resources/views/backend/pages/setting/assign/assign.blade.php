@@ -1,5 +1,7 @@
 @extends('layouts.backend.base')
 
+@section('title', 'Assign Permission Data')
+
 @section('styles')
 @endsection
 
@@ -85,7 +87,9 @@
                             <th>
                                 <h6 class="fs-4 fw-semibold mb-0">Created At</h6>
                             </th>
-                            <th><h6 class="fs-4 fw-semibold mb-0">Action</h6></th>
+                            <th>
+                                <h6 class="fs-4 fw-semibold mb-0">Action</h6>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -96,15 +100,18 @@
                                 </td>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ asset('back/dist/images/profile/user-1.jpg') }}" class="rounded-circle" width="40" height="40">
+                                        <img src="{{ asset('back/dist/images/profile/user-1.jpg') }}" class="rounded-circle"
+                                            width="40" height="40">
                                         <div class="ms-3">
-                                          <h6 class="fs-4 fw-semibold mb-0">{{ $role->name }}</h6>
-                                          <span class="fw-normal">{{ $role->guard_name }}</span>
+                                            <h6 class="fs-4 fw-semibold mb-0">{{ $role->name }}</h6>
+                                            <span class="fw-normal">{{ $role->guard_name }}</span>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <p class="mb-0 fw-normal text-primary"><a href="{{ route('assign.edit', $role) }}">{{ implode(' | ', $role->getPermissionNames()->toArray()) }}</p>
+                                    <p class="mb-0 fw-normal text-primary"><a
+                                            href="{{ route('assign.edit', $role) }}">{{ implode(' | ', $role->getPermissionNames()->toArray()) }}
+                                    </p>
                                 </td>
                                 <td>
                                     <p class="mb-0 fw-normal">{{ $role->created_at->format('d F Y') }}</p>

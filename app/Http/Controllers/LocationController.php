@@ -29,6 +29,9 @@ class LocationController extends Controller
             ->editColumn('alamat_locations', function (Location $location) {
                 return $location->alamat_locations;
             })
+            ->editColumn('employee_id', function (Location $location) {
+                return $location->employee->nama_karyawan;
+            })
             ->addColumn('action', function (Location $location) {
                 return "
                 <a href=". route('location.edit', $location->id) ." class='btn btn-sm btn-warning d-inline-flex' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-pencil-alt'></i></a>

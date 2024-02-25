@@ -1,5 +1,7 @@
 @extends('backend.base')
 
+@section('title', 'Paket Add')
+
 @section('styles')
 @endsection
 
@@ -31,7 +33,7 @@
                 </div>
                 <div class="card-body">
                     <form action="{{ route('paket.store') }}" enctype="multipart/form-data" method="POST"
-                    class="needs-validation" novalidate="">
+                        class="needs-validation" novalidate="">
                         @csrf
                         @include('backend.pages.paket.partials.form-control-paket', [
                             'submit' => 'Create',

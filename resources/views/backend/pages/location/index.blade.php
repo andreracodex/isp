@@ -1,5 +1,7 @@
 @extends('backend.base')
 
+@section('title', 'Location Data')
+
 @section('styles')
 @endsection
 
@@ -93,12 +95,8 @@
                         name: 'alamat_locations'
                     },
                     {
-                        data: 'penanggung_jawab_locations',
-                        name: 'penanggung_jawab_locations'
-                    },
-                    {
-                        data: 'kontak_penanggung_jawab_locations',
-                        name: 'kontak_penanggung_jawab_locations'
+                        data: 'employee_id',
+                        name: 'employee_id'
                     },
                     {
                         data: 'is_active',
@@ -224,7 +222,6 @@
                                     <th>Nama Lokasi Server</th>
                                     <th>Alamat Lokasi Server</th>
                                     <th>Penanggung Jawab</th>
-                                    <th>Kontak Penanggung Jawab</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>

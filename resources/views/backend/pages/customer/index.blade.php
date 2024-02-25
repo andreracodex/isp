@@ -1,5 +1,7 @@
 @extends('backend.base')
 
+@section('title', 'Customer Data')
+
 @section('styles')
 @endsection
 
@@ -89,7 +91,9 @@
                         name: 'nama_customer',
                         render: function(data, type, row) {
                             if (row.nama_customer != null) {
-                                return '<div class="row"><div class="col-auto pe-0"><img src="images/user/avatar-3.jpg" alt="user-image" class="wid-40 rounded-circle"></div><div class="col"><h6 class="mb-0">'+row.nama_customer+'</h6><p class="text-muted f-12 mb-0">'+row.nomor_layanan+'</p></div></div>';
+                                return '<div class="row"><div class="col-auto pe-0"><img src="images/user/avatar-3.jpg" alt="user-image" class="wid-40 rounded-circle"></div><div class="col"><h6 class="mb-0">' +
+                                    row.nama_customer + '</h6><p class="text-muted f-12 mb-0">' +
+                                    row.nomor_layanan + '</p></div></div>';
                             } else {
                                 return '<div class="row"><div class="col-auto pe-0"><img src="images/user/avatar-3.jpg" alt="user-image" class="wid-40 rounded-circle"></div><div class="col"><h6 class="mb-0">Alberta Robbins</h6><p class="text-muted f-12 mb-0">miza@gmail.com</p></div></div>';
                             }
@@ -202,7 +206,8 @@
                 <div class="card-header">
                     <div class="headerbutton">
                         <div>
-                            <a href="{{ route('customer.create') }}" type="button" class="btn btn-sm btn-outline-primary d-inline-flex"><i
+                            <a href="{{ route('customer.create') }}" type="button"
+                                class="btn btn-sm btn-outline-primary d-inline-flex"><i
                                     class="ti ti-plus me-1"></i>Pelanggan</a>
                             <button type="button" class="btn btn-sm btn-outline-success d-inline-flex"><i
                                     class="ti ti-inbox me-1"></i>Import Excel</button>

@@ -12,4 +12,9 @@ class Coordinate extends Model
 
     protected $table = 'coordinates';
 
+    protected $fillable = [
+        'longitude',
+        'latitude',
+        'is_active',
+    ];
 }

@@ -1,5 +1,7 @@
 @extends('layouts.backend.base')
 
+@section('title', 'Customer Edit')
+
 @section('styles')
 @endsection
 

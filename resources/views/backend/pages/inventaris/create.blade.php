@@ -1,5 +1,7 @@
 @extends('backend.base')
 
+@section('title', 'Inventory Add')
+
 @section('styles')
 @endsection
 
@@ -31,7 +33,7 @@
                 </div>
                 <div class="card-body">
                     <form action="{{ route('inve.store') }}" enctype="multipart/form-data" method="POST"
-                    class="needs-validation" novalidate="">
+                        class="needs-validation" novalidate="">
                         @csrf
                         @include('backend.pages.inventaris.partials.form-control-inventaris', [
                             'submit' => 'Create',

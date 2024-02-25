@@ -1,5 +1,7 @@
 @extends('layouts.backend.base')
 
+@section('title', 'Inventory Edit')
+
 @section('styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('back/dist/libs/cropper/dist/cropper.min.css') }}">
     <style type="text/css">

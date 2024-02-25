@@ -1,5 +1,7 @@
 @extends('layouts.backend.base')
 
+@section('title', 'User Data')
+
 @section('styles')
 @endsection
 
@@ -82,7 +84,9 @@
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td><a href="{{ route('userrole.edit', $user) }}">{{ implode(' | ', $user->getRoleNames()->toArray()) }}</a></td>
+                            <td><a
+                                    href="{{ route('userrole.edit', $user) }}">{{ implode(' | ', $user->getRoleNames()->toArray()) }}</a>
+                            </td>
                             <td><a href="{{ route('userrole.edit', $user) }}" class="btn btn-primary btn-sm">Sync</a></td>
                         </tr>
                     @endforeach

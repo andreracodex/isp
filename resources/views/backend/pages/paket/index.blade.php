@@ -1,5 +1,7 @@
 @extends('backend.base')
 
+@section('title', 'Paket Data')
+
 @section('styles')
 @endsection
 

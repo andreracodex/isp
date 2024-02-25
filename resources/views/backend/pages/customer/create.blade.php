@@ -1,5 +1,7 @@
 @extends('backend.base')
 
+@section('title', 'Customer Add')
+
 @section('styles')
 @endsection
 
@@ -31,7 +33,7 @@
                 </div>
                 <div class="card-body">
                     <form action="{{ route('customer.store') }}" enctype="multipart/form-data" method="POST"
-                    class="needs-validation" novalidate="">
+                        class="needs-validation" novalidate="">
                         @csrf
                         @include('backend.pages.customer.partials.form-control-customer', [
                             'submit' => 'Tambah Pelanggan',

@@ -1,4 +1,7 @@
 @extends('layouts.backend.base')
+
+@section('title', 'Role Data')
+
 @section('styles')
 @endsection
 
@@ -115,8 +118,10 @@
         </div>
         <div class="card-body">
             <form action="{{ route('role.create') }}" method="POST" class="needs-validation" novalidate="">
-            @csrf
-            @include('layouts.backend.pages.setting.role.partials.form-control-role', ['submit' => 'Create'])
+                @csrf
+                @include('layouts.backend.pages.setting.role.partials.form-control-role', [
+                    'submit' => 'Create',
+                ])
             </form>
         </div>
     </div>
@@ -146,6 +151,6 @@
         </div>
     </section>
 
-<!-- Container-fluid Ends-->
+    <!-- Container-fluid Ends-->
 
 @endsection
