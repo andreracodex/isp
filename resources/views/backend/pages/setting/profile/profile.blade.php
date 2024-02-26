@@ -69,8 +69,8 @@
                                                 alt="User image">
                                         </div>
                                         <h5 class="mb-0">
-                                            @if (Auth::user()->customer != null)
-                                                {{ Auth::user()->customer->nama_customer }}
+                                            @if (Auth::user()->name != null)
+                                                {{ Auth::user()->name }}
                                             @else
                                                 -
                                             @endif
@@ -85,7 +85,7 @@
                                         <div class="d-inline-flex align-items-center justify-content-start w-100 mb-3">
                                             <i class="ti ti-mail me-2"></i>
                                             <p class="mb-0">
-                                                @if (Auth::user()->customer != null)
+                                                @if (Auth::user()->email != null)
                                                     {{ Auth::user()->email }}
                                                 @else
                                                     -
@@ -95,10 +95,18 @@
                                         <div class="d-inline-flex align-items-center justify-content-start w-100 mb-3">
                                             <i class="ti ti-phone me-2"></i>
                                             <p class="mb-0">
-                                                @if (Auth::user()->customer != null)
-                                                    {{ Auth::user()->customer->nomor_telephone }}
+                                                @if (Auth::user()->user_type != 'admin')
+                                                    @if (Auth::user()->customer != null)
+                                                        {{ Auth::user()->customer->nomor_telephone }}
+                                                    @else
+                                                        -
+                                                    @endif
                                                 @else
-                                                    -
+                                                    @if (Auth::user()->employee != null)
+                                                        {{ Auth::user()->employee->nomor_telephone }}
+                                                    @else
+                                                        -
+                                                    @endif
                                                 @endif
                                             </p>
                                         </div>
@@ -118,20 +126,36 @@
                                                 <div class="col-md-6">
                                                     <p class="mb-1 text-muted">Full Name</p>
                                                     <p class="mb-0">
-                                                        @if (Auth::user()->customer != null)
-                                                            {{ Auth::user()->customer->nama_customer }}
+                                                        @if (Auth::user()->user_type != 'admin')
+                                                            @if (Auth::user()->customer != null)
+                                                                {{ Auth::user()->customer->nama_customer }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @else
-                                                            -
+                                                            @if (Auth::user()->employee != null)
+                                                                {{ Auth::user()->employee->nama_karyawan }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @endif
                                                     </p>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <p class="mb-1 text-muted">Gender</p>
                                                     <p class="mb-0">
-                                                        @if (Auth::user()->customer != null)
-                                                            {{ Auth::user()->customer->gender }}
+                                                        @if (Auth::user()->user_type != 'admin')
+                                                            @if (Auth::user()->customer != null)
+                                                                {{ Auth::user()->customer->gender }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @else
-                                                            -
+                                                            @if (Auth::user()->employee != null)
+                                                                {{ Auth::user()->employee->gender }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @endif
                                                     </p>
                                                 </div>
@@ -142,20 +166,36 @@
                                                 <div class="col-md-6">
                                                     <p class="mb-1 text-muted">Phone</p>
                                                     <p class="mb-0">
-                                                        @if (Auth::user()->customer != null)
-                                                            {{ Auth::user()->customer->nomor_telephone }}
+                                                        @if (Auth::user()->user_type != 'admin')
+                                                            @if (Auth::user()->customer != null)
+                                                                {{ Auth::user()->customer->nomor_telephone }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @else
-                                                            -
+                                                            @if (Auth::user()->employee != null)
+                                                                {{ Auth::user()->employee->nomor_telephone }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @endif
                                                     </p>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <p class="mb-1 text-muted">Kode POS</p>
                                                     <p class="mb-0">
-                                                        @if (Auth::user()->customer != null)
-                                                            {{ Auth::user()->customer->kodepos_customer }}
+                                                        @if (Auth::user()->user_type != 'admin')
+                                                            @if (Auth::user()->customer != null)
+                                                                {{ Auth::user()->customer->kodepos_customer }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @else
-                                                            -
+                                                            @if (Auth::user()->employee != null)
+                                                                {{ Auth::user()->employee->kodepos_karyawan }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @endif
                                                     </p>
                                                 </div>
@@ -166,20 +206,36 @@
                                                 <div class="col-md-6">
                                                     <p class="mb-1 text-muted">Kecamatan</p>
                                                     <p class="mb-0">
-                                                        @if (Auth::user()->customer != null)
-                                                            {{ Auth::user()->customer->kecamatan_customer }}
+                                                        @if (Auth::user()->user_type != 'admin')
+                                                            @if (Auth::user()->customer != null)
+                                                                {{ Auth::user()->customer->kecamatan_customer }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @else
-                                                            -
+                                                            @if (Auth::user()->employee != null)
+                                                                {{ Auth::user()->employee->kecamatan_karyawan }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @endif
                                                     </p>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <p class="mb-1 text-muted">Desa</p>
                                                     <p class="mb-0">
-                                                        @if (Auth::user()->customer != null)
-                                                            {{ Auth::user()->customer->desa_customer }}
+                                                        @if (Auth::user()->user_type != 'admin')
+                                                            @if (Auth::user()->customer != null)
+                                                                {{ Auth::user()->customer->desa_customer }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @else
-                                                            -
+                                                            @if (Auth::user()->employee != null)
+                                                                {{ Auth::user()->employee->desa_karyawan }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @endif
                                                     </p>
                                                 </div>
@@ -188,10 +244,18 @@
                                         <li class="list-group-item px-0 pb-0">
                                             <p class="mb-1 text-muted">Alamat</p>
                                             <p class="mb-0">
-                                                @if (Auth::user()->customer != null)
-                                                    {{ Auth::user()->customer->alamat_customer }}
+                                                @if (Auth::user()->user_type != 'admin')
+                                                    @if (Auth::user()->customer != null)
+                                                        {{ Auth::user()->customer->alamat_customer }}
+                                                    @else
+                                                        -
+                                                    @endif
                                                 @else
-                                                    -
+                                                    @if (Auth::user()->employee != null)
+                                                        {{ Auth::user()->employee->alamat_karyawan }}
+                                                    @else
+                                                        -
+                                                    @endif
                                                 @endif
                                             </p>
                                         </li>

@@ -26,8 +26,9 @@ class User extends Authenticatable
         'name',
         'user_name',
         'email',
-        'pin',
         'password',
+        'user_type',
+        'pin',
         'is_active',
     ];
 
@@ -59,5 +60,10 @@ class User extends Authenticatable
     public function customer()
     {
         return $this->hasOne(Customer::class, 'user_id', 'id');
+    }
+
+    public function employee()
+    {
+        return $this->hasOne(Employee::class, 'user_id', 'id');
     }
 }
