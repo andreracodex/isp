@@ -42,7 +42,7 @@
 <div class="row">
     <div class="col-md-3 mb-3">
         <label class="form-label" for="kodepos">Kode POS</label>
-        <input type="text" class="form-control" name="kodepos_customer" id="kodepos_customer" placeholder="Kode POS" value="{{ old('kodepos_customer') ?? $customer->kodepos_customer }}" required>
+        <input type="number" min="0" placeholder="602xxx" class="form-control" name="kodepos_customer" id="kodepos_customer" placeholder="Kode POS" value="{{ old('kodepos_customer') ?? $customer->kodepos_customer }}" required>
         <div class="invalid-feedback"> Harap isi desa. </div>
     </div>
     <div class="col-md-3 mb-3">
@@ -50,7 +50,7 @@
         <div class="input-group">
             <span class="input-group-text" id="nomor_telephone"><i class="ti ti-phone-call"></i></span>
             <input type="number" min="0" name="nomor_telephone" class="form-control" id="nomor_telephone" value="{{ old('nomor_telephone') ?? $customer->nomor_telephone }}"
-                placeholder="+62xxxx" aria-describedby="nomor_telephone" required>
+                placeholder="0812xxxx" aria-describedby="nomor_telephone" required>
             <div class="invalid-feedback"> Harap isi nomor HP. </div>
         </div>
     </div>
@@ -71,4 +71,4 @@
         <div class="invalid-feedback"> Harap checklist. </div>
     </div>
 </div>
-<button class="btn btn-primary" type="submit">{{ $submit }}</button>
+<button class="btn btn-primary" id="btn-success-ac @error('nomor_telephone')btn-danger-ac @enderror" type="submit">{{ $submit }}</button>

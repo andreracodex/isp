@@ -50,7 +50,6 @@
             <div class="loader-fill"></div>
         </div>
     </div>
-    @include('flash')
     {{-- Load Component if Auth --}}
     @auth
         @include('backend.components.sidebar')
@@ -75,8 +74,6 @@
 
     <!-- Required Js -->
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('/js/plugins/popper.min.js') }}"></script>
-    <script src="{{ asset('/js/plugins/notifier.js') }}"></script>
     <script src="{{ asset('/js/plugins/simplebar.min.js') }}"></script>
     <script src="{{ asset('/js/plugins/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/js/fonts/custom-font.js') }}"></script>
@@ -84,32 +81,10 @@
     <script src="{{ asset('/js/pcoded.js') }}"></script>
     <script src="{{ asset('/js/plugins/feather.min.js') }}"></script>
     <script src="{{ asset('/js/component.js') }}"></script>
+    <script src="{{ asset('/js/plugins/notifier.js') }}"></script>
+    <script src="{{ asset('/js/plugins/popper.min.js') }}"></script>
+    @include('flash')
     @auth
-        {{-- <script>
-            var animateModal = document.getElementById('animateModal');
-            animateModal.addEventListener('show.bs.modal', function(event) {
-                var button = event.relatedTarget;
-                var recipient = button.getAttribute('data-pc-animate');
-                var modalTitle = animateModal.querySelector('.modal-title');
-                animateModal.classList.add('anim-' + recipient);
-                if (recipient == 'let-me-in' || recipient == 'make-way' || recipient == 'slip-from-top') {
-                    document.body.classList.add('anim-' + recipient);
-                }
-            });
-            animateModal.addEventListener('hidden.bs.modal', function(event) {
-                removeClassByPrefix(animateModal, 'anim-');
-                removeClassByPrefix(document.body, 'anim-');
-            });
-
-            function removeClassByPrefix(node, prefix) {
-                for (let i = 0; i < node.classList.length; i++) {
-                    let value = node.classList[i];
-                    if (value.startsWith(prefix)) {
-                        node.classList.remove(value);
-                    }
-                }
-            }
-        </script> --}}
         <script>
             // Example starter JavaScript for disabling form submissions if there are invalid fields
             (function() {
@@ -138,7 +113,6 @@
                 );
             })();
         </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="{{ asset('/js/plugins/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('/js/plugins/dataTables.bootstrap5.min.js') }}"></script>
         <script src="{{ asset('/js/plugins/buttons.colVis.min.js') }}"></script>

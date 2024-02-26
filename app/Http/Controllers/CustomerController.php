@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Setting;
 use Illuminate\Support\Number;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
 
 class CustomerController extends Controller
@@ -41,6 +42,7 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'nama_customer' => 'required',
             'nomor_layanan' => 'required',
@@ -66,7 +68,7 @@ class CustomerController extends Controller
 
         $post->save();
         $profile = Setting::all();
-        return view('backend.pages.customer.index', compact('profile'));
+        return view('backend.pages.customer.index', compact('profile'))->with('successmessage','Property is updated .');
     }
 
     public function show(Customer $customer)
