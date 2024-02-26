@@ -1,4 +1,4 @@
-@extends('layouts.backend.base')
+@extends('backend.base')
 
 @section('title', 'Paket Edit')
 
@@ -59,17 +59,17 @@
         </div>
     </div>
 
-    @can('edit category')
+    @can('edit paket')
         <div class="card">
             <div class="card-header">
-                <h5>Edit Product Category</h5>
+                <h5>Edit Paket Internet</h5>
             </div>
             <div class="card-body">
-                <form action="{{ route('productcategory.update', $category->id) }}" enctype="multipart/form-data" method="POST"
+                <form action="{{ route('paket.update', $paket->id) }}" enctype="multipart/form-data" method="POST"
                     class="needs-validation" novalidate="">
                     @csrf
                     @method('PUT')
-                    @include('layouts.backend.pages.category.partials.form-control-product', [
+                    @include('backend.pages.paket.partials.form-control-paket', [
                         'submit' => 'Update',
                     ])
                 </form>

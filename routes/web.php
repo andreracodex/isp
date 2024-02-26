@@ -50,7 +50,8 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::get('/create', [PaketController::class, 'create'])->name('paket.create');
         Route::post('', [PaketController::class, 'store'])->name('paket.store');
         Route::get('{paket}/edit', [PaketController::class, 'edit'])->name('paket.edit');
-        Route::put('{paket}/edit', [PaketController::class, 'update']);
+        Route::put('{paket}/update', [PaketController::class, 'update'])->name('paket.update');
+        Route::delete('{paket}/delete', [PaketController::class, 'delete'])->name('paket.delete');
     });
 
     // Location

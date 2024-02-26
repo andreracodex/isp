@@ -32,7 +32,7 @@ class PaketController extends Controller
             ->addColumn('action', function (Paket $paket) {
                 return "
                 <a href=". route('paket.edit', $paket->id) ." class='btn btn-sm btn-warning d-inline-flex' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-pencil-alt'></i></a>
-                <a href=". route('paket.edit', $paket->id) ." class='btn btn-sm btn-danger d-inline-flex' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-trash-alt'></i></a>
+                <a href=". route('paket.delete', $paket->id) ." class='btn btn-sm btn-danger d-inline-flex' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-trash-alt'></i></a>
             ";
             })
             ->make(true);
@@ -54,6 +54,7 @@ class PaketController extends Controller
             'nama_paket' => 'required',
             'jenis_paket' => 'required',
             'harga_paket' => 'required',
+            'is_active' => 'required',
         ]);
 
         $post = new Paket();
@@ -63,13 +64,14 @@ class PaketController extends Controller
         $post->disc = $request->input('disc');
 
         $active = $request->input('is_active');
-        if($active == 'ON' || $active == 'on'){
+        if ($active == 'ON' || $active == 'on') {
             $post->is_active = 1;
-        }else{
+        } else {
             $post->is_active = 0;
         }
         $post->save();
         $profile = Setting::all();
+
         return view('backend.pages.paket.index', compact('profile'));
     }
 
@@ -80,16 +82,40 @@ class PaketController extends Controller
 
     public function edit(Paket $paket)
     {
-        //
+        $profile = Setting::all();
+
+        return view('backend.pages.paket.edit', compact('profile', 'paket'));
     }
 
     public function update(Request $request, Paket $paket)
     {
-        //
+        $this->validate($request, [
+            'nama_paket' => 'required',
+            'jenis_paket' => 'required',
+            'harga_paket' => 'required',
+            'is_active' => 'required',
+        ]);
+
+        $active = $request->input('is_active');
+        if ($active == 'ON' || $active == 'on') {
+            $is_active = 1;
+        } else {
+            $is_active = 0;
+        }
+
+        $paket = Paket::update([
+            'nama_paket' => $request->nama_paket,
+            'jenis_paket' => $request->jenis_paket,
+            'harga_paket' => $request->harga_paket,
+            'is_active' => $is_active,
+        ]);
+
+        return redirect()->route('paket.index')->with(['success' => 'Data berhasil diubah!']);
     }
 
     public function destroy(Paket $paket)
     {
-        //
+        $paket->delete();
+        return redirect()->route('paket.index')->with(['success' => 'Data berhasil dihapus!']);
     }
 }

@@ -115,11 +115,9 @@ class LocationController extends Controller
         return redirect()->route('location.index')->with(['success' => 'Data berhasil diubah!']);
     }
 
-    public function destroy(string $id)
+    public function destroy(Location $location)
     {
-        $location = Location::findOrFail($id);
         $location->delete();
-
         return redirect()->route('location.index')->with(['success' => 'Data berhasil dihapus!']);
     }
 }

@@ -29,7 +29,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>Tambah Paket Form</h5>
+                    <h5>Form Tambah Paket Internet</h5>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('paket.store') }}" enctype="multipart/form-data" method="POST"
