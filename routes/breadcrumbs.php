@@ -47,6 +47,11 @@ Breadcrumbs::for('location.create', function (BreadcrumbTrail $trail): void {
     $trail->push('Tambah Lokasi Server', route('location.create'));
 });
 
+Breadcrumbs::for('location.edit', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Edit Lokasi Server', route('location.edit', 'location'));
+});
+
 
 // Wa Page
 Breadcrumbs::for('wa.index', function (BreadcrumbTrail $trail): void {

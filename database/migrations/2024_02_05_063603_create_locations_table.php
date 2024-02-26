@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_locations');
-            $table->string('alamat_locations');
             $table->unsignedBigInteger('employee_id')->nullable();
             $table->foreign('employee_id')->references('id')->on('employees');
+            $table->string('nama_location', 50);
+            $table->text('alamat_location');
             $table->integer('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();

@@ -16,7 +16,8 @@ class InventarisController extends Controller
     {
         $profile = Setting::all();
         $data_table = Inventaris::orderBy('nama_barang', 'ASC')->get();
-        if ($request->ajax()){
+
+        if ($request->ajax()) {
             return DataTables::of($data_table)
             ->addIndexColumn()
             ->editColumn('inve_id', function (Inventaris $inve) {

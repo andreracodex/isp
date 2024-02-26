@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Tambah Pelanggan</h2>
+                        <h2 class="mb-0">Tambah Lokasi Server</h2>
                     </div>
                 </div>
             </div>
@@ -29,12 +29,13 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>Tambah Pelanggan Form</h5>
+                    <h5>Form Tambah Lokasi</h5>
                 </div>
                 <div class="card-body">
-                    <form class="needs-validation" novalidate>
+                    <form action="{{ route('location.store') }}" enctype="multipart/form-data" method="POST"
+                        class="needs-validation" novalidate>
                         @csrf
-                        @include('backend.pages.customer.partials.form-control-customer', [
+                        @include('backend.pages.location.partials.form-control-location', [
                             'submit' => 'Create',
                         ])
                     </form>

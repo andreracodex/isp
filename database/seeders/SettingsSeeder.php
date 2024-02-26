@@ -715,6 +715,9 @@ class SettingsSeeder extends Seeder
         ModelsPermission::create(['name' => 'view inventaris']);
         ModelsPermission::create(['name' => 'add inventaris']);
         ModelsPermission::create(['name' => 'edit inventaris']);
+        ModelsPermission::create(['name' => 'view location']);
+        ModelsPermission::create(['name' => 'add location']);
+        ModelsPermission::create(['name' => 'edit location']);
 
         $role2 = Role::find(2);
         $role2->givePermissionTo('menu dashboard');

@@ -12,17 +12,6 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WhatsappController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 require __DIR__.'/auth.php';
 
 Route::get('/', [HomeController::class, 'index'])->name('frontend');
@@ -65,16 +54,17 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     });
 
     // Location
-    Route::prefix('location')->group(function(){
+    Route::prefix('location')->group(function() {
         Route::get('', [LocationController::class, 'index'])->name('location.index');
         Route::get('/create', [LocationController::class, 'create'])->name('location.create');
-        Route::post('', [LocationController::class, 'store'])->name('location.store');
+        Route::post('/store', [LocationController::class, 'store'])->name('location.store');
         Route::get('{location}/edit', [LocationController::class, 'edit'])->name('location.edit');
-        Route::put('{location}/edit', [LocationController::class, 'update']);
+        Route::put('{location}/update', [LocationController::class, 'update'])->name('location.update');
+        Route::delete('{location}/delete', [LocationController::class, 'delete'])->name('location.delete');
     });
 
     // WA
-    Route::prefix('wa')->group(function(){
+    Route::prefix('wa')->group(function() {
         Route::get('', [WhatsappController::class, 'index'])->name('wa.index');
         Route::get('/create', [WhatsappController::class, 'create'])->name('wa.create');
         Route::get('/qr', [WhatsappController::class, 'link'])->name('wa.link');
@@ -85,7 +75,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     });
 
     // Inventaris
-    Route::prefix('inve')->group(function(){
+    Route::prefix('inve')->group(function() {
         Route::get('', [InventarisController::class, 'index'])->name('inve.index');
         Route::get('/create', [InventarisController::class, 'create'])->name('inve.create');
         Route::post('/store', [InventarisController::class, 'store'])->name('inve.store');

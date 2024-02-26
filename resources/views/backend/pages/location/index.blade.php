@@ -87,12 +87,12 @@
                         name: 'location_id'
                     },
                     {
-                        data: 'nama_locations',
-                        name: 'nama_locations'
+                        data: 'nama_location',
+                        name: 'nama_location'
                     },
                     {
-                        data: 'alamat_locations',
-                        name: 'alamat_locations'
+                        data: 'alamat_location',
+                        name: 'alamat_location'
                     },
                     {
                         data: 'employee_id',
@@ -197,7 +197,7 @@
                 <div class="card-header">
                     <div class="headerbutton">
                         <div>
-                            <a href="{{ route('customer.create') }}" type="button"
+                            <a href="{{ route('location.create') }}" type="button"
                                 class="btn btn-sm btn-outline-primary d-inline-flex"><i
                                     class="ti ti-plus me-1"></i>Server</a>
                         </div>

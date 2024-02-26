@@ -5,7 +5,7 @@
             <option selected disabled>Pilih Lokasi...</option>
             @foreach ($locations as $location)
                 <option value="{{ $location->id }}">
-                    {{ $location->nama_locations }}
+                    {{ $location->nama_location }}
                 </option>
             @endforeach
         </select>
@@ -70,6 +70,7 @@
         </div>
     </div>
 </div>
+
 <div class="form-group">
     <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" name="check" id="invalidCheck" required>

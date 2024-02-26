@@ -1,4 +1,4 @@
-@extends('layouts.backend.base')
+@extends('backend.base')
 
 @section('title', 'Location Edit')
 
@@ -46,7 +46,7 @@
         <div class="card-body px-4 py-3">
             <div class="row align-items-center">
                 <div class="col-9">
-                    <h4 class="fw-semibold mb-8">Product Category</h4>
+                    <h4 class="fw-semibold mb-8">Lokasi Server</h4>
                     {{ Breadcrumbs::render() }}
                 </div>
                 <div class="col-3">
@@ -59,17 +59,17 @@
         </div>
     </div>
 
-    @can('edit category')
+    @can('edit location')
         <div class="card">
             <div class="card-header">
-                <h5>Edit Product Category</h5>
+                <h5>Edit Lokasi Server</h5>
             </div>
             <div class="card-body">
-                <form action="{{ route('productcategory.update', $category->id) }}" enctype="multipart/form-data" method="POST"
+                <form action="{{ route('location.update', $location->id) }}" enctype="multipart/form-data" method="POST"
                     class="needs-validation" novalidate="">
                     @csrf
                     @method('PUT')
-                    @include('layouts.backend.pages.category.partials.form-control-product', [
+                    @include('backend.pages.location.partials.form-control-location', [
                         'submit' => 'Update',
                     ])
                 </form>
