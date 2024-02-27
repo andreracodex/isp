@@ -23,6 +23,9 @@ class InventarisController extends Controller
             ->editColumn('inve_id', function (Inventaris $inve) {
                 return $inve->id;
             })
+            ->editColumn('location_id', function (Inventaris $inve) {
+                return $inve->location->nama_location;
+            })
             ->editColumn('jumlah_barang', function (Inventaris $inve) {
                 return number_format($inve->jumlah_barang, 0, ',', '.');
             })

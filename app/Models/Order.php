@@ -29,4 +29,14 @@ class Order extends Model
         return $this->belongsTo(PaymentType::class, 'payment_id', 'id');
     }
 
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
+    }
+
+    public function paket()
+    {
+        return $this->belongsTo(Paket::class, 'paket_id', 'id');
+    }
+
 }

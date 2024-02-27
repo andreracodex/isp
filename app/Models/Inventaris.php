@@ -20,4 +20,9 @@ class Inventaris extends Model
         'satuan_barang',
         'is_active',
     ];
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class, 'location_id', 'id');
+    }
 }

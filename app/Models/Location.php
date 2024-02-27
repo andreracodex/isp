@@ -28,4 +28,9 @@ class Location extends Model
     {
         return $this->belongsTo(Employee::class, 'employee_id', 'id');
     }
+
+    public function inventaris()
+    {
+        return $this->hasMany(Inventaris::class, 'location_id', 'id');
+    }
 }

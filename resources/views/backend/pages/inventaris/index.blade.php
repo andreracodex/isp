@@ -87,6 +87,10 @@
                         name: 'inve_id'
                     },
                     {
+                        data: 'location_id',
+                        name: 'location_id'
+                    },
+                    {
                         data: 'nama_barang',
                         name: 'nama_barang'
                     },
@@ -224,11 +228,12 @@
                                 <tr>
                                     <th style="width: 10px;">#</th>
                                     <th></th>
+                                    <th>Lokasi Barang</th>
                                     <th>Nama Barang</th>
-                                    <th>Jenis Barang</th>
-                                    <th>Jumlah Barang</th>
+                                    <th>Jenis</th>
+                                    <th>Jumlah</th>
                                     <th>Satuan</th>
-                                    <th>Active</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
