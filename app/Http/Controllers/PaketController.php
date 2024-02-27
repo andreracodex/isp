@@ -89,6 +89,7 @@ class PaketController extends Controller
 
     public function update(Request $request, Paket $paket)
     {
+        $profile = Setting::all();
         $this->validate($request, [
             'nama_paket' => 'required',
             'jenis_paket' => 'required',
@@ -109,7 +110,7 @@ class PaketController extends Controller
         $paket->is_active = $is_active;
         $paket->save();
 
-        return redirect()->route('paket.index')->with(['success' => 'Data berhasil diubah!']);
+        return view('backend.pages.paket.index', compact('profile'))->with(['success' => 'Data berhasil diubah!']);
     }
 
     public function destroy(Paket $paket)

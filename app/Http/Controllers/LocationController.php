@@ -33,8 +33,8 @@ class LocationController extends Controller
             })
             ->addColumn('action', function (Location $location) {
                 return "
-                <a href=". route('location.edit', $location->id) ." class='btn btn-sm btn-warning d-inline-flex' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-pencil-alt'></i></a>
-                <a href=". route('location.delete', $location->id) ." class='btn btn-sm btn-danger d-inline-flex' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-trash-alt'></i></a>
+                <a href=". route('location.edit', $location->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-pencil-alt'></i></a>
+                <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusItem' data-id='$location->id'><i class='fa fa-trash-alt'></i></button>
             ";
             })
             ->make(true);
@@ -87,16 +87,14 @@ class LocationController extends Controller
         return view('backend.pages.location.edit', compact('profile', 'location', 'employees'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, Location $location)
     {
+        $profile = Setting::all();
         $this->validate($request, [
             'employee' => 'required',
             'nama_location' => 'required|max:50',
             'alamat_location' => 'required',
-            'is_active' => 'required',
         ]);
-
-        $location = Location::findOrFail($id);
 
         $active = $request->input('is_active');
         if ($active == 'ON' || $active == 'on') {
@@ -105,19 +103,26 @@ class LocationController extends Controller
             $is_active = 0;
         }
 
-        $locationUpdate = Location::update([
-            'employee_id' => $request->employee,
-            'nama_location' => $request->nama_location,
-            'alamat_location' => $request->alamat_location,
-            'is_active' => $is_active,
-        ]);
+        $location = Location::findOrFail($location->id);
+        $location->employee_id = $request->employee;
+        $location->nama_location = $request->nama_location;
+        $location->alamat_location = $request->alamat_location;
+        $location->is_active = $is_active;
+        $location->save();
 
-        return redirect()->route('location.index')->with(['success' => 'Data berhasil diubah!']);
+        return redirect()->route('location.index')->with(['success' => 'Data berhasil diupdate !']);
     }
 
-    public function destroy(Location $location)
+    public function delete(String $id)
     {
-        $location->delete();
-        return redirect()->route('location.index')->with(['success' => 'Data berhasil dihapus!']);
+        $location = Location::find($id);
+        if($location){
+            Location::where('id', $id)->delete();
+            return redirect()->back()->with(['success' => 'Data berhasil dihapus !']);
+        }else{
+            return redirect()->back()->with(['error' => 'Data failed dihapus !']);
+        }
+
+
     }
 }

@@ -45,7 +45,7 @@
                             <div class="d-flex mt-1 justify-content-between align-items-center">
                                 <div class="form-check">
                                     <input class="form-check-input input-primary" type="checkbox" id="check"
-                                        checked="" required>
+                                        checked required>
                                     <label class="form-check-label text-muted" for="check">Remember me?</label>
                                 </div>
                                 <a class="text-secondary f-w-400 mb-0" href="{{ route('forgotpassword') }}">Forgot

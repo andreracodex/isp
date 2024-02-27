@@ -140,7 +140,7 @@
                 action: function(e, dt, button, config) {
                     dt.ajax.reload();
                 },
-                text: '<i class="fa fa-sync-alt"></i> Refresh Table',
+                text: '<i class="fa fa-sync-alt"></i> Refresh',
                 className: 'btn btn-sm btn-rounded btn-primary',
                 titleAttr: 'Refresh Table',
             });
@@ -169,6 +169,49 @@
                 } else {
                     $("th.select-checkbox").addClass("selected");
                 }
+            });
+        });
+    </script>
+    <script src="{{ asset('/js/plugins/sweetalert2.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#location').on('click', '.hapusItem', function() {
+                let idItem = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Konfirmasi Hapus',
+                    text: "Anda yakin ingin menghapus data ini dari list?",
+                    icon: 'warning',
+                    data: idItem,
+                    showCancelButton: true,
+                    confirmButtonColor: '#10bd9d',
+                    cancelButtonColor: '#ca2062',
+                    confirmButtonText: 'Ya, Dihapus !'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            method: 'GET',
+                            url: "{{ route('location.delete', ':id') }}".replace(
+                                ':id', idItem),
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                id: idItem,
+                            },
+                            success: function(data) {
+                                window.location.reload();
+                                Swal.fire(
+                                    'Berhasil!',
+                                    'Item berhasil dihapus',
+                                    'success'
+                                )
+                            },
+                            error: function(error) {
+                                Swal.fire('Error', 'Gagal menghapus barang', 'error');
+                                // Handle error
+                            }
+                        });
+                    }
+                })
             });
         });
     </script>

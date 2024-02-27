@@ -18,7 +18,7 @@
             <select class="form-select @error('employee') is-invalid @enderror" name="employee" id="employee">
                 <option selected disabled>Pilih Karyawan...</option>
                 @foreach ($employees as $employee)
-                    <option value="{{ $employee->id }}">
+                    <option value="{{ $employee->id }}" @if($employee->id == $location->employee_id) @selected(true) @endif)>
                         {{ $employee->nama_karyawan }}
                     </option>
                 @endforeach
@@ -52,8 +52,7 @@
             <div class="form-check form-switch custom-switch-v1">
                 <input type="checkbox"
                     class="form-check-input input-success @error('is_active') is-invalid @enderror"
-                    id="customswitchlightv1-3" name="is_active" checked
-                    @if ($location->is_active == 1) @checked(true) @else @checked(false) @endif>
+                    id="customswitchlightv1-3" name="is_active" @if ($location->is_active == 1) @checked(true) @else @checked(false) @endif>
                 <label class="form-check-label" for="customswitchlightv1-3">Active</label>
             </div>
             @error('is_active')

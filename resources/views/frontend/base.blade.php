@@ -48,8 +48,6 @@
             <div class="loader-fill"></div>
         </div>
     </div>
-    {{-- Pre Loader End --}}
-    @include('flash')
     {{-- Header Start --}}
     @include('frontend.components.header')
     {{-- Header End --}}
@@ -66,7 +64,6 @@
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
     <!-- Required Js -->
     <script src="{{ asset('/js/plugins/popper.min.js') }}"></script>
-    <script src="{{ asset('/js/plugins/notify.min.js') }}"></script>
     <script src="{{ asset('/js/plugins/simplebar.min.js') }}"></script>
     <script src="{{ asset('/js/plugins/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/js/fonts/custom-font.js') }}"></script>

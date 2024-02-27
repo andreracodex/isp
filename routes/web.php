@@ -68,10 +68,11 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     Route::prefix('location')->group(function() {
         Route::get('', [LocationController::class, 'index'])->name('location.index');
         Route::get('/create', [LocationController::class, 'create'])->name('location.create');
+        // Route::get('/view', [LocationController::class, 'view'])->name('location.view');
         Route::post('/store', [LocationController::class, 'store'])->name('location.store');
         Route::get('{location}/edit', [LocationController::class, 'edit'])->name('location.edit');
         Route::put('{location}/update', [LocationController::class, 'update'])->name('location.update');
-        Route::delete('{location}/delete', [LocationController::class, 'delete'])->name('location.delete');
+        Route::get('{location}/delete', [LocationController::class, 'delete'])->name('location.delete');
     });
 
     // WA

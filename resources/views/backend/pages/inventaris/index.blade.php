@@ -148,7 +148,7 @@
                 action: function(e, dt, button, config) {
                     dt.ajax.reload();
                 },
-                text: '<i class="fa fa-sync-alt"></i> Refresh Table',
+                text: '<i class="fa fa-sync-alt"></i> Refresh',
                 className: 'btn btn-sm btn-rounded btn-primary',
                 titleAttr: 'Refresh Table',
             });

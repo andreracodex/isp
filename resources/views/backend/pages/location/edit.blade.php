@@ -33,19 +33,23 @@
     </div>
 
     @can('edit location')
-        <div class="card">
-            <div class="card-header">
-                <h5>Edit Lokasi Server</h5>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('location.update', $location->id) }}" enctype="multipart/form-data" method="POST"
-                    class="needs-validation" novalidate="">
-                    @csrf
-                    @method('PUT')
-                    @include('backend.pages.location.partials.form-control-location', [
-                        'submit' => 'Update',
-                    ])
-                </form>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Edit Lokasi Server</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('location.update', $location->id) }}" enctype="multipart/form-data"
+                            method="POST" class="needs-validation" novalidate="">
+                            @csrf
+                            @method('PUT')
+                            @include('backend.pages.location.partials.form-control-location', [
+                                'submit' => 'Update',
+                            ])
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     @endcan

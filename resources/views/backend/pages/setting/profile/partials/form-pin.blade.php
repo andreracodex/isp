@@ -15,7 +15,7 @@
                             </div>
                             <div class="form-check form-switch p-0">
                                 <input class="form-check-input h4 position-relative m-0" type="checkbox" role="switch"
-                                    @if ($usersetting[0]->secure_login == 1) checked @else @endif>
+                                    @if ($usersetting[0]->secure_login == 1)@checked(true) @else @checked(false) @endif>
                             </div>
                         </div>
                     </li>
@@ -28,7 +28,7 @@
                             </div>
                             <div class="form-check form-switch p-0">
                                 <input class="form-check-input h4 position-relative m-0" type="checkbox" role="switch"
-                                    @if ($usersetting[0]->login_notif == 1) checked @else @endif>
+                                    @if ($usersetting[0]->login_notif == 1) @checked(true) @else @checked(false) @endif>
                             </div>
                         </div>
                     </li>
@@ -42,7 +42,7 @@
                             </div>
                             <div class="form-check form-switch p-0">
                                 <input class="form-check-input h4 position-relative m-0" type="checkbox" role="switch"
-                                    @if ($usersetting[0]->login_approved == 1) checked @else @endif>
+                                    @if ($usersetting[0]->login_approved == 1) @checked(true) @else @checked(false) @endif>
                             </div>
                         </div>
                     </li>

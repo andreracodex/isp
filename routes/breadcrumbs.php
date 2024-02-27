@@ -30,13 +30,13 @@ Breadcrumbs::for('paket.create', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Tambah Paket Internet', route('paket.create'));
 });
-Breadcrumbs::for('paket.store', function (BreadcrumbTrail $trail): void {
-    $trail->parent('dashboard');
-    $trail->push('Simpan Paket Internet', route('paket.store'));
-});
 Breadcrumbs::for('paket.edit', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Edit Paket Internet', route('paket.edit', 'paket'));
+});
+Breadcrumbs::for('paket.update', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Update Paket Internet', route('paket.update', 'paket'));
 });
 
 // Location Management
@@ -52,6 +52,11 @@ Breadcrumbs::for('location.edit', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Edit Lokasi Server', route('location.edit', 'location'));
 });
+Breadcrumbs::for('location.update', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Update Lokasi Server', route('location.update', 'location'));
+});
+
 
 // Wa Page
 Breadcrumbs::for('wa.index', function (BreadcrumbTrail $trail): void {

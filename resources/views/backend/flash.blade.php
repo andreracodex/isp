@@ -1,28 +1,28 @@
-@if (!empty($success))
+@if ($success = Session::get('success'))
     <script>
         notifier.show("Success !!", "{{ $success }}", "success", "{{ asset('/images/notification/ok-48.png') }}", 5000);
     </script>
 @endif
 
-@if (!empty($erorr))
+@if ($erorr = session()->get('erorr'))
     <script>
         notifier.show("Error !!", "{{ $erorr }}", "error", "{{ asset('/images/notification/high_priority-48.png') }}", 5000);
     </script>
 @endif
 
-@if (!empty($warning))
+@if ($warning = session()->get('warning'))
     <script>
         notifier.show("Warning!", "{{ $warning }}", "warning", "{{ asset('/images/notification/medium_priority-48.png') }}", 5000);
     </script>
 @endif
 
-@if (!empty($info))
+@if ($info = session()->get('info'))
     <script>
         notifier.show("Info!", "{{ $info }}", "info", "{{ asset('/images/notification/survey-48.png') }}", 5000);
     </script>
 @endif
 
-@if (!empty($deleted))
+@if ($deleted = session()->get('deleted'))
     <script>
         notifier.show("Success !!", "{{ $deleted }}", "error", "{{ asset('/images/notification/ok-48.png') }}", 5000);
     </script>
