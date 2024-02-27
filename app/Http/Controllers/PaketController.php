@@ -93,7 +93,6 @@ class PaketController extends Controller
             'nama_paket' => 'required',
             'jenis_paket' => 'required',
             'harga_paket' => 'required',
-            'is_active' => 'required',
         ]);
 
         $active = $request->input('is_active');
@@ -103,12 +102,12 @@ class PaketController extends Controller
             $is_active = 0;
         }
 
-        $paket = Paket::update([
-            'nama_paket' => $request->nama_paket,
-            'jenis_paket' => $request->jenis_paket,
-            'harga_paket' => $request->harga_paket,
-            'is_active' => $is_active,
-        ]);
+        $paket = Paket::find($paket->id);
+        $paket->nama_paket = $request->nama_paket;
+        $paket->jenis_paket = $request->jenis_paket;
+        $paket->harga_paket = $request->harga_paket;
+        $paket->is_active = $is_active;
+        $paket->save();
 
         return redirect()->route('paket.index')->with(['success' => 'Data berhasil diubah!']);
     }

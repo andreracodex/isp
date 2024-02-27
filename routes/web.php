@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventarisController;
 use App\Http\Controllers\LocationController;
@@ -29,11 +30,19 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     Route::prefix('settings')->group(function(){
         Route::get('', [SettingsController::class, 'index'])->name('settings.index');
         Route::get('/create', [ProfileController::class, 'create'])->name('settings.profile-show');
-        Route::get('/employee', [EmployeeController::class, 'index'])->name('settings.profile-show');
         Route::post('', [ProfileController::class, 'store'])->name('settings.profile-store');
         Route::put('/profile', [ProfileController::class, 'update'])->name('settings.profile-update');
         Route::delete('', [ProfileController::class, 'destroy'])->name('settings.profile-destroy');
         Route::post('/logout', [ProfileController::class, 'logout'])->name('settings.profile-logout');
+    });
+    Route::prefix('employee')->group(function(){
+        // Employee
+        Route::get('', [EmployeeController::class, 'index'])->name('employee.index');
+        Route::get('/create', [EmployeeController::class, 'create'])->name('employee.create');
+        Route::get('/view', [EmployeeController::class, 'view'])->name('employee.view');
+        Route::get('{emp}/edit', [EmployeeController::class, 'edit'])->name('employee.edit');
+        Route::put('{emp}/edit', [EmployeeController::class, 'update']);
+        Route::delete('', [EmployeeController::class, 'destroy'])->name('employee.destroy');
     });
     // Customer
     Route::prefix('customer')->group(function(){

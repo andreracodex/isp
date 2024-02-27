@@ -42,17 +42,15 @@
         </div>
     @endif
 
-    <div class="card bg-light-info shadow-none position-relative overflow-hidden">
-        <div class="card-body px-4 py-3">
+    <div class="page-header">
+        <div class="page-block">
             <div class="row align-items-center">
-                <div class="col-9">
-                    <h4 class="fw-semibold mb-8">Product Category</h4>
+                <div class="col-md-12">
                     {{ Breadcrumbs::render() }}
                 </div>
-                <div class="col-3">
-                    <div class="text-center mb-n5">
-                        <img src="{{ asset('back/dist/images/breadcrumb/products.webp') }}" alt=""
-                            class="img-fluid mb-n4">
+                <div class="col-md-12">
+                    <div class="page-header-title">
+                        <h2 class="mb-0">Edit Paket Internet</h2>
                     </div>
                 </div>
             </div>
@@ -60,19 +58,23 @@
     </div>
 
     @can('edit paket')
-        <div class="card">
-            <div class="card-header">
-                <h5>Edit Paket Internet</h5>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('paket.update', $paket->id) }}" enctype="multipart/form-data" method="POST"
-                    class="needs-validation" novalidate="">
-                    @csrf
-                    @method('PUT')
-                    @include('backend.pages.paket.partials.form-control-paket', [
-                        'submit' => 'Update',
-                    ])
-                </form>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Edit Paket Internet</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('paket.update', $paket->id) }}" enctype="multipart/form-data" method="POST"
+                            class="needs-validation" novalidate="">
+                            @csrf
+                            @method('PUT')
+                            @include('backend.pages.paket.partials.form-control-paket', [
+                                'submit' => 'Update',
+                            ])
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     @endcan

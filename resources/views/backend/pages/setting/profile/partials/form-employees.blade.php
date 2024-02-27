@@ -5,40 +5,38 @@
     <div class="card-body">
         <h4>{{ $emp_active }}/{{ count($employee) }} <small>Employee Active of All Employee.</small></h4>
         <hr class="my-3">
+        <div class="headerbutton">
+            <div>
+                <a href="{{ route('inve.create') }}" type="button"
+                    class="btn btn-sm btn-outline-primary d-inline-flex"><i
+                        class="ti ti-plus me-1"></i>Karyawan</a>
+            </div>
+            <div>
+                <a href="{{ route('pdf.inventaris') }}" type="button"
+                    class="btn btn-sm btn-outline-danger d-inline-flex"><i
+                        class="fa fa-file-pdf">&nbsp;</i>Exspor PDF</a>
+                <button type="button" class="btn btn-sm btn-outline-success d-inline-flex"><i
+                        class="fa fa-file-excel">&nbsp;</i>Exspor Excel</button>
+                <button type="button" class="btn btn-sm btn-outline-warning d-inline-flex"><i
+                        class="ti ti-trash me-1"></i>Hapus Filter</button>
+            </div>
+        </div>
     </div>
     <div class="card-body table-card">
-        <div class="table-responsive">
-            <table class="table mb-0">
+        <div class="dt-responsive table-responsive">
+            <table id="employee" class="display table table-striped table-hover dt-responsive nowrap" style="width: 100%">
                 <thead>
                     <tr>
-                        <th>Nama Karyawan</th>
-                        <th>Gender</th>
-                        <th>Nomor Telepon</th>
+                        <th style="width: 10px;">#</th>
+                        <th></th>
+                        <th>Nama Karyawawn</th>
+                        <th>Alamat</th>
+                        <th>Nomor Telephone</th>
+                        <th>Active</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ( $employee as $emp)
-                    <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col-auto pe-0">
-                                    <img src="../assets/images/user/avatar-1.jpg" alt="user-image"
-                                        class="wid-40 rounded-circle">
-                                </div>
-                                <div class="col">
-                                    <h5 class="mb-0">Addie Bass</h5>
-                                    <p class="text-muted f-12 mb-0">mareva@gmail.com</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-primary">Owner</span></td>
-                        <td class="text-end"><span class="badge bg-success">Joined</span></td>
-                        <td class="text-end"><a href="#"
-                                class="avtar avtar-s btn-link-secondary"><i
-                                    class="ti ti-dots f-18"></i></a></td>
-                    </tr>
-                @endforeach
                 </tbody>
             </table>
         </div>

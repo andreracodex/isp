@@ -4,7 +4,7 @@
         <select class="form-select @error('location') is-invalid @enderror" name="location" id="location">
             <option selected disabled>Pilih Lokasi...</option>
             @foreach ($locations as $location)
-                <option value="{{ $location->id }}">
+                <option value="{{ $location->id }}" @if($location->id == $inve->location_id) @selected(true) @endif>
                     {{ $location->nama_location }}
                 </option>
             @endforeach
@@ -63,9 +63,9 @@
     <div class="col-md-3 mb-3">
         <label class="form-label" for="status_barang">Status Barang</label>
         <div class="form-check form-switch custom-switch-v1">
-            <input type="checkbox" class="form-check-input input-light-success @error('is_active') is-invalid @enderror"
-                id="customswitchlightv1-3" name="is_active" checked
-                @if ($inve->is_active == 1) @checked(true) @endif>
+            <input type="checkbox" class="form-check-input input-success @error('is_active') is-invalid @enderror"
+                id="customswitchlightv1-3" name="is_active"
+                @if ($inve->is_active == 1) @checked(true) @else @checked(false) @endif>
             <label class="form-check-label" for="customswitchlightv1-3">Active</label>
         </div>
     </div>

@@ -48,8 +48,8 @@
 
     <div class="col-md-3 mb-3">
         <div class="form-check form-switch custom-switch-v1">
-            <input type="checkbox" class="form-check-input input-light-success" id="customswitchlightv1-3"
-                name="is_active" checked @if ($paket->is_active == 1) @checked(true) @endif>
+            <input type="checkbox" class="form-check-input input-success" id="customswitchlightv1-3"
+                name="is_active" @if ($paket->is_active == 1) @checked(true) @else @checked(false) @endif>
             <label class="form-check-label" for="customswitchlightv1-3">Active</label>
 
             @error('is_active')

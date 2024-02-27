@@ -3,6 +3,12 @@
 @section('title', 'My Profile')
 
 @section('styles')
+    <style type="text/css">
+        .dataTables_scrollBody {
+            overflow-x: hidden !important;
+            overflow-y: auto !important;
+        }
+    </style>
 @endsection
 
 @push('script')
@@ -20,6 +26,7 @@
                 processing: true,
                 serverSide: true,
                 responsive: true,
+                scrollX: false,
                 ajax: "{{ route('settings.index') }}",
                 buttons: [
                     'colvis',
@@ -83,25 +90,25 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'cust_id',
-                        name: 'cust_id'
+                        data: 'emp_id',
+                        name: 'emp_id'
                     },
                     {
-                        data: 'nama_customer',
-                        name: 'nama_customer',
+                        data: 'nama_karyawan',
+                        name: 'nama_karyawan',
                         render: function(data, type, row) {
-                            if (row.nama_customer != null) {
+                            if (row.nama_karyawan != null) {
                                 return '<div class="row"><div class="col-auto pe-0"><img src="images/user/avatar-3.jpg" alt="user-image" class="wid-40 rounded-circle"></div><div class="col"><h6 class="mb-0">' +
-                                    row.nama_customer + '</h6><p class="text-muted f-12 mb-0">' +
-                                    row.nomor_layanan + '</p></div></div>';
+                                    row.nama_karyawan + '</h6><p class="text-muted f-12 mb-0">' +
+                                    row.gender + '</p></div></div>';
                             } else {
                                 return '<div class="row"><div class="col-auto pe-0"><img src="images/user/avatar-3.jpg" alt="user-image" class="wid-40 rounded-circle"></div><div class="col"><h6 class="mb-0">Alberta Robbins</h6><p class="text-muted f-12 mb-0">miza@gmail.com</p></div></div>';
                             }
                         }
                     },
                     {
-                        data: 'alamat_customer',
-                        name: 'alamat_customer'
+                        data: 'alamat_karyawan',
+                        name: 'alamat_karyawan'
                     },
                     {
                         data: 'nomor_telephone',
@@ -214,18 +221,22 @@
                                 <i class="ti ti-lock me-2"></i>Change Password
                             </a>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="profile-tab-5" data-bs-toggle="tab" href="#profile-5" role="tab"
-                                aria-selected="false" tabindex="-1">
-                                <i class="ti ti-box me-2"></i>Role & Hak Akses
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="profile-tab-6" data-bs-toggle="tab" href="#profile-6" role="tab"
-                                aria-selected="false" tabindex="-1">
-                                <i class="ti ti-users me-2"></i>Employee
-                            </a>
-                        </li>
+                        @can('view rolesettings')
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="profile-tab-5" data-bs-toggle="tab" href="#profile-5" role="tab"
+                                    aria-selected="false" tabindex="-1">
+                                    <i class="ti ti-box me-2"></i>Role & Hak Akses
+                                </a>
+                            </li>
+                        @endcan
+                        @can('view employee')
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="profile-tab-6" data-bs-toggle="tab" href="#profile-6" role="tab"
+                                    aria-selected="false" tabindex="-1">
+                                    <i class="ti ti-users me-2"></i>Employee
+                                </a>
+                            </li>
+                        @endcan
                     </ul>
                 </div>
             </div>

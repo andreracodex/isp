@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_paket');
             $table->string('jenis_paket');
-            $table->float('harga_paket');
+            $table->double('harga_paket');
             $table->integer('disc')->default(0);
             $table->integer('is_active')->default(1);
             $table->timestamps();

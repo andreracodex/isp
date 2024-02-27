@@ -51,9 +51,9 @@
             <label class="form-label">Status</label>
             <div class="form-check form-switch custom-switch-v1">
                 <input type="checkbox"
-                    class="form-check-input input-light-success @error('is_active') is-invalid @enderror"
+                    class="form-check-input input-success @error('is_active') is-invalid @enderror"
                     id="customswitchlightv1-3" name="is_active" checked
-                    @if ($location->is_active == 1) @checked(true) @endif>
+                    @if ($location->is_active == 1) @checked(true) @else @checked(false) @endif>
                 <label class="form-check-label" for="customswitchlightv1-3">Active</label>
             </div>
             @error('is_active')

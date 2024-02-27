@@ -3,32 +3,6 @@
 @section('title', 'Location Edit')
 
 @section('styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('back/dist/libs/cropper/dist/cropper.min.css') }}">
-    <style type="text/css">
-        #image {
-            display: block;
-            max-width: 100%;
-        }
-
-        .preview {
-            overflow: hidden;
-            width: 160px;
-            height: 160px;
-            margin: 10px;
-            border: 1px solid red;
-            border-radius: 50%;
-        }
-
-        .modal-lg {
-            margin-top: 10%;
-            max-width: 1100px !important;
-        }
-
-        .cropper-view-box,
-        .cropper-face {
-            border-radius: 50%;
-        }
-    </style>
 @endsection
 
 @section('isi')
@@ -42,17 +16,16 @@
         </div>
     @endif
 
-    <div class="card bg-light-info shadow-none position-relative overflow-hidden">
-        <div class="card-body px-4 py-3">
+    {{-- Breadcrumbs --}}
+    <div class="page-header">
+        <div class="page-block">
             <div class="row align-items-center">
-                <div class="col-9">
-                    <h4 class="fw-semibold mb-8">Lokasi Server</h4>
+                <div class="col-md-12">
                     {{ Breadcrumbs::render() }}
                 </div>
-                <div class="col-3">
-                    <div class="text-center mb-n5">
-                        <img src="{{ asset('back/dist/images/breadcrumb/products.webp') }}" alt=""
-                            class="img-fluid mb-n4">
+                <div class="col-md-12">
+                    <div class="page-header-title">
+                        <h2 class="mb-0">Edit Lokasi Server</h2>
                     </div>
                 </div>
             </div>
