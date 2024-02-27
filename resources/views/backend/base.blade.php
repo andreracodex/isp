@@ -83,6 +83,7 @@
     <script src="{{ asset('/js/component.js') }}"></script>
     <script src="{{ asset('/js/plugins/notifier.js') }}"></script>
     <script src="{{ asset('/js/plugins/popper.min.js') }}"></script>
+    <script src="{{ asset('/js/plugins/choices.min.js') }}"></script>
     @include('flash')
     @auth
         <script>

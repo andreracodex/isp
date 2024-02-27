@@ -68,7 +68,7 @@ class CustomerController extends Controller
 
         $post->save();
         $profile = Setting::all();
-        return view('backend.pages.customer.index', compact('profile'))->with('successmessage','Property is updated .');
+        return view('backend.pages.customer.index', compact('profile'))->with('success','Property is updated .');
     }
 
     public function show(Customer $customer)

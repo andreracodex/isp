@@ -1,23 +1,29 @@
 <div class="card">
     <div class="card-header">
-        <h5>Invite Team Members</h5>
+        <h5>Permission to Team Members</h5>
     </div>
     <div class="card-body">
-        <h4>5/10 <small>members available in your plan.</small></h4>
+        <h4>{{ $emp_active }}/{{ count($employee) }}<small>members available in your plan.</small></h4>
         <hr class="my-3">
         <div class="row">
-            <div class="col-md-8">
-                <div class="form-group">
-                    <label class="form-label">Email Address</label>
-                    <div class="row">
-                        <div class="col">
-                            <input type="email" class="form-control">
-                        </div>
-                        <div class="col-auto">
-                            <button class="btn btn-primary">Send</button>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-md-4">
+                <label class="form-label" for="roles_email">Email address</label>
+                <input name="email" class="form-control" id="roles_email" type="text" placeholder="name@example.com">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Pick Roles</label></br>
+                <select name="roles[]" id="choices-multiple-labels" class="form-control" multiple="multiple"
+                    aria-placeholder="Select Permissions">
+                    @foreach ($roles as $role)
+                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                    @endforeach
+                </select>
+                @error('permission')
+                    <div class="invalid-tooltip">Please Choose Permission.</div>
+                @enderror
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-primary">Send</button>
             </div>
         </div>
     </div>
@@ -48,8 +54,7 @@
                         </td>
                         <td><span class="badge bg-primary">Owner</span></td>
                         <td class="text-end"><span class="badge bg-success">Joined</span></td>
-                        <td class="text-end"><a href="#"
-                                class="avtar avtar-s btn-link-secondary"><i
+                        <td class="text-end"><a href="#" class="avtar avtar-s btn-link-secondary"><i
                                     class="ti ti-dots f-18"></i></a></td>
                     </tr>
                     <tr>
@@ -67,9 +72,9 @@
                         </td>
                         <td><span class="badge bg-light-info">Manager</span></td>
                         <td class="text-end"><a href="#" class="btn btn-link-danger">Resend</a>
-                            <span class="badge bg-light-success">Invited</span></td>
-                        <td class="text-end"><a href="#"
-                                class="avtar avtar-s btn-link-secondary"><i
+                            <span class="badge bg-light-success">Invited</span>
+                        </td>
+                        <td class="text-end"><a href="#" class="avtar avtar-s btn-link-secondary"><i
                                     class="ti ti-dots f-18"></i></a></td>
                     </tr>
                     <tr>
@@ -87,8 +92,7 @@
                         </td>
                         <td><span class="badge bg-light-warning">Staff</span></td>
                         <td class="text-end"><span class="badge bg-success">Joined</span></td>
-                        <td class="text-end"><a href="#"
-                                class="avtar avtar-s btn-link-secondary"><i
+                        <td class="text-end"><a href="#" class="avtar avtar-s btn-link-secondary"><i
                                     class="ti ti-dots f-18"></i></a></td>
                     </tr>
                     <tr>
@@ -106,8 +110,7 @@
                         </td>
                         <td><span class="badge bg-primary">Owner</span></td>
                         <td class="text-end"><span class="badge bg-success">Joined</span></td>
-                        <td class="text-end"><a href="#"
-                                class="avtar avtar-s btn-link-secondary"><i
+                        <td class="text-end"><a href="#" class="avtar avtar-s btn-link-secondary"><i
                                     class="ti ti-dots f-18"></i></a></td>
                     </tr>
                     <tr>
@@ -125,9 +128,9 @@
                         </td>
                         <td><span class="badge bg-light-info">Manager</span></td>
                         <td class="text-end"><a href="#" class="btn btn-link-danger">Resend</a>
-                            <span class="badge bg-light-success">Invited</span></td>
-                        <td class="text-end"><a href="#"
-                                class="avtar avtar-s btn-link-secondary"><i
+                            <span class="badge bg-light-success">Invited</span>
+                        </td>
+                        <td class="text-end"><a href="#" class="avtar avtar-s btn-link-secondary"><i
                                     class="ti ti-dots f-18"></i></a></td>
                     </tr>
                     <tr>
@@ -145,8 +148,7 @@
                         </td>
                         <td><span class="badge bg-light-warning">Staff</span></td>
                         <td class="text-end"><span class="badge bg-success">Joined</span></td>
-                        <td class="text-end"><a href="#"
-                                class="avtar avtar-s btn-link-secondary"><i
+                        <td class="text-end"><a href="#" class="avtar avtar-s btn-link-secondary"><i
                                     class="ti ti-dots f-18"></i></a></td>
                     </tr>
                     <tr>
@@ -164,8 +166,7 @@
                         </td>
                         <td><span class="badge bg-primary">Owner</span></td>
                         <td class="text-end"><span class="badge bg-success">Joined</span></td>
-                        <td class="text-end"><a href="#"
-                                class="avtar avtar-s btn-link-secondary"><i
+                        <td class="text-end"><a href="#" class="avtar avtar-s btn-link-secondary"><i
                                     class="ti ti-dots f-18"></i></a></td>
                     </tr>
                     <tr>
@@ -183,9 +184,9 @@
                         </td>
                         <td><span class="badge bg-light-info">Manager</span></td>
                         <td class="text-end"><a href="#" class="btn btn-link-danger">Resend</a>
-                            <span class="badge bg-light-success">Invited</span></td>
-                        <td class="text-end"><a href="#"
-                                class="avtar avtar-s btn-link-secondary"><i
+                            <span class="badge bg-light-success">Invited</span>
+                        </td>
+                        <td class="text-end"><a href="#" class="avtar avtar-s btn-link-secondary"><i
                                     class="ti ti-dots f-18"></i></a></td>
                     </tr>
                     <tr>
@@ -203,8 +204,7 @@
                         </td>
                         <td><span class="badge bg-light-warning">Staff</span></td>
                         <td class="text-end"><span class="badge bg-success">Joined</span></td>
-                        <td class="text-end"><a href="#"
-                                class="avtar avtar-s btn-link-secondary"><i
+                        <td class="text-end"><a href="#" class="avtar avtar-s btn-link-secondary"><i
                                     class="ti ti-dots f-18"></i></a></td>
                     </tr>
                 </tbody>
