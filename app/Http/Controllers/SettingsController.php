@@ -30,4 +30,8 @@ class SettingsController extends Controller
         $emp_active = Employee::where('is_active', 1)->count();
         return view('backend.pages.setting.profile.profile', compact('profile', 'usersetting', 'sess', 'ip', 'employee', 'emp_active', 'roles'));
     }
+
+    public function store() {
+
+    }
 }

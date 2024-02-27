@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="{{ asset('/css/style-preset.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/uikit.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/plugins/notifier.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/css/plugins/select2.min.css') }}" />
     @auth
     <link rel="stylesheet" href="{{ asset('/css/plugins/dataTables.bootstrap5.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/plugins/dataTables.checkboxes.css') }}">
@@ -83,9 +84,14 @@
     <script src="{{ asset('/js/component.js') }}"></script>
     <script src="{{ asset('/js/plugins/notifier.js') }}"></script>
     <script src="{{ asset('/js/plugins/popper.min.js') }}"></script>
-    <script src="{{ asset('/js/plugins/choices.min.js') }}"></script>
+    <script src="{{ asset('/js/plugins/select2.min.js') }}"></script>
     @include('flash')
     @auth
+        <script>
+            $(document).ready(function() {
+                $('.select2').select2();
+            });
+        </script>
         <script>
             // Example starter JavaScript for disabling form submissions if there are invalid fields
             (function() {

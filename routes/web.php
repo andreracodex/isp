@@ -29,6 +29,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     Route::prefix('settings')->group(function(){
         Route::get('', [SettingsController::class, 'index'])->name('settings.index');
         Route::get('/create', [ProfileController::class, 'create'])->name('settings.profile-show');
+        Route::get('/employee', [EmployeeController::class, 'index'])->name('settings.profile-show');
         Route::post('', [ProfileController::class, 'store'])->name('settings.profile-store');
         Route::put('/profile', [ProfileController::class, 'update'])->name('settings.profile-update');
         Route::delete('', [ProfileController::class, 'destroy'])->name('settings.profile-destroy');

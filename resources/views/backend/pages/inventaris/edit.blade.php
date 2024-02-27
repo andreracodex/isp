@@ -59,7 +59,7 @@
         </div>
     </div>
 
-    @can('edit category')
+    {{-- @can('edit inventaris') --}}
         <div class="card">
             <div class="card-header">
                 <h5>Edit Inventaris</h5>
@@ -75,5 +75,5 @@
                 </form>
             </div>
         </div>
-    @endcan
+    {{-- @endcan --}}
 @endsection

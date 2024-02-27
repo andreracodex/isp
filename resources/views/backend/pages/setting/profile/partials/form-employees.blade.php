@@ -3,33 +3,18 @@
         <h5>Team Members of - {{$profile[22]->value}}</h5>
     </div>
     <div class="card-body">
-        <h4>{{ $emp_active }}/{{ count($employee) }} <small>members available in your team.</small></h4>
+        <h4>{{ $emp_active }}/{{ count($employee) }} <small>Employee Active of All Employee.</small></h4>
         <hr class="my-3">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="form-group">
-                    <label class="form-label">Email Address</label>
-                    <div class="row">
-                        <div class="col">
-                            <input type="email" class="form-control">
-                        </div>
-                        <div class="col-auto">
-                            <button class="btn btn-primary">Send</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="card-body table-card">
         <div class="table-responsive">
             <table class="table mb-0">
                 <thead>
                     <tr>
-                        <th>MEMBER</th>
-                        <th>ROLE</th>
-                        <th class="text-end">STATUS</th>
-                        <th></th>
+                        <th>Nama Karyawan</th>
+                        <th>Gender</th>
+                        <th>Nomor Telepon</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>

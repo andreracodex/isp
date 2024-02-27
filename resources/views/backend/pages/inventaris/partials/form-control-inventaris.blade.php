@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-6 mb-3">
-        <label class="form-label" for="location">Lokasi Server</label>
+        <label class="form-label" for="location">Lokasi Barang</label>
         <select class="form-select @error('location') is-invalid @enderror" name="location" id="location">
             <option selected disabled>Pilih Lokasi...</option>
             @foreach ($locations as $location)
