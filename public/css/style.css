@@ -22562,7 +22562,7 @@ pre[class*="language-"] > code {
 .btn-link-danger:hover {
     background: #fce9e9;
     color: #dc2626;
-    border-color: #fce9e9;
+    border-color: transparent;
 }
 .btn-link-danger.focus,
 .btn-link-danger:focus {

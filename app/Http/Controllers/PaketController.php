@@ -31,9 +31,9 @@ class PaketController extends Controller
             })
             ->addColumn('action', function (Paket $paket) {
                 return "
-                <a href=". route('paket.edit', $paket->id) ." class='btn btn-sm btn-warning d-inline-flex' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-pencil-alt'></i></a>
-                <a href=". route('paket.delete', $paket->id) ." class='btn btn-sm btn-danger d-inline-flex' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-trash-alt'></i></a>
-            ";
+                <a href=". route('paket.edit', $paket->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-pencil-alt'></i></a>
+                <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusItem' data-id='$paket->id'><i class='fa fa-trash-alt'></i></button>
+                ";
             })
             ->make(true);
         }
