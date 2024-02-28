@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
             SettingsSeeder::class,
             PaymentTypeSeeder::class,
             BankSeeder::class,
+            IndoRegionSeeder::class
         ]);
 
         \App\Models\Customer::factory(100)->create();
