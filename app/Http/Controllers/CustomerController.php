@@ -84,7 +84,12 @@ class CustomerController extends Controller
 
     public function edit(Customer $customer)
     {
-        //
+        $customer = Customer::find($customer->id);
+        $lokasi = Location::all();
+        $profile = Setting::all();
+        $paket = Paket::all();
+        $order = Order::where('customer_id', $customer->id)->first();
+        return view('backend.pages.customer.edit', compact('profile', 'customer', 'lokasi', 'paket', 'order'));
     }
 
     public function update(Request $request, Customer $customer)

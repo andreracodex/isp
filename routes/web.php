@@ -52,7 +52,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::get('/create', [CustomerController::class, 'create'])->name('customer.create');
         Route::post('', [CustomerController::class, 'store'])->name('customer.store');
         Route::get('{customer}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
-        Route::put('{customer}/edit', [CustomerController::class, 'update']);
+        Route::put('{customer}/edit', [CustomerController::class, 'update'])->name('customer.update');
         Route::delete('', [CustomerController::class, 'delete'])->name('customer.delete');
     });
 

@@ -18,16 +18,14 @@ class CustomerFactory extends Factory
     {
         return [
             "nama_customer" => $this->faker->name(),
-            "nomor_layanan" => $this->faker->phoneNumber,
-            // "location_id" => $this->faker->numberBetween(1, 4),
-            // "paket_id" => $this->faker->numberBetween(1, 4),
+            "nomor_layanan" => $this->faker->randomNumber(),
+            "nomor_ktp" => $this->faker->randomNumber(),
             "ip_config" => $this->faker->numberBetween(1, 5),
             "gender" => $this->faker->randomElement([
                 "male",
                 "female",
                 "others"
             ]),
-            "nomor_ktp" => $this->faker->phoneNumber,
             "alamat_customer" => $this->faker->address,
             "kecamatan_customer" => $this->faker->address,
             "desa_customer" => $this->faker->address,

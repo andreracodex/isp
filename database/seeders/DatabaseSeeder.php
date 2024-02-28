@@ -16,13 +16,15 @@ class DatabaseSeeder extends Seeder
             IndoRegionSeeder::class
         ]);
 
-        \App\Models\Customer::factory(100)->create();
-        \App\Models\Employee::factory(20)->create();
+        \App\Models\Employee::factory(10)->create();
 
         $this->call([
             LocationSeeder::class,
             InventarisKategoriSeeder::class,
             InventarisSeeder::class,
         ]);
+
+        \App\Models\Customer::factory(50)->create();
+        \App\Models\Order::factory(10)->create();
     }
 }

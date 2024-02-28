@@ -225,9 +225,9 @@
                 <div class="card-header">
                     <div class="headerbutton">
                         <div>
-                            <a href="{{ route('customer.create') }}" type="button"
+                            {{-- <a href="{{ route('customer.create') }}" type="button"
                                 class="btn btn-sm btn-outline-primary d-inline-flex"><i
-                                    class="ti ti-plus me-1"></i>Tagihan</a>
+                                    class="ti ti-plus me-1"></i>Tagihan</a> --}}
                             <button type="button" class="btn btn-sm btn-outline-success d-inline-flex"><i
                                     class="ti ti-inbox me-1"></i>Import Excel</button>
                         </div>

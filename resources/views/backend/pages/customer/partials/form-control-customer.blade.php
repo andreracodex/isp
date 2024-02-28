@@ -40,9 +40,9 @@
     </div>
     @if($submit != 'Create')
     <div class="col-md-3 mb-3">
-        <label class="form-label" for="nomor_pelanggan">Nomor Layanan</label>
-        <input type="number" min="0" class="form-control" name="nomor_pelanggan" id="nomor_pelanggan"
-            value="{{ old('nomor_pelanggan') ?? $customer->nomor_pelanggan }}" placeholder="Nomor Pelanggan">
+        <label class="form-label" for="nomor_layanan">Nomor Layanan</label>
+        <input type="text" min="0" class="form-control" name="nomor_layanan" id="nomor_layanan"
+            value="{{ old('nomor_layanan') ?? $customer->nomor_layanan }}" placeholder="Nomor Layanan">
         <div class="valid-feedback"> Opsional ! </div>
         <div class="invalid-feedback"> Harap isi nomor layanan. </div>
     </div>
@@ -51,7 +51,7 @@
         <label class="form-label" for="nomor_ktp">Nomor KTP <sup class="text-primary" data-bs-toggle="tooltip"
                 data-bs-placement="top"
                 data-bs-original-title="ktp dapat di input opsional">*</sup></label>
-        <input type="number" min="0" class="form-control" name="nomor_ktp" id="nomor_ktp"
+        <input type="text" min="0" class="form-control" name="nomor_ktp" id="nomor_ktp"
             value="{{ old('nomor_ktp') ?? $customer->nomor_ktp }}" placeholder="Nomor KTP">
         <div class="valid-feedback"> Opsional ! </div>
         <div class="invalid-feedback"> Harap isi nomor KTP. </div>

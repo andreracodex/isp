@@ -24,6 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('payment_id')->nullable();
             $table->foreign('payment_id')->references('id')->on('payment_types');
             $table->float('diskon')->default(0);
+            $table->float('biaya_pasang')->default(0);
             $table->text('path_ktp')->nullable();
             $table->text('path_image_rumah')->nullable();
             $table->date('order_date');
