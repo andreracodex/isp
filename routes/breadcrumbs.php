@@ -88,3 +88,20 @@ Breadcrumbs::for('inve.store', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Simpan Inventaris', route('inve.store'));
 });
+
+// Order Customer
+Breadcrumbs::for('order.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Order', route('order.index'));
+});
+Breadcrumbs::for('order.create', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Tambah Order', route('order.create'));
+});
+Breadcrumbs::for('order.edit', function (BreadcrumbTrail $trail): void {
+    $trail->push('Edit Order', route('order.edit', 'order'));
+});
+Breadcrumbs::for('order.store', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Simpan Order', route('order.store'));
+});

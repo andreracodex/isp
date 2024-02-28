@@ -6,6 +6,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventarisController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
@@ -35,8 +36,8 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::delete('', [ProfileController::class, 'destroy'])->name('settings.profile-destroy');
         Route::post('/logout', [ProfileController::class, 'logout'])->name('settings.profile-logout');
     });
+     // Employee
     Route::prefix('employee')->group(function(){
-        // Employee
         Route::get('', [EmployeeController::class, 'index'])->name('employee.index');
         Route::get('/create', [EmployeeController::class, 'create'])->name('employee.create');
         Route::get('/view', [EmployeeController::class, 'view'])->name('employee.view');
@@ -94,6 +95,15 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::get('{inve}/edit', [InventarisController::class, 'edit'])->name('inve.edit');
         Route::put('{inve}/update', [InventarisController::class, 'update'])->name('inve.update');
         Route::delete('{inve}/delete', [InventarisController::class, 'delete'])->name('inve.delete');
+    });
+     // Order Customer
+     Route::prefix('order')->group(function() {
+        Route::get('', [OrderController::class, 'index'])->name('order.index');
+        Route::get('/create', [OrderController::class, 'create'])->name('order.create');
+        Route::post('/store', [OrderController::class, 'store'])->name('order.store');
+        Route::get('{order}/edit', [OrderController::class, 'edit'])->name('order.edit');
+        Route::put('{order}/update', [OrderController::class, 'update'])->name('order.update');
+        Route::delete('{order}/delete', [OrderController::class, 'delete'])->name('order.delete');
     });
 
     Route::get('/pdf', [PDFController::class, 'PDFInventaris'])->name('pdf.inventaris');

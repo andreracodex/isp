@@ -20260,7 +20260,7 @@ pre[class*="language-"] > code {
 
 .pc-sidebar {
     background: var(--pc-sidebar-background);
-    width: 280px;
+    width: 220px;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -20270,7 +20270,7 @@ pre[class*="language-"] > code {
     border-right: var(--pc-sidebar-border);
 }
 .pc-sidebar .navbar-wrapper {
-    width: 280px;
+    width: 220px;
     background: inherit;
 }
 .pc-sidebar ul {
@@ -20460,7 +20460,7 @@ pre[class*="language-"] > code {
     margin: 15px;
 }
 .pc-sidebar .card.pc-user-card {
-    margin: 0 15px 15px;
+    margin: 0 0px 15px;
     box-shadow: none;
     background: var(--pc-sidebar-user-background);
 }
