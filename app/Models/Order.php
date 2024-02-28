@@ -22,6 +22,10 @@ class Order extends Model
         'path_ktp',
         'path_image_rumah',
         'order_date',
+        'installed_date',
+        'installed_image',
+        'installed_status',
+        'due_date',
         'is_active',
     ];
 
@@ -43,6 +47,11 @@ class Order extends Model
     public function lokasi()
     {
         return $this->belongsTo(Location::class, 'location_id', 'id');
+    }
+
+    public function orderdetail()
+    {
+        return $this->hasMany(OrderDetail::class, 'order_id', 'id');
     }
 
 }
