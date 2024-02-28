@@ -17,6 +17,7 @@ class Customer extends Model
         'nama_customer',
         'gender',
         'nomor_layanan',
+        'nomor_ktp',
         'alamat_customer',
         'kecamatan_customer',
         'desa_customer',

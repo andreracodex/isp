@@ -8,7 +8,9 @@
         <div class="form-check form-switch custom-switch-v1 mt-3">
             <input type="checkbox" class="form-check-input input-success" id="customswitchlightv1-3" name="is_active"
                 @if ($customer->is_active == 1) @checked(true) @else @checked(false) @endif>
-            <label class="form-check-label" for="customswitchlightv1-3">Pelanggan Active</label>
+            <label class="form-check-label" for="customswitchlightv1-3">Pelanggan Active <sup class="text-danger"
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-original-title="status pelanggan harap aktif jika maasih berlangganan">*</sup></label>
         </div>
     </div>
     <div class="col-md-9 mb-3">
@@ -29,19 +31,30 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6 mb-3">
+    <div class="col-md-3 mb-3">
         <label class="form-label" for="nama">Nama Customer</label>
         <input type="text" class="form-control" name="nama_customer" id="nama_customer"
             value="{{ old('nama_customer') ?? $customer->nama_customer }}" placeholder="Nama Customer" required>
         <div class="valid-feedback"> Looks good! </div>
         <div class="invalid-feedback"> Harap isi nama customer. </div>
     </div>
+    @if($submit != 'Create')
     <div class="col-md-3 mb-3">
-        <label class="form-label" for="nomor_ktp">Nomor KTP</label>
-        <input type="number" min="0" class="form-control" name="nomor_ktp" id="nomor_ktp"
-            value="{{ old('nomor_ktp') ?? $customer->nomor_ktp }}" placeholder="Nomor Layanan" required>
-        <div class="valid-feedback"> Looks good! </div>
+        <label class="form-label" for="nomor_pelanggan">Nomor Layanan</label>
+        <input type="number" min="0" class="form-control" name="nomor_pelanggan" id="nomor_pelanggan"
+            value="{{ old('nomor_pelanggan') ?? $customer->nomor_pelanggan }}" placeholder="Nomor Pelanggan">
+        <div class="valid-feedback"> Opsional ! </div>
         <div class="invalid-feedback"> Harap isi nomor layanan. </div>
+    </div>
+    @endif
+    <div class="col-md-3 mb-3">
+        <label class="form-label" for="nomor_ktp">Nomor KTP <sup class="text-primary" data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-original-title="ktp dapat di input opsional">*</sup></label>
+        <input type="number" min="0" class="form-control" name="nomor_ktp" id="nomor_ktp"
+            value="{{ old('nomor_ktp') ?? $customer->nomor_ktp }}" placeholder="Nomor KTP">
+        <div class="valid-feedback"> Opsional ! </div>
+        <div class="invalid-feedback"> Harap isi nomor KTP. </div>
     </div>
     <div class="col-md-3 mb-3">
         <label class="form-label" for="gender">Gender</label>
@@ -55,23 +68,36 @@
 <div class="row">
     <div class="col-md-6 mb-3">
         <label class="form-label" for="alamat_customer">Alamat Customer</label>
-        <textarea class="form-control" id="exampleTextarea" name="alamat_customer" rows="3" required>{{ old('alamat_customer') ?? $customer->alamat_customer }}</textarea>
+        <textarea class="form-control" placeholder="Alamat Customer" id="exampleTextarea" name="alamat_customer" rows="3"
+            required>{{ old('alamat_customer') ?? $customer->alamat_customer }}</textarea>
         <div class="invalid-feedback"> Harap isi alamat. </div>
     </div>
     <div class="col-md-3 mb-3">
-        <label class="form-label" for="kecamatan">Kecamatan</label>
-        <input type="text" class="form-control" name="kecamatan_customer" id="kecamatan_customer"
-            placeholder="Kecamatan" value="{{ old('kecamatan_customer') ?? $customer->kecamatan_customer }}" required>
-        <div class="invalid-feedback"> Harap isi kecamatan. </div>
+        <label class="form-label" for="kodepos">Kode POS</label>
+        <input type="number" min="0" placeholder="602xxx" class="form-control" name="kodepos_customer"
+            id="kodepos_customer" placeholder="Kode POS"
+            value="{{ old('kodepos_customer') ?? $customer->kodepos_customer }}" required>
+        <div class="invalid-feedback"> Harap isi Kode POS. </div>
     </div>
     <div class="col-md-3 mb-3">
-        <label class="form-label" for="desa">Desa</label>
-        <input type="text" class="form-control" name="desa_customer" id="desa_customer" placeholder="Desa"
-            value="{{ old('desa_customer') ?? $customer->desa_customer }}" required>
-        <div class="invalid-feedback"> Harap isi desa. </div>
+        <label class="form-label" for="nomor_telephone">Nomor HP</label>
+        <div class="input-group">
+            <span class="input-group-text" id="nomor_telephone"><i class="ti ti-phone-call"></i></span>
+            <input type="number" min="0" name="nomor_telephone" class="form-control" id="nomor_telephone"
+                value="{{ old('nomor_telephone') ?? $customer->nomor_telephone }}" placeholder="0812xxxx"
+                aria-describedby="nomor_telephone" required>
+            <div class="invalid-feedback"> Harap isi nomor HP. </div>
+        </div>
     </div>
 </div>
 <div class="row">
+    <div class="col-md-6 mb-3">
+        <label class="form-label" for="nama">Email Customer</label>
+        <input type="text" class="form-control" name="email" id="email"
+            value="{{ old('email') ?? $customer->email }}" placeholder="mail@example" required>
+        <div class="valid-feedback"> Looks good! </div>
+        <div class="invalid-feedback"> Harap isi email customer. </div>
+    </div>
     <div class="col-md-3 mb-3">
         <label class="form-label">Lokasi Server</label>
         <select class="form-select @error('lokasi') is-invalid @enderror" name="lokasi" id="lokasi">
@@ -104,36 +130,70 @@
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
+</div>
+<div class="row">
     <div class="col-md-3 mb-3">
-        <label class="form-label" for="kecamatan">Tanggal Pemasangan <sup class="text-danger">*</sup></label>
-        <input class="form-control" type="date" value="{{ old('created_at') ?? $customer->created_at }}"
-            id="demo-date-only">
+        <label class="form-label" for="biaya_pasang">Biaya Pemasangan <sup class="text-primary"
+                data-bs-toggle="tooltip" data-bs-placement="top"
+                data-bs-original-title="biaya pasang dibebankan ketika ada tambahan biaya">*</sup></label>
+        <input type="number" min="0" class="form-control" name="biaya_pasang" id="biaya_pasang"
+            value="{{ old('biaya_pasang') ?? $order->biaya_pasang }}" placeholder="Biaya Pasang">
+        <div class="valid-feedback"> Opsional </div>
+        <div class="invalid-feedback"> Harap isi biaya pasang layanan. </div>
     </div>
     <div class="col-md-3 mb-3">
-        <label class="form-label" for="kecamatan">Tanggal Jatuh Tempo <sup class="text-danger">*</sup></label>
-        <input class="form-control" type="date" value="{{ old('created_at') ?? $customer->created_at }}"
-            id="demo-date-only">
+        <label class="form-label" for="biaya_pasang">Foto <sup class="text-primary"
+            data-bs-toggle="tooltip" data-bs-placement="top"
+            data-bs-original-title="foto lokasi pemasangan aksess internet">*</sup></label>
+        <input type="file" name="file_upload" class="form-control" aria-label="file example">
+        <div class="valid-feedback"> Opsional </div>
+        <div class="invalid-feedback"> Harap isi foto lokasi pasang layanan. </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label class="form-label" for="installed_date">Tanggal Pemasangan <sup class="text-danger"
+            data-bs-toggle="tooltip" data-bs-placement="top"
+            data-bs-original-title="tanggal pemasangan layanan">*</sup></label>
+        <input class="form-control" type="date" name="installed_date"
+            value="{{ old('created_at') ?? $order->installed_date }}" id="demo-date-only">
+        <div class="valid-feedback"> Looks good! </div>
+        <div class="invalid-feedback"> Harap isi tanggal pemasangan. </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label class="form-label" for="due_date">Tanggal Jatuh Tempo <sup class="text-danger"
+            data-bs-toggle="tooltip" data-bs-placement="top"
+            data-bs-original-title="tanggal jatuh tempo tagihan layanan">*</sup></label>
+        <input class="form-control" type="date" name="due_date"
+            value="{{ old('due_date') ?? $order->due_date }}" id="demo-date-only">
+        <div class="valid-feedback"> Looks good! </div>
+        <div class="invalid-feedback"> Harap isi tanggal jatuh tempo. </div>
     </div>
 </div>
 <div class="row">
     <div class="col-md-3 mb-3">
-        <label class="form-label" for="kodepos">Kode POS</label>
-        <input type="number" min="0" placeholder="602xxx" class="form-control" name="kodepos_customer"
-            id="kodepos_customer" placeholder="Kode POS"
-            value="{{ old('kodepos_customer') ?? $customer->kodepos_customer }}" required>
+        <label class="form-label" for="kecamatan">Kecamatan</label>
+        <input type="text" class="form-control" name="kecamatan_customer" id="kecamatan_customer"
+            placeholder="Kecamatan" value="{{ old('kecamatan_customer') ?? $customer->kecamatan_customer }}"
+            required>
+        <div class="invalid-feedback"> Harap isi kecamatan. </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label class="form-label" for="desa">Desa</label>
+        <input type="text" class="form-control" name="desa_customer" id="desa_customer" placeholder="Desa"
+            value="{{ old('desa_customer') ?? $customer->desa_customer }}" required>
         <div class="invalid-feedback"> Harap isi desa. </div>
     </div>
     <div class="col-md-3 mb-3">
-        <label class="form-label" for="nomor_telephone">Nomor HP</label>
-        <div class="input-group">
-            <span class="input-group-text" id="nomor_telephone"><i class="ti ti-phone-call"></i></span>
-            <input type="number" min="0" name="nomor_telephone" class="form-control" id="nomor_telephone"
-                value="{{ old('nomor_telephone') ?? $customer->nomor_telephone }}" placeholder="0812xxxx"
-                aria-describedby="nomor_telephone" required>
-            <div class="invalid-feedback"> Harap isi nomor HP. </div>
-        </div>
+        <label class="form-label" for="desa">Desa</label>
+        <input type="text" class="form-control" name="desa_customer" id="desa_customer" placeholder="Desa"
+            value="{{ old('desa_customer') ?? $customer->desa_customer }}" required>
+        <div class="invalid-feedback"> Harap isi desa. </div>
     </div>
-
+    <div class="col-md-3 mb-3">
+        <label class="form-label" for="desa">Desa</label>
+        <input type="text" class="form-control" name="desa_customer" id="desa_customer" placeholder="Desa"
+            value="{{ old('desa_customer') ?? $customer->desa_customer }}" required>
+        <div class="invalid-feedback"> Harap isi desa. </div>
+    </div>
 </div>
 <div class="form-group">
     <div class="form-check">

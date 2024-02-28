@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Location;
+use App\Models\Order;
 use App\Models\Paket;
 use App\Models\Setting;
 use Illuminate\Support\Number;
@@ -41,7 +42,8 @@ class CustomerController extends Controller
         $lokasi = Location::all();
         $profile = Setting::all();
         $paket = Paket::all();
-        return view('backend.pages.customer.create', compact('profile', 'customer', 'lokasi', 'paket'));
+        $order = new Order;
+        return view('backend.pages.customer.create', compact('profile', 'customer', 'lokasi', 'paket', 'order'));
     }
 
     public function store(Request $request)

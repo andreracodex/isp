@@ -27,6 +27,7 @@ class CustomerFactory extends Factory
                 "female",
                 "others"
             ]),
+            "nomor_ktp" => $this->faker->phoneNumber,
             "alamat_customer" => $this->faker->address,
             "kecamatan_customer" => $this->faker->address,
             "desa_customer" => $this->faker->address,

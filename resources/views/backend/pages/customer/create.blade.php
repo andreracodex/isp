@@ -36,7 +36,7 @@
                         class="needs-validation" novalidate="">
                         @csrf
                         @include('backend.pages.customer.partials.form-control-customer', [
-                            'submit' => 'Tambah Pelanggan',
+                            'submit' => 'Create',
                         ])
                     </form>
                 </div>
