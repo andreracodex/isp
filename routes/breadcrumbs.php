@@ -20,6 +20,14 @@ Breadcrumbs::for('customer.store', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Simpan Pelanggan', route('customer.store'));
 });
+Breadcrumbs::for('customer.edit', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Edit Pelanggan', route('customer.edit', 'customer'));
+});
+Breadcrumbs::for('customer.update', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Update Pelanggan', route('customer.update', 'customer'));
+});
 
 // Paket
 Breadcrumbs::for('paket.index', function (BreadcrumbTrail $trail): void {
@@ -57,7 +65,6 @@ Breadcrumbs::for('location.update', function (BreadcrumbTrail $trail): void {
     $trail->push('Update Lokasi Server', route('location.update', 'location'));
 });
 
-
 // Wa Page
 Breadcrumbs::for('wa.index', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
@@ -72,6 +79,27 @@ Breadcrumbs::for('wa.store', function (BreadcrumbTrail $trail): void {
     $trail->push('Tambah Whatsapp Bot', route('wa.store'));
 });
 
+// Inventaris Kategori
+Breadcrumbs::for('invekategori.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Kategori Inventaris', route('invekategori.index'));
+});
+Breadcrumbs::for('invekategori.create', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Tambah Kategori Inventaris', route('invekategori.create'));
+});
+Breadcrumbs::for('invekategori.edit', function (BreadcrumbTrail $trail): void {
+    $trail->push('Edit Kategori Inventaris', route('invekategori.edit', 'invekategori'));
+});
+Breadcrumbs::for('invekategori.store', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Simpan Kategori Inventaris', route('invekategori.store'));
+});
+Breadcrumbs::for('invekategori.update', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Update Kategori Inventaris', route('invekategori.update', 'invekategori'));
+});
+
 // Inventaris
 Breadcrumbs::for('inve.index', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
@@ -81,12 +109,16 @@ Breadcrumbs::for('inve.create', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Tambah Inventaris', route('inve.create'));
 });
-Breadcrumbs::for('inve.edit', function (BreadcrumbTrail $trail): void {
-    $trail->push('Edit Inventaris', route('inve.edit', 'inve'));
-});
 Breadcrumbs::for('inve.store', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Simpan Inventaris', route('inve.store'));
+});
+Breadcrumbs::for('inve.edit', function (BreadcrumbTrail $trail): void {
+    $trail->push('Edit Inventaris', route('inve.edit', 'inve'));
+});
+Breadcrumbs::for('inve.update', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Update Inventaris', route('inve.update', 'inve'));
 });
 
 // Order Customer

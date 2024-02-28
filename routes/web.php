@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventarisController;
+use App\Http\Controllers\InventarisKategoriController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaketController;
@@ -85,6 +86,16 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::get('{wa}/edit', [WhatsappController::class, 'edit'])->name('wa.edit');
         Route::put('{wa}/edit', [WhatsappController::class, 'update']);
         Route::delete('', [WhatsappController::class, 'delete'])->name('wa.delete');;
+    });
+
+    // Inventaris Kategori
+    Route::prefix('invekategori')->group(function() {
+        Route::get('', [InventarisKategoriController::class, 'index'])->name('invekategori.index');
+        Route::get('/create', [InventarisKategoriController::class, 'create'])->name('invekategori.create');
+        Route::post('/store', [InventarisKategoriController::class, 'store'])->name('invekategori.store');
+        Route::get('{invekategori}/edit', [InventarisKategoriController::class, 'edit'])->name('invekategori.edit');
+        Route::put('{invekategori}/update', [InventarisKategoriController::class, 'update'])->name('invekategori.update');
+        Route::delete('{invekategori}/delete', [InventarisKategoriController::class, 'delete'])->name('invekategori.delete');
     });
 
     // Inventaris

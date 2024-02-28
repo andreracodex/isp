@@ -1,6 +1,6 @@
 @extends('backend.base')
 
-@section('title', 'Inventory Data')
+@section('title', 'Inventory Category Data')
 
 @section('styles')
 @endsection
@@ -20,7 +20,7 @@
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                ajax: "{{ route('inve.index') }}",
+                ajax: "{{ route('invekategori.index') }}",
                 buttons: [
                     'colvis',
                     {
@@ -64,7 +64,7 @@
                 },
                 columnDefs: [{
                         targets: 0,
-                        className: 'paket',
+                        className: 'invenkategori',
                         orderable: false,
                         searchable: false,
                     },
@@ -83,28 +83,12 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'inve_id',
-                        name: 'inve_id'
+                        data: 'invekategori_id',
+                        name: 'invekategori_id'
                     },
                     {
-                        data: 'location_id',
-                        name: 'location_id'
-                    },
-                    {
-                        data: 'nama_barang',
-                        name: 'nama_barang'
-                    },
-                    {
-                        data: 'jenis_id',
-                        name: 'jenis_id'
-                    },
-                    {
-                        data: 'jumlah_barang',
-                        name: 'jumlah_barang'
-                    },
-                    {
-                        data: 'satuan_barang',
-                        name: 'satuan_barang'
+                        data: 'nama',
+                        name: 'nama'
                     },
                     {
                         data: 'is_active',
@@ -192,7 +176,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Inventaris Barang</h2>
+                        <h2 class="mb-0">Kategori Inventaris</h2>
                     </div>
                 </div>
             </div>
@@ -205,21 +189,16 @@
                 <div class="card-header">
                     <div class="headerbutton">
                         <div>
-                            <a href="{{ route('inve.create') }}" type="button"
-                                class="btn btn-sm btn-outline-primary d-inline-flex">
-                                <i class="ti ti-plus me-1"></i>Inventaris</a>
-
-                            <a href="{{ route('invekategori.index') }}" type="button"
-                                class="btn btn-sm btn-outline-primary d-inline-flex">
-                                <i class="ti ti-arrow-right me-1"></i>Kategori Inventaris</a>
+                            <a href="{{ route('invekategori.create') }}" type="button"
+                                class="btn btn-sm btn-outline-primary d-inline-flex"><i class="ti ti-plus me-1"></i>Kategori
+                                Kategori Inventaris</a>
                         </div>
-
                         <div>
                             <a href="{{ route('pdf.inventaris') }}" type="button"
                                 class="btn btn-sm btn-outline-danger d-inline-flex"><i
-                                    class="fa fa-file-pdf">&nbsp;</i>Exspor PDF</a>
+                                    class="fa fa-file-pdf">&nbsp;</i>Expor PDF</a>
                             <button type="button" class="btn btn-sm btn-outline-success d-inline-flex"><i
-                                    class="fa fa-file-excel">&nbsp;</i>Exspor Excel</button>
+                                    class="fa fa-file-excel">&nbsp;</i>Expor Excel</button>
                             <button type="button" class="btn btn-sm btn-outline-warning d-inline-flex"><i
                                     class="ti ti-trash me-1"></i>Hapus Filter</button>
                         </div>
@@ -233,11 +212,7 @@
                                 <tr>
                                     <th style="width: 10px;">#</th>
                                     <th></th>
-                                    <th>Lokasi Barang</th>
-                                    <th>Nama Barang</th>
-                                    <th>Jenis</th>
-                                    <th>Jumlah</th>
-                                    <th>Satuan</th>
+                                    <th>Nama Kategori</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
