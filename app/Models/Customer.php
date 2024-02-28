@@ -24,6 +24,7 @@ class Customer extends Model
         'nomor_telephone',
         'ip_config',
         'is_active',
+        'is_new',
     ];
 
     public function tickets()

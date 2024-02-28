@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nama_customer', 100);
             $table->string('gender');
             $table->string('nomor_layanan');
+            $table->string('nomor_ktp');
             $table->string('alamat_customer');
             $table->string('kecamatan_customer');
             $table->string('desa_customer');
@@ -25,6 +26,7 @@ return new class extends Migration
             $table->string('nomor_telephone');
             $table->string('ip_config')->nullable();
             $table->integer('is_active')->default(1);
+            $table->integer('is_new')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

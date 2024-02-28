@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Location;
+use App\Models\Paket;
 use App\Models\Setting;
 use Illuminate\Support\Number;
 use Illuminate\Http\Request;
@@ -36,8 +38,10 @@ class CustomerController extends Controller
     public function create()
     {
         $customer = new Customer;
+        $lokasi = Location::all();
         $profile = Setting::all();
-        return view('backend.pages.customer.create', compact('profile', 'customer'));
+        $paket = Paket::all();
+        return view('backend.pages.customer.create', compact('profile', 'customer', 'lokasi', 'paket'));
     }
 
     public function store(Request $request)
