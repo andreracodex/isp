@@ -20460,7 +20460,7 @@ pre[class*="language-"] > code {
     margin: 15px;
 }
 .pc-sidebar .card.pc-user-card {
-    margin: 0 0px 15px;
+    margin: 0 0px 0px;
     box-shadow: none;
     background: var(--pc-sidebar-user-background);
 }
@@ -20566,7 +20566,7 @@ pre[class*="language-"] > code {
     -webkit-backdrop-filter: blur(7px);
     backdrop-filter: blur(7px);
     position: fixed;
-    left: 280px;
+    left: 210px;
     right: 0;
     z-index: 1025;
     display: flex;
@@ -21092,7 +21092,7 @@ pre[class*="language-"] > code {
 .pc-footer {
     position: relative;
     z-index: 995;
-    margin-left: 280px;
+    margin-left: 210px;
     margin-top: 74px;
     padding: 15px 0;
 }
@@ -21118,7 +21118,7 @@ pre[class*="language-"] > code {
 .pc-container {
     position: relative;
     top: 74px;
-    margin-left: 280px;
+    margin-left: 210px;
     min-height: calc(100vh - 135px);
 }
 .pc-container .pc-content {

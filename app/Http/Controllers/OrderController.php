@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Number;
 use Yajra\DataTables\Facades\DataTables;
 
 class OrderController extends Controller
@@ -23,6 +24,21 @@ class OrderController extends Controller
             })
             ->editColumn('nomor_layanan', function (Order $order) {
                 return $order->customer->nomor_layanan;
+            })
+            ->editColumn('alamat_customer', function (Order $order) {
+                return $order->customer->alamat_customer;
+            })
+            ->editColumn('nomor_telephone', function (Order $order) {
+                return $order->customer->nomor_telephone;
+            })
+            ->editColumn('nama_location', function (Order $order) {
+                return $order->lokasi->nama_location;
+            })
+            ->editColumn('jenis_paket', function (Order $order) {
+                return $order->paket->jenis_paket;
+            })
+            ->editColumn('harga_paket', function (Order $order) {
+                return Number::currency($order->paket->harga_paket, in: 'IDR', locale: 'us');
             })
             ->addColumn('action', function (Order $order) {
                 return "

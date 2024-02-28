@@ -19,8 +19,6 @@
     <link rel="icon" href="{{ asset('/images/favicon.ico')}}" type="image/x-icon">
     <!-- [Font] Family -->
     <link rel="stylesheet" href="{{ asset('/fonts/inter/inter.css') }}" id="main-font-link" />
-    {{-- Notifier --}}
-    <link rel="stylesheet" href="{{ asset('css/plugins/notifier.css') }}">
     <!-- [Tabler Icons] https://tablericons.com -->
     <link rel="stylesheet" href="{{ asset('/fonts/tabler-icons.min.css') }}" />
     <!-- [Feather Icons] https://feathericons.com -->
@@ -36,10 +34,11 @@
     <link rel="stylesheet" href="{{ asset('/css/plugins/select2.min.css') }}" />
 
     @auth
-    <link rel="stylesheet" href="{{ asset('/css/plugins/dataTables.bootstrap5.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/plugins/dataTables.checkboxes.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/plugins/buttons.bootstrap5.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/plugins/responsive.bootstrap5.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('/css/plugins/dataTables.bootstrap5.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('/css/plugins/dataTables.checkboxes.css') }}">
+        <link rel="stylesheet" href="{{ asset('/css/plugins/buttons.bootstrap5.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('/css/plugins/responsive.bootstrap5.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/plugins/notifier.css') }}">
     @endauth
     @stack('styles')
 </head>
@@ -77,14 +76,16 @@
 
     <!-- Required Js -->
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('/js/plugins/popper.min.js') }}"></script>
     <script src="{{ asset('/js/plugins/simplebar.min.js') }}"></script>
     <script src="{{ asset('/js/plugins/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/js/fonts/custom-font.js') }}"></script>
+
     <script src="{{ asset('/js/config.js') }}"></script>
     <script src="{{ asset('/js/pcoded.js') }}"></script>
     <script src="{{ asset('/js/plugins/feather.min.js') }}"></script>
     <script src="{{ asset('/js/component.js') }}"></script>
-    <script src="{{ asset('/js/plugins/popper.min.js') }}"></script>
+
     <script src="{{ asset('/js/plugins/select2.min.js') }}"></script>
     <script src="{{ asset('/js/plugins/notifier.js') }}"></script>
 

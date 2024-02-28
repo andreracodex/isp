@@ -25,7 +25,7 @@ class Order extends Model
         'is_active',
     ];
 
-    public function paymentType()
+    public function paymenttype()
     {
         return $this->belongsTo(PaymentType::class, 'payment_id', 'id');
     }
@@ -38,6 +38,11 @@ class Order extends Model
     public function paket()
     {
         return $this->belongsTo(Paket::class, 'paket_id', 'id');
+    }
+
+    public function lokasi()
+    {
+        return $this->belongsTo(Location::class, 'location_id', 'id');
     }
 
 }

@@ -124,16 +124,16 @@ Breadcrumbs::for('inve.update', function (BreadcrumbTrail $trail): void {
 // Order Customer
 Breadcrumbs::for('order.index', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
-    $trail->push('Order', route('order.index'));
+    $trail->push('Tagihan', route('order.index'));
 });
 Breadcrumbs::for('order.create', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
-    $trail->push('Tambah Order', route('order.create'));
+    $trail->push('Tambah Tagihan', route('order.create'));
 });
 Breadcrumbs::for('order.edit', function (BreadcrumbTrail $trail): void {
-    $trail->push('Edit Order', route('order.edit', 'order'));
+    $trail->push('Edit Tagihan', route('order.edit', 'order'));
 });
 Breadcrumbs::for('order.store', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
-    $trail->push('Simpan Order', route('order.store'));
+    $trail->push('Simpan Tagihan', route('order.store'));
 });

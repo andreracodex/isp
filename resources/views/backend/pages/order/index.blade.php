@@ -100,12 +100,31 @@
                         }
                     },
                     {
+                        data: 'nama_location',
+                        name: 'nama_location'
+                    },
+                    {
                         data: 'alamat_customer',
                         name: 'alamat_customer'
                     },
                     {
                         data: 'nomor_telephone',
                         name: 'nomor_telephone'
+                    },
+                    {
+                        data: 'jenis_paket',
+                        name: 'jenis_paket',
+                        render: function(data, type, row) {
+                            if (row.jenis_paket != null) {
+                                return '<span class="badge bg-light-primary rounded-pill f-12">'+row.jenis_paket+'</span>';
+                            } else {
+                                return '<span class="badge bg-light-danger rounded-pill f-12"> - </span>';
+                            }
+                        }
+                    },
+                    {
+                        data: 'harga_paket',
+                        name: 'harga_paket'
                     },
                     {
                         data: 'is_active',
@@ -193,7 +212,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Pelanggan</h2>
+                        <h2 class="mb-0">Tagihan</h2>
                     </div>
                 </div>
             </div>
@@ -208,7 +227,7 @@
                         <div>
                             <a href="{{ route('customer.create') }}" type="button"
                                 class="btn btn-sm btn-outline-primary d-inline-flex"><i
-                                    class="ti ti-plus me-1"></i>Pelanggan</a>
+                                    class="ti ti-plus me-1"></i>Tagihan</a>
                             <button type="button" class="btn btn-sm btn-outline-success d-inline-flex"><i
                                     class="ti ti-inbox me-1"></i>Import Excel</button>
                         </div>
@@ -231,8 +250,11 @@
                                     <th style="width: 10px;">#</th>
                                     <th></th>
                                     <th>Nama - ID</th>
+                                    <th>Lokasi Server</th>
                                     <th>Alamat</th>
                                     <th>Telpon</th>
+                                    <th>Paket</th>
+                                    <th>Harga</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
