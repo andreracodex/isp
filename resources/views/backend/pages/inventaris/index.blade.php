@@ -209,9 +209,9 @@
                                 class="btn btn-sm btn-outline-primary d-inline-flex">
                                 <i class="ti ti-plus me-1"></i>Inventaris</a>
 
-                            <a href="{{ route('invekategori.index') }}" type="button"
+                            {{-- <a href="{{ route('invekategori.index') }}" type="button"
                                 class="btn btn-sm btn-outline-primary d-inline-flex">
-                                <i class="ti ti-arrow-right me-1"></i>Kategori Inventaris</a>
+                                <i class="ti ti-arrow-right me-1"></i>Kategori Inventaris</a> --}}
                         </div>
 
                         <div>

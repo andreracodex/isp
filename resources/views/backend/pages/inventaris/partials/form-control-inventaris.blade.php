@@ -28,12 +28,17 @@
 
 <div class="row">
     <div class="col-md-3 mb-3">
-        <label class="form-label" for="jenis_barang">Jenis Barang</label>
-        <input type="text" class="form-control @error('jenis_barang') is-invalid @enderror" name="jenis_barang"
-            id="jenis_barang" value="{{ old('jenis_barang') ?? $inve->jenis_barang }}" placeholder="Jenis Barang"
-            required>
+        <label class="form-label" for="location">Jenis Kategori Barang</label>
+        <select class="form-select @error('location') is-invalid @enderror" name="location" id="location">
+            <option selected disabled>Pilih Lokasi...</option>
+            @foreach ($locations as $location)
+                <option value="{{ $location->id }}" @if($location->id == $inve->location_id) @selected(true) @endif>
+                    {{ $location->nama_location }}
+                </option>
+            @endforeach
+        </select>
 
-        @error('jenis_barang')
+        @error('location')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
