@@ -7,6 +7,7 @@ use App\Models\Location;
 use App\Models\Order;
 use App\Models\Paket;
 use App\Models\Regency;
+use App\Models\District;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\Village;
@@ -46,7 +47,7 @@ class CustomerController extends Controller
         $lokasi = Location::all();
         $profile = Setting::all();
         $paket = Paket::all();
-        $kotas = Regency::where('province_id', '35')->get();
+        $kotas = Regency::where('province_id', '35')->orderBy('name', 'ASC')->get();
         $order = new Order;
         return view('backend.pages.customer.create',
             compact('profile', 'customer', 'lokasi', 'paket', 'order', 'kotas')
@@ -124,8 +125,13 @@ class CustomerController extends Controller
         $profile = Setting::all();
         $paket = Paket::all();
         $kotas = Regency::where('province_id', '35')->get();
+        $districts = District::all();
+        $villages = Village::all();
         $order = Order::where('customer_id', $customer->id)->first();
-        return view('backend.pages.customer.edit', compact('profile', 'customer', 'lokasi', 'paket', 'order', 'kotas'));
+
+        return view('backend.pages.customer.edit',
+            compact('profile', 'customer', 'lokasi', 'paket', 'order', 'kotas', 'districts', 'villages')
+        );
     }
 
     public function update(Request $request, Customer $customer)

@@ -169,7 +169,7 @@
                 data-bs-toggle="tooltip" data-bs-placement="top"
                 data-bs-original-title="tanggal pemasangan layanan">*</sup></label>
         <input class="form-control" type="date" name="installed_date"
-            value="{{ old('created_at') ?? $order->installed_date }}" id="demo-date-only">
+            value="{{ old('installed_date') ?? $order->installed_date }}" id="demo-date-only" required>
         <div class="valid-feedback"> Looks good! </div>
         <div class="invalid-feedback"> Harap isi tanggal pemasangan. </div>
     </div>
@@ -179,7 +179,7 @@
                 data-bs-toggle="tooltip" data-bs-placement="top"
                 data-bs-original-title="tanggal jatuh tempo tagihan layanan">*</sup></label>
         <input class="form-control" type="date" name="due_date"
-            value="{{ old('due_date') ?? $order->due_date }}" id="demo-date-only">
+            value="{{ old('due_date') ?? $order->due_date }}" id="demo-date-only" required>
         <div class="valid-feedback"> Looks good! </div>
         <div class="invalid-feedback"> Harap isi tanggal jatuh tempo. </div>
     </div>
@@ -192,9 +192,16 @@
                 data-bs-placement="top" data-bs-original-title="Kota dibutuhkan">*</sup></label>
         <select class="select2 form-control @error('kota') is-invalid @enderror" name="kota" id="kota"
             required>
+
             @foreach ($kotas as $kota)
+                @if($submit == 'Update')
+                    <option value="{{ $kota->id }}" @if($kota->id == $customer->village->district->regency->id) @selected(true) @endif)>
+                        {{ $kota->name }}
+                    </option>
+                @endif
                 <option value="{{ $kota->id }}">{{ $kota->name }}</option>
             @endforeach
+
         </select>
         <div class="invalid-feedback"> Harap isi desa. </div>
     </div>
@@ -205,6 +212,15 @@
                 data-bs-placement="top" data-bs-original-title="Kecamatan dibutuhkan">*</sup></label>
         <select class="select2 form-control @error('kecamatan') is-invalid @enderror" name="kecamatan" id="kecamatan"
             required>
+            @if($submit == 'Update')
+                @foreach ($districts as $district)
+                    <option value="{{ $district->id }}" @if($district->id == $customer->village->district->id) @selected(true) @endif)>
+                        {{ $district->name }}
+                    </option>
+                    <option value="{{ $district->id }}">{{ $district->name }}</option>
+                @endforeach
+            @endif
+
         </select>
         <div class="invalid-feedback"> Harap isi kecamatan. </div>
     </div>
@@ -215,6 +231,15 @@
                 data-bs-placement="top" data-bs-original-title="Kelurahan dibutuhkan">*</sup></label>
         <select class="select2 form-control @error('kelurahan') is-invalid @enderror" name="kelurahan" id="kelurahan"
             required>
+            @if($submit == 'Update')
+                @foreach ($villages as $village)
+                    <option value="{{ $village->id }}" @if($village->id == $customer->village->id) @selected(true) @endif)>
+                        {{ $village->name }}
+                    </option>
+                    <option value="{{ $village->id }}">{{ $village->name }}</option>
+                @endforeach
+            @endif
+
         </select>
         <div class="invalid-feedback"> Harap isi desa. </div>
     </div>
@@ -236,3 +261,55 @@
 
 <button class="btn btn-primary" id="btn-success-ac @error('nomor_telephone')btn-danger-ac @enderror"
     type="submit">{{ $submit }}</button>
+
+@push('script')
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $(function() {
+                $('#kota').on('change', function() {
+                    let id_kota = $('#kota').val();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('getKecamatan') }}",
+                        data: {
+                            id_kota: id_kota
+                        },
+                        cache: false,
+                        success: function(msg) {
+                            $('#kecamatan').html(msg);
+                        },
+                        error: function(data) {
+                            console.log('error: ', data);
+                        }
+                    })
+                })
+
+                $('#kecamatan').on('change', function() {
+                    let id_kecamatan = $('#kecamatan').val();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('getKelurahan') }}",
+                        data: {
+                            id_kecamatan: id_kecamatan
+                        },
+                        cache: false,
+                        success: function(msg) {
+                            $('#kelurahan').html(msg);
+                        },
+                        error: function(data) {
+                            console.log('error: ', data);
+                        }
+                    })
+                })
+            })
+        });
+    </script>
+@endpush
