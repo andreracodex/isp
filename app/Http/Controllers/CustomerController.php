@@ -6,6 +6,10 @@ use App\Models\Customer;
 use App\Models\Location;
 use App\Models\Order;
 use App\Models\Paket;
+use App\Models\Province;
+use App\Models\Regency;
+use App\Models\District;
+use App\Models\Village;
 use App\Models\Setting;
 use Illuminate\Support\Number;
 use Illuminate\Http\Request;
@@ -42,8 +46,11 @@ class CustomerController extends Controller
         $lokasi = Location::all();
         $profile = Setting::all();
         $paket = Paket::all();
+        $kotas = Regency::where('province_id', '35')->get();
         $order = new Order;
-        return view('backend.pages.customer.create', compact('profile', 'customer', 'lokasi', 'paket', 'order'));
+        return view('backend.pages.customer.create',
+            compact('profile', 'customer', 'lokasi', 'paket', 'order', 'kotas')
+        );
     }
 
     public function store(Request $request)
@@ -60,8 +67,7 @@ class CustomerController extends Controller
         $post->gender = $request->input('gender');
         $post->nomor_layanan = $request->input('nomor_layanan');
         $post->alamat_customer = $request->input('alamat_customer');
-        $post->kecamatan_customer = $request->input('kecamatan_customer');
-        $post->desa_customer = $request->input('desa_customer');
+        $post->kelurahan = $request->input('kelurahan');
         $post->kodepos_customer = $request->input('kodepos_customer');
         $post->nomor_telephone = $request->input('nomor_telephone');
         $active = $request->input('is_active');

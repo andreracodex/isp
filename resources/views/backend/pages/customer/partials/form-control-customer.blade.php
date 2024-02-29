@@ -13,6 +13,7 @@
                     data-bs-original-title="status pelanggan harap aktif jika maasih berlangganan">*</sup></label>
         </div>
     </div>
+
     <div class="col-md-9 mb-3">
         <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
             <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
@@ -30,6 +31,7 @@
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-3 mb-3">
         <label class="form-label" for="nama">Nama Customer</label>
@@ -38,24 +40,25 @@
         <div class="valid-feedback"> Looks good! </div>
         <div class="invalid-feedback"> Harap isi nama customer. </div>
     </div>
-    @if($submit != 'Create')
-    <div class="col-md-3 mb-3">
-        <label class="form-label" for="nomor_layanan">Nomor Layanan</label>
-        <input type="text" min="0" class="form-control" name="nomor_layanan" id="nomor_layanan"
-            value="{{ old('nomor_layanan') ?? $customer->nomor_layanan }}" placeholder="Nomor Layanan">
-        <div class="valid-feedback"> Opsional ! </div>
-        <div class="invalid-feedback"> Harap isi nomor layanan. </div>
-    </div>
+    @if ($submit != 'Create')
+        <div class="col-md-3 mb-3">
+            <label class="form-label" for="nomor_layanan">Nomor Layanan</label>
+            <input type="text" min="0" class="form-control" name="nomor_layanan" id="nomor_layanan"
+                value="{{ old('nomor_layanan') ?? $customer->nomor_layanan }}" placeholder="Nomor Layanan">
+            <div class="valid-feedback"> Opsional ! </div>
+            <div class="invalid-feedback"> Harap isi nomor layanan. </div>
+        </div>
     @endif
+
     <div class="col-md-3 mb-3">
         <label class="form-label" for="nomor_ktp">Nomor KTP <sup class="text-primary" data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                data-bs-original-title="ktp dapat di input opsional">*</sup></label>
+                data-bs-placement="top" data-bs-original-title="ktp dapat di input opsional">*</sup></label>
         <input type="text" min="0" class="form-control" name="nomor_ktp" id="nomor_ktp"
             value="{{ old('nomor_ktp') ?? $customer->nomor_ktp }}" placeholder="Nomor KTP">
         <div class="valid-feedback"> Opsional ! </div>
         <div class="invalid-feedback"> Harap isi nomor KTP. </div>
     </div>
+
     <div class="col-md-3 mb-3">
         <label class="form-label" for="gender">Gender</label>
         <select class="form-select" name="gender" id="gender">
@@ -63,8 +66,8 @@
             <option value="2" @if ($customer->gender == 2) selected @endif>Perempuan</option>
         </select>
     </div>
-
 </div>
+
 <div class="row">
     <div class="col-md-6 mb-3">
         <label class="form-label" for="alamat_customer">Alamat Customer</label>
@@ -72,6 +75,7 @@
             required>{{ old('alamat_customer') ?? $customer->alamat_customer }}</textarea>
         <div class="invalid-feedback"> Harap isi alamat. </div>
     </div>
+
     <div class="col-md-3 mb-3">
         <label class="form-label" for="kodepos">Kode POS</label>
         <input type="number" min="0" placeholder="602xxx" class="form-control" name="kodepos_customer"
@@ -79,6 +83,7 @@
             value="{{ old('kodepos_customer') ?? $customer->kodepos_customer }}" required>
         <div class="invalid-feedback"> Harap isi Kode POS. </div>
     </div>
+
     <div class="col-md-3 mb-3">
         <label class="form-label" for="nomor_telephone">Nomor HP</label>
         <div class="input-group">
@@ -90,6 +95,7 @@
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-6 mb-3">
         <label class="form-label" for="nama">Email Customer</label>
@@ -98,6 +104,7 @@
         <div class="valid-feedback"> Looks good! </div>
         <div class="invalid-feedback"> Harap isi email customer. </div>
     </div>
+
     <div class="col-md-3 mb-3">
         <label class="form-label">Lokasi Server</label>
         <select class="form-select @error('lokasi') is-invalid @enderror" name="lokasi" id="lokasi">
@@ -131,6 +138,7 @@
         @enderror
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-3 mb-3">
         <label class="form-label" for="biaya_pasang">Biaya Pemasangan <sup class="text-primary"
@@ -141,60 +149,82 @@
         <div class="valid-feedback"> Opsional </div>
         <div class="invalid-feedback"> Harap isi biaya pasang layanan. </div>
     </div>
+
     <div class="col-md-3 mb-3">
-        <label class="form-label" for="biaya_pasang">Foto <sup class="text-primary"
-            data-bs-toggle="tooltip" data-bs-placement="top"
-            data-bs-original-title="foto lokasi pemasangan aksess internet">*</sup></label>
+        <label class="form-label" for="biaya_pasang">Foto <sup class="text-primary" data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-original-title="foto lokasi pemasangan aksess internet">*</sup></label>
         <input type="file" name="file_upload" class="form-control" aria-label="file example">
         <div class="valid-feedback"> Opsional </div>
         <div class="invalid-feedback"> Harap isi foto lokasi pasang layanan. </div>
     </div>
+
     <div class="col-md-3 mb-3">
         <label class="form-label" for="installed_date">Tanggal Pemasangan <sup class="text-danger"
-            data-bs-toggle="tooltip" data-bs-placement="top"
-            data-bs-original-title="tanggal pemasangan layanan">*</sup></label>
+                data-bs-toggle="tooltip" data-bs-placement="top"
+                data-bs-original-title="tanggal pemasangan layanan">*</sup></label>
         <input class="form-control" type="date" name="installed_date"
             value="{{ old('created_at') ?? $order->installed_date }}" id="demo-date-only">
         <div class="valid-feedback"> Looks good! </div>
         <div class="invalid-feedback"> Harap isi tanggal pemasangan. </div>
     </div>
+
     <div class="col-md-3 mb-3">
         <label class="form-label" for="due_date">Tanggal Jatuh Tempo <sup class="text-danger"
-            data-bs-toggle="tooltip" data-bs-placement="top"
-            data-bs-original-title="tanggal jatuh tempo tagihan layanan">*</sup></label>
+                data-bs-toggle="tooltip" data-bs-placement="top"
+                data-bs-original-title="tanggal jatuh tempo tagihan layanan">*</sup></label>
         <input class="form-control" type="date" name="due_date"
             value="{{ old('due_date') ?? $order->due_date }}" id="demo-date-only">
         <div class="valid-feedback"> Looks good! </div>
         <div class="invalid-feedback"> Harap isi tanggal jatuh tempo. </div>
     </div>
 </div>
+
 <div class="row">
-    <div class="col-md-3 mb-3">
+    <!-- Kota input-->
+    <div class="col-md-4 mb-3">
+        <label class="form-label" for="kota">Kota</label>
+        <select class="select2 form-control @error('kota') is-invalid @enderror" name="kota" id="kota" required>
+            <option>Pilih kota...</option>
+            @foreach ($kotas as $kota)
+                <option value="{{ $kota->id }}">{{ $kota->name }}</option>
+            @endforeach
+        </select>
+        <div class="invalid-feedback"> Harap isi desa. </div>
+    </div>
+
+    <!-- Kecamatan input-->
+    <div class="col-md-4 mb-3">
         <label class="form-label" for="kecamatan">Kecamatan</label>
-        <input type="text" class="form-control" name="kecamatan_customer" id="kecamatan_customer"
-            placeholder="Kecamatan" value="{{ old('kecamatan_customer') ?? $customer->kecamatan_customer }}"
+        <select class="select2 form-control @error('kecamatan') is-invalid @enderror" name="kecamatan" id="kecamatan"
             required>
+            <option>Pilih kecamatan...</option>
+        </select>
+
+        {{-- <input type="text" class="form-control" name="kecamatan_customer" id="kecamatan_customer"
+            placeholder="Kecamatan" value="{{ old('kecamatan_customer') ?? $customer->kecamatan_customer }}"
+            required> --}}
         <div class="invalid-feedback"> Harap isi kecamatan. </div>
     </div>
-    <div class="col-md-3 mb-3">
+
+    <!-- Kelurahan input-->
+    <div class="col-md-4 mb-3">
+        <label class="form-label" for="kelurahan">Kelurahan</label>
+        <select class="select2 form-control @error('kelurahan') is-invalid @enderror" name="kelurahan" id="kelurahan"
+            required>
+            <option>Pilih kelurahan...</option>
+        </select>
+        <div class="invalid-feedback"> Harap isi desa. </div>
+    </div>
+
+    {{-- <div class="col-md-3 mb-3">
         <label class="form-label" for="desa">Desa</label>
         <input type="text" class="form-control" name="desa_customer" id="desa_customer" placeholder="Desa"
             value="{{ old('desa_customer') ?? $customer->desa_customer }}" required>
         <div class="invalid-feedback"> Harap isi desa. </div>
-    </div>
-    <div class="col-md-3 mb-3">
-        <label class="form-label" for="desa">Desa</label>
-        <input type="text" class="form-control" name="desa_customer" id="desa_customer" placeholder="Desa"
-            value="{{ old('desa_customer') ?? $customer->desa_customer }}" required>
-        <div class="invalid-feedback"> Harap isi desa. </div>
-    </div>
-    <div class="col-md-3 mb-3">
-        <label class="form-label" for="desa">Desa</label>
-        <input type="text" class="form-control" name="desa_customer" id="desa_customer" placeholder="Desa"
-            value="{{ old('desa_customer') ?? $customer->desa_customer }}" required>
-        <div class="invalid-feedback"> Harap isi desa. </div>
-    </div>
+    </div> --}}
 </div>
+
 <div class="form-group">
     <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" name="check" id="invalidCheck" required>
@@ -202,5 +232,6 @@
         <div class="invalid-feedback"> Harap checklist. </div>
     </div>
 </div>
+
 <button class="btn btn-primary" id="btn-success-ac @error('nomor_telephone')btn-danger-ac @enderror"
     type="submit">{{ $submit }}</button>

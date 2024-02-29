@@ -19,8 +19,7 @@ class Customer extends Model
         'nomor_layanan',
         'nomor_ktp',
         'alamat_customer',
-        'kecamatan_customer',
-        'desa_customer',
+        'kelurahan_id',
         'kodepos_customer',
         'nomor_telephone',
         'ip_config',
@@ -36,5 +35,10 @@ class Customer extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function village()
+    {
+        return $this->belongsTo(Village::class, 'kelurahan_id');
     }
 }

@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     @auth
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <meta name="description" content="{{ $profile[42]->value }}" />
         <meta name="keywords" content="{{ $profile[43]->value }}" />
         <meta name="author" content="{{ $profile[5]->value }}" />
@@ -137,6 +138,57 @@
         <script src="{{ asset('/js/plugins/dataTables.checkboxes.min.js') }}"></script>
         <script src="{{ asset('js/plugins/dataTables.responsive.min.js') }}"></script>
         <script src="{{ asset('/js/plugins/responsive.bootstrap5.min.js') }}"></script>
+
+        <script>
+            $(function() {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $(function() {
+                    $('#kota').on('change', function() {
+                        let id_kota = $('#kota').val();
+
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ route('getKecamatan') }}",
+                            data: {
+                                id_kota: id_kota
+                            },
+                            cache: false,
+                            success: function(msg) {
+                                $('#kecamatan').html(msg);
+                                $('#kelurahan').html('<option>Pilih kelurahan...</option>');
+                            },
+                            error: function(data) {
+                                console.log('error: ', data);
+                            }
+                        })
+                    })
+
+                    $('#kecamatan').on('change', function() {
+                        let id_kecamatan = $('#kecamatan').val();
+
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ route('getKelurahan') }}",
+                            data: {
+                                id_kecamatan: id_kecamatan
+                            },
+                            cache: false,
+                            success: function(msg) {
+                                $('#kelurahan').html(msg);
+                            },
+                            error: function(data) {
+                                console.log('error: ', data);
+                            }
+                        })
+                    })
+                })
+            });
+        </script>
     @endauth
     @stack('script')
 </body>

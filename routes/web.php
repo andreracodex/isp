@@ -4,6 +4,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IndoregionController;
 use App\Http\Controllers\InventarisController;
 use App\Http\Controllers\InventarisKategoriController;
 use App\Http\Controllers\LocationController;
@@ -99,6 +100,16 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::delete('{invekategori}/delete', [InventarisKategoriController::class, 'delete'])->name('invekategori.delete');
     });
 
+    // Inventaris Satuan
+    Route::prefix('invesatuan')->group(function() {
+        Route::get('', [InventarisSatuanController::class, 'index'])->name('invesatuan.index');
+        Route::get('/create', [InventarisSatuanController::class, 'create'])->name('invesatuan.create');
+        Route::post('/store', [InventarisSatuanController::class, 'store'])->name('invesatuan.store');
+        Route::get('{invesatuan}/edit', [InventarisSatuanController::class, 'edit'])->name('invesatuan.edit');
+        Route::put('{invesatuan}/update', [InventarisSatuanController::class, 'update'])->name('invesatuan.update');
+        Route::delete('{invesatuan}/delete', [InventarisSatuanController::class, 'delete'])->name('invesatuan.delete');
+    });
+
     // Inventaris
     Route::prefix('inve')->group(function() {
         Route::get('', [InventarisController::class, 'index'])->name('inve.index');
@@ -129,5 +140,10 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     });
 
     Route::get('/pdf', [PDFController::class, 'PDFInventaris'])->name('pdf.inventaris');
+    
+    //Indoregion
+    Route::post('/getKota', [IndoregionController::class, 'getKota'])->name('getKota');
+    Route::post('/getKecamatan', [IndoregionController::class, 'getKecamatan'])->name('getKecamatan');
+    Route::post('/getKelurahan', [IndoregionController::class, 'getKelurahan'])->name('getKelurahan');
 });
 

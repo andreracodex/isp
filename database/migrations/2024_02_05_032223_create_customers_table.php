@@ -20,8 +20,11 @@ return new class extends Migration
             $table->string('nomor_layanan');
             $table->string('nomor_ktp');
             $table->string('alamat_customer');
-            $table->string('kecamatan_customer');
-            $table->string('desa_customer');
+            $table->char('kelurahan_id', 10);
+            $table->foreign('kelurahan_id')
+                ->references('id')
+                ->on('villages')
+                ->onUpdate('cascade')->onDelete('restrict');
             $table->string('kodepos_customer');
             $table->string('nomor_telephone');
             $table->string('ip_config')->nullable();

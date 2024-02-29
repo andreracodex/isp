@@ -30,4 +30,9 @@ class Inventaris extends Model
     {
         return $this->belongsTo(InventarisKategori::class, 'jenis_id', 'id');
     }
+
+    public function inventarisSatuan()
+    {
+        return $this->belongsTo(InventarisSatuan::class, 'satuan_id', 'id');
+    }
 }
