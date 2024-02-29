@@ -4,11 +4,11 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label class="form-label" for="roles_email">Email address</label>
                 <input name="email" class="form-control" id="roles_email" type="text" placeholder="name@example.com">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label class="form-label">Pick Roles</label></br>
                 <select name="roles[]" id="roles" class="select2 form-control" multiple="multiple"
                     aria-placeholder="Select Permissions">
@@ -29,9 +29,9 @@
             <table class="table mb-0">
                 <thead>
                     <tr>
-                        <th>MEMBER</th>
-                        <th>ROLE</th>
-                        <th class="text-end">STATUS</th>
+                        <th>Email Register</th>
+                        <th>Roles</th>
+                        <th class="text-end">State</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -57,9 +57,5 @@
                 </tbody>
             </table>
         </div>
-    </div>
-    <div class="card-footer text-end btn-page">
-        <div class="btn btn-link-danger">Cancel</div>
-        <div class="btn btn-primary">Update Profile</div>
     </div>
 </div>

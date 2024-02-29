@@ -141,6 +141,18 @@
                             <use xlink:href="#custom-setting-2"></use>
                         </svg> </span><span class="pc-mtext">Pengaturan</span></a>
                 </li>
+                <li class="pc-item pc-hasmenu">
+                    <a href="{{ route('employee.index') }}" class="pc-link"><span class="pc-micon">
+                        <svg class="pc-icon">
+                            <use xlink:href="#custom-user-square"></use>
+                        </svg> </span><span class="pc-mtext">Employee</span></a>
+                </li>
+                <li class="pc-item pc-hasmenu">
+                    <a href="{{ route('ticket.index') }}" class="pc-link"><span class="pc-micon">
+                        <svg class="pc-icon">
+                            <use xlink:href="#custom-notification-status"></use>
+                        </svg> </span><span class="pc-mtext">Ticket</span></a>
+                </li>
             </ul>
         </div>
     </div>

@@ -15,7 +15,7 @@
                             </div>
                             <div class="form-check form-switch p-0">
                                 <input class="form-check-input h4 position-relative m-0" type="checkbox" role="switch"
-                                    @if ($usersetting[0]->secure_login == 1)@checked(true) @else @checked(false) @endif>
+                                    @if ($usersetting[0]->secure_login == 1) @checked(true) @else @checked(false) @endif>
                             </div>
                         </div>
                     </li>
@@ -115,8 +115,12 @@
             </div>
         </div>
     </div>
-    <div class="col-12 text-end">
-        <button class="btn btn-outline-dark ms-2">Clear</button>
-        <button class="btn btn-primary">Update Profile</button>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body text-end btn-page">
+                <div class="btn btn-outline-secondary">Cancel</div>
+                <div class="btn btn-primary">Update Settings</div>
+            </div>
+        </div>
     </div>
 </div>

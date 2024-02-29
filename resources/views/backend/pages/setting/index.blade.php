@@ -229,14 +229,6 @@
                                 </a>
                             </li>
                         @endcan
-                        @can('view employee')
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="profile-tab-6" data-bs-toggle="tab" href="#profile-6" role="tab"
-                                    aria-selected="false" tabindex="-1">
-                                    <i class="ti ti-users me-2"></i>Employee
-                                </a>
-                            </li>
-                        @endcan
                     </ul>
                 </div>
             </div>
@@ -452,19 +444,16 @@
                     </div>
                 </div>
                 <div class="tab-pane" id="profile-2" role="tabpanel" aria-labelledby="profile-tab-2">
-                    @include('backend.pages.setting.profile.partials.form-personal')
+                    @include('backend.pages.setting.partials.form-personal')
                 </div>
                 <div class="tab-pane" id="profile-3" role="tabpanel" aria-labelledby="profile-tab-3">
-                    @include('backend.pages.setting.profile.partials.form-pin')
+                    @include('backend.pages.setting.partials.form-pin')
                 </div>
                 <div class="tab-pane" id="profile-4" role="tabpanel" aria-labelledby="profile-tab-4">
-                    @include('backend.pages.setting.profile.partials.form-password')
+                    @include('backend.pages.setting.partials.form-password')
                 </div>
                 <div class="tab-pane" id="profile-5" role="tabpanel" aria-labelledby="profile-tab-5">
-                    @include('backend.pages.setting.profile.partials.form-roles')
-                </div>
-                <div class="tab-pane" id="profile-6" role="tabpanel" aria-labelledby="profile-tab-6">
-                    @include('backend.pages.setting.profile.partials.form-employees')
+                    @include('backend.pages.setting.partials.form-roles')
                 </div>
             </div>
         </div>

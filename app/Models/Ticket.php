@@ -18,8 +18,8 @@ class Ticket extends Model
         'is_active',
     ];
 
-    public function customer()
+    public function customers()
     {
-        return $this->belongsTo(Customer::class, 'id', 'customer_id');
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
     }
 }

@@ -30,7 +30,7 @@ class Customer extends Model
 
     public function tickets()
     {
-        return $this->hasMany(Ticket::class, 'id');
+        return $this->hasMany(Ticket::class, 'customer_id');
     }
 
     public function user()

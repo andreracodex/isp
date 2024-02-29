@@ -67,10 +67,10 @@
                     </div>
                 </div>
             </div>
+            <div class="card-footer text-end btn-page">
+                <div class="btn btn-outline-secondary">Cancel</div>
+                <div class="btn btn-primary">Update Profile</div>
+            </div>
         </div>
-    </div>
-    <div class="col-12 text-end btn-page">
-        <div class="btn btn-outline-secondary">Cancel</div>
-        <div class="btn btn-primary">Update Profile</div>
     </div>
 </div>

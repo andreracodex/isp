@@ -12,6 +12,7 @@ use App\Http\Controllers\PaketController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\WhatsappController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,7 +44,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::get('/create', [EmployeeController::class, 'create'])->name('employee.create');
         Route::get('/view', [EmployeeController::class, 'view'])->name('employee.view');
         Route::get('{emp}/edit', [EmployeeController::class, 'edit'])->name('employee.edit');
-        Route::put('{emp}/edit', [EmployeeController::class, 'update']);
+        Route::put('{emp}/edit', [EmployeeController::class, 'update'])->name('customer.update');
         Route::delete('', [EmployeeController::class, 'destroy'])->name('employee.destroy');
     });
     // Customer
@@ -108,13 +109,23 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::delete('{inve}/delete', [InventarisController::class, 'delete'])->name('inve.delete');
     });
      // Order Customer
-     Route::prefix('order')->group(function() {
+    Route::prefix('order')->group(function() {
         Route::get('', [OrderController::class, 'index'])->name('order.index');
         Route::get('/create', [OrderController::class, 'create'])->name('order.create');
         Route::post('/store', [OrderController::class, 'store'])->name('order.store');
         Route::get('{order}/edit', [OrderController::class, 'edit'])->name('order.edit');
         Route::put('{order}/update', [OrderController::class, 'update'])->name('order.update');
         Route::delete('{order}/delete', [OrderController::class, 'delete'])->name('order.delete');
+    });
+    // Ticket
+    Route::prefix('ticket')->group(function() {
+        Route::get('', [TicketController::class, 'index'])->name('ticket.index');
+        Route::get('/create', [TicketController::class, 'create'])->name('ticket.create');
+        Route::get('/view', [TicketController::class, 'view'])->name('ticket.view');
+        Route::post('/store', [TicketController::class, 'store'])->name('ticket.store');
+        Route::get('{ticket}/edit', [TicketController::class, 'edit'])->name('ticket.edit');
+        Route::put('{ticket}/update', [TicketController::class, 'update'])->name('ticket.update');
+        Route::delete('{ticket}/delete', [TicketController::class, 'delete'])->name('ticket.delete');
     });
 
     Route::get('/pdf', [PDFController::class, 'PDFInventaris'])->name('pdf.inventaris');
