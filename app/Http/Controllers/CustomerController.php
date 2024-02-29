@@ -61,12 +61,17 @@ class CustomerController extends Controller
             'nama_customer' => 'required',
             'nomor_telephone' => 'required|min:10|max:14',
             'nomor_ktp' => 'required|min:16|max:20',
+            'email' => 'required|email:dns|unique:users',
         ]);
+
+        if(!$validated){
+            return redirect()->route('customer.index')->with('error','Property is not valid .');
+        }
 
         $user = User::create([
             'name' => $request->nama_customer,
             'user_name' => $request->nama_customer,
-            'email' => $request->kodepos_customer,
+            'email' => $request->email,
             'password' => bcrypt('12345678'),
         ]);
 
@@ -102,12 +107,12 @@ class CustomerController extends Controller
 
         Order::create([
             'customer_id' => $customer->id,
-            'biaya_pasang' => $request->biaya_pasang,
+            'location_id' => $request->lokasi,
             'paket_id' => $request->paket_internet,
+            'biaya_pasang' => $request->biaya_pasang,
             'installed_date' => $request->installed_date,
             'order_date' => Date::now(),
             'due_date' => $request->due_date,
-            'location_id' => $request->lokasi,
         ]);
 
         return redirect()->route('customer.index')->with('success','Property is updated .');

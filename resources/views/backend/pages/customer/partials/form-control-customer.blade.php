@@ -100,8 +100,8 @@
 <div class="row">
     <div class="col-md-6 mb-3">
         <label class="form-label" for="nama">Email Customer</label>
-        <input type="text" class="form-control" name="email" id="email"
-            value="{{ old('email') ?? $customer->email }}" placeholder="mail@example" required>
+        <input type="email" class="form-control" name="email" id="email"
+            value="{{ old('email') ?? $customer->email }} @if($submit == 'Update'){{$customer->user->email}} @endif" placeholder="mail@example" required>
         <div class="valid-feedback"> Looks good! </div>
         <div class="invalid-feedback"> Harap isi email customer. </div>
     </div>
@@ -110,8 +110,7 @@
         <label class="form-label headerbutton">Lokasi Server <sup class="mt-2"><b><a
                         href="{{ route('location.index') }}">
                         <i class="ti ti-plus me-1"></i>Tambah Lokasi</a></b></sup></label>
-        <select class="form-select @error('lokasi') is-invalid @enderror" name="lokasi" id="lokasi">
-            <option selected disabled>Pilih Lokasi...</option>
+        <select class="form-select @error('lokasi') is-invalid @enderror" name="lokasi" id="lokasi" required>
             @foreach ($lokasi as $lokasi_detail)
                 <option value="{{ $lokasi_detail->id }}">
                     {{ $lokasi_detail->nama_location }}
@@ -129,8 +128,7 @@
                         href="{{ route('paket.index') }}">
                         <i class="ti ti-plus me-1"></i>Tambah Paket</a></b></sup></label>
         <select class="form-select @error('paket_internet') is-invalid @enderror" name="paket_internet"
-            id="paket_internet">
-            <option selected disabled>Pilih Paket Internet...</option>
+            id="paket_internet" required>
             @foreach ($paket as $paket_detail)
                 <option value="{{ $paket_detail->id }}">
                     {{ $paket_detail->nama_paket }} - {{ $paket_detail->jenis_paket }}
@@ -194,8 +192,9 @@
             required>
 
             @foreach ($kotas as $kota)
-                @if($submit == 'Update')
-                    <option value="{{ $kota->id }}" @if($kota->id == $customer->village->district->regency->id) @selected(true) @endif)>
+                @if ($submit == 'Update')
+                    <option value="{{ $kota->id }}"
+                        @if ($kota->id == $customer->village->district->regency->id) @selected(true) @endif)>
                         {{ $kota->name }}
                     </option>
                 @endif
@@ -212,9 +211,10 @@
                 data-bs-placement="top" data-bs-original-title="Kecamatan dibutuhkan">*</sup></label>
         <select class="select2 form-control @error('kecamatan') is-invalid @enderror" name="kecamatan" id="kecamatan"
             required>
-            @if($submit == 'Update')
+            @if ($submit == 'Update')
                 @foreach ($districts as $district)
-                    <option value="{{ $district->id }}" @if($district->id == $customer->village->district->id) @selected(true) @endif)>
+                    <option value="{{ $district->id }}"
+                        @if ($district->id == $customer->village->district->id) @selected(true) @endif)>
                         {{ $district->name }}
                     </option>
                     <option value="{{ $district->id }}">{{ $district->name }}</option>
@@ -229,11 +229,12 @@
     <div class="col-md-4 mb-3">
         <label class="form-label" for="kelurahan">Kelurahan <sup class="text-danger" data-bs-toggle="tooltip"
                 data-bs-placement="top" data-bs-original-title="Kelurahan dibutuhkan">*</sup></label>
-        <select class="select2 form-control @error('kelurahan') is-invalid @enderror" name="kelurahan" id="kelurahan"
-            required>
-            @if($submit == 'Update')
+        <select class="select2 form-control @error('kelurahan') is-invalid @enderror" name="kelurahan"
+            id="kelurahan" required>
+            @if ($submit == 'Update')
                 @foreach ($villages as $village)
-                    <option value="{{ $village->id }}" @if($village->id == $customer->village->id) @selected(true) @endif)>
+                    <option value="{{ $village->id }}"
+                        @if ($village->id == $customer->village->id) @selected(true) @endif)>
                         {{ $village->name }}
                     </option>
                     <option value="{{ $village->id }}">{{ $village->name }}</option>

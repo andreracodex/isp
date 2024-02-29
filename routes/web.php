@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndoregionController;
 use App\Http\Controllers\InventarisController;
 use App\Http\Controllers\InventarisKategoriController;
+use App\Http\Controllers\InventarisSatuanController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaketController;
@@ -123,6 +124,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     Route::prefix('order')->group(function() {
         Route::get('', [OrderController::class, 'index'])->name('order.index');
         Route::get('/create', [OrderController::class, 'create'])->name('order.create');
+        Route::get('/view', [OrderController::class, 'view'])->name('order.view');
         Route::post('/store', [OrderController::class, 'store'])->name('order.store');
         Route::get('{order}/edit', [OrderController::class, 'edit'])->name('order.edit');
         Route::put('{order}/update', [OrderController::class, 'update'])->name('order.update');
@@ -140,7 +142,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     });
 
     Route::get('/pdf', [PDFController::class, 'PDFInventaris'])->name('pdf.inventaris');
-    
+
     //Indoregion
     Route::post('/getKota', [IndoregionController::class, 'getKota'])->name('getKota');
     Route::post('/getKecamatan', [IndoregionController::class, 'getKecamatan'])->name('getKecamatan');
