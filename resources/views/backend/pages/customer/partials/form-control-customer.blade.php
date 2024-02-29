@@ -3,14 +3,14 @@
         <div class="form-check form-switch custom-switch-v1">
             <input type="checkbox" class="form-check-input input-success" id="customswitchlightv1-3" name="is_new"
                 @if ($customer->is_new == 1) @checked(true) @else @checked(false) @endif>
-            <label class="form-check-label" for="customswitchlightv1-3">Pelanggan Baru</label>
+            <label class="form-check-label" for="customswitchlightv1-3">Pelanggan Baru </label>
         </div>
         <div class="form-check form-switch custom-switch-v1 mt-3">
             <input type="checkbox" class="form-check-input input-success" id="customswitchlightv1-3" name="is_active"
                 @if ($customer->is_active == 1) @checked(true) @else @checked(false) @endif>
             <label class="form-check-label" for="customswitchlightv1-3">Pelanggan Active <sup class="text-danger"
                     data-bs-toggle="tooltip" data-bs-placement="top"
-                    data-bs-original-title="status pelanggan harap aktif jika maasih berlangganan">*</sup></label>
+                    data-bs-original-title="status pelanggan harap aktif, jika maasih berlangganan">*</sup></label>
         </div>
     </div>
 
@@ -27,14 +27,15 @@
                 <use xlink:href="#exclamation-triangle-fill"></use>
             </svg>
             <div> Ini adalah pilihan untuk membuat tagihan bulan pertama untuk pelanggan baru, aktifkan jika
-                ingin membuat tagihan pertama untuk pelanggan. </div>
+                ingin membuat tagihan pertama untuk pelanggan. (Pelanggan Baru) </div>
         </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-3 mb-3">
-        <label class="form-label" for="nama">Nama Customer</label>
+        <label class="form-label" for="nama">Nama Customer <sup class="text-danger" data-bs-toggle="tooltip"
+                data-bs-placement="top" data-bs-original-title="Nama Customer dibutuhkan">*</sup></label>
         <input type="text" class="form-control" name="nama_customer" id="nama_customer"
             value="{{ old('nama_customer') ?? $customer->nama_customer }}" placeholder="Nama Customer" required>
         <div class="valid-feedback"> Looks good! </div>
@@ -106,7 +107,9 @@
     </div>
 
     <div class="col-md-3 mb-3">
-        <label class="form-label">Lokasi Server</label>
+        <label class="form-label headerbutton">Lokasi Server <sup class="mt-2"><b><a
+                        href="{{ route('location.index') }}">
+                        <i class="ti ti-plus me-1"></i>Tambah Lokasi</a></b></sup></label>
         <select class="form-select @error('lokasi') is-invalid @enderror" name="lokasi" id="lokasi">
             <option selected disabled>Pilih Lokasi...</option>
             @foreach ($lokasi as $lokasi_detail)
@@ -122,7 +125,9 @@
     </div>
 
     <div class="col-md-3 mb-3">
-        <label class="form-label">Paket Internet</label>
+        <label class="form-label headerbutton">Paket Internet <sup class="mt-2"><b><a
+                        href="{{ route('paket.index') }}">
+                        <i class="ti ti-plus me-1"></i>Tambah Paket</a></b></sup></label>
         <select class="form-select @error('paket_internet') is-invalid @enderror" name="paket_internet"
             id="paket_internet">
             <option selected disabled>Pilih Paket Internet...</option>
@@ -183,8 +188,10 @@
 <div class="row">
     <!-- Kota input-->
     <div class="col-md-4 mb-3">
-        <label class="form-label" for="kota">Kota</label>
-        <select class="select2 form-control @error('kota') is-invalid @enderror" name="kota" id="kota" required>
+        <label class="form-label" for="kota">Kabupaten\Kota <sup class="text-danger" data-bs-toggle="tooltip"
+                data-bs-placement="top" data-bs-original-title="Kota dibutuhkan">*</sup></label>
+        <select class="select2 form-control @error('kota') is-invalid @enderror" name="kota" id="kota"
+            required>
             <option>Pilih kota...</option>
             @foreach ($kotas as $kota)
                 <option value="{{ $kota->id }}">{{ $kota->name }}</option>
@@ -195,34 +202,25 @@
 
     <!-- Kecamatan input-->
     <div class="col-md-4 mb-3">
-        <label class="form-label" for="kecamatan">Kecamatan</label>
+        <label class="form-label" for="kecamatan">Kecamatan <sup class="text-danger" data-bs-toggle="tooltip"
+                data-bs-placement="top" data-bs-original-title="Kecamatan dibutuhkan">*</sup></label>
         <select class="select2 form-control @error('kecamatan') is-invalid @enderror" name="kecamatan" id="kecamatan"
             required>
             <option>Pilih kecamatan...</option>
         </select>
-
-        {{-- <input type="text" class="form-control" name="kecamatan_customer" id="kecamatan_customer"
-            placeholder="Kecamatan" value="{{ old('kecamatan_customer') ?? $customer->kecamatan_customer }}"
-            required> --}}
         <div class="invalid-feedback"> Harap isi kecamatan. </div>
     </div>
 
     <!-- Kelurahan input-->
     <div class="col-md-4 mb-3">
-        <label class="form-label" for="kelurahan">Kelurahan</label>
+        <label class="form-label" for="kelurahan">Kelurahan <sup class="text-danger" data-bs-toggle="tooltip"
+                data-bs-placement="top" data-bs-original-title="Kelurahan dibutuhkan">*</sup></label>
         <select class="select2 form-control @error('kelurahan') is-invalid @enderror" name="kelurahan" id="kelurahan"
             required>
             <option>Pilih kelurahan...</option>
         </select>
         <div class="invalid-feedback"> Harap isi desa. </div>
     </div>
-
-    {{-- <div class="col-md-3 mb-3">
-        <label class="form-label" for="desa">Desa</label>
-        <input type="text" class="form-control" name="desa_customer" id="desa_customer" placeholder="Desa"
-            value="{{ old('desa_customer') ?? $customer->desa_customer }}" required>
-        <div class="invalid-feedback"> Harap isi desa. </div>
-    </div> --}}
 </div>
 
 <div class="form-group">
@@ -230,6 +228,12 @@
         <input class="form-check-input" type="checkbox" value="" name="check" id="invalidCheck" required>
         <label class="form-check-label" for="invalidCheck">Data Sudah Benar</label>
         <div class="invalid-feedback"> Harap checklist. </div>
+    </div>
+    <div class="mt-2">
+        <sup class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top"
+            data-bs-original-title="tanggal jatuh tempo tagihan layanan">(*) Dibutuhkan</sup>
+        <sup class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top"
+            data-bs-original-title="tanggal jatuh tempo tagihan layanan">(*) Opsional</sup>
     </div>
 </div>
 

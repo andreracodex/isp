@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inventaris;
+use App\Models\InventarisKategori;
 use App\Models\Location;
 use App\Models\Setting;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -47,11 +48,12 @@ class InventarisController extends Controller
     public function create()
     {
         $inve = new Inventaris;
+        $kategori = InventarisKategori::where('is_active',1)->get();
         $locations = Location::all();
         $profile = Setting::all();
 
         return view('backend.pages.inventaris.create',
-            compact('profile', 'inve', 'locations')
+            compact('profile', 'inve', 'locations', 'kategori')
         );
     }
 

@@ -1,10 +1,12 @@
 <div class="row">
     <div class="col-md-6 mb-3">
-        <label class="form-label" for="location">Lokasi Barang</label>
+        <label class="form-label headerbutton" for="location">Lokasi Barang <sup class="mt-2"><b><a href="{{ route('location.index') }}">
+            <i class="ti ti-plus me-1"></i>Tambah Lokasi</a></b></sup></label>
         <select class="form-select @error('location') is-invalid @enderror" name="location" id="location">
             <option selected disabled>Pilih Lokasi...</option>
             @foreach ($locations as $location)
-                <option value="{{ $location->id }}" @if($location->id == $inve->location_id) @selected(true) @endif>
+                <option value="{{ $location->id }}"
+                    @if ($location->id == $inve->location_id) @selected(true) @endif>
                     {{ $location->nama_location }}
                 </option>
             @endforeach
@@ -27,13 +29,15 @@
 </div>
 
 <div class="row">
-    <div class="col-md-3 mb-3">
-        <label class="form-label" for="location">Jenis Kategori Barang</label>
-        <select class="form-select @error('location') is-invalid @enderror" name="location" id="location">
-            <option selected disabled>Pilih Lokasi...</option>
-            @foreach ($locations as $location)
-                <option value="{{ $location->id }}" @if($location->id == $inve->location_id) @selected(true) @endif>
-                    {{ $location->nama_location }}
+    <div class="col-md-4 mb-3">
+        <label class="form-label headerbutton" for="kategori">Jenis Kategori<sup class="mt-2"><b><a href="{{ route('invekategori.index') }}">
+                    <i class="ti ti-plus me-1"></i>Tambah Kategori</a></b></sup></label>
+        <select class="form-select @error('kategori') is-invalid @enderror" name="kategori" id="kategori">
+            <option selected disabled>Pilih Jenis Kategori...</option>
+            @foreach ($kategori as $kat)
+                <option value="{{ $kat->id }}"
+                    @if ($kat->id == $inve->jenis_id) @selected(true) @endif>
+                    {{ $kat->nama }}
                 </option>
             @endforeach
         </select>
@@ -43,7 +47,7 @@
         @enderror
     </div>
 
-    <div class="col-md-3 mb-3">
+    <div class="col-md-2 mb-3">
         <label class="form-label" for="jumlah_barang">Jumlah Barang</label>
         <input type="number" min="0" class="form-control @error('jumlah_barang') is-invalid @enderror"
             name="jumlah_barang" id="jumlah_barang" placeholder="Jumlah Barang"
@@ -65,7 +69,7 @@
         @enderror
     </div>
 
-    <div class="col-md-3 mb-3">
+    <div class="col-md-2 mb-3">
         <label class="form-label" for="status_barang">Status Barang</label>
         <div class="form-check form-switch custom-switch-v1">
             <input type="checkbox" class="form-check-input input-success @error('is_active') is-invalid @enderror"

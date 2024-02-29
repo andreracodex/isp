@@ -190,7 +190,7 @@
                     <div class="headerbutton">
                         <div>
                             <a href="{{ route('invekategori.create') }}" type="button"
-                                class="btn btn-sm btn-outline-primary d-inline-flex"><i class="ti ti-plus me-1"></i>Kategori
+                                class="btn btn-sm btn-outline-primary d-inline-flex"><i class="ti ti-plus me-1"></i>
                                 Kategori Inventaris</a>
                         </div>
                         <div>

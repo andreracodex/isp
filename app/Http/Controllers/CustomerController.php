@@ -11,6 +11,7 @@ use App\Models\Regency;
 use App\Models\District;
 use App\Models\Village;
 use App\Models\Setting;
+use App\Models\User;
 use Illuminate\Support\Number;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -58,27 +59,48 @@ class CustomerController extends Controller
 
         $validated = $request->validate([
             'nama_customer' => 'required',
-            'nomor_layanan' => 'required',
             'nomor_telephone' => 'required|min:10|max:14',
         ]);
 
+        dd($request->all());
+
         $post = new Customer();
         $post->nama_customer = $request->input('nama_customer');
+        $post->nomor_ktp = $request->input('nomor_ktp');
         $post->gender = $request->input('gender');
-        $post->nomor_layanan = $request->input('nomor_layanan');
         $post->alamat_customer = $request->input('alamat_customer');
-        $post->kelurahan = $request->input('kelurahan');
         $post->kodepos_customer = $request->input('kodepos_customer');
         $post->nomor_telephone = $request->input('nomor_telephone');
+        $post->kelurahan = $request->input('kelurahan');
         $active = $request->input('is_active');
-
         if($active == 'ON' || $active == 'on'){
             $post->is_active = 1;
         }else{
             $post->is_active = 0;
         }
-
+        $new = $request->input('is_new');
+        if($new == 'ON' || $new == 'on'){
+            $post->is_new = 1;
+        }else{
+            $post->is_new = 0;
+        }
         $post->save();
+
+        $user = new User();
+        $user->name = $request->input('nama_customer');
+        $user->email = $request->input('kodepos_customer');
+        $user->password = bcrypt('12345678');
+        $user->save();
+
+        // Notes Belum selesai
+        $request->input('biaya_pasang');
+        $request->input('paket_internet');
+        $request->input('installed_date');
+        $request->input('due_date');
+        $request->input('kota');
+        $request->input('kecamatan');
+        $request->input('kelurahan');
+
         $profile = Setting::all();
         return view('backend.pages.customer.index', compact('profile'))->with('success','Property is updated .');
     }

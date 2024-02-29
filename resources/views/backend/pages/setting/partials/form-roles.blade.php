@@ -10,7 +10,7 @@
             </div>
             <div class="col-md-4">
                 <label class="form-label">Pick Roles</label></br>
-                <select name="roles[]" id="roles" class="select2 form-control" multiple="multiple"
+                <select name="roles[]" id="roles" style="width: 400px;" class="select2 form-control" multiple="multiple"
                     aria-placeholder="Select Permissions">
                     @foreach ($roles as $role)
                         <option value="{{ $role->id }}">{{ $role->name }}</option>
@@ -36,24 +36,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col-auto pe-0">
-                                    <img src="../assets/images/user/avatar-1.jpg" alt="user-image"
-                                        class="wid-40 rounded-circle">
-                                </div>
-                                <div class="col">
-                                    <h5 class="mb-0">Addie Bass</h5>
-                                    <p class="text-muted f-12 mb-0">mareva@gmail.com</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-primary">Owner</span></td>
-                        <td class="text-end"><span class="badge bg-success">Joined</span></td>
-                        <td class="text-end"><a href="#" class="avtar avtar-s btn-link-secondary"><i
-                                    class="ti ti-dots f-18"></i></a></td>
-                    </tr> --}}
                 </tbody>
             </table>
         </div>

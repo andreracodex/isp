@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('nomor_layanan');
             $table->string('nomor_ktp');
             $table->string('alamat_customer');
-            $table->char('kelurahan_id', 10);
-            $table->foreign('kelurahan_id')
+            $table->char('kabupaten_id', 10);
+            $table->foreign('kabupaten_id')
                 ->references('id')
                 ->on('villages')
                 ->onUpdate('cascade')->onDelete('restrict');
