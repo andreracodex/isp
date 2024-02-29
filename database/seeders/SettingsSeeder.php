@@ -430,6 +430,11 @@ class SettingsSeeder extends Seeder
                 'user_type' => 'user',
             ),
         );
+        UserSetting::insert(
+            array(
+                'user_id' => 2,
+            ),
+        );
         // Insert Paket
         Paket::insert(
             array(

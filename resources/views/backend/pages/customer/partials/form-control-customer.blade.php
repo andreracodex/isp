@@ -54,7 +54,7 @@
     <div class="col-md-3 mb-3">
         <label class="form-label" for="nomor_ktp">Nomor KTP <sup class="text-primary" data-bs-toggle="tooltip"
                 data-bs-placement="top" data-bs-original-title="ktp dapat di input opsional">*</sup></label>
-        <input type="text" min="0" class="form-control" name="nomor_ktp" id="nomor_ktp"
+        <input type="number" min="0" class="form-control" name="nomor_ktp" id="nomor_ktp"
             value="{{ old('nomor_ktp') ?? $customer->nomor_ktp }}" placeholder="Nomor KTP">
         <div class="valid-feedback"> Opsional ! </div>
         <div class="invalid-feedback"> Harap isi nomor KTP. </div>
@@ -192,7 +192,6 @@
                 data-bs-placement="top" data-bs-original-title="Kota dibutuhkan">*</sup></label>
         <select class="select2 form-control @error('kota') is-invalid @enderror" name="kota" id="kota"
             required>
-            <option>Pilih kota...</option>
             @foreach ($kotas as $kota)
                 <option value="{{ $kota->id }}">{{ $kota->name }}</option>
             @endforeach
@@ -206,7 +205,6 @@
                 data-bs-placement="top" data-bs-original-title="Kecamatan dibutuhkan">*</sup></label>
         <select class="select2 form-control @error('kecamatan') is-invalid @enderror" name="kecamatan" id="kecamatan"
             required>
-            <option>Pilih kecamatan...</option>
         </select>
         <div class="invalid-feedback"> Harap isi kecamatan. </div>
     </div>
@@ -217,7 +215,6 @@
                 data-bs-placement="top" data-bs-original-title="Kelurahan dibutuhkan">*</sup></label>
         <select class="select2 form-control @error('kelurahan') is-invalid @enderror" name="kelurahan" id="kelurahan"
             required>
-            <option>Pilih kelurahan...</option>
         </select>
         <div class="invalid-feedback"> Harap isi desa. </div>
     </div>

@@ -6,16 +6,15 @@ use App\Models\Customer;
 use App\Models\Location;
 use App\Models\Order;
 use App\Models\Paket;
-use App\Models\Province;
 use App\Models\Regency;
-use App\Models\District;
-use App\Models\Village;
 use App\Models\Setting;
 use App\Models\User;
-use Illuminate\Support\Number;
+use App\Models\Village;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Date;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
 
 class CustomerController extends Controller
 {
@@ -60,49 +59,57 @@ class CustomerController extends Controller
         $validated = $request->validate([
             'nama_customer' => 'required',
             'nomor_telephone' => 'required|min:10|max:14',
+            'nomor_ktp' => 'required|min:16|max:20',
         ]);
 
-        dd($request->all());
+        $user = User::create([
+            'name' => $request->nama_customer,
+            'user_name' => $request->nama_customer,
+            'email' => $request->kodepos_customer,
+            'password' => bcrypt('12345678'),
+        ]);
 
-        $post = new Customer();
-        $post->nama_customer = $request->input('nama_customer');
-        $post->nomor_ktp = $request->input('nomor_ktp');
-        $post->gender = $request->input('gender');
-        $post->alamat_customer = $request->input('alamat_customer');
-        $post->kodepos_customer = $request->input('kodepos_customer');
-        $post->nomor_telephone = $request->input('nomor_telephone');
-        $post->kelurahan = $request->input('kelurahan');
         $active = $request->input('is_active');
         if($active == 'ON' || $active == 'on'){
-            $post->is_active = 1;
+            $is_active = 1;
         }else{
-            $post->is_active = 0;
+            $is_active = 0;
         }
+
         $new = $request->input('is_new');
         if($new == 'ON' || $new == 'on'){
-            $post->is_new = 1;
+            $is_new = 1;
+            $due_date = Carbon::parse($request->input('due_date'))->addMonths(1);
         }else{
-            $post->is_new = 0;
+            $is_new = 0;
+            $due_date = $request->input('due_date');
         }
-        $post->save();
 
-        $user = new User();
-        $user->name = $request->input('nama_customer');
-        $user->email = $request->input('kodepos_customer');
-        $user->password = bcrypt('12345678');
-        $user->save();
+        $customer = Customer::create([
+            'user_id' => $user->id,
+            'nama_customer' => $request->nama_customer,
+            'nomor_layanan' => 'GDN-' . mt_rand(111111 ,999999),
+            'nomor_ktp' => $request->nomor_ktp,
+            'gender' => $request->gender,
+            'alamat_customer' => $request->alamat_customer,
+            'kodepos_customer' => $request->kodepos_customer,
+            'nomor_telephone' => $request->nomor_telephone,
+            'kelurahan_id' => $request->kelurahan,
+            'is_active' => $is_active,
+            'is_new' => $is_new,
+        ]);
 
-        // Notes Belum selesai
-        $request->input('biaya_pasang');
-        $request->input('paket_internet');
-        $request->input('installed_date');
-        $request->input('due_date');
-        $request->input('kota');
-        $request->input('kecamatan');
-        $request->input('kelurahan');
+        Order::create([
+            'customer_id' => $customer->id,
+            'biaya_pasang' => $request->biaya_pasang,
+            'paket_id' => $request->paket_internet,
+            'installed_date' => $request->installed_date,
+            'order_date' => Date::now(),
+            'due_date' => $request->due_date,
+            'location_id' => $request->lokasi,
+        ]);
 
-        $profile = Setting::all();
-        return view('backend.pages.customer.index', compact('profile'))->with('success','Property is updated .');
+        return redirect()->route('customer.index')->with('success','Property is updated .');
     }
 
     public function show(Customer $customer)
@@ -116,8 +123,9 @@ class CustomerController extends Controller
         $lokasi = Location::all();
         $profile = Setting::all();
         $paket = Paket::all();
+        $kotas = Regency::where('province_id', '35')->get();
         $order = Order::where('customer_id', $customer->id)->first();
-        return view('backend.pages.customer.edit', compact('profile', 'customer', 'lokasi', 'paket', 'order'));
+        return view('backend.pages.customer.edit', compact('profile', 'customer', 'lokasi', 'paket', 'order', 'kotas'));
     }
 
     public function update(Request $request, Customer $customer)
