@@ -18,6 +18,7 @@ class Order extends Model
         'paket_id',
         'coordinates_id',
         'payment_id',
+        'biaya_pasang',
         'diskon',
         'path_ktp',
         'path_image_rumah',

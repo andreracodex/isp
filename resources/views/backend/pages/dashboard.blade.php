@@ -51,17 +51,24 @@
                             </div>
                         </div>
                         <div class="flex-grow-1 ms-3">
-                            <h6 class="mb-0">All Earnings</h6>
+                            <h6 class="mb-0">Biaya Pasang <sup class="text-danger" data-bs-toggle="tooltip"
+                                data-bs-placement="top" data-bs-original-title="Total biaya pasang bulan ini">*</sup></h6>
                         </div>
                     </div>
                     <div class="bg-body p-3 mt-3 rounded">
                         <div class="mt-3 row align-items-center">
-                            <div class="col-7">
-                                <div id="all-earnings-graph"></div>
-                            </div>
-                            <div class="col-5">
-                                <h5 class="mb-1">$3,020</h5>
-                                <p class="text-primary mb-0"><i class="ti ti-arrow-up-right"></i> 30.6%</p>
+                            <div class="col-12">
+                                <h5 class="mb-1">{{ $biaya_pasang }} Bulan Ini</h5>
+                                <p class="text-primary mb-0">
+                                    @if ($selisih_biaya < 0)
+                                    <i class="ti ti-trending-down"></i>
+                                    @elseif($selisih_biaya == 0)
+                                        <i class="ti ti-minus"></i>
+                                    @else
+                                        <i class="ti ti-trending-up"></i>
+                                    @endif
+                                    {{ $selisih_biaya }} Bulan Lalu
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -91,17 +98,24 @@
                             </div>
                         </div>
                         <div class="flex-grow-1 ms-3">
-                            <h6 class="mb-0">Page Views</h6>
+                            <h6 class="mb-0">Customer Baru <sup class="text-danger" data-bs-toggle="tooltip"
+                                data-bs-placement="top" data-bs-original-title="Total customer baru bulan ini">*</sup></h6>
                         </div>
                     </div>
                     <div class="bg-body p-3 mt-3 rounded">
                         <div class="mt-3 row align-items-center">
-                            <div class="col-7">
-                                <div id="page-views-graph"></div>
-                            </div>
-                            <div class="col-5">
-                                <h5 class="mb-1">290K+</h5>
-                                <p class="text-warning mb-0"><i class="ti ti-arrow-up-right"></i> 30.6%</p>
+                            <div class="col-12">
+                                <h5 class="mb-1">{{ $new_customer }} Bulan Ini</h5>
+                                <p class="text-warning mb-0">
+                                    @if ($selisih_customer < 0)
+                                        <i class="ti ti-trending-down"></i>
+                                    @elseif($selisih_customer == 0)
+                                        <i class="ti ti-minus"></i>
+                                    @else
+                                        <i class="ti ti-trending-up"></i>
+                                    @endif
+                                    {{ $selisih_customer }} Bulan Lalu
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -147,10 +161,7 @@
                     </div>
                     <div class="bg-body p-3 mt-3 rounded">
                         <div class="mt-3 row align-items-center">
-                            <div class="col-7">
-                                <div id="total-task-graph"></div>
-                            </div>
-                            <div class="col-5">
+                            <div class="col-12">
                                 <h5 class="mb-1">839</h5>
                                 <p class="text-success mb-0"><i class="ti ti-arrow-up-right"></i> New</p>
                             </div>
