@@ -23,6 +23,7 @@ class Employee extends Model
         'nomor_telephone',
         'ip_config',
         'is_active',
+        'gaji_pokok',
     ];
 
     public function location()

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('kodepos_karyawan');
             $table->string('nomor_telephone');
             $table->string('ip_config')->nullable();
+            $table->double('gaji_pokok')->default(0);
             $table->integer('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();

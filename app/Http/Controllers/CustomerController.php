@@ -112,10 +112,10 @@ class CustomerController extends Controller
             'biaya_pasang' => $request->biaya_pasang,
             'installed_date' => $request->installed_date,
             'order_date' => Date::now(),
-            'due_date' => $request->due_date,
+            'due_date' => $due_date,
         ]);
 
-        return redirect()->route('customer.index')->with('success','Property is updated .');
+        return redirect()->route('customer.index')->with('success','Berhasil Tambah Customer.');
     }
 
     public function show(Customer $customer)

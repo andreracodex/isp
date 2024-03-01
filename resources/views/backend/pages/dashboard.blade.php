@@ -52,22 +52,25 @@
                         </div>
                         <div class="flex-grow-1 ms-3">
                             <h6 class="mb-0">Biaya Pasang <sup class="text-danger" data-bs-toggle="tooltip"
-                                data-bs-placement="top" data-bs-original-title="Total biaya pasang bulan ini">*</sup></h6>
+                                    data-bs-placement="top" data-bs-original-title="Total biaya pasang bulan ini">*</sup>
+                            </h6>
                         </div>
                     </div>
                     <div class="bg-body p-3 mt-3 rounded">
                         <div class="mt-3 row align-items-center">
                             <div class="col-12">
-                                <h5 class="mb-1">{{ $biaya_pasang }} Bulan Ini</h5>
-                                <p class="text-primary mb-0">
-                                    @if ($selisih_biaya < 0)
-                                    <i class="ti ti-trending-down"></i>
-                                    @elseif($selisih_biaya == 0)
-                                        <i class="ti ti-minus"></i>
+                                <h5 class="mb-1">
+                                    @if ($biaya_pasang < $biaya_pasang_last)
+                                        <i class="ti ti-trending-down text-danger"></i>
+                                    @elseif($biaya_pasang == $biaya_pasang_last)
+                                        <i class="ti ti-minus text-primary"></i>
                                     @else
-                                        <i class="ti ti-trending-up"></i>
+                                        <i class="ti ti-trending-up text-success"></i>
                                     @endif
-                                    {{ $selisih_biaya }} Bulan Lalu
+                                    {{ $biaya_pasang_conversion }}
+                                </h5>
+                                <p class="text-primary mb-0">
+                                    {{ $biaya_pasang_last_conversion }} Bulan Lalu
                                 </p>
                             </div>
                         </div>
@@ -99,22 +102,25 @@
                         </div>
                         <div class="flex-grow-1 ms-3">
                             <h6 class="mb-0">Customer Baru <sup class="text-danger" data-bs-toggle="tooltip"
-                                data-bs-placement="top" data-bs-original-title="Total customer baru bulan ini">*</sup></h6>
+                                    data-bs-placement="top" data-bs-original-title="Total customer baru bulan ini">*</sup>
+                            </h6>
                         </div>
                     </div>
                     <div class="bg-body p-3 mt-3 rounded">
                         <div class="mt-3 row align-items-center">
                             <div class="col-12">
-                                <h5 class="mb-1">{{ $new_customer }} Bulan Ini</h5>
-                                <p class="text-warning mb-0">
-                                    @if ($selisih_customer < 0)
-                                        <i class="ti ti-trending-down"></i>
-                                    @elseif($selisih_customer == 0)
-                                        <i class="ti ti-minus"></i>
+                                <h5 class="mb-1">
+                                    @if ($new_customer < $last_new_customer)
+                                        <i class="ti ti-trending-down text-danger"></i>
+                                    @elseif($new_customer == $last_new_customer)
+                                        <i class="ti ti-minus text-primary"></i>
                                     @else
-                                        <i class="ti ti-trending-up"></i>
+                                        <i class="ti ti-trending-up text-success"></i>
                                     @endif
-                                    {{ $selisih_customer }} Bulan Lalu
+                                    {{ $new_customer }} Pelanggan
+                                </h5>
+                                <p class="text-warning mb-0">
+                                    {{ $last_new_customer }} Pelanggan Bulan Lalu
                                 </p>
                             </div>
                         </div>
@@ -130,40 +136,36 @@
                             <div class="avtar avtar-s bg-light-success">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8 2V5" stroke="#2ca87f" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M16 2V5" stroke="#2ca87f" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path opacity="0.4" d="M3.5 9.08984H20.5" stroke="#2ca87f" stroke-width="1.5"
-                                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z"
-                                        stroke="#2ca87f" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path opacity="0.4" d="M15.6947 13.7002H15.7037" stroke="#2ca87f" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path opacity="0.4" d="M15.6947 16.7002H15.7037" stroke="#2ca87f" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path opacity="0.4" d="M11.9955 13.7002H12.0045" stroke="#2ca87f" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path opacity="0.4" d="M11.9955 16.7002H12.0045" stroke="#2ca87f" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path opacity="0.4" d="M8.29431 13.7002H8.30329" stroke="#2ca87f" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path opacity="0.4" d="M8.29395 16.7002H8.30293" stroke="#2ca87f" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path
+                                            d="M14 7.14614C13.5 7.00383 12.6851 6.99859 12 7.00383C11.7709 7.00558 11.9094 6.9944 11.6 7.00383C10.7926 7.03273 10.0016 7.41781 10 8.50882C9.99825 9.67108 11 10.015 12 10.015C13 10.015 14 10.2803 14 11.5211C14 12.4536 13.1925 12.8621 12.1861 12.9974C11.3861 12.9974 11 13.0272 10 12.8838M12 13V14M12 6V7M21 17V17.8C21 18.9201 21 19.4802 20.782 19.908C20.5903 20.2843 20.2843 20.5903 19.908 20.782C19.4802 21 18.9201 21 17.8 21H6.2C5.0799 21 4.51984 21 4.09202 20.782C3.71569 20.5903 3.40973 20.2843 3.21799 19.908C3 19.4802 3 18.9201 3 17.8V17M19 10C19 13.866 15.866 17 12 17C8.13401 17 5 13.866 5 10C5 6.13401 8.13401 3 12 3C15.866 3 19 6.13401 19 10Z"
+                                            stroke="#2ca87f" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </g>
                                 </svg>
                             </div>
                         </div>
                         <div class="flex-grow-1 ms-3">
-                            <h6 class="mb-0">Total Task</h6>
+                            <h6 class="mb-0">Pendapatan</h6>
                         </div>
                     </div>
                     <div class="bg-body p-3 mt-3 rounded">
                         <div class="mt-3 row align-items-center">
                             <div class="col-12">
-                                <h5 class="mb-1">839</h5>
-                                <p class="text-success mb-0"><i class="ti ti-arrow-up-right"></i> New</p>
+                                <h5 class="mb-1">
+                                    @if ($pendapatan < $pendapatan_last)
+                                        <i class="ti ti-trending-down text-danger"></i>
+                                    @elseif($pendapatan == $pendapatan_last)
+                                        <i class="ti ti-minus text-primary"></i>
+                                    @else
+                                        <i class="ti ti-trending-up text-success"></i>
+                                    @endif{{ $pendapatan }}
+                                </h5>
+                                <p class="text-success mb-0">
+                                    {{ $pendapatan_last }} Bulan Lalu
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -178,35 +180,46 @@
                             <div class="avtar avtar-s bg-light-warning">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                                        stroke="#DC2626" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path opacity="0.4" d="M8.4707 10.7402L12.0007 14.2602L15.5307 10.7402"
-                                        stroke="#DC2626" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path
+                                            d="M6 8H4M6 16H4M6 12H3M7 4.51555C8.4301 3.55827 10.1499 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C10.1499 21 8.4301 20.4417 7 19.4845M14 9.49991C13.5 9.37589 12.6851 9.37133 12 9.37589M12 9.37589C11.7709 9.37742 11.9094 9.36768 11.6 9.37589C10.7926 9.40108 10.0016 9.73666 10 10.6874C9.99825 11.7002 11 11.9999 12 11.9999C13 11.9999 14 12.2311 14 13.3124C14 14.125 13.1925 14.4811 12.1861 14.599C12.1216 14.599 12.0597 14.5991 12 14.5994M12 9.37589L12 8M12 14.5994C11.3198 14.6022 10.9193 14.6148 10 14.4999M12 14.5994L12 16"
+                                            stroke="#DC2626" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </g>
                                 </svg>
                             </div>
                         </div>
                         <div class="flex-grow-1 ms-3">
-                            <h6 class="mb-0">Download</h6>
+                            <h6 class="mb-0">Pengeluaran</h6>
                         </div>
                     </div>
                     <div class="bg-body p-3 mt-3 rounded">
                         <div class="mt-3 row align-items-center">
-                            <div class="col-7">
-                                <div id="download-graph"></div>
-                            </div>
-                            <div class="col-5">
-                                <h5 class="mb-1">2,067</h5>
-                                <p class="text-danger mb-0"><i class="ti ti-arrow-up-right"></i> 30.6%</p>
+                            <div class="col-12">
+                                <h5 class="mb-1">
+
+                                    @if ($pengeluaran < $pengeluaran)
+                                        <i class="ti ti-trending-down text-danger"></i>
+                                    @elseif($pengeluaran == $pengeluaran)
+                                        <i class="ti ti-minus text-primary"></i>
+                                    @else
+                                        <i class="ti ti-trending-up text-success"></i>
+                                    @endif
+
+                                    {{ $pengeluaran }}
+                                </h5>
+                                <p class="text-danger mb-0">
+                                    {{ $pengeluaran }} Bulan Lalu
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-9">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
                     <h5 class="mb-0">Monthly Revenue</h5>
@@ -214,84 +227,6 @@
                 <div class="card-body">
                     <h5 class="text-end my-2">5.44% <span class="badge bg-success">+2.6%</span> </h5>
                     <div id="customer-rate-graph"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0">Project - Able Pro</h5>
-                </div>
-                <div class="card-body">
-                    <div class="mb-4">
-                        <p class="mb-2">Release v1.2.0<span class="float-end">70%</span></p>
-                        <div class="progress progress-primary" style="height: 8px">
-                            <div class="progress-bar" style="width: 70%"></div>
-                        </div>
-                    </div>
-                    <div class="d-grid gap-2">
-                        <a href="#" class="btn btn-link-secondary">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-shrink-0">
-                                    <span class="p-1 d-block bg-warning rounded-circle">
-                                        <span class="visually-hidden">New alerts</span>
-                                    </span>
-                                </div>
-                                <div class="flex-grow-1 mx-2">
-                                    <p class="mb-0 d-grid text-start">
-                                        <span class="text-truncate w-100">Horizontal Layout</span>
-                                    </p>
-                                </div>
-                                <div class="badge bg-light-secondary f-12"><i class="ti ti-paperclip text-sm"></i> 2</div>
-                            </div>
-                        </a>
-                        <a href="#" class="btn btn-link-secondary">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-shrink-0">
-                                    <span class="p-1 d-block bg-warning rounded-circle">
-                                        <span class="visually-hidden">New alerts</span>
-                                    </span>
-                                </div>
-                                <div class="flex-grow-1 mx-2">
-                                    <p class="mb-0 d-grid text-start">
-                                        <span class="text-truncate w-100">Invoice Generator</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="btn btn-link-secondary">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-shrink-0">
-                                    <span class="p-1 d-block bg-warning rounded-circle">
-                                        <span class="visually-hidden">New alerts</span>
-                                    </span>
-                                </div>
-                                <div class="flex-grow-1 mx-2">
-                                    <p class="mb-0 d-grid text-start">
-                                        <span class="text-truncate w-100">Package Upgrades</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="btn btn-link-secondary">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-shrink-0">
-                                    <span class="p-1 d-block bg-success rounded-circle">
-                                        <span class="visually-hidden">New alerts</span>
-                                    </span>
-                                </div>
-                                <div class="flex-grow-1 mx-2">
-                                    <p class="mb-0 d-grid text-start">
-                                        <span class="text-truncate w-100">Figma Auto Layout</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="d-grid mt-3">
-                        <button class="btn btn-primary d-flex align-items-center justify-content-center"><i
-                                class="ti ti-plus"></i> Add task</button>
-                    </div>
                 </div>
             </div>
         </div>
