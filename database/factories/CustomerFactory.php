@@ -17,6 +17,7 @@ class CustomerFactory extends Factory
     public function definition(): array
     {
         return [
+            "user_id" => $this->faker->numberBetween(1, 3),
             "nama_customer" => $this->faker->name(),
             "nomor_layanan" => $this->faker->randomNumber(),
             "nomor_ktp" => $this->faker->randomNumber(),
@@ -27,10 +28,10 @@ class CustomerFactory extends Factory
                 "others"
             ]),
             "alamat_customer" => $this->faker->address,
-            "kecamatan_customer" => $this->faker->address,
-            "desa_customer" => $this->faker->address,
+            "kelurahan_id" => 3510011001,
             "kodepos_customer" => $this->faker->postcode,
             "nomor_telephone" => $this->faker->phoneNumber
         ];
     }
+
 }

@@ -17,7 +17,7 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            "customer_id" => $this->faker->numberBetween(1, 50),
+            "customer_id" => $this->faker->numberBetween(1, 10),
             "location_id" => $this->faker->numberBetween(1, 5),
             "paket_id" => $this->faker->numberBetween(1, 5),
             // "coordinates_id" => $this->faker->name(),
