@@ -17,7 +17,7 @@ class InventarisSatuan extends Model
         'is_active',
     ];
 
-    public function inventarisSatuans()
+    public function satinve()
     {
         return $this->hasMany(Inventaris::class, 'satuan_id', 'id');
     }

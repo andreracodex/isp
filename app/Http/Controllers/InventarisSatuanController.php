@@ -19,16 +19,16 @@ class InventarisSatuanController extends Controller
         if ($request->ajax()){
             return DataTables::of($data_table)
             ->addIndexColumn()
-            ->editColumn('invekategori_id', function (InventarisSatuan $invekategori) {
-                return $invekategori->id;
+            ->editColumn('satuan_id', function (InventarisSatuan $satuan) {
+                return $satuan->id;
             })
-            ->editColumn('nama', function (InventarisSatuan $invekategori) {
-                return $invekategori->nama;
+            ->editColumn('nama', function (InventarisSatuan $satuan) {
+                return $satuan->nama;
             })
-            ->addColumn('action', function (InventarisSatuan $invekategori) {
+            ->addColumn('action', function (InventarisSatuan $satuan) {
                 return "
-                <a href=". route('invekategori.edit', $invekategori->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-pencil-alt'></i></a>
-                <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusItem' data-id='$invekategori->id'><i class='fa fa-trash-alt'></i></button>
+                <a href=". route('invesatuan.edit', $satuan->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-pencil-alt'></i></a>
+                <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusItem' data-id='$satuan->id'><i class='fa fa-trash-alt'></i></button>
                 ";
             })
             ->make(true);
@@ -38,10 +38,10 @@ class InventarisSatuanController extends Controller
 
     public function create()
     {
-        $invekategori = new InventarisSatuan;
+        $invesatuan = new InventarisSatuan;
         $profile = Setting::all();
 
-        return view('backend.pages.inventaris_satuan.create', compact('profile', 'invekategori'));
+        return view('backend.pages.inventaris_satuan.create', compact('profile', 'invesatuan'));
     }
 
     public function store(Request $request)

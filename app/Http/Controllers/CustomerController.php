@@ -94,7 +94,7 @@ class CustomerController extends Controller
         $customer = Customer::create([
             'user_id' => $user->id,
             'nama_customer' => $request->nama_customer,
-            'nomor_layanan' => 'GDN-' . mt_rand(111111 ,999999),
+            'nomor_layanan' => mt_rand(111111 ,999999),
             'nomor_ktp' => $request->nomor_ktp,
             'gender' => $request->gender,
             'alamat_customer' => $request->alamat_customer,

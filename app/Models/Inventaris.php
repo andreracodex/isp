@@ -17,8 +17,8 @@ class Inventaris extends Model
         'nama_barang',
         'jenis_id',
         'jumlah_barang',
-        'satuan_barang',
         'is_active',
+        'satuan_id'
     ];
 
     public function location()
@@ -26,12 +26,12 @@ class Inventaris extends Model
         return $this->belongsTo(Location::class, 'location_id', 'id');
     }
 
-    public function inventarisKategori()
+    public function kategori()
     {
         return $this->belongsTo(InventarisKategori::class, 'jenis_id', 'id');
     }
 
-    public function inventarisSatuan()
+    public function satuan()
     {
         return $this->belongsTo(InventarisSatuan::class, 'satuan_id', 'id');
     }

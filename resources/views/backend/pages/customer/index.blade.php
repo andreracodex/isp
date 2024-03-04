@@ -92,7 +92,7 @@
                         render: function(data, type, row) {
                             if (row.nama_customer != null) {
                                 return '<div class="row"><div class="col-auto pe-0"><img src="images/user/avatar-3.jpg" alt="user-image" class="wid-40 rounded-circle"></div><div class="col"><h6 class="mb-0">' +
-                                    row.nama_customer + '</h6><p class="text-muted f-12 mb-0">' +
+                                    row.nama_customer + '</h6><p class="text-muted f-12 mb-0">GDN-' +
                                     row.nomor_layanan + '</p></div></div>';
                             } else {
                                 return '<div class="row"><div class="col-auto pe-0"><img src="images/user/avatar-3.jpg" alt="user-image" class="wid-40 rounded-circle"></div><div class="col"><h6 class="mb-0">Alberta Robbins</h6><p class="text-muted f-12 mb-0">miza@gmail.com</p></div></div>';

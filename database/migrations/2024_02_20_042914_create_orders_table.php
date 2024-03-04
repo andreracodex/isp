@@ -27,11 +27,11 @@ return new class extends Migration
             $table->double('biaya_pasang')->default(0);
             $table->text('path_ktp')->nullable();
             $table->text('path_image_rumah')->nullable();
-            $table->date('order_date');
-            $table->date('installed_date')->nullable();
+            $table->datetime('order_date');
+            $table->datetime('installed_date')->nullable();
             $table->text('installed_image')->nullable();
             $table->integer('installed_status')->default(0);
-            $table->date('due_date'); //tanggal jatuh tempo
+            $table->datetime('due_date'); //tanggal jatuh tempo
             $table->integer('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();

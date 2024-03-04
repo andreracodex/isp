@@ -32,15 +32,6 @@
 @endsection
 
 @section('isi')
-    @if ($errors->any())
-        <div class="alert alert-danger dismiss-text">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 
     <div class="page-header">
         <div class="page-block">
@@ -69,7 +60,7 @@
                             method="POST" class="needs-validation" novalidate="">
                             @csrf
                             @method('PUT')
-                            @include('backend.pages.inventaris_satuan.partials.form-inventaris_ktg', [
+                            @include('backend.pages.inventaris_satuan.partials.form-inventaris_satuan', [
                                 'submit' => 'Update',
                             ])
                         </form>

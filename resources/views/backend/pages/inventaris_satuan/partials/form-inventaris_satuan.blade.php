@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-md-9 mb-3">
-        <label class="form-label" for="nama">Nama Kategori</label>
+        <label class="form-label" for="nama">Nama Satuan</label>
         <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama"
-            value="{{ old('nama') ?? $invekategori->nama }}" placeholder="Nama Kategori" required>
+            value="{{ old('nama') ?? $invesatuan->nama }}" placeholder="Nama Satuan" required>
 
         @error('nama')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -10,11 +10,11 @@
     </div>
 
     <div class="col-md-3 mb-3">
-        <label class="form-label" for="status_kategori">Status Kategori</label>
+        <label class="form-label" for="status_kategori">Status Satuan</label>
         <div class="form-check form-switch custom-switch-v1">
             <input type="checkbox" class="form-check-input input-success @error('is_active') is-invalid @enderror"
                 id="customswitchlightv1-3" name="is_active"
-                @if ($invekategori->is_active == 1) @checked(true) @else @checked(false) @endif>
+                @if ($invesatuan->is_active == 1) @checked(true) @else @checked(false) @endif>
             <label class="form-check-label" for="customswitchlightv1-3">Active</label>
         </div>
     </div>

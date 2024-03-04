@@ -23,9 +23,8 @@ class CustomerFactory extends Factory
             "nomor_ktp" => $this->faker->randomNumber(),
             "ip_config" => $this->faker->numberBetween(1, 5),
             "gender" => $this->faker->randomElement([
-                "male",
-                "female",
-                "others"
+                "1",
+                "2",
             ]),
             "alamat_customer" => $this->faker->address,
             "kelurahan_id" => 3510011001,

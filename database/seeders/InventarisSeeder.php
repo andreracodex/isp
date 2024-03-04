@@ -17,7 +17,6 @@ class InventarisSeeder extends Seeder
             'jenis_id' => 1,
             'satuan_id' => 1,
             'jumlah_barang' => 50,
-            'satuan_barang' => 'pcs',
             'created_at' => Carbon::now(),
         ]);
         DB::table('inventaris')->insert([
@@ -26,7 +25,6 @@ class InventarisSeeder extends Seeder
             'jenis_id' => 1,
             'satuan_id' => 1,
             'jumlah_barang' => 50,
-            'satuan_barang' => 'pcs',
             'created_at' => Carbon::now(),
         ]);
         DB::table('inventaris')->insert([
@@ -35,7 +33,6 @@ class InventarisSeeder extends Seeder
             'jenis_id' => 1,
             'satuan_id' => 1,
             'jumlah_barang' => 50,
-            'satuan_barang' => 'pcs',
             'created_at' => Carbon::now(),
         ]);
         DB::table('inventaris')->insert([
@@ -44,7 +41,6 @@ class InventarisSeeder extends Seeder
             'jenis_id' => 1,
             'satuan_id' => 1,
             'jumlah_barang' => 50,
-            'satuan_barang' => 'pcs',
             'created_at' => Carbon::now(),
         ]);
         DB::table('inventaris')->insert([
@@ -53,7 +49,6 @@ class InventarisSeeder extends Seeder
             'jenis_id' => 1,
             'satuan_id' => 1,
             'jumlah_barang' => 50,
-            'satuan_barang' => 'pcs',
             'created_at' => Carbon::now(),
         ]);
 
@@ -64,7 +59,6 @@ class InventarisSeeder extends Seeder
             'jenis_id' => 2,
             'satuan_id' => 2,
             'jumlah_barang' => 10000,
-            'satuan_barang' => 'meter',
             'created_at' => Carbon::now(),
         ]);
         DB::table('inventaris')->insert([
@@ -73,7 +67,6 @@ class InventarisSeeder extends Seeder
             'jenis_id' => 2,
             'satuan_id' => 2,
             'jumlah_barang' => 10000,
-            'satuan_barang' => 'meter',
             'created_at' => Carbon::now(),
         ]);
         DB::table('inventaris')->insert([
@@ -82,7 +75,6 @@ class InventarisSeeder extends Seeder
             'jenis_id' => 2,
             'satuan_id' => 2,
             'jumlah_barang' => 10000,
-            'satuan_barang' => 'meter',
             'created_at' => Carbon::now(),
         ]);
         DB::table('inventaris')->insert([
@@ -91,7 +83,6 @@ class InventarisSeeder extends Seeder
             'jenis_id' => 2,
             'satuan_id' => 2,
             'jumlah_barang' => 10000,
-            'satuan_barang' => 'meter',
             'created_at' => Carbon::now(),
         ]);
         DB::table('inventaris')->insert([
@@ -100,7 +91,6 @@ class InventarisSeeder extends Seeder
             'jenis_id' => 2,
             'satuan_id' => 2,
             'jumlah_barang' => 10000,
-            'satuan_barang' => 'meter',
             'created_at' => Carbon::now(),
         ]);
 
@@ -111,7 +101,6 @@ class InventarisSeeder extends Seeder
             'jenis_id' => 3,
             'satuan_id' => 1,
             'jumlah_barang' => 1000,
-            'satuan_barang' => 'pcs',
             'created_at' => Carbon::now(),
         ]);
         DB::table('inventaris')->insert([
@@ -120,7 +109,6 @@ class InventarisSeeder extends Seeder
             'jenis_id' => 3,
             'satuan_id' => 1,
             'jumlah_barang' => 1000,
-            'satuan_barang' => 'pcs',
             'created_at' => Carbon::now(),
         ]);
         DB::table('inventaris')->insert([
@@ -129,7 +117,6 @@ class InventarisSeeder extends Seeder
             'jenis_id' => 3,
             'satuan_id' => 1,
             'jumlah_barang' => 1000,
-            'satuan_barang' => 'pcs',
             'created_at' => Carbon::now(),
         ]);
         DB::table('inventaris')->insert([
@@ -138,7 +125,6 @@ class InventarisSeeder extends Seeder
             'jenis_id' => 3,
             'satuan_id' => 1,
             'jumlah_barang' => 1000,
-            'satuan_barang' => 'pcs',
             'created_at' => Carbon::now(),
         ]);
         DB::table('inventaris')->insert([
@@ -147,7 +133,6 @@ class InventarisSeeder extends Seeder
             'jenis_id' => 3,
             'satuan_id' => 1,
             'jumlah_barang' => 1000,
-            'satuan_barang' => 'pcs',
             'created_at' => Carbon::now(),
         ]);
     }

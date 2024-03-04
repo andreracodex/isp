@@ -26,6 +26,8 @@ class DashboardController extends Controller
         // Pengeluaran
         $pengeluaran = Number::currency(count_pengeluaran(), in: 'IDR', locale: 'us');
         $pengeluaran_last = Number::currency(count_pengeluaran_last(), in: 'IDR', locale: 'us');
+        $income = pemasukan_chart();
+        dd($income);
 
         return view(
             'backend.pages.dashboard',

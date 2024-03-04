@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Inventaris;
 use App\Models\InventarisKategori;
+use App\Models\InventarisSatuan;
 use App\Models\Location;
 use App\Models\Setting;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -28,10 +29,13 @@ class InventarisController extends Controller
                 return $inve->location->nama_location;
             })
             ->editColumn('jenis_id', function (Inventaris $inve) {
-                return $inve->inventarisKategori->nama;
+                return $inve->kategori->nama;
             })
             ->editColumn('jumlah_barang', function (Inventaris $inve) {
                 return number_format($inve->jumlah_barang, 0, ',', '.');
+            })
+            ->editColumn('satuan_id', function (Inventaris $inve) {
+                return $inve->satuan->nama;
             })
             ->addColumn('action', function (Inventaris $inve) {
                 return "
@@ -48,12 +52,13 @@ class InventarisController extends Controller
     public function create()
     {
         $inve = new Inventaris;
-        $kategori = InventarisKategori::where('is_active',1)->get();
+        $kategories = InventarisKategori::where('is_active',1)->get();
+        $satuan = InventarisSatuan::where('is_active',1)->get();
         $locations = Location::all();
         $profile = Setting::all();
 
         return view('backend.pages.inventaris.create',
-            compact('profile', 'inve', 'locations', 'kategori')
+            compact('profile', 'inve', 'locations', 'kategories', 'satuan')
         );
     }
 
@@ -64,7 +69,7 @@ class InventarisController extends Controller
             'nama_barang' => 'required|max:100',
             'jenis_barang' => 'required',
             'jumlah_barang' => 'required',
-            'satuan_barang' => 'required',
+            'satuan_id' => 'required',
             'is_active' => 'required',
         ]);
 
@@ -75,7 +80,7 @@ class InventarisController extends Controller
             $is_active = 0;
         }
 
-        $inve = Inventaris::create([
+        Inventaris::create([
             'location_id' => $request->location,
             'nama_barang' => $request->nama_barang,
             'jenis_barang' => $request->jenis_barang,
@@ -91,8 +96,10 @@ class InventarisController extends Controller
     {
         $profile = Setting::all();
         $locations = Location::all();
+        $kategories = InventarisKategori::where('is_active', 1)->get();
+        $satuan = InventarisSatuan::where('is_active', 1)->get();
 
-        return view('backend.pages.inventaris.edit', compact('profile', 'inve', 'locations'));
+        return view('backend.pages.inventaris.edit', compact('profile', 'inve', 'locations', 'kategories', 'satuan'));
     }
 
     public function update(Request $request, string $id)
@@ -100,9 +107,9 @@ class InventarisController extends Controller
         $this->validate($request, [
             'location' => 'required',
             'nama_barang' => 'required|max:100',
-            'jenis_barang' => 'required',
+            'jenis_id' => 'required',
             'jumlah_barang' => 'required',
-            'satuan_barang' => 'required',
+            'satuan_id' => 'required',
             'is_active' => 'required',
         ]);
 
@@ -115,12 +122,12 @@ class InventarisController extends Controller
             $is_active = 0;
         }
 
-        $inve = Inventaris::update([
+        $inve->update([
             'location_id' => $request->location,
             'nama_barang' => $request->nama_barang,
-            'jenis_barang' => $request->jenis_barang,
+            'jenis_id' => $request->jenis_id,
             'jumlah_barang' => $request->jumlah_barang,
-            'satuan_barang' => $request->satuan_barang,
+            'satuan_id' => $request->satuan_id,
             'is_active' => $is_active,
         ]);
 

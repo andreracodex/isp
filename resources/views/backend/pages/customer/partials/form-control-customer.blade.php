@@ -3,7 +3,9 @@
         <div class="form-check form-switch custom-switch-v1">
             <input type="checkbox" class="form-check-input input-success" id="customswitchlightv1-3" name="is_new"
                 @if ($customer->is_new == 1) @checked(true) @else @checked(false) @endif>
-            <label class="form-check-label" for="customswitchlightv1-3">Pelanggan Baru </label>
+            <label class="form-check-label" for="customswitchlightv1-3">Pelanggan Baru <sup class="text-danger"
+                data-bs-toggle="tooltip" data-bs-placement="top"
+                data-bs-original-title="status pelanggan telah terpasang, jika non aktif belum terpasang">*</sup></label>
         </div>
         <div class="form-check form-switch custom-switch-v1 mt-3">
             <input type="checkbox" class="form-check-input input-success" id="customswitchlightv1-3" name="is_active"
@@ -11,6 +13,13 @@
             <label class="form-check-label" for="customswitchlightv1-3">Pelanggan Active <sup class="text-danger"
                     data-bs-toggle="tooltip" data-bs-placement="top"
                     data-bs-original-title="status pelanggan harap aktif, jika maasih berlangganan">*</sup></label>
+        </div>
+        <div class="form-check form-switch custom-switch-v1 mt-3">
+            <input type="checkbox" class="form-check-input input-success" id="customswitchlightv1-3" name="is_active"
+                @if ($order->installed_status == 1) @checked(true) @else @checked(false) @endif>
+            <label class="form-check-label" for="customswitchlightv1-3"> Active <sup class="text-danger"
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-original-title="status pelanggan telah terpasang, jika non aktif belum terpasang">*</sup></label>
         </div>
     </div>
 
@@ -26,7 +35,7 @@
             <svg class="bi flex-shrink-0 me-2" width="24" height="24">
                 <use xlink:href="#exclamation-triangle-fill"></use>
             </svg>
-            <div> Ini adalah pilihan untuk membuat tagihan bulan pertama untuk pelanggan baru, aktifkan jika
+            <div> Ini adalah pilihan untuk membuat tagihan bulan pertama untuk pelanggan baru, pemasangan baru, dan status pelanggan aktif
                 ingin membuat tagihan pertama untuk pelanggan. (Pelanggan Baru) </div>
         </div>
     </div>

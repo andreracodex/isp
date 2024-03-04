@@ -83,8 +83,8 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'invekategori_id',
-                        name: 'invekategori_id'
+                        data: 'satuan_id',
+                        name: 'satuan_id'
                     },
                     {
                         data: 'nama',
@@ -176,7 +176,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Satuan Inventaris</h2>
+                        <h2 class="mb-0">Satuan</h2>
                     </div>
                 </div>
             </div>
@@ -191,7 +191,7 @@
                         <div>
                             <a href="{{ route('invesatuan.create') }}" type="button"
                                 class="btn btn-sm btn-outline-primary d-inline-flex"><i class="ti ti-plus me-1"></i>Kategori
-                                Satuan Inventaris</a>
+                                Satuan</a>
                         </div>
                         <div>
                             <a href="{{ route('pdf.inventaris') }}" type="button"

@@ -171,3 +171,20 @@ Breadcrumbs::for('ticket.store', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Simpan Ticket', route('ticket.store'));
 });
+
+// Ticket
+Breadcrumbs::for('invesatuan.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Satuan', route('invesatuan.index'));
+});
+Breadcrumbs::for('invesatuan.create', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Tambah Satuan', route('invesatuan.create'));
+});
+Breadcrumbs::for('invesatuan.edit', function (BreadcrumbTrail $trail): void {
+    $trail->push('Edit Satuan', route('invesatuan.edit', 'invesatuan'));
+});
+Breadcrumbs::for('invesatuan.store', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Simpan Satuan', route('invesatuan.store'));
+});

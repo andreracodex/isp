@@ -103,8 +103,8 @@
                         name: 'jumlah_barang'
                     },
                     {
-                        data: 'satuan_barang',
-                        name: 'satuan_barang'
+                        data: 'satuan_id',
+                        name: 'satuan_id'
                     },
                     {
                         data: 'is_active',
