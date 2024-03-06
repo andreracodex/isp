@@ -5,7 +5,7 @@
                 @if ($customer->is_new == 1) @checked(true) @else @checked(false) @endif>
             <label class="form-check-label" for="customswitchlightv1-3">Pelanggan Baru <sup class="text-danger"
                 data-bs-toggle="tooltip" data-bs-placement="top"
-                data-bs-original-title="status pelanggan telah terpasang, jika non aktif belum terpasang">*</sup></label>
+                data-bs-original-title="status pelanggan baru, jika non aktif pelanggan lama">*</sup></label>
         </div>
         <div class="form-check form-switch custom-switch-v1 mt-3">
             <input type="checkbox" class="form-check-input input-success" id="customswitchlightv1-3" name="is_active"
@@ -15,9 +15,9 @@
                     data-bs-original-title="status pelanggan harap aktif, jika maasih berlangganan">*</sup></label>
         </div>
         <div class="form-check form-switch custom-switch-v1 mt-3">
-            <input type="checkbox" class="form-check-input input-success" id="customswitchlightv1-3" name="is_active"
+            <input type="checkbox" class="form-check-input input-success" id="customswitchlightv1-3" name="is_installed"
                 @if ($order->installed_status == 1) @checked(true) @else @checked(false) @endif>
-            <label class="form-check-label" for="customswitchlightv1-3"> Active <sup class="text-danger"
+            <label class="form-check-label" for="customswitchlightv1-3">Pelanggan Terpasang <sup class="text-danger"
                     data-bs-toggle="tooltip" data-bs-placement="top"
                     data-bs-original-title="status pelanggan telah terpasang, jika non aktif belum terpasang">*</sup></label>
         </div>
@@ -35,8 +35,7 @@
             <svg class="bi flex-shrink-0 me-2" width="24" height="24">
                 <use xlink:href="#exclamation-triangle-fill"></use>
             </svg>
-            <div> Ini adalah pilihan untuk membuat tagihan bulan pertama untuk pelanggan baru, pemasangan baru, dan status pelanggan aktif
-                ingin membuat tagihan pertama untuk pelanggan. (Pelanggan Baru) </div>
+            <div> Ini adalah pilihan untuk membuat tagihan bulan pertama untuk pelanggan baru, pemasangan baru, dan status pelanggan aktif. Harap perhatikan dengan cara arahkan kursor ke tanda * (Untuk penjelasan lebih lanjut) </div>
         </div>
     </div>
 </div>
@@ -45,6 +44,7 @@
     <div class="col-md-3 mb-3">
         <label class="form-label" for="nama">Nama Customer <sup class="text-danger" data-bs-toggle="tooltip"
                 data-bs-placement="top" data-bs-original-title="Nama Customer dibutuhkan">*</sup></label>
+        <input type="text" type="hidden" hidden name="order_id" value="{{ $order->id }}">
         <input type="text" class="form-control" name="nama_customer" id="nama_customer"
             value="{{ old('nama_customer') ?? $customer->nama_customer }}" placeholder="Nama Customer" required>
         <div class="valid-feedback"> Looks good! </div>
@@ -61,8 +61,8 @@
     @endif
 
     <div class="col-md-3 mb-3">
-        <label class="form-label" for="nomor_ktp">Nomor KTP <sup class="text-primary" data-bs-toggle="tooltip"
-                data-bs-placement="top" data-bs-original-title="ktp dapat di input opsional">*</sup></label>
+        <label class="form-label" for="nomor_ktp">Nomor KTP <sup class="text-danger" data-bs-toggle="tooltip"
+                data-bs-placement="top" data-bs-original-title="ktp wajib di input dibutuhkan untuk verifikasi">*</sup></label>
         <input type="number" min="0" class="form-control" name="nomor_ktp" id="nomor_ktp"
             value="{{ old('nomor_ktp') ?? $customer->nomor_ktp }}" placeholder="Nomor KTP">
         <div class="valid-feedback"> Opsional ! </div>
@@ -99,7 +99,7 @@
         <div class="input-group">
             <span class="input-group-text" id="nomor_telephone"><i class="ti ti-phone-call"></i></span>
             <input type="number" min="0" name="nomor_telephone" class="form-control" id="nomor_telephone"
-                value="{{ old('nomor_telephone') ?? $customer->nomor_telephone }}" placeholder="0812xxxx"
+                value="{{ old('nomor_telephone') ?? preg_replace("/[^0-9]/", "", $customer->nomor_telephone) }}" placeholder="0812xxxx"
                 aria-describedby="nomor_telephone" required>
             <div class="invalid-feedback"> Harap isi nomor HP. </div>
         </div>
@@ -110,7 +110,7 @@
     <div class="col-md-6 mb-3">
         <label class="form-label" for="nama">Email Customer</label>
         <input type="email" class="form-control" name="email" id="email"
-            value="{{ old('email') ?? $customer->email }} @if($submit == 'Update'){{$customer->user->email}} @endif" placeholder="mail@example" required>
+            value="{{ old('email') ?? $customer->email }}@if($submit != 'Create'){{$customer->user->email}}@else{{$customer->email}}@endif" placeholder="mail@example" required>
         <div class="valid-feedback"> Looks good! </div>
         <div class="invalid-feedback"> Harap isi email customer. </div>
     </div>
@@ -176,7 +176,7 @@
                 data-bs-toggle="tooltip" data-bs-placement="top"
                 data-bs-original-title="tanggal pemasangan layanan">*</sup></label>
         <input class="form-control" type="date" name="installed_date"
-            value="{{ old('installed_date') ?? $order->installed_date }}" id="demo-date-only" required>
+            value="{{ old('installed_date') ?? \Carbon\Carbon::parse($order->installed_date)->format('Y-m-d') }}" id="demo-date-only" required>
         <div class="valid-feedback"> Looks good! </div>
         <div class="invalid-feedback"> Harap isi tanggal pemasangan. </div>
     </div>
@@ -186,7 +186,7 @@
                 data-bs-toggle="tooltip" data-bs-placement="top"
                 data-bs-original-title="tanggal jatuh tempo tagihan layanan">*</sup></label>
         <input class="form-control" type="date" name="due_date"
-            value="{{ old('due_date') ?? $order->due_date }}" id="demo-date-only" required>
+            value="{{ old('due_date') ?? \Carbon\Carbon::parse($order->due_date)->format('Y-m-d') }}" id="demo-date-only" required>
         <div class="valid-feedback"> Looks good! </div>
         <div class="invalid-feedback"> Harap isi tanggal jatuh tempo. </div>
     </div>

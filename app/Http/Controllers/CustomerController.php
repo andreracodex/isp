@@ -91,6 +91,13 @@ class CustomerController extends Controller
             $due_date = $request->input('due_date');
         }
 
+        $installed = $request->input('is_installed');
+        if($installed == 'ON' || $installed == 'on'){
+            $is_installed = 1;
+        }else{
+            $is_installed = 0;
+        }
+
         $customer = Customer::create([
             'user_id' => $user->id,
             'nama_customer' => $request->nama_customer,
@@ -111,6 +118,7 @@ class CustomerController extends Controller
             'paket_id' => $request->paket_internet,
             'biaya_pasang' => $request->biaya_pasang,
             'installed_date' => $request->installed_date,
+            'installed_status' => $is_installed,
             'order_date' => Date::now(),
             'due_date' => $due_date,
         ]);
@@ -141,7 +149,72 @@ class CustomerController extends Controller
 
     public function update(Request $request, Customer $customer)
     {
-        //
+        $validated = $request->validate([
+            'nama_customer' => 'required',
+            'nomor_telephone' => 'required|min:10|max:14',
+            'nomor_ktp' => 'required|min:16|max:20',
+        ]);
+
+        if(!$validated){
+            return redirect()->route('customer.index')->with('error','Property is not valid .');
+        }
+
+        $active = $request->input('is_active');
+        if($active == 'ON' || $active == 'on'){
+            $is_active = 1;
+        }else{
+            $is_active = 0;
+        }
+
+        $new = $request->input('is_new');
+        if($new == 'ON' || $new == 'on'){
+            $is_new = 1;
+            $due_date = $request->input('due_date');
+        }else{
+            $is_new = 0;
+            $due_date = $request->input('due_date');
+        }
+
+        $installed = $request->input('is_installed');
+        if($installed == 'ON' || $installed == 'on'){
+            $is_installed = 1;
+        }else{
+            $is_installed = 0;
+        }
+
+        $user = User::find($customer->user_id);
+        $user->update([
+            'name' => $request->nama_customer,
+            'email' => $request->email,
+        ]);
+
+        $customer->update([
+            'nama_customer' => $request->nama_customer,
+            'nomor_layanan' =>$request->nomor_layanan,
+            'nomor_ktp' => $request->nomor_ktp,
+            'gender' => $request->gender,
+            'alamat_customer' => $request->alamat_customer,
+            'kodepos_customer' => $request->kodepos_customer,
+            'nomor_telephone' => $request->nomor_telephone,
+            'kelurahan_id' => $request->kelurahan,
+            'is_active' => $is_active,
+            'is_new' => $is_new,
+        ]);
+
+        $order = Order::find($request->input('order_id'));
+
+        $order->update([
+            'customer_id' => $customer->id,
+            'location_id' => $request->lokasi,
+            'paket_id' => $request->paket_internet,
+            'biaya_pasang' => $request->biaya_pasang,
+            'installed_date' => $request->installed_date,
+            'installed_status' => $is_installed,
+            'order_date' => Date::now(),
+            'due_date' => $due_date,
+        ]);
+
+        return redirect()->route('customer.index')->with('success','Berhasil Edit Customer.');
     }
 
     public function destroy(Customer $customer)
