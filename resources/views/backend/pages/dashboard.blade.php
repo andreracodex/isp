@@ -9,6 +9,10 @@
 @push('script')
     <script src="{{ asset('/js/plugins/apexcharts.min.js') }}"></script>
     <script type="text/javascript">
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
+        }
+
         var income = {{ Js::from($income) }};
         var outcome = {{ Js::from($outcome) }};
 
@@ -21,7 +25,7 @@
                     show: false,
                 },
             },
-            colors: ["#0d6efd", "#8996A4"],
+            colors: ["#2ca87f", "#dc2626"],
             fill: {
                 type: "gradient",
                 gradient: {
@@ -49,8 +53,7 @@
                 borderColor: "#F3F5F7",
                 strokeDashArray: 2,
             },
-            series: [
-                {
+            series: [{
                     name: "Income",
                     data: income,
                 },
@@ -61,24 +64,34 @@
             ],
             xaxis: {
                 categories: [
-                    "Jan",
-                    "Feb",
-                    "Mar",
-                    "Apr",
-                    "May",
-                    "Jun",
-                    "Jul",
-                    "Aug",
-                    "Sep",
-                    "Oct",
-                    "Nov",
-                    "Dec",
+                    "Januari",
+                    "Febuari",
+                    "Maret",
+                    "April",
+                    "Mei",
+                    "Juni",
+                    "Juli",
+                    "Agustus",
+                    "September",
+                    "Oktober",
+                    "November",
+                    "Desember",
                 ],
                 axisBorder: {
                     show: false,
                 },
                 axisTicks: {
                     show: false,
+                },
+            },
+            yaxis: {
+                title: {
+                    text: 'Price in Rupiah',
+                },
+                labels: {
+                    formatter: (value) => {
+                        return `Rp ${numberWithCommas(value)}`;
+                    },
                 },
             },
         };
@@ -138,17 +151,17 @@
                         <div class="mt-3 row align-items-center">
                             <div class="col-12">
                                 <h5 class="mb-1">
-                                    @if ($biaya_pasang < $biaya_pasang_last)
-                                        <i class="ti ti-trending-down text-danger"></i>
-                                    @elseif($biaya_pasang == $biaya_pasang_last)
+                                    @if ($biaya_pasang_real > $biaya_pasang_last_real)
+                                        <i class="ti ti-trending-up text-success"></i>
+                                    @elseif($biaya_pasang_real == $biaya_pasang_last_real)
                                         <i class="ti ti-minus text-primary"></i>
                                     @else
-                                        <i class="ti ti-trending-up text-success"></i>
+                                        <i class="ti ti-trending-down text-danger"></i>
                                     @endif
-                                    {{ $biaya_pasang_conversion }}
+                                    {{ $biaya_pasang }}
                                 </h5>
                                 <p class="text-primary mb-0">
-                                    {{ $biaya_pasang_last_conversion }} Bulan Lalu
+                                    {{ $biaya_pasang_last }} Bulan Lalu
                                 </p>
                             </div>
                         </div>
@@ -188,12 +201,12 @@
                         <div class="mt-3 row align-items-center">
                             <div class="col-12">
                                 <h5 class="mb-1">
-                                    @if ($new_customer < $last_new_customer)
-                                        <i class="ti ti-trending-down text-danger"></i>
+                                    @if ($new_customer > $last_new_customer)
+                                        <i class="ti ti-trending-up text-success"></i>
                                     @elseif($new_customer == $last_new_customer)
                                         <i class="ti ti-minus text-primary"></i>
                                     @else
-                                        <i class="ti ti-trending-up text-success"></i>
+                                        <i class="ti ti-trending-down text-danger"></i>
                                     @endif
                                     {{ $new_customer }} Pelanggan
                                 </h5>
@@ -226,19 +239,21 @@
                             </div>
                         </div>
                         <div class="flex-grow-1 ms-3">
-                            <h6 class="mb-0">Pendapatan</h6>
+                            <h6 class="mb-0">Pendapatan <sup class="text-danger" data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    data-bs-original-title="Total pendapatan langganan paket bulan ini">*</sup></h6>
                         </div>
                     </div>
                     <div class="bg-body p-3 mt-3 rounded">
                         <div class="mt-3 row align-items-center">
                             <div class="col-12">
                                 <h5 class="mb-1">
-                                    @if ($pendapatan < $pendapatan_last)
-                                        <i class="ti ti-trending-down text-danger"></i>
-                                    @elseif($pendapatan == $pendapatan_last)
+                                    @if ($pendapatan_real > $pendapatan_last_real)
+                                        <i class="ti ti-trending-up text-success"></i>
+                                    @elseif($pendapatan_real == $pendapatan_last_real)
                                         <i class="ti ti-minus text-primary"></i>
                                     @else
-                                        <i class="ti ti-trending-up text-success"></i>
+                                        <i class="ti ti-trending-down text-danger"></i>
                                     @endif{{ $pendapatan }}
                                 </h5>
                                 <p class="text-success mb-0">
@@ -270,7 +285,9 @@
                             </div>
                         </div>
                         <div class="flex-grow-1 ms-3">
-                            <h6 class="mb-0">Pengeluaran</h6>
+                            <h6 class="mb-0">Pengeluaran <sup class="text-danger" data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    data-bs-original-title="Total pengeluaran gaji bulan ini">*</sup></h6>
                         </div>
                     </div>
                     <div class="bg-body p-3 mt-3 rounded">
@@ -278,18 +295,18 @@
                             <div class="col-12">
                                 <h5 class="mb-1">
 
-                                    @if ($pengeluaran < $pengeluaran)
-                                        <i class="ti ti-trending-down text-danger"></i>
-                                    @elseif($pengeluaran == $pengeluaran)
+                                    @if ($pengeluaran_real > $pengeluaran_last_real)
+                                        <i class="ti ti-trending-up text-success"></i>
+                                    @elseif($pengeluaran_real == $pengeluaran_last_real)
                                         <i class="ti ti-minus text-primary"></i>
                                     @else
-                                        <i class="ti ti-trending-up text-success"></i>
+                                        <i class="ti ti-trending-down text-danger"></i>
                                     @endif
 
                                     {{ $pengeluaran }}
                                 </h5>
                                 <p class="text-danger mb-0">
-                                    {{ $pengeluaran }} Bulan Lalu
+                                    {{ $pengeluaran_last }} Bulan Lalu
                                 </p>
                             </div>
                         </div>
@@ -304,6 +321,71 @@
                 </div>
                 <div class="card-body">
                     <div id="income_vs_expenses"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h5 class="mb-0">Total Pendapatan & Pengeluaran (Bulan Ini)</h5>
+                    </div>
+                    <div id="total-income-graph"></div>
+                    <div class="row g-3 mt-3">
+                        <div class="col-sm-4">
+                            <div class="bg-body p-3 rounded">
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="flex-shrink-0">
+                                        <span class="p-1 d-block bg-success rounded-circle">
+                                            <span class="visually-hidden">New alerts</span>
+                                        </span>
+                                    </div>
+                                    <div class="flex-grow-1 ms-2">
+                                        <p class="mb-0">Pemasukan</p>
+                                    </div>
+                                </div>
+                                <h6 class="mb-0">
+                                    {{ Number::currency($pendapatan_real + $biaya_pasang_real, in: 'IDR', locale: 'us') }}
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="bg-body p-3 rounded">
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="flex-shrink-0">
+                                        <span class="p-1 d-block bg-danger rounded-circle">
+                                            <span class="visually-hidden">New alerts</span>
+                                        </span>
+                                    </div>
+                                    <div class="flex-grow-1 ms-2">
+                                        <p class="mb-0">Pengeluaran</p>
+                                    </div>
+                                </div>
+                                <h6 class="mb-0">{{ Number::currency($pengeluaran_real, in: 'IDR', locale: 'us') }}</h6>
+                            </div>
+                        </div>
+                        <?php
+                        $total_pemasukan = $pendapatan_real + $biaya_pasang_real;
+                        $total_pengeluaran = $pengeluaran_real;
+                        $total = $total_pemasukan - $total_pengeluaran;
+                        ?>
+                        <div class="col-sm-4">
+                            <div class="@if ($total_pemasukan > $total_pengeluaran) bg-green-100 @else bg-red-100 @endif p-3 rounded">
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="flex-shrink-0">
+                                        <span
+                                            class="p-1 d-block @if ($total_pemasukan > $total_pengeluaran) bg-success @else bg-danger @endif rounded-circle">
+                                            <span class="visually-hidden">New alerts</span>
+                                        </span>
+                                    </div>
+                                    <div class="flex-grow-1 ms-2">
+                                        <p class="mb-0">Result</p>
+                                    </div>
+                                </div>
+                                <h6 class="mb-0">{{ Number::currency($total, in: 'IDR', locale: 'us') }}</h6>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -697,93 +779,6 @@
                             <div class="d-grid">
                                 <button class="btn btn-primary d-grid"><span class="text-truncate w-100">Create new
                                         Transaction</span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <h5 class="mb-0">Total Income</h5>
-                        <div class="dropdown">
-                            <a class="avtar avtar-s btn-link-secondary dropdown-toggle arrow-none" href="#"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ti ti-dots-vertical f-18"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#">Today</a>
-                                <a class="dropdown-item" href="#">Weekly</a>
-                                <a class="dropdown-item" href="#">Monthly</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="total-income-graph"></div>
-                    <div class="row g-3 mt-3">
-                        <div class="col-sm-6">
-                            <div class="bg-body p-3 rounded">
-                                <div class="d-flex align-items-center mb-2">
-                                    <div class="flex-shrink-0">
-                                        <span class="p-1 d-block bg-primary rounded-circle">
-                                            <span class="visually-hidden">New alerts</span>
-                                        </span>
-                                    </div>
-                                    <div class="flex-grow-1 ms-2">
-                                        <p class="mb-0">Income</p>
-                                    </div>
-                                </div>
-                                <h6 class="mb-0">$23,876 <small class="text-muted"><i class="ti ti-chevrons-up"></i>
-                                        +$763,43</small></h6>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="bg-body p-3 rounded">
-                                <div class="d-flex align-items-center mb-2">
-                                    <div class="flex-shrink-0">
-                                        <span class="p-1 d-block bg-warning rounded-circle">
-                                            <span class="visually-hidden">New alerts</span>
-                                        </span>
-                                    </div>
-                                    <div class="flex-grow-1 ms-2">
-                                        <p class="mb-0">Rent</p>
-                                    </div>
-                                </div>
-                                <h6 class="mb-0">$23,876 <small class="text-muted"><i class="ti ti-chevrons-up"></i>
-                                        +$763,43</small></h6>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="bg-body p-3 rounded">
-                                <div class="d-flex align-items-center mb-2">
-                                    <div class="flex-shrink-0">
-                                        <span class="p-1 d-block bg-success rounded-circle">
-                                            <span class="visually-hidden">New alerts</span>
-                                        </span>
-                                    </div>
-                                    <div class="flex-grow-1 ms-2">
-                                        <p class="mb-0">Download</p>
-                                    </div>
-                                </div>
-                                <h6 class="mb-0">$23,876 <small class="text-muted"><i class="ti ti-chevrons-up"></i>
-                                        +$763,43</small></h6>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="bg-body p-3 rounded">
-                                <div class="d-flex align-items-center mb-2">
-                                    <div class="flex-shrink-0">
-                                        <span class="p-1 d-block bg-light-primary rounded-circle">
-                                            <span class="visually-hidden">New alerts</span>
-                                        </span>
-                                    </div>
-                                    <div class="flex-grow-1 ms-2">
-                                        <p class="mb-0">Views</p>
-                                    </div>
-                                </div>
-                                <h6 class="mb-0">$23,876 <small class="text-muted"><i class="ti ti-chevrons-up"></i>
-                                        +$763,43</small></h6>
                             </div>
                         </div>
                     </div>

@@ -13,25 +13,47 @@ class DashboardController extends Controller
         $profile = Setting::all();
 
         // Biaya pasang
-        $biaya_pasang_conversion = Number::currency(count_order(), in: 'IDR', locale: 'us');
-        $biaya_pasang_last_conversion = Number::currency(count_last_order(), in: 'IDR', locale: 'us');
-        $biaya_pasang = count_order();
-        $biaya_pasang_last = count_last_order();
+        $biaya_pasang = Number::currency(count_order(), in: 'IDR', locale: 'us');
+        $biaya_pasang_last = Number::currency(count_last_order(), in: 'IDR', locale: 'us');
+        $biaya_pasang_real = count_order();
+        $biaya_pasang_last_real = count_last_order();
         // Customer New
         $new_customer = new_customer();
         $last_new_customer = last_customer();
         // Pendapatan
         $pendapatan = Number::currency(count_pendapatan(), in: 'IDR', locale: 'us');
         $pendapatan_last = Number::currency(count_pendapatan_last(), in: 'IDR', locale: 'us');
+        $pendapatan_real = count_pendapatan();
+        $pendapatan_last_real = count_pendapatan_last();
+
         // Pengeluaran
         $pengeluaran = Number::currency(count_pengeluaran(), in: 'IDR', locale: 'us');
         $pengeluaran_last = Number::currency(count_pengeluaran_last(), in: 'IDR', locale: 'us');
+        $pengeluaran_real = count_pengeluaran();
+        $pengeluaran_last_real = count_pengeluaran_last();
+
         $income = pemasukan_chart();
         $outcome = pengeluaran_chart();
 
         return view(
             'backend.pages.dashboard',
-            compact('profile', 'biaya_pasang', 'biaya_pasang_conversion', 'biaya_pasang_last', 'biaya_pasang_last_conversion', 'new_customer', 'last_new_customer', 'pendapatan', 'pendapatan_last', 'pengeluaran', 'pengeluaran_last', 'income', 'outcome')
+            compact('profile',
+            'biaya_pasang',
+            'biaya_pasang_last',
+            'biaya_pasang_real',
+            'biaya_pasang_last_real',
+            'new_customer',
+            'last_new_customer',
+            'pendapatan',
+            'pendapatan_last',
+            'pendapatan_real',
+            'pendapatan_last_real',
+            'pengeluaran',
+            'pengeluaran_last',
+            'pengeluaran_real',
+            'pengeluaran_last_real',
+            'income',
+            'outcome')
         );
     }
 }
