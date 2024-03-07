@@ -18,6 +18,7 @@ class EmployeeFactory extends Factory
                 "male",
                 "female",
             ]),
+            "gaji_pokok" => $this->faker->numberBetween(1000000, 3000000),
             "alamat_karyawan" => $this->faker->address,
             "kecamatan_karyawan" => $this->faker->address,
             "desa_karyawan" => $this->faker->address,

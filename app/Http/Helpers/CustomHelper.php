@@ -64,18 +64,18 @@ function last_customer()
 
 function pengeluaran_chart()
 {
-    $Jan = Order::whereMonth('created_at', 1)->where('')->sum();
-    $Feb = Order::whereMonth('created_at', 2)->where()->count();
-    $Mar = Order::whereMonth('created_at', 3)->get()->count();
-    $Apr = Order::whereMonth('created_at', 4)->get()->count();
-    $Mei = Order::whereMonth('created_at', 5)->get()->count();
-    $Jun = Order::whereMonth('created_at', 6)->get()->count();
-    $Jul = Order::whereMonth('created_at', 7)->get()->count();
-    $Agu = Order::whereMonth('created_at', 8)->get()->count();
-    $Sep = Order::whereMonth('created_at', 9)->get()->count();
-    $Okt = Order::whereMonth('created_at', 10)->get()->count();
-    $Nov = Order::whereMonth('created_at', 11)->get()->count();
-    $Des = Order::whereMonth('created_at', 12)->get()->count();
+    $Jan = Employee::where('is_active', 1)->sum('gaji_pokok');
+    $Feb = Employee::where('is_active', 1)->sum('gaji_pokok');
+    $Mar = Employee::where('is_active', 1)->sum('gaji_pokok');
+    $Apr = Employee::where('is_active', 1)->sum('gaji_pokok');
+    $Mei = Employee::where('is_active', 1)->sum('gaji_pokok');
+    $Jun = Employee::where('is_active', 1)->sum('gaji_pokok');
+    $Jul = Employee::where('is_active', 1)->sum('gaji_pokok');
+    $Agu = Employee::where('is_active', 1)->sum('gaji_pokok');
+    $Sep = Employee::where('is_active', 1)->sum('gaji_pokok');
+    $Okt = Employee::where('is_active', 1)->sum('gaji_pokok');
+    $Nov = Employee::where('is_active', 1)->sum('gaji_pokok');
+    $Des = Employee::where('is_active', 1)->sum('gaji_pokok');
 
     $chart_bulan = array(
         $Jan, $Feb, $Mar, $Apr,
@@ -86,19 +86,20 @@ function pengeluaran_chart()
     return $chart_bulan;
 }
 
-function pemasukan_chart(){
-    $Jan = Order::whereMonth('due_date', 1)->whereYear('due_date', date('Y'))->sum('biaya_pasang');
-    $Feb = Order::whereMonth('due_date', 2)->whereYear('due_date', date('Y'))->sum('biaya_pasang');
-    $Mar = Order::whereMonth('due_date', 3)->whereYear('due_date', date('Y'))->sum('biaya_pasang');
-    $Apr = Order::whereMonth('due_date', 4)->whereYear('due_date', date('Y'))->sum('biaya_pasang');
-    $Mei = Order::whereMonth('due_date', 5)->whereYear('due_date', date('Y'))->sum('biaya_pasang');
-    $Jun = Order::whereMonth('due_date', 6)->whereYear('due_date', date('Y'))->sum('biaya_pasang');
-    $Jul = Order::whereMonth('due_date', 7)->whereYear('due_date', date('Y'))->sum('biaya_pasang');
-    $Agu = Order::whereMonth('due_date', 8)->whereYear('due_date', date('Y'))->sum('biaya_pasang');
-    $Sep = Order::whereMonth('due_date', 9)->whereYear('due_date', date('Y'))->sum('biaya_pasang');
-    $Okt = Order::whereMonth('due_date', 10)->whereYear('due_date', date('Y'))->sum('biaya_pasang');
-    $Nov = Order::whereMonth('due_date', 11)->whereYear('due_date', date('Y'))->sum('biaya_pasang');
-    $Des = Order::whereMonth('due_date', 12)->whereYear('due_date', date('Y'))->sum('biaya_pasang');
+function pemasukan_chart()
+{
+    $Jan = Order::whereMonth('due_date', 1)->whereYear('due_date', date('Y'))->where('is_active', 1)->sum('biaya_pasang') + Order::leftJoin('pakets', 'pakets.id', '=', 'orders.paket_id')->whereMonth('orders.due_date', 1)->whereYear('orders.due_date', date('Y'))->where('orders.is_active', 1)->sum('pakets.harga_paket');
+    $Feb = Order::whereMonth('due_date', 2)->whereYear('due_date', date('Y'))->where('is_active', 1)->sum('biaya_pasang') + Order::leftJoin('pakets', 'pakets.id', '=', 'orders.paket_id')->whereMonth('orders.due_date', 2)->whereYear('orders.due_date', date('Y'))->where('orders.is_active', 1)->sum('pakets.harga_paket');
+    $Mar = Order::whereMonth('due_date', 3)->whereYear('due_date', date('Y'))->where('is_active', 1)->sum('biaya_pasang') + Order::leftJoin('pakets', 'pakets.id', '=', 'orders.paket_id')->whereMonth('orders.due_date', 3)->whereYear('orders.due_date', date('Y'))->where('orders.is_active', 1)->sum('pakets.harga_paket');
+    $Apr = Order::whereMonth('due_date', 4)->whereYear('due_date', date('Y'))->where('is_active', 1)->sum('biaya_pasang') + Order::leftJoin('pakets', 'pakets.id', '=', 'orders.paket_id')->whereMonth('orders.due_date', 4)->whereYear('orders.due_date', date('Y'))->where('orders.is_active', 1)->sum('pakets.harga_paket');
+    $Mei = Order::whereMonth('due_date', 5)->whereYear('due_date', date('Y'))->where('is_active', 1)->sum('biaya_pasang') + Order::leftJoin('pakets', 'pakets.id', '=', 'orders.paket_id')->whereMonth('orders.due_date', 5)->whereYear('orders.due_date', date('Y'))->where('orders.is_active', 1)->sum('pakets.harga_paket');
+    $Jun = Order::whereMonth('due_date', 6)->whereYear('due_date', date('Y'))->where('is_active', 1)->sum('biaya_pasang') + Order::leftJoin('pakets', 'pakets.id', '=', 'orders.paket_id')->whereMonth('orders.due_date', 6)->whereYear('orders.due_date', date('Y'))->where('orders.is_active', 1)->sum('pakets.harga_paket');
+    $Jul = Order::whereMonth('due_date', 7)->whereYear('due_date', date('Y'))->where('is_active', 1)->sum('biaya_pasang') + Order::leftJoin('pakets', 'pakets.id', '=', 'orders.paket_id')->whereMonth('orders.due_date', 7)->whereYear('orders.due_date', date('Y'))->where('orders.is_active', 1)->sum('pakets.harga_paket');
+    $Agu = Order::whereMonth('due_date', 8)->whereYear('due_date', date('Y'))->where('is_active', 1)->sum('biaya_pasang') + Order::leftJoin('pakets', 'pakets.id', '=', 'orders.paket_id')->whereMonth('orders.due_date', 8)->whereYear('orders.due_date', date('Y'))->where('orders.is_active', 1)->sum('pakets.harga_paket');
+    $Sep = Order::whereMonth('due_date', 9)->whereYear('due_date', date('Y'))->where('is_active', 1)->sum('biaya_pasang') + Order::leftJoin('pakets', 'pakets.id', '=', 'orders.paket_id')->whereMonth('orders.due_date', 9)->whereYear('orders.due_date', date('Y'))->where('orders.is_active', 1)->sum('pakets.harga_paket');
+    $Okt = Order::whereMonth('due_date', 10)->whereYear('due_date', date('Y'))->where('is_active', 1)->sum('biaya_pasang') + Order::leftJoin('pakets', 'pakets.id', '=', 'orders.paket_id')->whereMonth('orders.due_date', 10)->whereYear('orders.due_date', date('Y'))->where('orders.is_active', 1)->sum('pakets.harga_paket');
+    $Nov = Order::whereMonth('due_date', 11)->whereYear('due_date', date('Y'))->where('is_active', 1)->sum('biaya_pasang') + Order::leftJoin('pakets', 'pakets.id', '=', 'orders.paket_id')->whereMonth('orders.due_date', 11)->whereYear('orders.due_date', date('Y'))->where('orders.is_active', 1)->sum('pakets.harga_paket');
+    $Des = Order::whereMonth('due_date', 12)->whereYear('due_date', date('Y'))->where('is_active', 1)->sum('biaya_pasang') + Order::leftJoin('pakets', 'pakets.id', '=', 'orders.paket_id')->whereMonth('orders.due_date', 12)->whereYear('orders.due_date', date('Y'))->where('orders.is_active', 1)->sum('pakets.harga_paket');
 
     $chart_bulan = array(
         $Jan, $Feb, $Mar, $Apr,

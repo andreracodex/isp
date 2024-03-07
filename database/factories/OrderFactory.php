@@ -30,7 +30,7 @@ class OrderFactory extends Factory
             "installed_date" => $this->faker->date(),
             "installed_image" => $this->faker->imageUrl($format = 'jpg'),
             "installed_status" => $this->faker->numberBetween(0,1),
-            "due_date" => $this->faker->date(),
+            "due_date" => $this->faker->unique()->dateTimeBetween($startDate = 'now', $endDate = '+1 years', $timezone = null),
         ];
     }
 }

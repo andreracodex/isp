@@ -27,11 +27,11 @@ class DashboardController extends Controller
         $pengeluaran = Number::currency(count_pengeluaran(), in: 'IDR', locale: 'us');
         $pengeluaran_last = Number::currency(count_pengeluaran_last(), in: 'IDR', locale: 'us');
         $income = pemasukan_chart();
-        dd($income);
+        $outcome = pengeluaran_chart();
 
         return view(
             'backend.pages.dashboard',
-            compact('profile', 'biaya_pasang', 'biaya_pasang_conversion', 'biaya_pasang_last', 'biaya_pasang_last_conversion', 'new_customer', 'last_new_customer', 'pendapatan', 'pendapatan_last', 'pengeluaran')
+            compact('profile', 'biaya_pasang', 'biaya_pasang_conversion', 'biaya_pasang_last', 'biaya_pasang_last_conversion', 'new_customer', 'last_new_customer', 'pendapatan', 'pendapatan_last', 'pengeluaran', 'pengeluaran_last', 'income', 'outcome')
         );
     }
 }

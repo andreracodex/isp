@@ -6,10 +6,12 @@
 
 @section('styles')
 @endsection
-
 @push('script')
     <script src="{{ asset('/js/plugins/apexcharts.min.js') }}"></script>
     <script type="text/javascript">
+        var income = {{ Js::from($income) }};
+        var outcome = {{ Js::from($outcome) }};
+
         var options = {
             chart: {
                 fontFamily: "Inter var, sans-serif",
@@ -50,11 +52,11 @@
             series: [
                 {
                     name: "Income",
-                    data: {{$income}},
+                    data: income,
                 },
                 {
                     name: "Expense",
-                    data: {{$expenses}},
+                    data: outcome
                 },
             ],
             xaxis: {
