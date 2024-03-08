@@ -4,8 +4,8 @@
             <input type="checkbox" class="form-check-input input-success" id="customswitchlightv1-3" name="is_new"
                 @if ($customer->is_new == 1) @checked(true) @else @checked(false) @endif>
             <label class="form-check-label" for="customswitchlightv1-3">Pelanggan Baru <sup class="text-danger"
-                data-bs-toggle="tooltip" data-bs-placement="top"
-                data-bs-original-title="status pelanggan baru, jika non aktif pelanggan lama">*</sup></label>
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-original-title="status pelanggan baru, jika non aktif pelanggan lama">*</sup></label>
         </div>
         <div class="form-check form-switch custom-switch-v1 mt-3">
             <input type="checkbox" class="form-check-input input-success" id="customswitchlightv1-3" name="is_active"
@@ -35,7 +35,9 @@
             <svg class="bi flex-shrink-0 me-2" width="24" height="24">
                 <use xlink:href="#exclamation-triangle-fill"></use>
             </svg>
-            <div> Ini adalah pilihan untuk membuat tagihan bulan pertama untuk pelanggan baru, pemasangan baru, dan status pelanggan aktif. Harap perhatikan dengan cara arahkan kursor ke tanda * (Untuk penjelasan lebih lanjut) </div>
+            <div> Ini adalah pilihan untuk membuat tagihan bulan pertama untuk pelanggan baru, pemasangan baru, dan
+                status pelanggan aktif. Harap perhatikan dengan cara arahkan kursor ke tanda * (Untuk penjelasan lebih
+                lanjut) </div>
         </div>
     </div>
 </div>
@@ -62,7 +64,8 @@
 
     <div class="col-md-3 mb-3">
         <label class="form-label" for="nomor_ktp">Nomor KTP <sup class="text-danger" data-bs-toggle="tooltip"
-                data-bs-placement="top" data-bs-original-title="ktp wajib di input dibutuhkan untuk verifikasi">*</sup></label>
+                data-bs-placement="top"
+                data-bs-original-title="ktp wajib di input dibutuhkan untuk verifikasi">*</sup></label>
         <input type="number" min="0" class="form-control" name="nomor_ktp" id="nomor_ktp"
             value="{{ old('nomor_ktp') ?? $customer->nomor_ktp }}" placeholder="Nomor KTP">
         <div class="valid-feedback"> Opsional ! </div>
@@ -81,8 +84,8 @@
 <div class="row">
     <div class="col-md-6 mb-3">
         <label class="form-label" for="alamat_customer">Alamat Customer</label>
-        <textarea class="form-control" placeholder="Alamat Customer" id="exampleTextarea" name="alamat_customer" rows="3"
-            required>{{ old('alamat_customer') ?? $customer->alamat_customer }}</textarea>
+        <textarea class="form-control" placeholder="Alamat Customer" id="exampleTextarea" name="alamat_customer"
+            rows="3" required>{{ old('alamat_customer') ?? $customer->alamat_customer }}</textarea>
         <div class="invalid-feedback"> Harap isi alamat. </div>
     </div>
 
@@ -99,8 +102,8 @@
         <div class="input-group">
             <span class="input-group-text" id="nomor_telephone"><i class="ti ti-phone-call"></i></span>
             <input type="number" min="0" name="nomor_telephone" class="form-control" id="nomor_telephone"
-                value="{{ old('nomor_telephone') ?? preg_replace("/[^0-9]/", "", $customer->nomor_telephone) }}" placeholder="0812xxxx"
-                aria-describedby="nomor_telephone" required>
+                value="{{ old('nomor_telephone') ?? preg_replace('/[^0-9]/', '', $customer->nomor_telephone) }}"
+                placeholder="0812xxxx" aria-describedby="nomor_telephone" required>
             <div class="invalid-feedback"> Harap isi nomor HP. </div>
         </div>
     </div>
@@ -110,7 +113,8 @@
     <div class="col-md-6 mb-3">
         <label class="form-label" for="nama">Email Customer</label>
         <input type="email" class="form-control" name="email" id="email"
-            value="{{ old('email') ?? $customer->email }}@if($submit != 'Create'){{$customer->user->email}}@else{{$customer->email}}@endif" placeholder="mail@example" required>
+            value="{{ old('email') ?? $customer->email }}@if ($submit != 'Create') {{ $customer->user->email }}@else{{ $customer->email }} @endif"
+            placeholder="mail@example" required>
         <div class="valid-feedback"> Looks good! </div>
         <div class="invalid-feedback"> Harap isi email customer. </div>
     </div>
@@ -176,7 +180,8 @@
                 data-bs-toggle="tooltip" data-bs-placement="top"
                 data-bs-original-title="tanggal pemasangan layanan">*</sup></label>
         <input class="form-control" type="date" name="installed_date"
-            value="{{ old('installed_date') ?? \Carbon\Carbon::parse($order->installed_date)->format('Y-m-d') }}" id="demo-date-only" required>
+            value="{{ old('installed_date') ?? \Carbon\Carbon::parse($order->installed_date)->format('Y-m-d') }}"
+            id="demo-date-only" required>
         <div class="valid-feedback"> Looks good! </div>
         <div class="invalid-feedback"> Harap isi tanggal pemasangan. </div>
     </div>
@@ -186,7 +191,8 @@
                 data-bs-toggle="tooltip" data-bs-placement="top"
                 data-bs-original-title="tanggal jatuh tempo tagihan layanan">*</sup></label>
         <input class="form-control" type="date" name="due_date"
-            value="{{ old('due_date') ?? \Carbon\Carbon::parse($order->due_date)->format('Y-m-d') }}" id="demo-date-only" required>
+            value="{{ old('due_date') ?? \Carbon\Carbon::parse($order->due_date)->format('Y-m-d') }}"
+            id="demo-date-only" required>
         <div class="valid-feedback"> Looks good! </div>
         <div class="invalid-feedback"> Harap isi tanggal jatuh tempo. </div>
     </div>
@@ -218,8 +224,8 @@
     <div class="col-md-4 mb-3">
         <label class="form-label" for="kecamatan">Kecamatan <sup class="text-danger" data-bs-toggle="tooltip"
                 data-bs-placement="top" data-bs-original-title="Kecamatan dibutuhkan">*</sup></label>
-        <select class="select2 form-control @error('kecamatan') is-invalid @enderror" name="kecamatan" id="kecamatan"
-            required>
+        <select class="select2 form-control @error('kecamatan') is-invalid @enderror" name="kecamatan"
+            id="kecamatan" required>
             @if ($submit == 'Update')
                 @foreach ($districts as $district)
                     <option value="{{ $district->id }}"
@@ -273,53 +279,54 @@
     type="submit">{{ $submit }}</button>
 
 @push('script')
-    <script>
+    <script type="text/javascript">
         $(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
+            $('#kota').on('change', function() {
+                let id_kota = $(this).val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('region.kecamatan') }}",
+                    data: {
+                        id_kota: id_kota
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    cache: false,
+                    success: function(msg) {
+                        $('#kecamatan').html(msg);
+                    },
+                    error: function(data) {
+                        console.log('error: ', data);
+                    }
+                });
             });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            $('#kecamatan').on('change', function() {
+                let id_kecamatan = $(this).val();
 
-            $(function() {
-                $('#kota').on('change', function() {
-                    let id_kota = $('#kota').val();
-
-                    $.ajax({
-                        type: 'POST',
-                        url: "{{ route('region.kecamatan') }}",
-                        data: {
-                            id_kota: id_kota
-                        },
-                        cache: false,
-                        success: function(msg) {
-                            $('#kecamatan').html(msg);
-                        },
-                        error: function(data) {
-                            console.log('error: ', data);
-                        }
-                    })
-                })
-
-                $('#kecamatan').on('change', function() {
-                    let id_kecamatan = $('#kecamatan').val();
-
-                    $.ajax({
-                        type: 'POST',
-                        url: "{{ route('region.kelurahan') }}",
-                        data: {
-                            id_kecamatan: id_kecamatan
-                        },
-                        cache: false,
-                        success: function(msg) {
-                            $('#kelurahan').html(msg);
-                        },
-                        error: function(data) {
-                            console.log('error: ', data);
-                        }
-                    })
-                })
-            })
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('region.kelurahan') }}",
+                    data: {
+                        id_kecamatan: id_kecamatan
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    cache: false,
+                    success: function(msg) {
+                        $('#kelurahan').html(msg);
+                    },
+                    error: function(data) {
+                        console.log('error: ', data);
+                    }
+                });
+            });
         });
     </script>
 @endpush
