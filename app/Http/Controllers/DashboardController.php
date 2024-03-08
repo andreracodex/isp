@@ -13,22 +13,22 @@ class DashboardController extends Controller
         $profile = Setting::all();
 
         // Biaya pasang
-        $biaya_pasang = Number::currency(count_order(), in: 'IDR', locale: 'us');
-        $biaya_pasang_last = Number::currency(count_last_order(), in: 'IDR', locale: 'us');
+        $biaya_pasang = Number::currency(count_order(), in: 'IDR', locale: 'id');
+        $biaya_pasang_last = Number::currency(count_last_order(), in: 'IDR', locale: 'id');
         $biaya_pasang_real = count_order();
         $biaya_pasang_last_real = count_last_order();
         // Customer New
         $new_customer = new_customer();
         $last_new_customer = last_customer();
         // Pendapatan
-        $pendapatan = Number::currency(count_pendapatan(), in: 'IDR', locale: 'us');
-        $pendapatan_last = Number::currency(count_pendapatan_last(), in: 'IDR', locale: 'us');
+        $pendapatan = Number::currency(count_pendapatan(), in: 'IDR', locale: 'id');
+        $pendapatan_last = Number::currency(count_pendapatan_last(), in: 'IDR', locale: 'id');
         $pendapatan_real = count_pendapatan();
         $pendapatan_last_real = count_pendapatan_last();
 
         // Pengeluaran
-        $pengeluaran = Number::currency(count_pengeluaran(), in: 'IDR', locale: 'us');
-        $pengeluaran_last = Number::currency(count_pengeluaran_last(), in: 'IDR', locale: 'us');
+        $pengeluaran = Number::currency(count_pengeluaran(), in: 'IDR', locale: 'id');
+        $pengeluaran_last = Number::currency(count_pengeluaran_last(), in: 'IDR', locale: 'id');
         $pengeluaran_real = count_pengeluaran();
         $pengeluaran_last_real = count_pengeluaran_last();
 
