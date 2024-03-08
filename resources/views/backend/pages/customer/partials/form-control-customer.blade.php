@@ -287,7 +287,7 @@
 
                     $.ajax({
                         type: 'POST',
-                        url: "{{ route('getKecamatan') }}",
+                        url: "{{ route('region.kecamatan') }}",
                         data: {
                             id_kota: id_kota
                         },
@@ -306,7 +306,7 @@
 
                     $.ajax({
                         type: 'POST',
-                        url: "{{ route('getKelurahan') }}",
+                        url: "{{ route('region.kelurahan') }}",
                         data: {
                             id_kecamatan: id_kecamatan
                         },
