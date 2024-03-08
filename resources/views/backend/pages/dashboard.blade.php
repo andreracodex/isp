@@ -345,7 +345,7 @@
                                     </div>
                                 </div>
                                 <h6 class="mb-0">
-                                    {{ Number::currency($pendapatan_real + $biaya_pasang_real, in: 'IDR', locale: 'us') }}
+                                    {{ Number::currency($pendapatan_real + $biaya_pasang_real, in: 'IDR', locale: 'id') }}
                                 </h6>
                             </div>
                         </div>
@@ -361,7 +361,7 @@
                                         <p class="mb-0">Pengeluaran</p>
                                     </div>
                                 </div>
-                                <h6 class="mb-0">{{ Number::currency($pengeluaran_real, in: 'IDR', locale: 'us') }}</h6>
+                                <h6 class="mb-0">{{ Number::currency($pengeluaran_real, in: 'IDR', locale: 'id') }}</h6>
                             </div>
                         </div>
                         <?php
@@ -382,7 +382,7 @@
                                         <p class="mb-0">Result</p>
                                     </div>
                                 </div>
-                                <h6 class="mb-0">{{ Number::currency($total, in: 'IDR', locale: 'us') }}</h6>
+                                <h6 class="mb-0">{{ Number::currency($total, in: 'IDR', locale: 'id') }}</h6>
                             </div>
                         </div>
                     </div>
