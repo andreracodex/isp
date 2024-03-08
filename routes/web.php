@@ -144,10 +144,8 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     Route::get('/pdf', [PDFController::class, 'PDFInventaris'])->name('pdf.inventaris');
 
     //Indoregion
-    Route::prefix('region')->group(function() {
-        Route::post('/kota', [IndoregionController::class, 'getKota'])->name('region.kota');
-        Route::post('/kecamatan', [IndoregionController::class, 'getKecamatan'])->name('region.kecamatan');
-        Route::post('/kelurahan', [IndoregionController::class, 'getKelurahan'])->name('region.kelurahan');
-    });
+    Route::post('/kota', [IndoregionController::class, 'getKota'])->name('region.kota');
+    Route::post('/kecamatan', [IndoregionController::class, 'getKecamatan'])->name('region.kecamatan');
+    Route::post('/kelurahan', [IndoregionController::class, 'getKelurahan'])->name('region.kelurahan');
 });
 
