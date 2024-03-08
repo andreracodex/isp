@@ -92,7 +92,7 @@
                         render: function(data, type, row) {
                             if (row.nama_customer != null) {
                                 return '<div class="row"><div class="col-auto pe-0"><img src="images/user/avatar-3.jpg" alt="user-image" class="wid-40 rounded-circle"></div><div class="col"><h6 class="mb-0">' +
-                                    row.nama_customer + '</h6><p class="text-muted f-12 mb-0">' +
+                                    row.nama_customer + '</h6><p class="text-muted f-12 mb-0">GDN-' +
                                     row.nomor_layanan + '</p></div></div>';
                             } else {
                                 return '<div class="row"><div class="col-auto pe-0"><img src="images/user/avatar-3.jpg" alt="user-image" class="wid-40 rounded-circle"></div><div class="col"><h6 class="mb-0">Alberta Robbins</h6><p class="text-muted f-12 mb-0">miza@gmail.com</p></div></div>';
@@ -123,6 +123,10 @@
                         }
                     },
                     {
+                        data: 'due_date',
+                        name: 'due_date',
+                    },
+                    {
                         data: 'harga_paket',
                         name: 'harga_paket'
                     },
@@ -131,11 +135,11 @@
                         name: 'is_active',
                         render: function(data, type, row) {
                             if (row.is_active == 0) {
-                                return '<span class="badge bg-light-danger rounded-pill f-12"> Not Active </span>';
+                                return '<span class="badge bg-light-danger rounded-pill f-12"> Belum Lunas </span>';
                             } else if (row.is_active == 1) {
-                                return '<span class="badge bg-light-success rounded-pill f-12"> Active </span>';
+                                return '<span class="badge bg-light-success rounded-pill f-12"> Lunas </span>';
                             } else {
-                                return '<span class="badge bg-light-primary rounded-pill f-12"> - </span>';
+                                return '<span class="badge bg-light-primary rounded-pill f-12"> Isolir </span>';
                             }
                         }
                     },
@@ -249,11 +253,12 @@
                                 <tr>
                                     <th style="width: 10px;">#</th>
                                     <th></th>
-                                    <th>Nama - ID</th>
+                                    <th>Nama - Nomor ID</th>
                                     <th>Lokasi Server</th>
                                     <th>Alamat</th>
                                     <th>Telpon</th>
                                     <th>Paket</th>
+                                    <th>Jatuh Tempo</th>
                                     <th>Harga</th>
                                     <th>Status</th>
                                     <th>Action</th>

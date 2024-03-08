@@ -91,14 +91,15 @@
                         name: 'nama_customer',
                         render: function(data, type, row) {
                             if (row.nama_customer != null) {
-                                return '<div class="row"><div class="col-auto pe-0"><img src="{{asset("/images/user/avatar-1.jpg")}}" alt="user-image" class="wid-40 rounded-circle"></div><div class="col"><h6 class="mb-0">' +
-                                    row.nama_customer +
-                                    '</h6><p class="text-muted f-12 mb-0">GDN-' +
-                                    row.nomor_layanan + '</p></div></div>';
+                                return '<div class="row"><div class="col-auto pe-0"><img src="{{asset("/images/user/avatar-1.jpg")}}" alt="user-image" class="wid-40 rounded-circle"></div><div class="col auto pt-2">'+row.nama_customer+'</div>'
                             } else {
                                 return '<div class="row"><div class="col-auto pe-0"><img src="{{asset("/images/user/avatar-1.jpg")}}" alt="user-image" class="wid-40 rounded-circle"></div><div class="col"><h6 class="mb-0">Alberta Robbins</h6><p class="text-muted f-12 mb-0">miza@gmail.com</p></div></div>';
                             }
                         }
+                    },
+                    {
+                        data: 'nomor_layanan',
+                        name: 'nomor_layanan'
                     },
                     {
                         data: 'alamat_customer',
@@ -231,7 +232,8 @@
                                 <tr>
                                     <th style="width: 10px;">#</th>
                                     <th></th>
-                                    <th>Nama - ID</th>
+                                    <th>Nama</th>
+                                    <th>Nomor ID</th>
                                     <th>Alamat</th>
                                     <th>Telpon</th>
                                     <th>Status</th>

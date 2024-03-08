@@ -12,3 +12,43 @@
      - Ticket -- progress
      - Wa Console -- progress
      - Tripay -- progress
+
+
+2. Revisi :
+1. Data Pelanggan :
+- New Pelanggan = Tidak muncul otomatis kecamatan dan kelurahan setelah isi Kota -- done
+- No KTP = Status Optional Aja (biru) -- done
+- View Data = Not Found -- progress 
+- Delete = Tidak Berfungsi -- done
+- ID Pelanggan = dibuat terpisah dan Otomatis tercreate 8 angka saat Add New Pelanggan -- done
+- Edit Data = Kota, Kecamatan, kelurahan Double Data -- form is single (created, updated) -- done
+
+2. Paket Internet
+- Create Paket = Load Error Page. Tapi Data Terinput -- done
+- Diskon Paket = Disable Aja -- done
+- Delete Paket = Tidak Berfungsi -- progress
+
+3. Inventaris Barang
+- View Data = Not Found -- progress
+- Delete = Error Page -- progress
+- Add Barang = Sorry! The jenis barang field is required. -- progress
+
+4. Tagihan
+- View Data -- progress
+- Edit Data -- progress
+- Delete = Error Page -- progress
+- Tab Menu Tambahan = Periode Bulan, Total Tagihan, Tunggakan, Status Lunas/Belum
+
+5. Employe
+# View Data = Error Page
+# Edit Data = Blank
+# Delete = Tidak Berfungsi
+# Add Karyawan = Direct to Inventaris
+
+6. All Menu :
+# Nominal IDR dikasih titik atau koma agar mudah terbaca
+
+7. Dashboard
+# View = Tagihan Terbayar
+# View = Tagihan Belum Terbayar
+# View = Total Saldo 

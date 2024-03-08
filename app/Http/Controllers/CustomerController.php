@@ -60,7 +60,6 @@ class CustomerController extends Controller
         $validated = $request->validate([
             'nama_customer' => 'required',
             'nomor_telephone' => 'required|min:10|max:14',
-            'nomor_ktp' => 'required|min:16|max:20',
             'email' => 'required|email:dns|unique:users',
         ]);
 
@@ -101,8 +100,8 @@ class CustomerController extends Controller
         $customer = Customer::create([
             'user_id' => $user->id,
             'nama_customer' => $request->nama_customer,
-            'nomor_layanan' => mt_rand(111111 ,999999),
-            'nomor_ktp' => $request->nomor_ktp,
+            'nomor_layanan' => mt_rand(10000000 ,99999999),
+            'nomor_ktp' => $request->nomor_ktp ?? 0,
             'gender' => $request->gender,
             'alamat_customer' => $request->alamat_customer,
             'kodepos_customer' => $request->kodepos_customer,
@@ -152,7 +151,7 @@ class CustomerController extends Controller
         $validated = $request->validate([
             'nama_customer' => 'required',
             'nomor_telephone' => 'required|min:10|max:14',
-            'nomor_ktp' => 'required|min:16|max:20',
+            'nomor_layanan' => 'required|min:7|max:8'
         ]);
 
         if(!$validated){
@@ -191,7 +190,7 @@ class CustomerController extends Controller
         $customer->update([
             'nama_customer' => $request->nama_customer,
             'nomor_layanan' =>$request->nomor_layanan,
-            'nomor_ktp' => $request->nomor_ktp,
+            'nomor_ktp' => $request->nomor_ktp ?? 0,
             'gender' => $request->gender,
             'alamat_customer' => $request->alamat_customer,
             'kodepos_customer' => $request->kodepos_customer,

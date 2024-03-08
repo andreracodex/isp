@@ -57,11 +57,14 @@ class PaketController extends Controller
             'is_active' => 'required',
         ]);
 
+        if(!$validated){
+            return redirect()->route('paket.index')->with('error','Property is not valid .');
+        }
+
         $post = new Paket();
         $post->nama_paket = $request->input('nama_paket');
         $post->jenis_paket = $request->input('jenis_paket');
         $post->harga_paket = $request->input('harga_paket');
-        $post->disc = $request->input('disc');
 
         $active = $request->input('is_active');
         if ($active == 'ON' || $active == 'on') {
@@ -70,9 +73,8 @@ class PaketController extends Controller
             $post->is_active = 0;
         }
         $post->save();
-        $profile = Setting::all();
 
-        return view('backend.pages.paket.index', compact('profile'));
+        return redirect()->route('paket.index')->with('success','Berhasil Tambah Paket.');
     }
 
     public function show(Paket $paket)
@@ -89,7 +91,6 @@ class PaketController extends Controller
 
     public function update(Request $request, Paket $paket)
     {
-        $profile = Setting::all();
         $this->validate($request, [
             'nama_paket' => 'required',
             'jenis_paket' => 'required',
@@ -110,7 +111,7 @@ class PaketController extends Controller
         $paket->is_active = $is_active;
         $paket->save();
 
-        return view('backend.pages.paket.index', compact('profile'))->with(['success' => 'Data berhasil diubah!']);
+        return redirect()->route('paket.index')->with('success','Berhasil Edit Paket.');
     }
 
     public function destroy(Paket $paket)

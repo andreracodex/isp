@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-6 mb-3">
+    <div class="col-md-4 mb-3">
         <label class="form-label" for="nama">Nama Paket</label>
         <input type="text" class="form-control" name="nama_paket" id="nama_paket"
             value="{{ old('nama_paket') ?? $paket->nama_paket }}" placeholder="Nama Paket" required>
@@ -10,7 +10,7 @@
         @enderror
     </div>
 
-    <div class="col-md-4 mb-3">
+    <div class="col-md-3 mb-3">
         <label class="form-label" for="jenis_paket">Jenis Paket Layanan</label>
         <input type="text" class="form-control" name="jenis_paket" id="jenis_paket"
             value="{{ old('jenis_paket') ?? $paket->jenis_paket }}" placeholder="Paket Layanan" required>
@@ -20,9 +20,6 @@
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
-</div>
-
-<div class="row">
     <div class="col-md-3 mb-3">
         <label class="form-label" for="harga_paket">Harga Paket Internet</label>
         <input type="number" min="0" class="form-control" name="harga_paket" id="harga_paket"
@@ -32,6 +29,21 @@
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
+    <div class="col-md-1 mb-3">
+        <div class="form-check form-switch custom-switch-v1">
+            <input type="checkbox" class="form-check-input input-success" id="customswitchlightv1-3"
+                name="is_active" @if ($paket->is_active == 1) @checked(true) @else @checked(false) @endif>
+            <label class="form-check-label" for="customswitchlightv1-3">Active</label>
+
+            @error('is_active')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+    </div>
+</div>
+{{--
+<div class="row">
+
 
     <div class="col-md-3 mb-3">
         <label class="form-label" for="disc">Diskon Paket <sup>( % )</sup></label>
@@ -46,18 +58,7 @@
         </div>
     </div>
 
-    <div class="col-md-3 mb-3">
-        <div class="form-check form-switch custom-switch-v1">
-            <input type="checkbox" class="form-check-input input-success" id="customswitchlightv1-3"
-                name="is_active" @if ($paket->is_active == 1) @checked(true) @else @checked(false) @endif>
-            <label class="form-check-label" for="customswitchlightv1-3">Active</label>
-
-            @error('is_active')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-    </div>
-</div>
+</div> --}}
 
 <div class="form-group">
     <div class="form-check">

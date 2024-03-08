@@ -46,6 +46,11 @@ Breadcrumbs::for('paket.update', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Update Paket Internet', route('paket.update', 'paket'));
 });
+Breadcrumbs::for('paket.store', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Simpan Paket Internet', route('paket.store', 'paket'));
+});
+
 
 // Location Management
 Breadcrumbs::for('location.index', function (BreadcrumbTrail $trail): void {

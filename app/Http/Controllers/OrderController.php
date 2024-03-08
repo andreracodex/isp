@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Setting;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Number;
 use Yajra\DataTables\Facades\DataTables;
@@ -36,6 +37,9 @@ class OrderController extends Controller
             })
             ->editColumn('jenis_paket', function (Order $order) {
                 return $order->paket->jenis_paket;
+            })
+            ->editColumn('due_date', function (Order $order) {
+                return Carbon::parse($order->due_date)->format('F-Y');
             })
             ->editColumn('harga_paket', function (Order $order) {
                 return Number::currency($order->paket->harga_paket, in: 'IDR', locale: 'us');
