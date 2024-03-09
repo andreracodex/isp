@@ -42,19 +42,19 @@
 - Delete = Error Page -- done
 - Tab Menu Tambahan 
     - Periode Bulan -- done 
-    - Total Tagihan, 
-    - Tunggakan, Status Lunas/Belum
+    - Total Tagihan, -- done 
+    - Tunggakan, Status Lunas/Belum -- progress in view
 
 5. Employe
-# View Data = Error Page
-# Edit Data = Blank
-# Delete = Tidak Berfungsi
-# Add Karyawan = Direct to Inventaris
+- View Data = Error Page
+- Edit Data = Blank
+- Delete = Tidak Berfungsi
+- Add Karyawan = Direct to Inventaris
 
 6. All Menu :
-# Nominal IDR dikasih titik atau koma agar mudah terbaca
+- Nominal IDR dikasih titik atau koma agar mudah terbaca
 
 7. Dashboard
-# View = Tagihan Terbayar
-# View = Tagihan Belum Terbayar
-# View = Total Saldo 
+- View = Tagihan Terbayar
+- View = Tagihan Belum Terbayar
+- View = Total Saldo 
