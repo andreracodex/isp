@@ -46,8 +46,8 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::get('/create', [EmployeeController::class, 'create'])->name('employee.create');
         Route::get('/view', [EmployeeController::class, 'view'])->name('employee.view');
         Route::get('{emp}/edit', [EmployeeController::class, 'edit'])->name('employee.edit');
-        Route::put('{emp}/edit', [EmployeeController::class, 'update'])->name('customer.update');
-        Route::delete('', [EmployeeController::class, 'destroy'])->name('employee.destroy');
+        Route::put('{emp}/edit', [EmployeeController::class, 'update'])->name('employee.update');
+        Route::get('{emp}/delete', [EmployeeController::class, 'delete'])->name('employee.delete');
     });
     // Customer
     Route::prefix('customer')->group(function(){
