@@ -213,7 +213,9 @@
                         {{ $kota->name }}
                     </option>
                 @endif
-                <option value="{{ $kota->id }}">{{ $kota->name }}</option>
+                @if ($submit == 'Create')
+                    <option value="{{ $kota->id }}">{{ $kota->name }}</option>
+                @endif
             @endforeach
 
         </select>
@@ -226,15 +228,18 @@
                 data-bs-placement="top" data-bs-original-title="Kecamatan dibutuhkan">*</sup></label>
         <select class="select2 form-control @error('kecamatan') is-invalid @enderror" name="kecamatan"
             id="kecamatan" required>
-            @if ($submit == 'Update')
-                @foreach ($districts as $district)
+
+            @foreach ($districts as $district)
+                @if ($submit == 'Update')
                     <option value="{{ $district->id }}"
                         @if ($district->id == $customer->village->district->id) @selected(true) @endif)>
                         {{ $district->name }}
                     </option>
+                @endif
+                @if ($submit == 'Create')
                     <option value="{{ $district->id }}">{{ $district->name }}</option>
-                @endforeach
-            @endif
+                @endif
+            @endforeach
 
         </select>
         <div class="invalid-feedback"> Harap isi kecamatan. </div>
@@ -246,15 +251,17 @@
                 data-bs-placement="top" data-bs-original-title="Kelurahan dibutuhkan">*</sup></label>
         <select class="select2 form-control @error('kelurahan') is-invalid @enderror" name="kelurahan"
             id="kelurahan" required>
-            @if ($submit == 'Update')
-                @foreach ($villages as $village)
+            @foreach ($villages as $village)
+                @if ($submit == 'Update')
                     <option value="{{ $village->id }}"
                         @if ($village->id == $customer->village->id) @selected(true) @endif)>
                         {{ $village->name }}
                     </option>
+                @endif
+                @if ($submit == 'Create')
                     <option value="{{ $village->id }}">{{ $village->name }}</option>
-                @endforeach
-            @endif
+                @endif
+            @endforeach
 
         </select>
         <div class="invalid-feedback"> Harap isi desa. </div>
