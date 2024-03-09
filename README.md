@@ -39,8 +39,11 @@
 4. Tagihan
 - View Data -- progress
 - Edit Data -- progress
-- Delete = Error Page -- progress
-- Tab Menu Tambahan = Periode Bulan, Total Tagihan, Tunggakan, Status Lunas/Belum
+- Delete = Error Page -- done
+- Tab Menu Tambahan 
+    - Periode Bulan -- done 
+    - Total Tagihan, 
+    - Tunggakan, Status Lunas/Belum
 
 5. Employe
 # View Data = Error Page

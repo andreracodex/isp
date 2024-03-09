@@ -14,7 +14,50 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+            function formatRupiah(angka) {
+                var number_string = angka.toString(),
+                    sisa = number_string.length % 3,
+                    rupiah = number_string.substr(0, sisa),
+                    ribuan = number_string.substr(sisa).match(/\d{3}/g);
+
+                if (ribuan) {
+                    separator = sisa ? '.' : '';
+                    rupiah += separator + ribuan.join('.');
+                }
+
+                return 'Rp ' + rupiah;
+            };
+
             let table = $('#order').DataTable({
+                "footerCallback": function(row, data, start, end, display) {
+                    var api = this.api(),
+                        data;
+                    var intVal = function(i) {
+                        return typeof i === 'string' ?
+                            i.replace(/[^\d]/g, '') * 1 :
+                            typeof i === 'number' ?
+                            i : 0;
+                    };
+
+                    // Total over all pages
+                    total = api
+                        .column(7, {
+                            search: 'applied'
+                        })
+                        .data()
+                        .reduce(function(a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    var number = total;
+                    let formatted = formatRupiah(number);
+
+                    // Update footer
+                    $(api.column(7).footer()).html(
+                        '<span class="badge bg-light-danger rounded-pill f-12">' + formatted +
+                        '</span>');
+                },
                 dom: "<'row'<'col-sm-12 col-md-6'Bl><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 deferRender: true,
                 processing: true,
@@ -92,7 +135,8 @@
                         render: function(data, type, row) {
                             if (row.nama_customer != null) {
                                 return '<div class="row"><div class="col-auto pe-0"><img src="images/user/avatar-3.jpg" alt="user-image" class="wid-40 rounded-circle"></div><div class="col"><h6 class="mb-0">' +
-                                    row.nama_customer + '</h6><p class="text-muted f-12 mb-0">GDN-' +
+                                    row.nama_customer +
+                                    '</h6><p class="text-danger f-12 mb-0">GDN-' +
                                     row.nomor_layanan + '</p></div></div>';
                             } else {
                                 return '<div class="row"><div class="col-auto pe-0"><img src="images/user/avatar-3.jpg" alt="user-image" class="wid-40 rounded-circle"></div><div class="col"><h6 class="mb-0">Alberta Robbins</h6><p class="text-muted f-12 mb-0">miza@gmail.com</p></div></div>';
@@ -101,11 +145,16 @@
                     },
                     {
                         data: 'nama_location',
-                        name: 'nama_location'
-                    },
-                    {
-                        data: 'alamat_customer',
-                        name: 'alamat_customer'
+                        name: 'nama_location',
+                        render: function(data, type, row) {
+                            if (row.nama_location != null) {
+                                return '<div class="row"><div class="col"><h6 class="mb-0">' +
+                                    row.alamat_customer + '</h6><p class="text-danger f-12 mb-0">' +
+                                    row.nama_location + '</p></div></div>';
+                            } else {
+                                return '<div class="row"><div class="col-auto pe-0"><img src="images/user/avatar-3.jpg" alt="user-image" class="wid-40 rounded-circle"></div><div class="col"><h6 class="mb-0">Alberta Robbins</h6><p class="text-muted f-12 mb-0">miza@gmail.com</p></div></div>';
+                            }
+                        }
                     },
                     {
                         data: 'nomor_telephone',
@@ -116,7 +165,8 @@
                         name: 'jenis_paket',
                         render: function(data, type, row) {
                             if (row.jenis_paket != null) {
-                                return '<span class="badge bg-light-primary rounded-pill f-12">'+row.jenis_paket+'</span>';
+                                return '<span class="badge bg-light-primary rounded-pill f-12">' +
+                                    row.jenis_paket + '</span>';
                             } else {
                                 return '<span class="badge bg-light-danger rounded-pill f-12"> - </span>';
                             }
@@ -204,6 +254,49 @@
             });
         });
     </script>
+    <script src="{{ asset('/js/plugins/sweetalert2.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#order').on('click', '.hapusOrder', function() {
+                let idItem = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Konfirmasi Hapus',
+                    text: "Anda yakin ingin menghapus data ini dari list, Data ini adalah data tagihan ?",
+                    icon: 'warning',
+                    data: idItem,
+                    showCancelButton: true,
+                    confirmButtonColor: '#10bd9d',
+                    cancelButtonColor: '#ca2062',
+                    confirmButtonText: 'Ya, Dihapus !'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            method: 'GET',
+                            url: "{{ route('order.delete', ':id') }}".replace(
+                                ':id', idItem),
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                id: idItem,
+                            },
+                            success: function(data) {
+                                window.location.reload();
+                                Swal.fire(
+                                    'Berhasil!',
+                                    'Item berhasil dihapus',
+                                    'success'
+                                )
+                            },
+                            error: function(error) {
+                                Swal.fire('Error', 'Gagal menghapus barang', 'error');
+                                // Handle error
+                            }
+                        });
+                    }
+                })
+            });
+        });
+    </script>
 @endpush
 
 @section('isi')
@@ -247,25 +340,59 @@
                 </div>
                 <div class="card-body">
                     <div class="dt-responsive table-responsive">
+                        <div class="row">
+                            <div class="col-sm-4 col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Nama Customer</label>
+                                    <select name="customer_id" id="customer_id" class="form-control select2" required>
+                                        @foreach ($customer as $cust)
+                                        <option value="{{ $cust->id }}">{{  $cust->nama_customer }} </option>
+                                        @endforeach
+                                    </select>
+                                    <div class="invalid-tooltip" style="top: 0">Status Aktif required</div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3 col-md-2">
+                                <div class="mb-3">
+                                    <label class="form-label">Jatuh Tempo Periode</label>
+                                    <select name="jatuh_tempo" id="jatuh_tempo" class="form-control select2" required>
+                                        @foreach ($date as $jatuh)
+                                        <option value="{{ $jatuh->id }}">{{ \Carbon\Carbon::parse($jatuh->bulan_periode)->format('F Y') }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="invalid-tooltip" style="top: 0">Status Aktif required</div>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <table id="order" class="table compact table-striped table-hover table-bordered wrap"
                             style="width:100%">
                             <thead>
                                 <tr>
                                     <th style="width: 10px;">#</th>
                                     <th></th>
-                                    <th>Nama - Nomor ID</th>
-                                    <th>Lokasi Server</th>
-                                    <th>Alamat</th>
+                                    <th>Nama Customer & Nomor ID</th>
+                                    <th>Alamat & Lokasi</th>
                                     <th>Telpon</th>
                                     <th>Paket</th>
                                     <th>Jatuh Tempo</th>
-                                    <th>Harga</th>
+                                    <th>Tagihan</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="7" style="text-align:right">Total Tagihan:</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Order;
+use App\Models\Periode;
 use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Number;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -13,6 +16,8 @@ class OrderController extends Controller
 {
     public function index(Request $request){
         $profile = Setting::all();
+        $customer = Customer::all();
+        $date = Periode::where('is_active', 1)->get();
         $data_table = Order::orderBy('customer_id', 'ASC')->get();
         if ($request->ajax()){
             return DataTables::of($data_table)
@@ -39,20 +44,35 @@ class OrderController extends Controller
                 return $order->paket->jenis_paket;
             })
             ->editColumn('due_date', function (Order $order) {
-                return Carbon::parse($order->due_date)->format('F-Y');
+                return Carbon::parse($order->due_date)->format('F Y');
             })
             ->editColumn('harga_paket', function (Order $order) {
-                return Number::currency($order->paket->harga_paket, in: 'IDR', locale: 'us');
+                $formatted_price = Number::currency($order->paket->harga_paket, 'IDR', 'id');
+                $formatted_price = str_replace(",00", "", $formatted_price);
+                return $formatted_price;
             })
             ->addColumn('action', function (Order $order) {
                 return "
                 <a href=". route('order.view', $order->id)." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
                 <a href=". route('order.edit', $order->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Data'><i class='fa fa-pencil-alt'></i></a>
-                <a href=". route('order.delete', $order->id) ." class='avtar avtar-xs btn-link-danger btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Delete Data'><i class='fa fa-trash-alt'></i></a>
-            ";
+                <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusOrder' data-id='$order->id'><i class='fa fa-trash-alt'></i></button>
+                ";
             })
             ->make(true);
         }
-        return view('backend.pages.order.index', compact('profile'));
+        return view('backend.pages.order.index', compact('profile', 'customer', 'date'));
+    }
+
+
+    public function delete(String $id){
+        $order = Order::find($id);
+        if($order){
+            Order::where('id', $id)->delete();
+            return redirect()->back()->with(['success' => 'Data berhasil dihapus !']);
+        }else{
+            return redirect()->back()->with(['error' => 'Data failed dihapus !']);
+        }
     }
 }
+
+

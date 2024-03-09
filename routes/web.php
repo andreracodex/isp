@@ -128,7 +128,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::post('/store', [OrderController::class, 'store'])->name('order.store');
         Route::get('{order}/edit', [OrderController::class, 'edit'])->name('order.edit');
         Route::put('{order}/update', [OrderController::class, 'update'])->name('order.update');
-        Route::delete('{order}/delete', [OrderController::class, 'delete'])->name('order.delete');
+        Route::get('{order}/delete', [OrderController::class, 'delete'])->name('order.delete');
     });
     // Ticket
     Route::prefix('ticket')->group(function() {
