@@ -94,7 +94,7 @@
                                 return '<div class="row"><div class="col-auto pe-0"><img src="{{ asset('/images/user/avatar-1.jpg') }}" alt="user-image" class="wid-40 rounded-circle"></div><div class="col auto pt-2">' +
                                     row.nama_customer + '</div>'
                             } else {
-                                return '<div class="row"><div class="col-auto pe-0"><img src="{{ asset('/images/user/avatar-1.jpg') }}" alt="user-image" class="wid-40 rounded-circle"></div><div class="col"><h6 class="mb-0">Alberta Robbins</h6><p class="text-muted f-12 mb-0">miza@gmail.com</p></div></div>';
+                                return '-';
                             }
                         }
                     },
