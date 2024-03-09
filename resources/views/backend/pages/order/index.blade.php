@@ -355,7 +355,9 @@
 
                             <div class="col-sm-3 col-md-2">
                                 <div class="mb-3">
-                                    <label class="form-label">Jatuh Tempo Periode</label>
+                                    <label class="form-label headerbutton">Jatuh Tempo <sup class="mt-2"><b><a
+                                        href="{{ route('location.index') }}">
+                                        <i class="ti ti-plus me-1"></i>Tambah Periode</a></b></sup></label>
                                     <select name="jatuh_tempo" id="jatuh_tempo" class="form-control select2" required>
                                         @foreach ($date as $jatuh)
                                         <option value="{{ $jatuh->id }}">{{ \Carbon\Carbon::parse($jatuh->bulan_periode)->format('F Y') }}</option>
