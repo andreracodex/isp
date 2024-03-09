@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('periodes', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('bulan_periode');
+            $table->datetime('bulan_periode');
             $table->integer('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();
