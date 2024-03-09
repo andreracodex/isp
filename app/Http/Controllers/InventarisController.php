@@ -39,9 +39,9 @@ class InventarisController extends Controller
             })
             ->addColumn('action', function (Inventaris $inve) {
                 return "
-                <a href=".$inve->id." class='btn btn-sm btn-secondary d-inline-flex' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
-                <a href=". route('inve.edit', $inve->id) ." class='btn btn-sm btn-warning d-inline-flex' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Data'><i class='fa fa-pencil-alt'></i></a>
-                <a href=". route('inve.delete', $inve->id) ." class='btn btn-sm btn-danger d-inline-flex' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Delete Data'><i class='fa fa-trash-alt'></i></a>
+                <a href=".$inve->id." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
+                <a href=". route('inve.edit', $inve->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Data'><i class='fa fa-pencil-alt'></i></a>
+                <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusInven' data-id='$inve->id'><i class='fa fa-trash-alt'></i></button>
             ";
             })
             ->make(true);
@@ -134,11 +134,14 @@ class InventarisController extends Controller
         return redirect()->route('inve.index')->with(['success' => 'Data berhasil diubah!']);
     }
 
-    public function destroy(string $id)
+    public function delete(string $id)
     {
-        $inve = Inventaris::findOrFail($id);
-        $inve->delete();
-
-        return redirect()->route('inve.index')->with(['success' => 'Data berhasil dihapus!']);
+        $inve = Inventaris::find($id);
+        if($inve){
+            Inventaris::where('id', $id)->delete();
+            return redirect()->back()->with(['success' => 'Data berhasil dihapus !']);
+        }else{
+            return redirect()->back()->with(['error' => 'Data failed dihapus !']);
+        }
     }
 }

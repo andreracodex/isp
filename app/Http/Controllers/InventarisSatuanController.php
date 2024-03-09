@@ -28,7 +28,7 @@ class InventarisSatuanController extends Controller
             ->addColumn('action', function (InventarisSatuan $satuan) {
                 return "
                 <a href=". route('invesatuan.edit', $satuan->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-pencil-alt'></i></a>
-                <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusItem' data-id='$satuan->id'><i class='fa fa-trash-alt'></i></button>
+                <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusSatuan' data-id='$satuan->id'><i class='fa fa-trash-alt'></i></button>
                 ";
             })
             ->make(true);
@@ -76,7 +76,6 @@ class InventarisSatuanController extends Controller
 
     public function update(Request $request, InventarisSatuan $invesatuan)
     {
-        $profile = Setting::all();
 
         $this->validate($request, [
             'nama' => 'required',
@@ -94,12 +93,17 @@ class InventarisSatuanController extends Controller
         $invesatuan->is_active = $is_active;
         $invesatuan->save();
 
-        return view('backend.pages.inventaris_kategori.index', compact('profile'))->with(['success' => 'Data berhasil diubah!']);
+        return redirect()->route('invesatuan.index')->with(['success' => 'Data berhasil diubah!']);
     }
 
-    public function destroy(InventarisSatuan $invesatuan)
+    public function delete(String $id)
     {
-        $invesatuan->delete();
-        return redirect()->route('invesatuan.index')->with(['success' => 'Data berhasil dihapus!']);
+        $satuan = InventarisSatuan::find($id);
+        if($satuan){
+            InventarisSatuan::where('id', $id)->delete();
+            return redirect()->back()->with(['success' => 'Data berhasil dihapus !']);
+        }else{
+            return redirect()->back()->with(['error' => 'Data failed dihapus !']);
+        }
     }
 }

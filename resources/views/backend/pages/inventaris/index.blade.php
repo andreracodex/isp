@@ -180,6 +180,49 @@
             });
         });
     </script>
+    <script src="{{ asset('/js/plugins/sweetalert2.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#inven').on('click', '.hapusInven', function() {
+                let idItem = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Konfirmasi Hapus',
+                    text: "Anda yakin ingin menghapus data ini dari list?",
+                    icon: 'warning',
+                    data: idItem,
+                    showCancelButton: true,
+                    confirmButtonColor: '#10bd9d',
+                    cancelButtonColor: '#ca2062',
+                    confirmButtonText: 'Ya, Dihapus !'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            method: 'GET',
+                            url: "{{ route('inve.delete', ':id') }}".replace(
+                                ':id', idItem),
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                id: idItem,
+                            },
+                            success: function(data) {
+                                window.location.reload();
+                                Swal.fire(
+                                    'Berhasil!',
+                                    'Item berhasil dihapus',
+                                    'success'
+                                )
+                            },
+                            error: function(error) {
+                                Swal.fire('Error', 'Gagal menghapus barang', 'error');
+                                // Handle error
+                            }
+                        });
+                    }
+                })
+            });
+        });
+    </script>
 @endpush
 
 @section('isi')

@@ -56,7 +56,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::post('', [CustomerController::class, 'store'])->name('customer.store');
         Route::get('{customer}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
         Route::put('{customer}/edit', [CustomerController::class, 'update'])->name('customer.update');
-        Route::delete('', [CustomerController::class, 'delete'])->name('customer.delete');
+        Route::get('{customer}/delete', [CustomerController::class, 'delete'])->name('customer.delete');
     });
 
     // Paket
@@ -66,7 +66,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::post('', [PaketController::class, 'store'])->name('paket.store');
         Route::get('{paket}/edit', [PaketController::class, 'edit'])->name('paket.edit');
         Route::put('{paket}/update', [PaketController::class, 'update'])->name('paket.update');
-        Route::delete('{paket}/delete', [PaketController::class, 'delete'])->name('paket.delete');
+        Route::get('{paket}/delete', [PaketController::class, 'delete'])->name('paket.delete');
     });
 
     // Location
@@ -98,7 +98,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::post('/store', [InventarisKategoriController::class, 'store'])->name('invekategori.store');
         Route::get('{invekategori}/edit', [InventarisKategoriController::class, 'edit'])->name('invekategori.edit');
         Route::put('{invekategori}/update', [InventarisKategoriController::class, 'update'])->name('invekategori.update');
-        Route::delete('{invekategori}/delete', [InventarisKategoriController::class, 'delete'])->name('invekategori.delete');
+        Route::get('{invekategori}/delete', [InventarisKategoriController::class, 'delete'])->name('invekategori.delete');
     });
 
     // Inventaris Satuan
@@ -108,7 +108,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::post('/store', [InventarisSatuanController::class, 'store'])->name('invesatuan.store');
         Route::get('{invesatuan}/edit', [InventarisSatuanController::class, 'edit'])->name('invesatuan.edit');
         Route::put('{invesatuan}/update', [InventarisSatuanController::class, 'update'])->name('invesatuan.update');
-        Route::delete('{invesatuan}/delete', [InventarisSatuanController::class, 'delete'])->name('invesatuan.delete');
+        Route::get('{invesatuan}/delete', [InventarisSatuanController::class, 'delete'])->name('invesatuan.delete');
     });
 
     // Inventaris
@@ -118,7 +118,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::post('/store', [InventarisController::class, 'store'])->name('inve.store');
         Route::get('{inve}/edit', [InventarisController::class, 'edit'])->name('inve.edit');
         Route::put('{inve}/update', [InventarisController::class, 'update'])->name('inve.update');
-        Route::delete('{inve}/delete', [InventarisController::class, 'delete'])->name('inve.delete');
+        Route::get('{inve}/delete', [InventarisController::class, 'delete'])->name('inve.delete');
     });
      // Order Customer
     Route::prefix('order')->group(function() {

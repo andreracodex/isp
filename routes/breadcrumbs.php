@@ -193,3 +193,7 @@ Breadcrumbs::for('invesatuan.store', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Simpan Satuan', route('invesatuan.store'));
 });
+Breadcrumbs::for('invesatuan.update', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Update Satuan', route('invesatuan.update', 'invesatuan'));
+});

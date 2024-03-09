@@ -33,7 +33,7 @@ class CustomerController extends Controller
                 return "
                 <a href=".$cust->id." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
                 <a href=". route('customer.edit', $cust->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Data'><i class='fa fa-pencil-alt'></i></a>
-                <a href=". route('customer.delete', $cust->id) ." class='avtar avtar-xs btn-link-danger btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Delete Data'><i class='fa fa-trash-alt'></i></a>
+                <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusCust' data-id='$cust->id'><i class='fa fa-trash-alt'></i></button>
             ";
             })
             ->make(true);
@@ -216,8 +216,14 @@ class CustomerController extends Controller
         return redirect()->route('customer.index')->with('success','Berhasil Edit Customer.');
     }
 
-    public function destroy(Customer $customer)
+    public function delete(String $id)
     {
-        //
+        $cust = Customer::find($id);
+        if($cust){
+            Customer::where('id', $id)->delete();
+            return redirect()->back()->with(['success' => 'Data berhasil dihapus !']);
+        }else{
+            return redirect()->back()->with(['error' => 'Data failed dihapus !']);
+        }
     }
 }

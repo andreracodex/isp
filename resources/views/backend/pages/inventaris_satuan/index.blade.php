@@ -14,7 +14,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            let table = $('#inven').DataTable({
+            let table = $('#satuan').DataTable({
                 dom: "<'row'<'col-sm-12 col-md-6'Bl><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 deferRender: true,
                 processing: true,
@@ -164,6 +164,49 @@
             });
         });
     </script>
+    <script src="{{ asset('/js/plugins/sweetalert2.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#satuan').on('click', '.hapusSatuan', function() {
+                let idItem = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Konfirmasi Hapus',
+                    text: "Anda yakin ingin menghapus data ini dari list?",
+                    icon: 'warning',
+                    data: idItem,
+                    showCancelButton: true,
+                    confirmButtonColor: '#10bd9d',
+                    cancelButtonColor: '#ca2062',
+                    confirmButtonText: 'Ya, Dihapus !'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            method: 'GET',
+                            url: "{{ route('invesatuan.delete', ':id') }}".replace(
+                                ':id', idItem),
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                id: idItem,
+                            },
+                            success: function(data) {
+                                window.location.reload();
+                                Swal.fire(
+                                    'Berhasil!',
+                                    'Item berhasil dihapus',
+                                    'success'
+                                )
+                            },
+                            error: function(error) {
+                                Swal.fire('Error', 'Gagal menghapus barang', 'error');
+                                // Handle error
+                            }
+                        });
+                    }
+                })
+            });
+        });
+    </script>
 @endpush
 
 @section('isi')
@@ -206,7 +249,7 @@
                 </div>
                 <div class="card-body">
                     <div class="dt-responsive table-responsive">
-                        <table id="inven" class="table compact table-striped table-hover table-bordered wrap"
+                        <table id="satuan" class="table compact table-striped table-hover table-bordered wrap"
                             style="width:100%">
                             <thead>
                                 <tr>

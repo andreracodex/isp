@@ -180,7 +180,7 @@
 
                 Swal.fire({
                     title: 'Konfirmasi Hapus',
-                    text: "Anda yakin ingin menghapus data ini dari list?",
+                    text: "Anda yakin ingin menghapus data ini dari list, Data ini berelasi dengan lokasi pada inventaris ?",
                     icon: 'warning',
                     data: idItem,
                     showCancelButton: true,

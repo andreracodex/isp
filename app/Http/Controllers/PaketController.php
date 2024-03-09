@@ -32,7 +32,7 @@ class PaketController extends Controller
             ->addColumn('action', function (Paket $paket) {
                 return "
                 <a href=". route('paket.edit', $paket->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-pencil-alt'></i></a>
-                <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusItem' data-id='$paket->id'><i class='fa fa-trash-alt'></i></button>
+                <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusPaket' data-id='$paket->id'><i class='fa fa-trash-alt'></i></button>
                 ";
             })
             ->make(true);
@@ -114,9 +114,14 @@ class PaketController extends Controller
         return redirect()->route('paket.index')->with('success','Berhasil Edit Paket.');
     }
 
-    public function destroy(Paket $paket)
+    public function delete(String $id)
     {
-        $paket->delete();
-        return redirect()->route('paket.index')->with(['success' => 'Data berhasil dihapus!']);
+        $paket = Paket::find($id);
+        if($paket){
+            Paket::where('id', $id)->delete();
+            return redirect()->back()->with(['success' => 'Data berhasil dihapus !']);
+        }else{
+            return redirect()->back()->with(['error' => 'Data failed dihapus !']);
+        }
     }
 }

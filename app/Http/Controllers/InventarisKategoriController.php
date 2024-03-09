@@ -28,7 +28,7 @@ class InventarisKategoriController extends Controller
             ->addColumn('action', function (InventarisKategori $invekategori) {
                 return "
                 <a href=". route('invekategori.edit', $invekategori->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-pencil-alt'></i></a>
-                <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusItem' data-id='$invekategori->id'><i class='fa fa-trash-alt'></i></button>
+                <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusKateinven' data-id='$invekategori->id'><i class='fa fa-trash-alt'></i></button>
                 ";
             })
             ->make(true);
@@ -94,12 +94,17 @@ class InventarisKategoriController extends Controller
         $invekategori->is_active = $is_active;
         $invekategori->save();
 
-        return view('backend.pages.inventaris_kategori.index', compact('profile'))->with(['success' => 'Data berhasil diubah!']);
+        return redirect()->route('invekategori.index')->with(['success' => 'Data berhasil diubah!']);
     }
 
-    public function destroy(InventarisKategori $invekategori)
+    public function delete(String $id)
     {
-        $invekategori->delete();
-        return redirect()->route('invekategori.index')->with(['success' => 'Data berhasil dihapus!']);
+        $invenkategori = InventarisKategori::find($id);
+        if($invenkategori){
+            InventarisKategori::where('id', $id)->delete();
+            return redirect()->back()->with(['success' => 'Data berhasil dihapus !']);
+        }else{
+            return redirect()->back()->with(['error' => 'Data failed dihapus !']);
+        }
     }
 }

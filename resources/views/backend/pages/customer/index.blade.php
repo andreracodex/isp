@@ -91,9 +91,10 @@
                         name: 'nama_customer',
                         render: function(data, type, row) {
                             if (row.nama_customer != null) {
-                                return '<div class="row"><div class="col-auto pe-0"><img src="{{asset("/images/user/avatar-1.jpg")}}" alt="user-image" class="wid-40 rounded-circle"></div><div class="col auto pt-2">'+row.nama_customer+'</div>'
+                                return '<div class="row"><div class="col-auto pe-0"><img src="{{ asset('/images/user/avatar-1.jpg') }}" alt="user-image" class="wid-40 rounded-circle"></div><div class="col auto pt-2">' +
+                                    row.nama_customer + '</div>'
                             } else {
-                                return '<div class="row"><div class="col-auto pe-0"><img src="{{asset("/images/user/avatar-1.jpg")}}" alt="user-image" class="wid-40 rounded-circle"></div><div class="col"><h6 class="mb-0">Alberta Robbins</h6><p class="text-muted f-12 mb-0">miza@gmail.com</p></div></div>';
+                                return '<div class="row"><div class="col-auto pe-0"><img src="{{ asset('/images/user/avatar-1.jpg') }}" alt="user-image" class="wid-40 rounded-circle"></div><div class="col"><h6 class="mb-0">Alberta Robbins</h6><p class="text-muted f-12 mb-0">miza@gmail.com</p></div></div>';
                             }
                         }
                     },
@@ -180,6 +181,48 @@
                 } else {
                     $("th.select-checkbox").addClass("selected");
                 }
+            });
+        });
+    </script>
+    <script src="{{ asset('/js/plugins/sweetalert2.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#customer').on('click', '.hapusCust', function() {
+                let idItem = $(this).data('id');
+                Swal.fire({
+                    title: 'Konfirmasi Hapus',
+                    text: "Anda yakin ingin menghapus data customer ini dari list?",
+                    icon: 'warning',
+                    data: idItem,
+                    showCancelButton: true,
+                    confirmButtonColor: '#10bd9d',
+                    cancelButtonColor: '#ca2062',
+                    confirmButtonText: 'Ya, Dihapus !'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            method: 'GET',
+                            url: "{{ route('customer.delete', ':id') }}".replace(
+                                ':id', idItem),
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                id: idItem,
+                            },
+                            success: function(data) {
+                                window.location.reload();
+                                Swal.fire(
+                                    'Berhasil!',
+                                    'Item berhasil dihapus',
+                                    'success'
+                                )
+                            },
+                            error: function(error) {
+                                Swal.fire('Error', 'Gagal menghapus barang', 'error');
+                                // Handle error
+                            }
+                        });
+                    }
+                })
             });
         });
     </script>

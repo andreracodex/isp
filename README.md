@@ -26,12 +26,15 @@
 2. Paket Internet
 - Create Paket = Load Error Page. Tapi Data Terinput -- done
 - Diskon Paket = Disable Aja -- done
-- Delete Paket = Tidak Berfungsi -- progress
+- Delete Paket = Tidak Berfungsi -- done
 
 3. Inventaris Barang
 - View Data = Not Found -- progress
-- Delete = Error Page -- progress
+- Delete = Error Page -- done
 - Add Barang = Sorry! The jenis barang field is required. -- progress
+    - Kategori Inventaris - done
+    - Kategori Satuan - done
+
 
 4. Tagihan
 - View Data -- progress

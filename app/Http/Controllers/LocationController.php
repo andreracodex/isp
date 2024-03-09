@@ -122,7 +122,5 @@ class LocationController extends Controller
         }else{
             return redirect()->back()->with(['error' => 'Data failed dihapus !']);
         }
-
-
     }
 }
