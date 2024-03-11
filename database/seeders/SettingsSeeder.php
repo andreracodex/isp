@@ -423,11 +423,11 @@ class SettingsSeeder extends Seeder
             array(
                 'name' => 'Nanda',
                 'user_name' => 'Nandax',
-                'email' => 'user@isp.com',
+                'email' => 'nanda@isp.com',
                 'is_active' => 1,
                 'password' => bcrypt(12345678),
                 'path' => '',
-                'user_type' => 'user',
+                'user_type' => 'admin',
             ),
         );
         UserSetting::insert(

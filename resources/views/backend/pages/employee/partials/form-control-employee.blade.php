@@ -23,8 +23,9 @@
     </div>
     <div class="col-md-3 mb-3">
         <label class="form-label" for="nama">Email</label>
-        <input type="text" class="form-control" name="email" id="email"
-            value="{{ old('email') ?? $employee->email }}" placeholder="mail@example.com" required>
+        <input type="email" class="form-control" name="email" id="email"
+            value="{{ old('email') ?? $employee->email }} @if ($submit != 'Create') {{ $employee->user->email }} @else{{ $employee->user->email }} @endif"
+            placeholder="mail@example.com" required>
         <div class="valid-feedback"> Looks good! </div>
         <div class="invalid-feedback"> Harap isi email karyawan. </div>
     </div>

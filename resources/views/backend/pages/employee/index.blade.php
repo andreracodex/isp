@@ -108,6 +108,10 @@
                         name: 'nomor_telephone'
                     },
                     {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
                         data: 'is_active',
                         name: 'is_active',
                         render: function(data, type, row) {
@@ -280,6 +284,7 @@
                                     <th>Nama Karyawan</th>
                                     <th>Alamat</th>
                                     <th>Nomor Telephone</th>
+                                    <th>Email</th>
                                     <th>Active</th>
                                     <th>Action</th>
                                 </tr>

@@ -47,7 +47,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::post('', [EmployeeController::class, 'store'])->name('employee.store');
         Route::get('/view', [EmployeeController::class, 'view'])->name('employee.view');
         Route::get('{emp}/edit', [EmployeeController::class, 'edit'])->name('employee.edit');
-        Route::put('{emp}/edit', [EmployeeController::class, 'update'])->name('employee.update');
+        Route::put('{emp}/update', [EmployeeController::class, 'update'])->name('employee.update');
         Route::get('{emp}/delete', [EmployeeController::class, 'delete'])->name('employee.delete');
     });
     // Customer
@@ -56,7 +56,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::get('/create', [CustomerController::class, 'create'])->name('customer.create');
         Route::post('', [CustomerController::class, 'store'])->name('customer.store');
         Route::get('{customer}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
-        Route::put('{customer}/edit', [CustomerController::class, 'update'])->name('customer.update');
+        Route::put('{customer}/update', [CustomerController::class, 'update'])->name('customer.update');
         Route::get('{customer}/delete', [CustomerController::class, 'delete'])->name('customer.delete');
     });
 
