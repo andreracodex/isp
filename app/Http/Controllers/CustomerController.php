@@ -31,7 +31,7 @@ class CustomerController extends Controller
             })
             ->addColumn('action', function (Customer $cust) {
                 return "
-                <a href=".$cust->id." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
+                <a href=".route('customer.view', $cust->id)." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
                 <a href=". route('customer.edit', $cust->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Data'><i class='fa fa-pencil-alt'></i></a>
                 <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusCust' data-id='$cust->id'><i class='fa fa-trash-alt'></i></button>
             ";
@@ -127,9 +127,20 @@ class CustomerController extends Controller
         return redirect()->route('customer.index')->with('success','Berhasil Tambah Customer.');
     }
 
-    public function show(Customer $customer)
+    public function view(Customer $customer)
     {
-        //
+        $customer = Customer::find($customer->id);
+        $lokasi = Location::all();
+        $profile = Setting::all();
+        $paket = Paket::all();
+        $kotas = Regency::where('province_id', '35')->get();
+        $districts = District::all();
+        $villages = Village::all();
+        $order = Order::where('customer_id', $customer->id)->first();
+
+        return view('backend.pages.customer.view',
+            compact('profile', 'customer', 'lokasi', 'paket', 'order', 'kotas', 'districts', 'villages')
+        );
     }
 
     public function edit(Customer $customer)

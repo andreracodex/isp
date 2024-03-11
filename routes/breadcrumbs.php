@@ -20,6 +20,10 @@ Breadcrumbs::for('customer.store', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Simpan Pelanggan', route('customer.store'));
 });
+Breadcrumbs::for('customer.view', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Detail Pelanggan', route('customer.view', 'customer'));
+});
 Breadcrumbs::for('customer.edit', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Edit Pelanggan', route('customer.edit', 'customer'));
