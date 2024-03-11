@@ -1,6 +1,6 @@
 @extends('backend.base')
 
-@section('title', 'Customer Data')
+@section('title', 'Tagihan Data')
 
 @section('styles')
 @endsection
@@ -330,9 +330,9 @@
                         </div>
                         <div>
                             <button type="button" class="btn btn-sm btn-outline-danger d-inline-flex"><i
-                                    class="fa fa-file-pdf">&nbsp;</i>Exspor PDF</button>
+                                    class="fa fa-file-pdf">&nbsp;</i>Ekspor PDF</button>
                             <button type="button" class="btn btn-sm btn-outline-success d-inline-flex"><i
-                                    class="fa fa-file-excel">&nbsp;</i>Exspor Excel</button>
+                                    class="fa fa-file-excel">&nbsp;</i>Ekspor Excel</button>
                             <button type="button" class="btn btn-sm btn-outline-warning d-inline-flex"><i
                                     class="ti ti-trash me-1"></i>Hapus Filter</button>
                         </div>
@@ -341,26 +341,33 @@
                 <div class="card-body">
                     <div class="dt-responsive table-responsive">
                         <div class="row">
-                            <div class="col-sm-4 col-md-3">
+                            <div class="col-sm-8 col-md-8">
                                 <div class="mb-3">
                                     <label class="form-label">Nama Customer</label>
                                     <select name="customer_id" id="customer_id" class="form-control select2" required>
                                         @foreach ($customer as $cust)
-                                        <option value="{{ $cust->id }}">{{  $cust->nama_customer }} </option>
+                                            <option value="{{ $cust->id }}">{{ $cust->nama_customer }} </option>
                                         @endforeach
                                     </select>
                                     <div class="invalid-tooltip" style="top: 0">Status Aktif required</div>
                                 </div>
                             </div>
 
-                            <div class="col-sm-3 col-md-2">
+                            <div class="col-sm-4 col-md-4">
                                 <div class="mb-3">
-                                    <label class="form-label headerbutton">Jatuh Tempo <sup class="mt-2"><b><a
-                                        href="{{ route('location.index') }}">
-                                        <i class="ti ti-plus me-1"></i>Tambah Periode</a></b></sup></label>
+                                    <label class="form-label headerbutton">Jatuh Tempo
+                                        <sup class="mt-2">
+                                            <b>
+                                                <a href="{{ route('periode.create') }}">
+                                                    <i class="ti ti-plus me-1"></i>Tambah Periode
+                                                </a>
+                                            </b>
+                                        </sup>
+                                    </label>
                                     <select name="jatuh_tempo" id="jatuh_tempo" class="form-control select2" required>
                                         @foreach ($date as $jatuh)
-                                        <option value="{{ $jatuh->id }}">{{ \Carbon\Carbon::parse($jatuh->bulan_periode)->format('F Y') }}</option>
+                                            <option value="{{ $jatuh->id }}">
+                                                {{ \Carbon\Carbon::parse($jatuh->bulan_periode)->format('F Y') }}</option>
                                         @endforeach
                                     </select>
                                     <div class="invalid-tooltip" style="top: 0">Status Aktif required</div>

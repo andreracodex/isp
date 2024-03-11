@@ -11,6 +11,7 @@ use App\Http\Controllers\InventarisSatuanController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaketController;
+use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
@@ -40,6 +41,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::delete('', [ProfileController::class, 'destroy'])->name('settings.profile-destroy');
         Route::post('/logout', [ProfileController::class, 'logout'])->name('settings.profile-logout');
     });
+
      // Employee
     Route::prefix('employee')->group(function(){
         Route::get('', [EmployeeController::class, 'index'])->name('employee.index');
@@ -50,6 +52,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::put('{emp}/update', [EmployeeController::class, 'update'])->name('employee.update');
         Route::get('{emp}/delete', [EmployeeController::class, 'delete'])->name('employee.delete');
     });
+
     // Customer
     Route::prefix('customer')->group(function(){
         Route::get('', [CustomerController::class, 'index'])->name('customer.index');
@@ -123,7 +126,8 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::put('{inve}/update', [InventarisController::class, 'update'])->name('inve.update');
         Route::get('{inve}/delete', [InventarisController::class, 'delete'])->name('inve.delete');
     });
-     // Order Customer
+
+    // Order Customer
     Route::prefix('order')->group(function() {
         Route::get('', [OrderController::class, 'index'])->name('order.index');
         Route::get('/create', [OrderController::class, 'create'])->name('order.create');
@@ -133,6 +137,16 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::put('{order}/update', [OrderController::class, 'update'])->name('order.update');
         Route::get('{order}/delete', [OrderController::class, 'delete'])->name('order.delete');
     });
+
+    Route::prefix('periode')->group(function() {
+        Route::get('', [PeriodeController::class, 'index'])->name('periode.index');
+        Route::get('/create', [PeriodeController::class, 'create'])->name('periode.create');
+        Route::post('/store', [PeriodeController::class, 'store'])->name('periode.store');
+        Route::get('{periode}/edit', [PeriodeController::class, 'edit'])->name('periode.edit');
+        Route::put('{periode}/update', [PeriodeController::class, 'update'])->name('periode.update');
+        Route::get('{periode}/delete', [PeriodeController::class, 'delete'])->name('periode.delete');
+    });
+
     // Ticket
     Route::prefix('ticket')->group(function() {
         Route::get('', [TicketController::class, 'index'])->name('ticket.index');

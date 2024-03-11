@@ -1,6 +1,6 @@
 @extends('backend.base')
 
-@section('title', 'Location Data')
+@section('title', 'Periode Tagihan Data')
 
 @section('styles')
 @endsection
@@ -14,13 +14,13 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            let table = $('#location').DataTable({
+            let table = $('#periode').DataTable({
                 dom: "<'row'<'col-sm-12 col-md-6'Bl><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 deferRender: true,
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                ajax: "{{ route('location.index') }}",
+                ajax: "{{ route('periode.index') }}",
                 buttons: [
                     'colvis',
                     {
@@ -64,7 +64,7 @@
                 },
                 columnDefs: [{
                         targets: 0,
-                        className: 'paket',
+                        className: 'periode',
                         orderable: false,
                         searchable: false,
                     },
@@ -83,20 +83,12 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'location_id',
-                        name: 'location_id'
+                        data: 'periode_id',
+                        name: 'periode_id'
                     },
                     {
-                        data: 'nama_location',
-                        name: 'nama_location'
-                    },
-                    {
-                        data: 'alamat_location',
-                        name: 'alamat_location'
-                    },
-                    {
-                        data: 'employee_id',
-                        name: 'employee_id'
+                        data: 'bulan_periode',
+                        name: 'bulan_periode'
                     },
                     {
                         data: 'is_active',
@@ -175,12 +167,12 @@
     <script src="{{ asset('/js/plugins/sweetalert2.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#location').on('click', '.hapusItem', function() {
+            $('#periode').on('click', '.hapusPeriode', function() {
                 let idItem = $(this).data('id');
 
                 Swal.fire({
                     title: 'Konfirmasi Hapus',
-                    text: "Anda yakin ingin menghapus data ini dari list, Data ini berelasi dengan lokasi pada inventaris ?",
+                    text: "Anda yakin ingin menghapus periode tagihan ini?",
                     icon: 'warning',
                     data: idItem,
                     showCancelButton: true,
@@ -191,7 +183,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             method: 'GET',
-                            url: "{{ route('location.delete', ':id') }}".replace(
+                            url: "{{ route('periode.delete', ':id') }}".replace(
                                 ':id', idItem),
                             data: {
                                 _token: '{{ csrf_token() }}',
@@ -201,12 +193,12 @@
                                 window.location.reload();
                                 Swal.fire(
                                     'Berhasil!',
-                                    'Item berhasil dihapus',
+                                    'Periode Tagihan berhasil dihapus',
                                     'success'
                                 )
                             },
                             error: function(error) {
-                                Swal.fire('Error', 'Gagal menghapus barang', 'error');
+                                Swal.fire('Error', 'Gagal menghapus periode', 'error');
                                 // Handle error
                             }
                         });
@@ -227,7 +219,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Lokasi Server</h2>
+                        <h2 class="mb-0">Periode Tagihan</h2>
                     </div>
                 </div>
             </div>
@@ -240,31 +232,31 @@
                 <div class="card-header">
                     <div class="headerbutton">
                         <div>
-                            <a href="{{ route('location.create') }}" type="button"
-                                class="btn btn-sm btn-outline-primary d-inline-flex"><i
-                                    class="ti ti-plus me-1"></i>Server</a>
+                            <a href="{{ route('periode.create') }}" type="button"
+                                class="btn btn-sm btn-outline-primary d-inline-flex">
+                                <i class="ti ti-plus me-1"></i> Periode Tagihan
+                            </a>
                         </div>
                         <div>
-                            <button type="button" class="btn btn-sm btn-outline-danger d-inline-flex"><i
-                                    class="fa fa-file-pdf">&nbsp;</i>Ekspor PDF</button>
+                            {{-- <a href="{{ route('pdf.periode') }}" type="button"
+                                class="btn btn-sm btn-outline-danger d-inline-flex"><i
+                                    class="fa fa-file-pdf">&nbsp;</i>Expor PDF</a>
                             <button type="button" class="btn btn-sm btn-outline-success d-inline-flex"><i
-                                    class="fa fa-file-excel">&nbsp;</i>Ekspor Excel</button>
+                                    class="fa fa-file-excel">&nbsp;</i>Expor Excel</button>
                             <button type="button" class="btn btn-sm btn-outline-warning d-inline-flex"><i
-                                    class="ti ti-trash me-1"></i>Hapus Filter</button>
+                                    class="ti ti-trash me-1"></i>Hapus Filter</button> --}}
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="dt-responsive table-responsive">
-                        <table id="location" class="table compact table-striped table-hover table-bordered wrap"
+                        <table id="periode" class="table compact table-striped table-hover table-bordered wrap"
                             style="width:100%">
                             <thead>
                                 <tr>
                                     <th style="width: 10px;">#</th>
                                     <th></th>
-                                    <th>Nama Lokasi Server</th>
-                                    <th>Alamat Lokasi Server</th>
-                                    <th>Penanggung Jawab</th>
+                                    <th>Bulan Periode</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>

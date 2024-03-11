@@ -153,6 +153,23 @@ Breadcrumbs::for('order.store', function (BreadcrumbTrail $trail): void {
     $trail->push('Simpan Tagihan', route('order.store'));
 });
 
+// Periode Tagihan
+Breadcrumbs::for('periode.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Periode Tagihan', route('periode.index'));
+});
+Breadcrumbs::for('periode.create', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Tambah Periode Tagihan', route('periode.create'));
+});
+Breadcrumbs::for('periode.edit', function (BreadcrumbTrail $trail): void {
+    $trail->push('Edit Periode Tagihan', route('periode.edit', 'periode'));
+});
+Breadcrumbs::for('periode.store', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Simpan Periode Tagihan', route('periode.store'));
+});
+
 // Employee
 Breadcrumbs::for('employee.index', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
