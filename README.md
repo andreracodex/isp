@@ -33,7 +33,7 @@
 
 3. Inventaris Barang
 
--   View Data = Not Found -- progress
+-   View Data = Not Found -- done
 -   Delete = Error Page -- done
 -   Add Barang = Sorry! The jenis barang field is required. -- progress
     -   Kategori Inventaris - done

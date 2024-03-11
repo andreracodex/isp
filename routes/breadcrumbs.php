@@ -65,6 +65,9 @@ Breadcrumbs::for('location.create', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Tambah Lokasi Server', route('location.create'));
 });
+Breadcrumbs::for('location.view', function (BreadcrumbTrail $trail): void {
+    $trail->push('Detail Lokasi Server', route('location.view', 'location'));
+});
 Breadcrumbs::for('location.edit', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Edit Lokasi Server', route('location.edit', 'location'));
@@ -121,6 +124,9 @@ Breadcrumbs::for('inve.create', function (BreadcrumbTrail $trail): void {
 Breadcrumbs::for('inve.store', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Simpan Inventaris', route('inve.store'));
+});
+Breadcrumbs::for('inve.view', function (BreadcrumbTrail $trail): void {
+    $trail->push('Detail Inventaris', route('inve.view', 'inve'));
 });
 Breadcrumbs::for('inve.edit', function (BreadcrumbTrail $trail): void {
     $trail->push('Edit Inventaris', route('inve.edit', 'inve'));

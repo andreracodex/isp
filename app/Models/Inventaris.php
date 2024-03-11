@@ -17,8 +17,8 @@ class Inventaris extends Model
         'nama_barang',
         'jenis_id',
         'jumlah_barang',
+        'satuan_id',
         'is_active',
-        'satuan_id'
     ];
 
     public function location()

@@ -39,7 +39,7 @@ class InventarisController extends Controller
             })
             ->addColumn('action', function (Inventaris $inve) {
                 return "
-                <a href=".$inve->id." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
+                <a href=". route('inve.view', $inve->id) ." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
                 <a href=". route('inve.edit', $inve->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Data'><i class='fa fa-pencil-alt'></i></a>
                 <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusInven' data-id='$inve->id'><i class='fa fa-trash-alt'></i></button>
             ";
@@ -90,6 +90,18 @@ class InventarisController extends Controller
         ]);
 
         return redirect()->route('inve.index')->with(['success' => 'Data berhasil disimpan!']);
+    }
+
+    public function view(Inventaris $inve)
+    {
+        $profile = Setting::all();
+        $locations = Location::all();
+        $kategories = InventarisKategori::where('is_active', 1)->get();
+        $satuan = InventarisSatuan::where('is_active', 1)->get();
+
+        return view('backend.pages.inventaris.view',
+            compact('profile', 'inve', 'locations', 'kategories', 'satuan')
+        );
     }
 
     public function edit(Inventaris $inve)

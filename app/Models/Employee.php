@@ -22,8 +22,8 @@ class Employee extends Model
         'kodepos_karyawan',
         'nomor_telephone',
         'ip_config',
-        'is_active',
         'gaji_pokok',
+        'is_active',
     ];
 
     public function location()
