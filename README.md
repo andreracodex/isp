@@ -20,7 +20,7 @@
 
 -   New Pelanggan = Tidak muncul otomatis kecamatan dan kelurahan setelah isi Kota -- done
 -   No KTP = Status Optional Aja (biru) -- done
--   View Data = Not Found -- progress
+-   View Data = Not Found -- done
 -   Delete = Tidak Berfungsi -- done
 -   ID Pelanggan = dibuat terpisah dan Otomatis tercreate 8 angka saat Add New Pelanggan -- done
 -   Edit Data = Kota, Kecamatan, kelurahan Double Data -- form is single (created, updated) -- done
