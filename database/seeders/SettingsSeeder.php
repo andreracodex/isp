@@ -696,6 +696,9 @@ class SettingsSeeder extends Seeder
         ModelsPermission::create(['name' => 'view customer']);
         ModelsPermission::create(['name' => 'add customer']);
         ModelsPermission::create(['name' => 'edit customer']);
+        ModelsPermission::create(['name' => 'view employee']);
+        ModelsPermission::create(['name' => 'add employee']);
+        ModelsPermission::create(['name' => 'edit employee']);
         ModelsPermission::create(['name' => 'view order']);
         ModelsPermission::create(['name' => 'view order_partial']);
         ModelsPermission::create(['name' => 'add order']);
