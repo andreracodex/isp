@@ -49,12 +49,12 @@
     -   Total Tagihan, -- done
     -   Tunggakan, Status Lunas/Belum -- progress in view
 
-5. Employe
+5. Employee
 
 -   View Data = Error Page
 -   Edit Data = Blank
 -   Delete = Tidak Berfungsi -- done
--   Add Karyawan = Direct to Inventaris
+-   Add Karyawan = Direct to Inventaris -- done
 
 6. All Menu :
 

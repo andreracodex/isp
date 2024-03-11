@@ -29,6 +29,13 @@ class CustomerController extends Controller
             ->editColumn('cust_id', function (Customer $cust) {
                 return $cust->id;
             })
+            ->editColumn('gender', function (Employee $emp) {
+                if ($emp->gender == '1') {
+                    return 'male';
+                } else {
+                    return 'female';
+                }
+            })
             ->addColumn('action', function (Customer $cust) {
                 return "
                 <a href=".$cust->id." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>

@@ -1,6 +1,6 @@
 @extends('backend.base')
 
-@section('title', 'Pelanggan Edit')
+@section('title', 'Employee Edit')
 
 @section('styles')
 @endsection
@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Edit Pelanggan</h2>
+                        <h2 class="mb-0">Edit Karyawan</h2>
                     </div>
                 </div>
             </div>
@@ -36,14 +36,14 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Edit Customer</h5>
+                        <h5>Edit Karyawan</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('customer.update', $customer->id) }}" enctype="multipart/form-data"
+                        <form action="{{ route('employee.update', $employee->id) }}" enctype="multipart/form-data"
                             method="POST" class="needs-validation" novalidate="">
                             @csrf
                             @method('PUT')
-                            @include('backend.pages.customer.partials.form-control-customer', [
+                            @include('backend.pages.employee.partials.form-control-employee', [
                                 'submit' => 'Update',
                             ])
                         </form>

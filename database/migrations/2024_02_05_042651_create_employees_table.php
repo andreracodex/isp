@@ -19,8 +19,11 @@ return new class extends Migration
             $table->string('gender');
             $table->string('nomor_ktp');
             $table->string('alamat_karyawan');
-            $table->string('kecamatan_karyawan');
-            $table->string('desa_karyawan');
+            $table->char('kelurahan_id', 10);
+            $table->foreign('kelurahan_id')
+                ->references('id')
+                ->on('villages')
+                ->onUpdate('cascade')->onDelete('restrict');
             $table->string('kodepos_karyawan');
             $table->string('nomor_telephone');
             $table->string('ip_config')->nullable();

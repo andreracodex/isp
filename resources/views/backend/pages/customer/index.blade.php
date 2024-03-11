@@ -259,9 +259,9 @@
                         </div>
                         <div>
                             <button type="button" class="btn btn-sm btn-outline-danger d-inline-flex"><i
-                                    class="fa fa-file-pdf">&nbsp;</i>Exspor PDF</button>
+                                    class="fa fa-file-pdf">&nbsp;</i>Ekspor PDF</button>
                             <button type="button" class="btn btn-sm btn-outline-success d-inline-flex"><i
-                                    class="fa fa-file-excel">&nbsp;</i>Exspor Excel</button>
+                                    class="fa fa-file-excel">&nbsp;</i>Ekspor Excel</button>
                             <button type="button" class="btn btn-sm btn-outline-warning d-inline-flex"><i
                                     class="ti ti-trash me-1"></i>Hapus Filter</button>
                         </div>

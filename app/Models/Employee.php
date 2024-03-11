@@ -18,8 +18,7 @@ class Employee extends Model
         'gender',
         'nomor_ktp',
         'alamat_karyawan',
-        'kecamatan_karyawan',
-        'desa_karyawan',
+        'kelurahan_id',
         'kodepos_karyawan',
         'nomor_telephone',
         'ip_config',
@@ -35,5 +34,10 @@ class Employee extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function village()
+    {
+        return $this->belongsTo(Village::class, 'kelurahan_id');
     }
 }
