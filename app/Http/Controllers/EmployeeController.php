@@ -110,6 +110,19 @@ class EmployeeController extends Controller
         return redirect()->route('employee.index')->with('success','Berhasil Tambah Karyawan.');
     }
 
+    public function view(Employee $emp)
+    {
+        $employee = Employee::find($emp->id);
+        $profile = Setting::all();
+        $kotas = Regency::where('province_id', '35')->get();
+        $districts = District::all();
+        $villages = Village::all();
+
+        return view('backend.pages.employee.view',
+            compact('profile', 'employee', 'kotas', 'districts', 'villages')
+        );
+    }
+
     public function edit(Employee $emp)
     {
         $employee = Employee::find($emp->id);

@@ -152,6 +152,9 @@ Breadcrumbs::for('employee.create', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Tambah Karyawan', route('employee.create'));
 });
+Breadcrumbs::for('employee.view', function (BreadcrumbTrail $trail): void {
+    $trail->push('View Karyawan', route('employee.view', 'employee'));
+});
 Breadcrumbs::for('employee.edit', function (BreadcrumbTrail $trail): void {
     $trail->push('Edit Karyawan', route('employee.edit', 'employee'));
 });

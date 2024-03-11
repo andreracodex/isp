@@ -51,8 +51,8 @@
 
 5. Employee
 
--   View Data = Error Page
--   Edit Data = Blank
+-   View Data = Error Page -- done
+-   Edit Data = Blank -- done
 -   Delete = Tidak Berfungsi -- done
 -   Add Karyawan = Direct to Inventaris -- done
 
