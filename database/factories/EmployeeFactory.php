@@ -13,6 +13,7 @@ class EmployeeFactory extends Factory
     {
         return [
             "nama_karyawan" => $this->faker->name(),
+            "nomor_ktp" => $this->faker->randomNumber(),
             "ip_config" => $this->faker->numberBetween(1, 5),
             "gender" => $this->faker->randomElement([
                 "male",

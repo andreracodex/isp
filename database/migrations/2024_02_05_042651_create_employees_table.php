@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('nama_karyawan', 100);
             $table->string('gender');
+            $table->string('nomor_ktp');
             $table->string('alamat_karyawan');
             $table->string('kecamatan_karyawan');
             $table->string('desa_karyawan');

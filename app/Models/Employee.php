@@ -16,6 +16,7 @@ class Employee extends Model
         'user_id',
         'nama_karyawan',
         'gender',
+        'nomor_ktp',
         'alamat_karyawan',
         'kecamatan_karyawan',
         'desa_karyawan',
