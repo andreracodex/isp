@@ -24,7 +24,7 @@ class BankController extends Controller
                 return $bank->id;
             })
             ->editColumn('payment', function (Bank $bank) {
-                return $bank->payment->payment_methode_name;
+                return $bank->paymentType->payment_methode_name;
             })
             ->addColumn('action', function (Bank $bank) {
                 return "

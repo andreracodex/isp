@@ -235,7 +235,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Kategori Inventaris</h2>
+                        <h2 class="mb-0">Bank</h2>
                     </div>
                 </div>
             </div>
@@ -248,16 +248,16 @@
                 <div class="card-header">
                     <div class="headerbutton">
                         <div>
-                            <a href="{{ route('invekategori.create') }}" type="button"
+                            <a href="{{ route('bank.create') }}" type="button"
                                 class="btn btn-sm btn-outline-primary d-inline-flex"><i class="ti ti-plus me-1"></i>
-                                Kategori Inventaris</a>
+                                Bank</a>
                         </div>
                         <div>
                             <a href="{{ route('pdf.inventaris') }}" type="button"
                                 class="btn btn-sm btn-outline-danger d-inline-flex"><i
-                                    class="fa fa-file-pdf">&nbsp;</i>Expor PDF</a>
+                                    class="fa fa-file-pdf">&nbsp;</i>Ekspor PDF</a>
                             <button type="button" class="btn btn-sm btn-outline-success d-inline-flex"><i
-                                    class="fa fa-file-excel">&nbsp;</i>Expor Excel</button>
+                                    class="fa fa-file-excel">&nbsp;</i>Ekspor Excel</button>
                             <button type="button" class="btn btn-sm btn-outline-warning d-inline-flex"><i
                                     class="ti ti-trash me-1"></i>Hapus Filter</button>
                         </div>
@@ -265,13 +265,17 @@
                 </div>
                 <div class="card-body">
                     <div class="dt-responsive table-responsive">
-                        <table id="kateinven" class="table compact table-striped table-hover table-bordered wrap"
+                        <table id="bank" class="table compact table-striped table-hover table-bordered wrap"
                             style="width:100%">
                             <thead>
                                 <tr>
                                     <th style="width: 10px;">#</th>
                                     <th></th>
-                                    <th>Nama Kategori</th>
+                                    <th>Kode Bank</th>
+                                    <th>Nama Bank</th>
+                                    <th>Nama Akun</th>
+                                    <th>Nomor Rekening</th>
+                                    <th>Metode Pembayaran</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
