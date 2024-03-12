@@ -26,7 +26,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{ dd($inve) }}
                     @foreach ($inve as $data)
                         <tr>
                             <th scope="row">{{ $data->id }}</th>

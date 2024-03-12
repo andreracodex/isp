@@ -18,6 +18,7 @@
 
             var customerid = $('#customer_id').val();
             var tempo = $('#jatuh_tempo').val();
+            var status = $('#status').val();
 
             // console.log(customerid, tempo);
 

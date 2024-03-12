@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class PDFController extends Controller
 {
-    public function inventaris(Request $request) {
+    public function PDFInventaris(Request $request) {
         $inve = Inventaris::all();
         $profile = Setting::all();
         $pdfContent = PDF::loadView('backend.pages.pdf.inventaris', compact('inve', 'profile'));

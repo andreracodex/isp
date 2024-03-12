@@ -32,6 +32,7 @@ return new class extends Migration
             $table->text('installed_image')->nullable();
             $table->integer('installed_status')->default(0);
             $table->datetime('due_date'); //tanggal jatuh tempo
+            $table->integer('payment_status')->default(0); // 0 Belum Lunas , 1 Lunas
             $table->integer('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();
