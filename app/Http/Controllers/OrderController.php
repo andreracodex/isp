@@ -107,6 +107,10 @@ class OrderController extends Controller
             return redirect()->back()->with(['error' => 'Data failed dihapus !']);
         }
     }
+
+    public function edit(){
+
+    }
 }
 
 

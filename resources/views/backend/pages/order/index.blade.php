@@ -416,6 +416,7 @@
                                 <label class="form-label headerbutton">Status Tagihan
                                 </label>
                                 <select name="status_tagihan" id="status_tagihan" class="form-control select2" required>
+                                    <option value="null">All</option>
                                     <option value="0">Belum Lunas</option>
                                     <option value="1">Lunas</option>
                                 </select>
