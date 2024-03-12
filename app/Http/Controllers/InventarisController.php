@@ -67,7 +67,7 @@ class InventarisController extends Controller
         $this->validate($request, [
             'location' => 'required',
             'nama_barang' => 'required|max:100',
-            'jenis_barang' => 'required',
+            'jenis_id' => 'required',
             'jumlah_barang' => 'required',
             'satuan_id' => 'required',
             'is_active' => 'required',
@@ -83,9 +83,9 @@ class InventarisController extends Controller
         Inventaris::create([
             'location_id' => $request->location,
             'nama_barang' => $request->nama_barang,
-            'jenis_barang' => $request->jenis_barang,
+            'jenis_id' => $request->jenis_id,
             'jumlah_barang' => $request->jumlah_barang,
-            'satuan_barang' => $request->satuan_barang,
+            'satuan_id' => $request->satuan_id,
             'is_active' => $is_active,
         ]);
 
@@ -122,7 +122,7 @@ class InventarisController extends Controller
             'jenis_id' => 'required',
             'jumlah_barang' => 'required',
             'satuan_id' => 'required',
-            'is_active' => 'required',
+            // 'is_active' => 'required',
         ]);
 
         $inve = Inventaris::findOrFail($id);
