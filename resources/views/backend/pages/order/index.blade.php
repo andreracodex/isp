@@ -76,6 +76,7 @@
                     data: function(d) {
                         d.customerid = customerid;
                         d.tempo = tempo;
+                        d.status = status;
                         return d
                     }
                 },
@@ -196,12 +197,12 @@
                         name: 'harga_paket'
                     },
                     {
-                        data: 'is_active',
-                        name: 'is_active',
+                        data: 'pay_status',
+                        name: 'pay_status',
                         render: function(data, type, row) {
-                            if (row.is_active == 0) {
+                            if (row.pay_status == 0) {
                                 return '<span class="badge bg-light-danger rounded-pill f-12"> Belum Lunas </span>';
-                            } else if (row.is_active == 1) {
+                            } else if (row.pay_status == 1) {
                                 return '<span class="badge bg-light-success rounded-pill f-12"> Lunas </span>';
                             } else {
                                 return '<span class="badge bg-light-primary rounded-pill f-12"> Isolir </span>';
@@ -242,6 +243,12 @@
 
             $('#jatuh_tempo').on('change', function(selected) {
                 tempo = $('#jatuh_tempo').val();
+                // console.log(tempo);
+                $('#order').DataTable().ajax.reload()
+            });
+
+            $('#status_tagihan').on('change', function(selected) {
+                status = $('#status_tagihan').val();
                 // console.log(tempo);
                 $('#order').DataTable().ajax.reload()
             });
@@ -399,6 +406,18 @@
                                         <option value="{{ $jatuh->id }}">
                                             {{ \Carbon\Carbon::parse($jatuh->bulan_periode)->format('F Y') }}</option>
                                     @endforeach
+                                </select>
+                                <div class="invalid-tooltip" style="top: 0">Status Aktif required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2 col-md-2">
+                            <div class="mb-3">
+                                <label class="form-label headerbutton">Status Tagihan
+                                </label>
+                                <select name="status_tagihan" id="status_tagihan" class="form-control select2" required>
+                                    <option value="0">Belum Lunas</option>
+                                    <option value="1">Lunas</option>
                                 </select>
                                 <div class="invalid-tooltip" style="top: 0">Status Aktif required</div>
                             </div>

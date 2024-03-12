@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Paket;
 use App\Models\Regency;
 use App\Models\District;
+use App\Models\OrderDetail;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\Village;
@@ -113,7 +114,7 @@ class CustomerController extends Controller
             'is_new' => $is_new,
         ]);
 
-        Order::create([
+        $order = Order::create([
             'customer_id' => $customer->id,
             'location_id' => $request->lokasi,
             'paket_id' => $request->paket_internet,
@@ -122,6 +123,11 @@ class CustomerController extends Controller
             'installed_status' => $is_installed,
             'order_date' => Date::now(),
             'due_date' => $due_date,
+        ]);
+
+        OrderDetail::create([
+            'order_id' => $order->id,
+            'is_active' => $is_active,
         ]);
 
         return redirect()->route('customer.index')->with('success','Berhasil Tambah Customer.');

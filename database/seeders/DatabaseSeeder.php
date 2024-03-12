@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Customer::factory(10)->create();
         \App\Models\Order::factory(50)->create();
+        \App\Models\OrderDetail::factory(50)->create();
 
         $startDate = Carbon::create(2023, 1, 1);
         $endDate = Carbon::create(2024, 12, 1);
