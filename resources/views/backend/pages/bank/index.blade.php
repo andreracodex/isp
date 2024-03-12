@@ -1,6 +1,6 @@
 @extends('backend.base')
 
-@section('title', 'Inventory Category Data')
+@section('title', 'Bank Data')
 
 @section('styles')
 @endsection
@@ -14,19 +14,19 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            let table = $('#kateinven').DataTable({
+            let table = $('#bank').DataTable({
                 dom: "<'row'<'col-sm-12 col-md-6'Bl><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 deferRender: true,
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                ajax: "{{ route('invekategori.index') }}",
+                ajax: "{{ route('bank.index') }}",
                 buttons: [
                     'colvis',
                     {
                         extend: 'print',
                         text: '<i class="fa fa-print"></i>  Print Data',
-                        title: 'Data Customer',
+                        title: 'Data Bank',
                         titleAttr: 'Export Excel',
                         className: 'btn btn-sm btn-primary',
                         exportOptions: {
@@ -36,7 +36,7 @@
                     // {
                     //     extend: 'pdfHtml5',
                     //     text: '<i class="fa fa-file-pdf"></i>',
-                    //     title: 'Data Customer',
+                    //     title: 'Data Bank',
                     //     titleAttr: 'Export PDF',
                     //     className: 'btn btn-sm btn-rounded btn-primary',
                     //     exportOptions: {
@@ -64,7 +64,7 @@
                 },
                 columnDefs: [{
                         targets: 0,
-                        className: 'invenkategori',
+                        className: 'bank',
                         orderable: false,
                         searchable: false,
                     },
@@ -83,12 +83,28 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'invekategori_id',
-                        name: 'invekategori_id'
+                        data: 'bank_id',
+                        name: 'bank_id'
                     },
                     {
-                        data: 'nama',
-                        name: 'nama'
+                        data: 'kode_bank',
+                        name: 'kode_bank'
+                    },
+                    {
+                        data: 'nama_bank',
+                        name: 'nama_bank'
+                    },
+                    {
+                        data: 'nama_akun',
+                        name: 'nama_akun'
+                    },
+                    {
+                        data: 'nomor_akun_rekening',
+                        name: 'nomor_akun_rekening'
+                    },
+                    {
+                        data: 'payment',
+                        name: 'payment'
                     },
                     {
                         data: 'is_active',
@@ -167,12 +183,12 @@
     <script src="{{ asset('/js/plugins/sweetalert2.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#kateinven').on('click', '.hapusKateinven', function() {
+            $('#bank').on('click', '.hapusBank', function() {
                 let idItem = $(this).data('id');
 
                 Swal.fire({
                     title: 'Konfirmasi Hapus',
-                    text: "Anda yakin ingin menghapus data kategori ini dari list?",
+                    text: "Anda yakin ingin menghapus data bank ini?",
                     icon: 'warning',
                     data: idItem,
                     showCancelButton: true,
@@ -183,7 +199,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             method: 'GET',
-                            url: "{{ route('invekategori.delete', ':id') }}".replace(
+                            url: "{{ route('bank.delete', ':id') }}".replace(
                                 ':id', idItem),
                             data: {
                                 _token: '{{ csrf_token() }}',
@@ -193,12 +209,12 @@
                                 window.location.reload();
                                 Swal.fire(
                                     'Berhasil!',
-                                    'Item berhasil dihapus',
+                                    'Bank berhasil dihapus',
                                     'success'
                                 )
                             },
                             error: function(error) {
-                                Swal.fire('Error', 'Gagal menghapus barang', 'error');
+                                Swal.fire('Error', 'Gagal menghapus bank', 'error');
                                 // Handle error
                             }
                         });
