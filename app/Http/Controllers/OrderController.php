@@ -41,7 +41,7 @@ class OrderController extends Controller
             $data_table = $data_table;
         }
 
-        if($request->input('status') != null){
+        if($request->input('status') != "null"){
             // Non Active
             $status = $request->input('status');
             $data_table = $data_table->where('orderdetail.pay_status', '=', $status);
