@@ -1,6 +1,6 @@
 @extends('backend.base')
 
-@section('title', 'Inventory Category Add')
+@section('title', 'Bank Add')
 
 @section('styles')
 @endsection
@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Tambah Kategori Inventaris</h2>
+                        <h2 class="mb-0">Tambah Bank</h2>
                     </div>
                 </div>
             </div>
@@ -29,13 +29,13 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>Form Tambah Kategori Inventaris</h5>
+                    <h5>Form Tambah Bank</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('invekategori.store') }}" enctype="multipart/form-data" method="POST"
+                    <form action="{{ route('bank.store') }}" enctype="multipart/form-data" method="POST"
                         class="needs-validation" novalidate="">
                         @csrf
-                        @include('backend.pages.inventaris_kategori.partials.form-inventaris_ktg', [
+                        @include('backend.pages.bank.partials.form-control-bank', [
                             'submit' => 'Create',
                         ])
                     </form>

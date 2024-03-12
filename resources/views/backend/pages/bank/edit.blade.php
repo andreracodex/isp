@@ -1,6 +1,6 @@
 @extends('backend.base')
 
-@section('title', 'Inventory Category Edit')
+@section('title', 'Bank Edit')
 
 @section('styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('back/dist/libs/cropper/dist/cropper.min.css') }}">
@@ -50,7 +50,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Edit Kategori Inventaris</h2>
+                        <h2 class="mb-0">Edit Bank</h2>
                     </div>
                 </div>
             </div>
@@ -62,14 +62,14 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Edit Kategori Inventaris</h5>
+                        <h5>Edit Bank</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('invekategori.update', $invekategori->id) }}" enctype="multipart/form-data"
-                            method="POST" class="needs-validation" novalidate="">
+                        <form action="{{ route('bank.update', $bank->id) }}" enctype="multipart/form-data" method="POST"
+                            class="needs-validation" novalidate="">
                             @csrf
                             @method('PUT')
-                            @include('backend.pages.inventaris_kategori.partials.form-inventaris_ktg', [
+                            @include('backend.pages.bank.partials.form-control-bank', [
                                 'submit' => 'Update',
                             ])
                         </form>
