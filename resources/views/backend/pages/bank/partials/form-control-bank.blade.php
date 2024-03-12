@@ -12,7 +12,7 @@
     <div class="col-md-4 mb-3">
         <label class="form-label" for="nama_bank">Nama Bank</label>
         <input type="text" class="form-control @error('nama_bank') is-invalid @enderror" name="nama_bank"
-            id="nama_bank" value="{{ old('nama_bank') ?? $bank->nama_bank }}" placeholder="Kode Bank" required>
+            id="nama_bank" value="{{ old('nama_bank') ?? $bank->nama_bank }}" placeholder="Nama Bank" required>
 
         @error('nama_bank')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -33,11 +33,12 @@
 <div class="row">
     <div class="col-md-5 mb-3">
         <label class="form-label" for="nomor_akun_rekening">Nomor Akun Rekening</label>
-        <input type="text" class="form-control @error('nomor_akun_rekening') is-invalid @enderror" name="nama"
-            id="nama" value="{{ old('nomor_akun_rekening') ?? $bank->nomor_akun_rekening }}"
-            placeholder="Nomor Rekening" required>
+        <input type="text" class="form-control @error('nomor_akun_rekening') is-invalid @enderror"
+            name="nomor_akun_rekening" id="nomor_akun_rekening"
+            value="{{ old('nomor_akun_rekening') ?? $bank->nomor_akun_rekening }}" placeholder="Nomor Rekening"
+            required>
 
-        @error('nama')
+        @error('nomor_akun_rekening')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>

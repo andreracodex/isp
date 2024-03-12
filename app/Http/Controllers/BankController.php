@@ -40,9 +40,10 @@ class BankController extends Controller
     public function create()
     {
         $bank = new Bank;
+        $payments = PaymentType::orderBy('payment_methode_name', 'ASC')->get();
         $profile = Setting::all();
 
-        return view('backend.pages.bank.create', compact('profile', 'bank'));
+        return view('backend.pages.bank.create', compact('profile', 'bank', 'payments'));
     }
 
     public function store(Request $request)
