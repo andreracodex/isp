@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('order_id')->references('id')->on('orders');
             $table->text('pay_image')->nullable();
             $table->text('pay_description')->nullable();
-            $table->integer('pay_status')->default(1);
+            $table->integer('pay_status')->default(0);
             $table->integer('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();
