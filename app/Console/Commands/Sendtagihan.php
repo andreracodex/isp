@@ -40,11 +40,12 @@ class Sendtagihan extends Command
                     'customer_id' => $list->customer_id,
                     'location_id' => $list->location_id,
                     'paket_id' => $list->paket_id,
+                    'payment_id' => $list->payment_id,
                     'biaya_pasang' => 0,
                     'installed_date' => $list->installed_date,
                     'installed_status' => 0,
                     'order_date' => $list->order_date,
-                    'due_date' => Carbon::now()->addMonth(1)->format('Y-m-d'),
+                    'due_date' => Carbon::parse($list->due_date)->addMonth(1)->format('Y-m-d'),
                 ]);
 
                 $orderdetail = OrderDetail::create([
