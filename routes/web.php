@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BankController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\InventarisSatuanController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaketController;
+use App\Http\Controllers\PaymentTypeController;
 use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
@@ -51,6 +53,16 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::get('{emp}/edit', [EmployeeController::class, 'edit'])->name('employee.edit');
         Route::put('{emp}/update', [EmployeeController::class, 'update'])->name('employee.update');
         Route::get('{emp}/delete', [EmployeeController::class, 'delete'])->name('employee.delete');
+    });
+
+    // Bank
+    Route::prefix('bank')->group(function() {
+        Route::get('', [BankController::class, 'index'])->name('bank.index');
+        Route::get('/create', [BankController::class, 'create'])->name('bank.create');
+        Route::post('/store', [BankController::class, 'store'])->name('bank.store');
+        Route::get('{bank}/edit', [BankController::class, 'edit'])->name('bank.edit');
+        Route::put('{bank}/update', [BankController::class, 'update'])->name('bank.update');
+        Route::get('{bank}/delete', [BankController::class, 'delete'])->name('bank.delete');
     });
 
     // Customer
@@ -138,6 +150,17 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::get('{order}/delete', [OrderController::class, 'delete'])->name('order.delete');
     });
 
+    // Payment Type
+    Route::prefix('paymenttype')->group(function() {
+        Route::get('', [PaymentTypeController::class, 'index'])->name('paymenttype.index');
+        Route::get('/create', [PaymentTypeController::class, 'create'])->name('paymenttype.create');
+        Route::post('/store', [PaymentTypeController::class, 'store'])->name('paymenttype.store');
+        Route::get('{paymenttype}/edit', [PaymentTypeController::class, 'edit'])->name('paymenttype.edit');
+        Route::put('{paymenttype}/update', [PaymentTypeController::class, 'update'])->name('paymenttype.update');
+        Route::get('{paymenttype}/delete', [PaymentTypeController::class, 'delete'])->name('paymenttype.delete');
+    });
+
+    // Periode
     Route::prefix('periode')->group(function() {
         Route::get('', [PeriodeController::class, 'index'])->name('periode.index');
         Route::get('/create', [PeriodeController::class, 'create'])->name('periode.create');

@@ -4,9 +4,9 @@
             <a href="{{ route('frontend') }}" class="b-brand text-primary">
                 <!-- ========   Change your logo from here   ============ -->
                 @if (session()->has('isDark'))
-                <img src="{{ asset($profile[1]->value) }}" width="100" height="40" />
+                    <img src="{{ asset($profile[1]->value) }}" width="100" height="40" />
                 @else
-                <img src="{{ asset($profile[0]->value) }}" width="100" height="40" />
+                    <img src="{{ asset($profile[0]->value) }}" width="100" height="40" />
                 @endif
             </a>
         </div>
@@ -44,12 +44,14 @@
                                 <span>Lock Screen</span>
                             </a>
                             @method('POST') @csrf
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('sidebar-logout').submit();">
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('sidebar-logout').submit();">
                                 <i class="ti ti-power"></i>
                                 <span>Logout</span>
                             </a>
 
-                            <form id="sidebar-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            <form id="sidebar-logout" action="{{ route('logout') }}" method="POST"
+                                style="display: none;">
                                 {{ csrf_field() }}
                             </form>
                         </div>
@@ -107,34 +109,34 @@
                 </li>
 
                 <li class="pc-item">
-                    <a href="{{route('inve.index')}}" class="pc-link"><span class="pc-micon">
+                    <a href="{{ route('inve.index') }}" class="pc-link"><span class="pc-micon">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-presentation-chart"></use>
                             </svg> </span><span class="pc-mtext">Inventaris</span></a>
                 </li>
                 <li class="pc-item pc-hasmenu">
                     <a href="{{ route('order.index') }}" class="pc-link"><span class="pc-micon">
-                        <svg class="pc-icon">
-                            <use xlink:href="#custom-dollar-square"></use>
-                        </svg> </span><span class="pc-mtext">Tagihan</span></a>
+                            <svg class="pc-icon">
+                                <use xlink:href="#custom-dollar-square"></use>
+                            </svg> </span><span class="pc-mtext">Tagihan</span></a>
                 </li>
                 <li class="pc-item pc-hasmenu">
                     <a href="#" class="pc-link"><span class="pc-micon">
-                        <svg class="pc-icon">
-                            <use xlink:href="#custom-fatrows"></use>
-                        </svg> </span><span class="pc-mtext">Arus Kas</span></a>
+                            <svg class="pc-icon">
+                                <use xlink:href="#custom-fatrows"></use>
+                            </svg> </span><span class="pc-mtext">Arus Kas</span></a>
                 </li>
                 <li class="pc-item pc-hasmenu">
                     <a href="#" class="pc-link"><span class="pc-micon">
-                        <svg class="pc-icon">
-                            <use xlink:href="#custom-graph"></use>
-                        </svg> </span><span class="pc-mtext">Laporan</span></a>
+                            <svg class="pc-icon">
+                                <use xlink:href="#custom-graph"></use>
+                            </svg> </span><span class="pc-mtext">Laporan</span></a>
                 </li>
                 <li class="pc-item pc-hasmenu">
                     <a href="{{ route('ticket.index') }}" class="pc-link"><span class="pc-micon">
-                        <svg class="pc-icon">
-                            <use xlink:href="#custom-notification-status"></use>
-                        </svg> </span><span class="pc-mtext">Ticket</span></a>
+                            <svg class="pc-icon">
+                                <use xlink:href="#custom-notification-status"></use>
+                            </svg> </span><span class="pc-mtext">Ticket</span></a>
                 </li>
 
                 <li class="pc-item pc-caption">
@@ -143,15 +145,27 @@
                 </li>
                 <li class="pc-item pc-hasmenu">
                     <a href="{{ route('settings.index') }}" class="pc-link"><span class="pc-micon">
-                        <svg class="pc-icon">
-                            <use xlink:href="#custom-setting-2"></use>
-                        </svg> </span><span class="pc-mtext">Pengaturan</span></a>
+                            <svg class="pc-icon">
+                                <use xlink:href="#custom-setting-2"></use>
+                            </svg> </span><span class="pc-mtext">Pengaturan</span></a>
                 </li>
                 <li class="pc-item pc-hasmenu">
                     <a href="{{ route('employee.index') }}" class="pc-link"><span class="pc-micon">
-                        <svg class="pc-icon">
-                            <use xlink:href="#custom-user-square"></use>
-                        </svg> </span><span class="pc-mtext">Employee</span></a>
+                            <svg class="pc-icon">
+                                <use xlink:href="#custom-user-square"></use>
+                            </svg> </span><span class="pc-mtext">Employee</span></a>
+                </li>
+                <li class="pc-item pc-hasmenu">
+                    <a href="{{ route('paymenttype.index') }}" class="pc-link"><span class="pc-micon">
+                            <svg class="pc-icon">
+                                <use xlink:href="#custom-user-square"></use>
+                            </svg> </span><span class="pc-mtext">Payment Type</span></a>
+                </li>
+                <li class="pc-item pc-hasmenu">
+                    <a href="{{ route('bank.index') }}" class="pc-link"><span class="pc-micon">
+                            <svg class="pc-icon">
+                                <use xlink:href="#custom-user-square"></use>
+                            </svg> </span><span class="pc-mtext">Bank</span></a>
                 </li>
             </ul>
         </div>

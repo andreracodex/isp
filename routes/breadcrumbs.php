@@ -7,6 +7,23 @@ Breadcrumbs::for('dashboard', function (BreadcrumbTrail $trail): void {
     $trail->push('Home', route('dashboard'));
 });
 
+// Bank
+Breadcrumbs::for('bank.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Bank', route('bank.index'));
+});
+Breadcrumbs::for('bank.create', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Tambah Bank', route('bank.create'));
+});
+Breadcrumbs::for('bank.edit', function (BreadcrumbTrail $trail): void {
+    $trail->push('Edit Bank', route('bank.edit', 'bank'));
+});
+Breadcrumbs::for('bank.store', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Simpan Bank', route('bank.store'));
+});
+
 // Customers
 Breadcrumbs::for('customer.index', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
@@ -136,6 +153,27 @@ Breadcrumbs::for('inve.update', function (BreadcrumbTrail $trail): void {
     $trail->push('Update Inventaris', route('inve.update', 'inve'));
 });
 
+// Inventaris Satuan
+Breadcrumbs::for('invesatuan.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Satuan', route('invesatuan.index'));
+});
+Breadcrumbs::for('invesatuan.create', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Tambah Satuan', route('invesatuan.create'));
+});
+Breadcrumbs::for('invesatuan.edit', function (BreadcrumbTrail $trail): void {
+    $trail->push('Edit Satuan', route('invesatuan.edit', 'invesatuan'));
+});
+Breadcrumbs::for('invesatuan.store', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Simpan Satuan', route('invesatuan.store'));
+});
+Breadcrumbs::for('invesatuan.update', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Update Satuan', route('invesatuan.update', 'invesatuan'));
+});
+
 // Order Customer
 Breadcrumbs::for('order.index', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
@@ -207,23 +245,23 @@ Breadcrumbs::for('ticket.store', function (BreadcrumbTrail $trail): void {
     $trail->push('Simpan Ticket', route('ticket.store'));
 });
 
-// Ticket
-Breadcrumbs::for('invesatuan.index', function (BreadcrumbTrail $trail): void {
+// Payment Method
+Breadcrumbs::for('paymenttype.index', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
-    $trail->push('Satuan', route('invesatuan.index'));
+    $trail->push('Metode Pembayaran', route('paymenttype.index'));
 });
-Breadcrumbs::for('invesatuan.create', function (BreadcrumbTrail $trail): void {
+Breadcrumbs::for('paymenttype.create', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
-    $trail->push('Tambah Satuan', route('invesatuan.create'));
+    $trail->push('Tambah Metode Pembayaran', route('paymenttype.create'));
 });
-Breadcrumbs::for('invesatuan.edit', function (BreadcrumbTrail $trail): void {
-    $trail->push('Edit Satuan', route('invesatuan.edit', 'invesatuan'));
+Breadcrumbs::for('paymenttype.edit', function (BreadcrumbTrail $trail): void {
+    $trail->push('Edit Metode Pembayaran', route('paymenttype.edit', 'paymenttype'));
 });
-Breadcrumbs::for('invesatuan.store', function (BreadcrumbTrail $trail): void {
+Breadcrumbs::for('paymenttype.store', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
-    $trail->push('Simpan Satuan', route('invesatuan.store'));
+    $trail->push('Simpan Metode Pembayaran', route('paymenttype.store'));
 });
-Breadcrumbs::for('invesatuan.update', function (BreadcrumbTrail $trail): void {
+Breadcrumbs::for('paymenttype.update', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
-    $trail->push('Update Satuan', route('invesatuan.update', 'invesatuan'));
+    $trail->push('Update Metode Pembayaran', route('paymenttype.update', 'paymenttype'));
 });
