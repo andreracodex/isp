@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-sm-12 text-center mb-3">
                         <div class="user-upload wid-75">
-                            <img src="{{ Auth::user()->real_path }}" alt="img"
+                            <img src="{{ asset(Auth::user()->real_path) }}" alt="img"
                                 class="img-fluid">
                             <label for="uplfile" class="img-avtar-upload">
                                 <i class="ti ti-camera f-24 mb-1"></i>
