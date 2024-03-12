@@ -107,7 +107,7 @@ class CustomerController extends Controller
             'gender' => $request->gender,
             'alamat_customer' => $request->alamat_customer,
             'kodepos_customer' => $request->kodepos_customer,
-            'nomor_telephone' => $request->nomor_telephone,
+            'nomor_telephone' => preg_replace("/[^0-9,]/", "", $request->nomor_telephone),
             'kelurahan_id' => $request->kelurahan,
             'is_active' => $is_active,
             'is_new' => $is_new,

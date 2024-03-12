@@ -35,13 +35,14 @@
 
 -   View Data = Not Found -- done
 -   Delete = Error Page -- done
--   Add Barang = Sorry! The jenis barang field is required. -- progress
+-   Add Barang = Sorry! The jenis barang field is required. -- done
     -   Kategori Inventaris - done
     -   Kategori Satuan - done
 
 4. Tagihan
 
 -   View Data -- progress
+-   Filter Data -- done
 -   Edit Data -- progress
 -   Delete = Error Page -- done
 -   Tab Menu Tambahan

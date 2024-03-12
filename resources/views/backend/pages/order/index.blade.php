@@ -14,6 +14,12 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+            $.fn.DataTable.ext.errMode = 'throw';
+
+            var customerid = $('#customer_id').val();
+            var tempo = $('#jatuh_tempo').val();
+
+            // console.log(customerid, tempo);
 
             function formatRupiah(angka) {
                 var number_string = angka.toString(),
@@ -63,7 +69,15 @@
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                ajax: "{{ route('order.index') }}",
+                ajax: {
+                    url: "{{ route('order.index') }}",
+                    type: "GET",
+                    data: function(d) {
+                        d.customerid = customerid;
+                        d.tempo = tempo;
+                        return d
+                    }
+                },
                 buttons: [
                     'colvis',
                     {
@@ -216,8 +230,21 @@
                             return;
                         });
 
-                }
+                },
             });
+
+            $('#customer_id').on('change', function(selected) {
+                customerid = $('#customer_id').val();
+                // console.log(customerid);
+                $('#order').DataTable().ajax.reload()
+            });
+
+            $('#jatuh_tempo').on('change', function(selected) {
+                tempo = $('#jatuh_tempo').val();
+                // console.log(tempo);
+                $('#order').DataTable().ajax.reload()
+            });
+
             table.button().add(2, {
                 action: function(e, dt, button, config) {
                     dt.ajax.reload();
@@ -339,43 +366,45 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="dt-responsive table-responsive">
-                        <div class="row">
-                            <div class="col-sm-8 col-md-8">
-                                <div class="mb-3">
-                                    <label class="form-label">Nama Customer</label>
-                                    <select name="customer_id" id="customer_id" class="form-control select2" required>
-                                        @foreach ($customer as $cust)
-                                            <option value="{{ $cust->id }}">{{ $cust->nama_customer }} </option>
-                                        @endforeach
-                                    </select>
-                                    <div class="invalid-tooltip" style="top: 0">Status Aktif required</div>
-                                </div>
-                            </div>
 
-                            <div class="col-sm-4 col-md-4">
-                                <div class="mb-3">
-                                    <label class="form-label headerbutton">Jatuh Tempo
-                                        <sup class="mt-2">
-                                            <b>
-                                                <a href="{{ route('periode.create') }}">
-                                                    <i class="ti ti-plus me-1"></i>Tambah Periode
-                                                </a>
-                                            </b>
-                                        </sup>
-                                    </label>
-                                    <select name="jatuh_tempo" id="jatuh_tempo" class="form-control select2" required>
-                                        @foreach ($date as $jatuh)
-                                            <option value="{{ $jatuh->id }}">
-                                                {{ \Carbon\Carbon::parse($jatuh->bulan_periode)->format('F Y') }}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="invalid-tooltip" style="top: 0">Status Aktif required</div>
-                                </div>
+                    <div class="row">
+                        <div class="col-sm-4 col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label">Nama Customer</label>
+                                <select name="customer_id" id="customer_id" class="form-control select2" required>
+                                    <option value="0">All Customer</option>
+                                    @foreach ($customer as $cust)
+                                        <option value="{{ $cust->id }}">{{ $cust->nama_customer }} </option>
+                                    @endforeach
+                                </select>
+                                <div class="invalid-tooltip" style="top: 0">Status Aktif required</div>
                             </div>
                         </div>
 
+                        <div class="col-sm-3 col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label headerbutton">Jatuh Tempo
+                                    <sup class="mt-2">
+                                        <b>
+                                            <a href="{{ route('periode.create') }}">
+                                                <i class="ti ti-plus me-1"></i>Tambah Periode
+                                            </a>
+                                        </b>
+                                    </sup>
+                                </label>
+                                <select name="jatuh_tempo" id="jatuh_tempo" class="form-control select2" required>
+                                    <option value="0">All Tempo</option>
+                                    @foreach ($date as $jatuh)
+                                        <option value="{{ $jatuh->id }}">
+                                            {{ \Carbon\Carbon::parse($jatuh->bulan_periode)->format('F Y') }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="invalid-tooltip" style="top: 0">Status Aktif required</div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="dt-responsive table-responsive">
                         <table id="order" class="table compact table-striped table-hover table-bordered wrap"
                             style="width:100%">
                             <thead>

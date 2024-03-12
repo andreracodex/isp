@@ -19,6 +19,29 @@ class OrderController extends Controller
         $customer = Customer::all();
         $date = Periode::where('is_active', 1)->get();
         $data_table = Order::orderBy('customer_id', 'ASC')->get();
+
+        if($request->input('customerid') != null && $request->input('customerid') != 0){
+            // Non Active
+            $customer_id = $request->input('customerid');
+            $data_table = $data_table->where('customer_id', '=', $customer_id);
+        }else{
+            // All
+            $data_table = $data_table;
+        }
+
+        if($request->input('tempo') != null && $request->input('tempo') != 0){
+            // Non Active
+            $tempo = $request->input('tempo');
+            $date = Periode::select('bulan_periode')->where('id', '=', $tempo)->first();
+            $from = Carbon::parse($date->bulan_periode)->startOfMonth();
+            $to = Carbon::parse($date->bulan_periode)->endOfMonth();
+            $data_table = $data_table->whereBetween('due_date', [$from, $to]);
+        }else{
+            // All
+            $data_table = $data_table;
+        }
+
+
         if ($request->ajax()){
             return DataTables::of($data_table)
             ->addIndexColumn()
