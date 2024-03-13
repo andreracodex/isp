@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Number;
@@ -32,28 +33,45 @@ class DashboardController extends Controller
         $pengeluaran_real = count_pengeluaran();
         $pengeluaran_last_real = count_pengeluaran_last();
 
+        // Tagihan Belum Terbayar
+        $tagihan = Number::currency(count_tagihan(), in: 'IDR', locale: 'id');
+        $tagihan_last = Number::currency(count_tagihan_last(), in: 'IDR', locale: 'id');
+        $tagihan_count = count_tagihan();
+
+        $pembayaran = Number::currency(count_pembayaran(), in: 'IDR', locale: 'id');
+        $pembayaran_last = Number::currency(count_pembayaran_last(), in: 'IDR', locale: 'id');
+        $pembayaran_count = count_pembayaran();
+
         $income = pemasukan_chart();
         $outcome = pengeluaran_chart();
 
         return view(
             'backend.pages.dashboard',
-            compact('profile',
-            'biaya_pasang',
-            'biaya_pasang_last',
-            'biaya_pasang_real',
-            'biaya_pasang_last_real',
-            'new_customer',
-            'last_new_customer',
-            'pendapatan',
-            'pendapatan_last',
-            'pendapatan_real',
-            'pendapatan_last_real',
-            'pengeluaran',
-            'pengeluaran_last',
-            'pengeluaran_real',
-            'pengeluaran_last_real',
-            'income',
-            'outcome')
+            compact(
+                'profile',
+                'biaya_pasang',
+                'biaya_pasang_last',
+                'biaya_pasang_real',
+                'biaya_pasang_last_real',
+                'new_customer',
+                'last_new_customer',
+                'pendapatan',
+                'pendapatan_last',
+                'pendapatan_real',
+                'pendapatan_last_real',
+                'pengeluaran',
+                'pengeluaran_last',
+                'pengeluaran_real',
+                'pengeluaran_last_real',
+                'income',
+                'outcome',
+                'tagihan',
+                'tagihan_last',
+                'tagihan_count',
+                'pembayaran',
+                'pembayaran_last',
+                'pembayaran_count'
+            )
         );
     }
 }

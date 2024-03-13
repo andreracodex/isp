@@ -15,9 +15,15 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
+            $table->unsignedBigInteger('payment_id')->nullable();
+            $table->foreign('payment_id')->references('id')->on('payment_types');
             $table->text('pay_image')->nullable();
             $table->text('pay_description')->nullable();
             $table->integer('pay_status')->default(0);
+            $table->double('diskon')->default(0);
+            $table->double('biaya_pasang')->default(0);
+            $table->datetime('due_date'); //tanggal jatuh tempo
+            $table->integer('is_payed')->default(0);
             $table->integer('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();

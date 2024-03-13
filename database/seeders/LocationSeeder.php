@@ -26,19 +26,19 @@ class LocationSeeder extends Seeder
         DB::table('locations')->insert([
             'nama_location'=> 'Lokasi 3',
             'alamat_location'=> 'Jl. test 3',
-            'employee_id' => 3,
+            'employee_id' => 1,
             'created_at' => Carbon::now(),
         ]);
         DB::table('locations')->insert([
             'nama_location'=> 'Lokasi 4',
             'alamat_location'=> 'Jl. test 4',
-            'employee_id' => 4,
+            'employee_id' => 2,
             'created_at' => Carbon::now(),
         ]);
         DB::table('locations')->insert([
             'nama_location'=> 'Lokasi 5',
             'alamat_location'=> 'Jl. test 5',
-            'employee_id' => 5,
+            'employee_id' => 1,
             'created_at' => Carbon::now(),
         ]);
     }

@@ -18,6 +18,7 @@ class OrderDetailFactory extends Factory
     {
         return [
             "order_id" => $this->faker->numberBetween(1, 10),
+            "due_date" => $this->faker->unique()->dateTimeBetween($startDate = '-3 months', $endDate = '+1 years', $timezone = null),
         ];
     }
 }
