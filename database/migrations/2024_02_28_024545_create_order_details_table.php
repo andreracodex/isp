@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreign('payment_id')->references('id')->on('payment_types');
             $table->text('pay_image')->nullable();
             $table->text('pay_description')->nullable();
-            $table->integer('pay_status')->default(0);
             $table->double('diskon')->default(0);
             $table->double('biaya_pasang')->default(0);
             $table->datetime('due_date'); //tanggal jatuh tempo

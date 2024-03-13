@@ -16,7 +16,7 @@ class OrderDetail extends Model
         'order_id',
         'pay_image',
         'pay_description',
-        'pay_status',
+        'is_payed',
         'is_active',
     ];
 

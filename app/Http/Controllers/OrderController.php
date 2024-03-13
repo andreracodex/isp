@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Periode;
 use App\Models\Setting;
 use Carbon\Carbon;
@@ -18,7 +19,7 @@ class OrderController extends Controller
         $profile = Setting::all();
         $customer = Customer::all();
         $date = Periode::where('is_active', 1)->get();
-        $data_table = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->orderBy('orders.customer_id', 'ASC')->get();
+        $data_table = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')->orderBy('order_details.order_id', 'ASC')->get();
 
         if($request->input('customerid') != null && $request->input('customerid') != 0){
             // Non Active
@@ -44,7 +45,7 @@ class OrderController extends Controller
         if($request->input('status') != "null"){
             // Non Active
             $status = $request->input('status');
-            $data_table = $data_table->where('orderdetail.pay_status', '=', $status);
+            $data_table = $data_table->where('is_payed', '=', $status);
         }else{
             // All
             $data_table = $data_table;
@@ -53,43 +54,43 @@ class OrderController extends Controller
         if ($request->ajax()){
             return DataTables::of($data_table)
             ->addIndexColumn()
-            ->editColumn('order_id', function (Order $order) {
-                return $order->id;
+            ->editColumn('order_id', function (OrderDetail $orderdetail) {
+                return $orderdetail->id;
             })
-            ->editColumn('nama_customer', function (Order $order) {
-                return $order->customer->nama_customer;
+            ->editColumn('nama_customer', function (OrderDetail $orderdetail) {
+                return $orderdetail->order->customer->nama_customer;
             })
-            ->editColumn('nomor_layanan', function (Order $order) {
-                return $order->customer->nomor_layanan;
+            ->editColumn('nomor_layanan', function (OrderDetail $orderdetail) {
+                return $orderdetail->order->customer->nomor_layanan;
             })
-            ->editColumn('alamat_customer', function (Order $order) {
-                return $order->customer->alamat_customer;
+            ->editColumn('alamat_customer', function (OrderDetail $orderdetail) {
+                return $orderdetail->order->customer->alamat_customer;
             })
-            ->editColumn('nomor_telephone', function (Order $order) {
-                return $order->customer->nomor_telephone;
+            ->editColumn('nomor_telephone', function (OrderDetail $orderdetail) {
+                return $orderdetail->order->customer->nomor_telephone;
             })
-            ->editColumn('nama_location', function (Order $order) {
-                return $order->lokasi->nama_location;
+            ->editColumn('nama_location', function (OrderDetail $orderdetail) {
+                return $orderdetail->order->lokasi->nama_location;
             })
-            ->editColumn('jenis_paket', function (Order $order) {
-                return $order->paket->jenis_paket;
+            ->editColumn('jenis_paket', function (OrderDetail $orderdetail) {
+                return $orderdetail->order->paket->jenis_paket;
             })
-            ->editColumn('due_date', function (Order $order) {
-                return Carbon::parse($order->due_date)->format('d F Y');
+            ->editColumn('due_date', function (OrderDetail $orderdetail) {
+                return Carbon::parse($orderdetail->due_date)->format('d F Y');
             })
-            ->editColumn('pay_status', function (Order $order) {
-                return $order->orderdetail->pay_status;
+            ->editColumn('pay_status', function (OrderDetail $orderdetail) {
+                return $orderdetail->is_payed;
             })
-            ->editColumn('harga_paket', function (Order $order) {
-                $formatted_price = Number::currency($order->paket->harga_paket, 'IDR', 'id');
+            ->editColumn('harga_paket', function (OrderDetail $orderdetail) {
+                $formatted_price = Number::currency($orderdetail->order->paket->harga_paket, 'IDR', 'id');
                 $formatted_price = str_replace(",00", "", $formatted_price);
                 return $formatted_price;
             })
-            ->addColumn('action', function (Order $order) {
+            ->addColumn('action', function (OrderDetail $orderdetail) {
                 return "
-                <a href=". route('order.view', $order->id)." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
-                <a href=". route('order.edit', $order->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Data'><i class='fa fa-pencil-alt'></i></a>
-                <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusOrder' data-id='$order->id'><i class='fa fa-trash-alt'></i></button>
+                <a href=". route('order.view', $orderdetail->id,)." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
+                <a href=". route('order.edit', $orderdetail->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Data'><i class='fa fa-pencil-alt'></i></a>
+                <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusOrder' data-id='$orderdetail->id'><i class='fa fa-trash-alt'></i></button>
                 ";
             })
             ->make(true);
