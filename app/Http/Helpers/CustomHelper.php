@@ -70,7 +70,7 @@ function last_customer()
 function count_tagihan()
 {
     $now = Carbon::now();
-    $tagihan = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereYear('order_details.due_date', date('Y'))->whereMonth('order_details.due_date', $now->month)->where('order_details.is_payed', 0)->sum('pakets.harga_paket');
+    $tagihan = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereYear('order_details.due_date', date('Y'))->whereMonth('order_details.due_date', $now->month)->where('order_details.is_payed', 0)->sum('pakets.harga_paket');
     return $tagihan;
 }
 
@@ -78,7 +78,7 @@ function count_tagihan()
 function count_tagihan_last()
 {
     $now = Carbon::now()->subMonths(1);
-    $lasttagihan = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereYear('order_details.due_date', date('Y'))->whereMonth('order_details.due_date', $now->month)->where('order_details.is_payed', 0)->sum('pakets.harga_paket');
+    $lasttagihan = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereYear('order_details.due_date', date('Y'))->whereMonth('order_details.due_date', $now->month)->where('order_details.is_payed', 0)->sum('pakets.harga_paket');
     return $lasttagihan;
 }
 
@@ -86,16 +86,16 @@ function count_tagihan_last()
 function count_pembayaran()
 {
     $now = Carbon::now();
-    $tagihan = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereYear('order_details.due_date', date('Y'))->whereMonth('order_details.due_date', $now->month)->where('order_details.is_payed', 1)->sum('pakets.harga_paket');
-    return $tagihan;
+    $pembayaran = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereYear('order_details.due_date', date('Y'))->whereMonth('order_details.due_date', $now->month)->where('order_details.is_payed', 1)->sum('pakets.harga_paket');
+    return $pembayaran;
 }
 
 // Pembayaran bulan lalu
 function count_pembayaran_last()
 {
     $now = Carbon::now()->subMonths(1);
-    $lasttagihan = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereYear('order_details.due_date', date('Y'))->whereMonth('order_details.due_date', $now->month)->where('order_details.is_payed', 1)->sum('pakets.harga_paket');
-    return $lasttagihan;
+    $lastpembayaran = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereYear('order_details.due_date', date('Y'))->whereMonth('order_details.due_date', $now->month)->where('order_details.is_payed', 1)->sum('pakets.harga_paket');
+    return $lastpembayaran;
 }
 
 

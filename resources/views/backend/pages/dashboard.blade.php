@@ -298,17 +298,17 @@
                         <div class="mt-3 row align-items-center">
                             <div class="col-12">
                                 <h5 class="mb-1">
-                                    @if ($new_customer > $last_new_customer)
+                                    @if ($tagihan_count > $pembayaran_count)
                                         <i class="ti ti-trending-up text-success"></i>
-                                    @elseif($new_customer == $last_new_customer)
+                                    @elseif($tagihan_count == $pembayaran_count)
                                         <i class="ti ti-minus text-primary"></i>
                                     @else
                                         <i class="ti ti-trending-down text-danger"></i>
                                     @endif
-                                    {{ $new_customer }} Pelanggan
+                                    {{ $tagihan }}
                                 </h5>
-                                <p class="text-warning mb-0">
-                                    {{ $last_new_customer }} Pelanggan Bulan Lalu
+                                <p class="text-dark mb-0">
+                                    {{ $tagihan_last }} Bulan Lalu
                                 </p>
                             </div>
                         </div>
