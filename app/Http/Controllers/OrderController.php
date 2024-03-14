@@ -105,6 +105,7 @@ class OrderController extends Controller
         $date = Periode::where('is_active', 1)->get();
         $data_table = OrderDetail::where('order_id', $order->id)->orderBy('created_at', 'ASC')->get();
 
+
         if ($request->input('tempo') != null && $request->input('tempo') != 0) {
             // Non Active
             $tempo = $request->input('tempo');
@@ -117,13 +118,15 @@ class OrderController extends Controller
             $data_table = $data_table;
         }
 
-        if ($request->input('status') != "null") {
-            // Non Active
-            $status = $request->input('status');
-            $data_table = $data_table->where('is_payed', '=', $status);
-        } else {
+        if ($request->input('status') == "null" || $request->input('status') == null) {
             // All
             $data_table = $data_table;
+        } else {
+            // Status
+            $status = $request->input('status');
+            $data_table = $data_table->where('is_payed', '=', $status);
+
+
         }
 
         if ($request->ajax()) {

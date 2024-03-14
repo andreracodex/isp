@@ -3,6 +3,7 @@
 @section('title', 'Tagihan View')
 
 @section('styles')
+
 @endsection
 
 
@@ -47,7 +48,7 @@
 
                     // Total over all pages
                     total = api
-                        .column(4, {
+                        .column(3, {
                             search: 'applied'
                         })
                         .data()
@@ -59,7 +60,7 @@
                     let formatted = formatRupiah(number);
 
                     // Update footer
-                    $(api.column(4).footer()).html(
+                    $(api.column(3).footer()).html(
                         '<span class="badge bg-light-danger rounded-pill f-12">' + formatted +
                         '</span>');
                 },
@@ -311,116 +312,121 @@
 
     @can('view customer')
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <div class="card">
                     <div class="card-header">
                         <h5>Detail Tagihan</h5>
                     </div>
                     <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item px-0 pt-0">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <p class="mb-1 text-muted">Nama Customer</p>
-                                        <p class="mb-0">
-                                            {{ $order->customer->nama_customer }}
-                                        </p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p class="mb-1 text-muted">Gender</p>
-                                        <p class="mb-0">
-                                            @if ($order->gender == '1')
-                                                Laki-laki
-                                            @else
-                                                Perempuan
-                                            @endif
-                                        </p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p class="mb-1 text-muted">Nomor Telefon</p>
-                                        <p class="mb-0">
-                                            {{ $order->customer->nomor_telephone }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item px-0">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <p class="mb-1 text-muted">Kota</p>
-                                        <p class="mb-0">
-                                            {{ $order->customer->village->district->regency->name }}
-                                        </p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p class="mb-1 text-muted">Kecamatan</p>
-                                        <p class="mb-0">
-                                            {{ $order->customer->village->district->name }}
-                                        </p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p class="mb-1 text-muted">Kelurahan</p>
-                                        <p class="mb-0">
-                                            {{ $order->customer->village->name }}
-                                        </p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p class="mb-1 text-muted">Alamat</p>
-                                        <p class="mb-0">
-                                            {{ $order->customer->alamat_customer }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </li>
-                            {{-- Paket --}}
-                            <li class="list-group-item px-0">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <p class="mb-1 text-muted">Nama Paket</p>
-                                        <p class="mb-0">
-                                            {{ $order->paket->nama_paket }}
-                                        </p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p class="mb-1 text-muted">Harga Paket</p>
-                                        <p class="mb-0">
-                                            @php
-                                                $formatted_price = Number::currency(
-                                                    $order->paket->harga_paket,
-                                                    'IDR',
-                                                    'id',
-                                                );
-                                            @endphp
-                                            {{ str_replace(',00', '', $formatted_price) }}
-                                        </p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p class="mb-1 text-muted">Tanggal Pemesanan</p>
-                                        <p class="mb-0">
-                                            {{ date('d F Y', strtotime($order->created_at)) }}
-                                        </p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p class="mb-1 text-muted">Tanggal Pemasangan</p>
-                                        <p class="mb-0">
-                                            @if ($order->installed_date != null)
-                                                {{ date('d F Y', strtotime($order->installed_date)) }}
-                                            @endif
-                                        </p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="mb-1 text-primary">Nama Customer :</p>
+                                <p class="mb-0">
+                                    {{ $order->customer->nama_customer }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <p class="mb-1 text-primary">Gender :</p>
+                                <p class="mb-0">
+                                    @if ($order->gender == '1')
+                                        Laki-laki
+                                    @else
+                                        Perempuan
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <p class="mb-1 text-primary">Nomor Telefon :</p>
+                                <p class="mb-0">
+                                    {{ $order->customer->nomor_telephone }}
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="mb-1 text-primary">Kota :</p>
+                                <p class="mb-0">
+                                    {{ $order->customer->village->district->regency->name }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <p class="mb-1 text-primary">Kecamatan :</p>
+                                <p class="mb-0">
+                                    {{ $order->customer->village->district->name }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <p class="mb-1 text-primary">Kelurahan :</p>
+                                <p class="mb-0">
+                                    {{ $order->customer->village->name }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <p class="mb-1 text-primary">Alamat :</p>
+                                <p class="mb-0">
+                                    {{ $order->customer->alamat_customer }}
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="mb-1 text-primary">Nama Paket :</p>
+                                <p class="mb-0">
+                                    {{ $order->paket->nama_paket }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <p class="mb-1 text-primary">Harga Paket :</p>
+                                <p class="mb-0">
+                                    @php
+                                        $formatted_price = Number::currency($order->paket->harga_paket, 'IDR', 'id');
+                                    @endphp
+                                    {{ str_replace(',00', '', $formatted_price) }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <p class="mb-1 text-primary">Tanggal Pemesanan :</p>
+                                <p class="mb-0">
+                                    {{ date('d F Y', strtotime($order->created_at)) }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <p class="mb-1 text-primary">Tanggal Pemasangan :</p>
+                                <p class="mb-0">
+                                    @if ($order->installed_date != null)
+                                        {{ date('d F Y', strtotime($order->installed_date)) }}
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer">
-                        <a href="{{ route('order.edit', $order->id) }}" class="btn btn-warning btn-round">
+                        <a href="{{ route('customer.edit', $order->customer_id) }}" class="btn btn-sm btn-primary btn-round">
                             <i class='fa fa-pencil-alt'></i> Edit
                         </a>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-6">
+            <div class="col-lg-8">
                 <div class="card">
                     <div class="card-header">
                         <div class="headerbutton">
@@ -442,31 +448,28 @@
                         </div>
                     </div>
                     <div class="card-body">
-
                         <div class="row">
-                            <div class="col-sm-6 col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label headerbutton">Jatuh Tempo
-                                        <sup class="mt-2">
-                                            <b>
-                                                <a href="{{ route('periode.create') }}">
-                                                    <i class="ti ti-plus me-1"></i>Tambah Periode
-                                                </a>
-                                            </b>
-                                        </sup>
-                                    </label>
-                                    <select name="jatuh_tempo" id="jatuh_tempo" class="form-control select2" required>
-                                        <option value="0">All Tempo</option>
-                                        @foreach ($date as $jatuh)
-                                            <option value="{{ $jatuh->id }}">
-                                                {{ \Carbon\Carbon::parse($jatuh->bulan_periode)->format('F Y') }}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="invalid-tooltip" style="top: 0">Status Aktif required</div>
-                                </div>
+                            <div class="col-md-6 col-sm-12">
+                                <label class="form-label headerbutton">Jatuh Tempo
+                                    <sup class="mt-2">
+                                        <b>
+                                            <a href="{{ route('periode.create') }}">
+                                                <i class="ti ti-plus me-1"></i>Tambah Periode
+                                            </a>
+                                        </b>
+                                    </sup>
+                                </label>
+                                <select name="jatuh_tempo" id="jatuh_tempo" class="form-control se" required>
+                                    <option value="0">All Tempo</option>
+                                    @foreach ($date as $jatuh)
+                                        <option value="{{ $jatuh->id }}">
+                                            {{ \Carbon\Carbon::parse($jatuh->bulan_periode)->format('F Y') }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="invalid-tooltip" style="top: 0">Status Aktif required</div>
                             </div>
 
-                            <div class="col-sm-6 col-md-6">
+                            <div class="col-md-4 col-sm-12">
                                 <div class="mb-3">
                                     <label class="form-label headerbutton">Status Tagihan
                                     </label>
@@ -487,17 +490,18 @@
                                     <tr>
                                         <th style="width: 10px;">#</th>
                                         <th></th>
-                                        <th>Paket</th>
                                         <th>Jatuh Tempo</th>
                                         <th>Tagihan</th>
                                         <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th colspan="4" style="text-align:right">Total Tagihan:</th>
+                                        <th colspan="3" style="text-align:right">Total Tagihan:</th>
+                                        <th></th>
                                         <th></th>
                                         <th></th>
                                     </tr>
