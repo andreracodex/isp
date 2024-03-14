@@ -183,6 +183,9 @@ Breadcrumbs::for('order.create', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Tambah Tagihan', route('order.create'));
 });
+Breadcrumbs::for('order.view', function (BreadcrumbTrail $trail): void {
+    $trail->push('Detail Tagihan', route('order.view', 'order'));
+});
 Breadcrumbs::for('order.edit', function (BreadcrumbTrail $trail): void {
     $trail->push('Edit Tagihan', route('order.edit', 'order'));
 });
