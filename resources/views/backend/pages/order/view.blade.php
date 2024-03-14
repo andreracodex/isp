@@ -47,7 +47,7 @@
 
                     // Total over all pages
                     total = api
-                        .column(7, {
+                        .column(4, {
                             search: 'applied'
                         })
                         .data()
@@ -59,7 +59,7 @@
                     let formatted = formatRupiah(number);
 
                     // Update footer
-                    $(api.column(7).footer()).html(
+                    $(api.column(4).footer()).html(
                         '<span class="badge bg-light-danger rounded-pill f-12">' + formatted +
                         '</span>');
                 },
@@ -192,13 +192,13 @@
             $('#jatuh_tempo').on('change', function(selected) {
                 tempo = $('#jatuh_tempo').val();
                 // console.log(tempo);
-                $('#order').DataTable().ajax.reload()
+                $('#orderdetail').DataTable().ajax.reload()
             });
 
             $('#status_tagihan').on('change', function(selected) {
                 status = $('#status_tagihan').val();
                 // console.log(tempo);
-                $('#order').DataTable().ajax.reload()
+                $('#orderdetail').DataTable().ajax.reload()
             });
 
             table.button().add(2, {
@@ -481,7 +481,7 @@
                         </div>
 
                         <div class="dt-responsive table-responsive">
-                            <table id="order" class="table compact table-striped table-hover table-bordered wrap"
+                            <table id="orderdetail" class="table compact table-striped table-hover table-bordered wrap"
                                 style="width:100%">
                                 <thead>
                                     <tr>
@@ -491,15 +491,13 @@
                                         <th>Jatuh Tempo</th>
                                         <th>Tagihan</th>
                                         <th>Status</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th colspan="7" style="text-align:right">Total Tagihan:</th>
-                                        <th></th>
+                                        <th colspan="4" style="text-align:right">Total Tagihan:</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
