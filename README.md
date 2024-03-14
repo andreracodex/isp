@@ -59,12 +59,12 @@
 
 6. All Menu :
 
--   Nominal IDR dikasih titik atau koma agar mudah terbaca
+-   Nominal IDR dikasih titik atau koma agar mudah terbaca -- done
 
 7. Dashboard
 
--   View = Tagihan Terbayar
--   View = Tagihan Belum Terbayar
+-   View = Tagihan Terbayar -- done
+-   View = Tagihan Belum Terbayar -- done
 -   View = Total Saldo
 
 

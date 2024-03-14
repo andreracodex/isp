@@ -228,7 +228,6 @@ class CustomerController extends Controller
         ]);
 
         $order = Order::find($request->input('order_id'));
-
         $order->update([
             'customer_id' => $customer->id,
             'location_id' => $request->lokasi,
@@ -237,7 +236,11 @@ class CustomerController extends Controller
             'installed_date' => $request->installed_date,
             'installed_status' => $is_installed,
             'order_date' => Date::now(),
-            'due_date' => $due_date,
+        ]);
+
+        $details = OrderDetail::where('order_id', $order->id)->first();
+        $details->update([
+            'due_date' => Date::now(),
         ]);
 
         return redirect()->route('customer.index')->with('success','Berhasil Edit Customer.');
