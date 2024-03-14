@@ -127,7 +127,7 @@ class CustomerController extends Controller
 
         OrderDetail::create([
             'order_id' => $order->id,
-            'is_active' => $is_active,
+            'is_payed' => $is_active,
         ]);
 
         return redirect()->route('customer.index')->with('success','Berhasil Tambah Customer.');
