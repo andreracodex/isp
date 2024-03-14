@@ -102,7 +102,29 @@ class OrderController extends Controller
     {
         $order = Order::find($order->id);
         $profile = Setting::all();
-        $data_table = OrderDetail::orderBy('created_at', 'ASC')->get();
+        $date = Periode::where('is_active', 1)->get();
+        $data_table = OrderDetail::where('order_id', $order->id)->orderBy('created_at', 'ASC')->get();
+
+        if ($request->input('tempo') != null && $request->input('tempo') != 0) {
+            // Non Active
+            $tempo = $request->input('tempo');
+            $date = Periode::select('bulan_periode')->where('id', '=', $tempo)->first();
+            $from = Carbon::parse($date->bulan_periode)->startOfMonth();
+            $to = Carbon::parse($date->bulan_periode)->endOfMonth();
+            $data_table = $data_table->whereBetween('due_date', [$from, $to]);
+        } else {
+            // All
+            $data_table = $data_table;
+        }
+
+        if ($request->input('status') != "null") {
+            // Non Active
+            $status = $request->input('status');
+            $data_table = $data_table->where('is_payed', '=', $status);
+        } else {
+            // All
+            $data_table = $data_table;
+        }
 
         if ($request->ajax()) {
             return DataTables::of($data_table)
@@ -110,8 +132,16 @@ class OrderController extends Controller
             ->editColumn('orderdetail_id', function (OrderDetail $orderdetail) {
                 return $orderdetail->id;
             })
-            ->addColumn('paket', function (OrderDetail $orderdetail) {
-                return $orderdetail->paket->nama_paket;
+            ->editColumn('due_date', function (OrderDetail $orderdetail) {
+                return Carbon::parse($orderdetail->due_date)->format('d F Y');
+            })
+            ->editColumn('pay_status', function (OrderDetail $orderdetail) {
+                return $orderdetail->is_payed;
+            })
+            ->editColumn('harga_paket', function (OrderDetail $orderdetail) {
+                $formatted_price = Number::currency($orderdetail->order->paket->harga_paket, 'IDR', 'id');
+                $formatted_price = str_replace(",00", "", $formatted_price);
+                return $formatted_price;
             })
             ->addColumn('action', function (OrderDetail $orderdetail) {
                 return "
@@ -124,7 +154,7 @@ class OrderController extends Controller
         }
 
         return view('backend.pages.order.view',
-            compact('profile', 'order')
+            compact('profile', 'order', 'date')
         );
     }
 
