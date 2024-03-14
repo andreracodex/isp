@@ -12,9 +12,6 @@ use Yajra\DataTables\Facades\DataTables;
 
 class TicketController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $profile = Setting::all();
@@ -40,8 +37,8 @@ class TicketController extends Controller
             ->addColumn('action', function (Ticket $ticket) {
                 return "
                 <a href=". route('ticket.view', $ticket->id) ." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
-                <a href=". route('ticket.edit', $ticket->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Data'><i class='fa fa-pencil-alt'></i></a>
-                <a href=". route('ticket.delete', $ticket->id) ." class='avtar avtar-xs btn-link-danger btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Delete Data'><i class='fa fa-trash-alt'></i></a>
+                <button type='button' class='avtar avtar-xs btn-link-warning btn-pc-default updateStatusTicket' data-id='$ticket->id'><i class='fa fa-pencil-alt'></i></button>
+                <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusTicket' data-id='$ticket->id'><i class='fa fa-trash-alt'></i></button>
             ";
             })
             ->make(true);
@@ -50,9 +47,6 @@ class TicketController extends Controller
         return view('backend.pages.ticket.index', compact('ticket', 'ticket_active', 'profile'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $profile = Setting::all();
@@ -62,9 +56,6 @@ class TicketController extends Controller
         return view('backend.pages.ticket.create', compact('profile', 'ticket', 'customers', 'ticket_details'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -93,35 +84,45 @@ class TicketController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Ticket $ticket)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Ticket $ticket)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Ticket $ticket)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Ticket $ticket)
+    public function updateStatus(Request $request, Ticket $ticket)
     {
-        //
+        if ($ticket->is_active == 1) {
+            $ticket->update([
+                'is_active' => 0,
+            ]);
+        } else {
+            $ticket->update([
+                'is_active' => 1,
+            ]);
+        }
+
+
+        return redirect()->route('ticket.index')->with('success', 'Berhasil Edit Status Keluhan.');
+    }
+
+    public function delete(string $id)
+    {
+        $ticket = Ticket::find($id);
+        if ($ticket) {
+            Ticket::where('id', $id)->delete();
+            return redirect()->back()->with(['success' => 'Data berhasil dihapus !']);
+        } else {
+            return redirect()->back()->with(['error' => 'Data failed dihapus !']);
+        }
     }
 }

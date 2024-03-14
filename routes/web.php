@@ -188,7 +188,8 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::post('/store', [TicketController::class, 'store'])->name('ticket.store');
         Route::get('{ticket}/edit', [TicketController::class, 'edit'])->name('ticket.edit');
         Route::put('{ticket}/update', [TicketController::class, 'update'])->name('ticket.update');
-        Route::delete('{ticket}/delete', [TicketController::class, 'delete'])->name('ticket.delete');
+        Route::get('{ticket}/updateStatus', [TicketController::class, 'updateStatus'])->name('ticket.updateStatus');
+        Route::get('{ticket}/delete', [TicketController::class, 'delete'])->name('ticket.delete');
     });
 
     Route::get('/pdf', [PDFController::class, 'PDFInventaris'])->name('pdf.inventaris');
