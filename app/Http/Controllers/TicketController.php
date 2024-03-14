@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Setting;
 use App\Models\Ticket;
+use App\Models\TicketKategori;
+use Exception;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -52,7 +55,11 @@ class TicketController extends Controller
      */
     public function create()
     {
-        //
+        $profile = Setting::all();
+        $customers = Customer::where('is_active', 1)->get();
+        $ticket_details = TicketKategori::all();
+        $ticket = new Ticket();
+        return view('backend.pages.ticket.create', compact('profile', 'ticket', 'customers', 'ticket_details'));
     }
 
     /**
@@ -60,7 +67,30 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'customer' => 'required',
+            'ticket_detail' => 'required',
+            'komplain_customer' => 'required'
+        ]);
+        if(!$validated){
+            return redirect()->route('ticket.index')->with('error','Property is not valid .');
+        }else{
+            try{
+
+                Ticket::create([
+                    'customer_id' => $request->customer,
+                    'ticket_kat_id' => $request->ticket_detail,
+                    'keterangan_komplain' => $request->komplain_customer,
+                ]);
+
+                return redirect()->route('ticket.index')->with('error','Property is not valid .');
+
+            }catch(Exception $e){
+                dd($e);
+            }
+        }
+
+
     }
 
     /**

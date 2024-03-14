@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Tambah Pelanggan</h2>
+                        <h2 class="mb-0">Tambah Ticket</h2>
                     </div>
                 </div>
             </div>
@@ -29,13 +29,13 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>Tambah Pelanggan Form</h5>
+                    <h5>Tambah Ticket Form</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('customer.store') }}" enctype="multipart/form-data" method="POST"
+                    <form action="{{ route('ticket.store') }}" enctype="multipart/form-data" method="POST"
                         class="needs-validation" novalidate="">
                         @csrf
-                        @include('backend.pages.customer.partials.form-control-customer', [
+                        @include('backend.pages.ticket.partials.form-control-ticket', [
                             'submit' => 'Create',
                         ])
                     </form>

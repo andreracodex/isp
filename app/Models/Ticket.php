@@ -14,7 +14,8 @@ class Ticket extends Model
 
     protected $fillable = [
         'customer_id',
-        'keluhan_id',
+        'ticket_kat_id',
+        'keterangan_komplain',
         'is_active',
     ];
 

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('customer_id')->nullable();
             $table->foreign('customer_id')->references('id')->on('customers');
+            $table->unsignedBigInteger('ticket_kat_id')->nullable();
+            $table->foreign('ticket_kat_id')->references('id')->on('ticket_kategoris');
             $table->longText('keterangan_komplain');
             $table->integer('is_active')->default(1);
             $table->timestamps();

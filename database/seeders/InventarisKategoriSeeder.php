@@ -23,5 +23,19 @@ class InventarisKategoriSeeder extends Seeder
             'nama' => 'Konektor RJ-45',
             'created_at' => Carbon::now(),
         ]);
+
+        //
+        DB::table('ticket_kategoris')->insert([
+            'nama' => 'Masalah Tagihan Pembayaran',
+            'created_at' => Carbon::now(),
+        ]);
+        DB::table('ticket_kategoris')->insert([
+            'nama' => 'Gangguan Teknis',
+            'created_at' => Carbon::now(),
+        ]);
+        DB::table('ticket_kategoris')->insert([
+            'nama' => 'Koneksi Lambat atau Tidak Stabil',
+            'created_at' => Carbon::now(),
+        ]);
     }
 }

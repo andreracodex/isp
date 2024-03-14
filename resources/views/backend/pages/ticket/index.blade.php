@@ -107,7 +107,7 @@
                         name: 'is_active',
                         render: function(data, type, row) {
                             if (row.is_active == 0) {
-                                return '<span class="badge bg-light-danger rounded-pill f-12"> Closed </span>';
+                                return '<span class="badge bg-light-primary rounded-pill f-12"> Closed </span>';
                             } else if (row.is_active == 1) {
                                 return '<span class="badge bg-light-warning rounded-pill f-12"> Complain </span>';
                             } else {
