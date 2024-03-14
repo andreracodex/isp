@@ -66,3 +66,24 @@
 -   View = Tagihan Terbayar
 -   View = Tagihan Belum Terbayar
 -   View = Total Saldo
+
+
+New Revisi :
+
+1. Inventaris Barang
+- Add Barang = Sorry! The jenis barang field is required. --done
+
+2. Tagihan
+- View Data, Edit Data = Error Page
+- Tab Menu Status = Status Lunas atau Belum tidak sesuai jatuh temponya -- done
+- Tagihan Pelanggan = Double Tagihan
+- Tambahan Menu Dropdown = Lunas dan Belum bayar sesuai tagihan pelanggan agar tidak tercampur
+- Edit Data = Pembayaran dikonfirmasi jika ada pelanggan yg bayar cash ( ceklist/uncheck wa gate kirim bukti bayar melalui whatsapp )
+
+3. Employe
+- Add Karyawan = Error Page
+
+4. Dashboard
+- View Tambahan = Tagihan Terbayar
+- View Tambahan = Tagihan Belum Terbayar
+
