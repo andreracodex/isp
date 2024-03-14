@@ -13,7 +13,8 @@
                 <div class="card my-5">
                     <div class="card-body">
                         <div class="text-center">
-                            <a href="{{ route('frontend') }}"><img src="{{ asset('/images/logo.png') }}" width="150" alt="img"></a>
+                            <a href="{{ route('frontend') }}"><img src="{{ asset('/images/logo.png') }}" width="150"
+                                    alt="img"></a>
                             <h5 class="text-center f-w-500 mb-3">Internet Provider Kesayangan Kamu</h5>
                             <div class="d-grid my-3">
                                 <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
@@ -27,10 +28,11 @@
                         </div>
 
                         <form class="needs-validation" novalidate method="POST" action="{{ route('login') }}">
-                        @csrf
+                            @csrf
                             <div class="form-group mb-3">
                                 <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" id="email" placeholder="Email Address" required>
+                                    name="email" id="email" value="{{ old('email') }}" placeholder="Email Address"
+                                    required>
                                 @error('email')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -44,8 +46,8 @@
                             </div>
                             <div class="d-flex mt-1 justify-content-between align-items-center">
                                 <div class="form-check">
-                                    <input class="form-check-input input-primary" type="checkbox" id="check"
-                                        checked required>
+                                    <input class="form-check-input input-primary" type="checkbox" id="check" checked
+                                        required>
                                     <label class="form-check-label text-muted" for="check">Remember me?</label>
                                 </div>
                                 <a class="text-secondary f-w-400 mb-0" href="{{ route('forgotpassword') }}">Forgot

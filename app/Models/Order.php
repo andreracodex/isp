@@ -17,16 +17,11 @@ class Order extends Model
         'location_id',
         'paket_id',
         'coordinates_id',
-        'payment_id',
-        'biaya_pasang',
-        'diskon',
         'path_ktp',
         'path_image_rumah',
-        'order_date',
         'installed_date',
         'installed_image',
         'installed_status',
-        'due_date',
         'is_active',
     ];
 

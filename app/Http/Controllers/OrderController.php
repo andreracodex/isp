@@ -109,8 +109,24 @@ class OrderController extends Controller
         }
     }
 
-    public function edit(){
+    public function view(Order $order)
+    {
+        $order = Order::find($order->id);
+        $profile = Setting::all();
 
+        return view('backend.pages.order.view',
+            compact('profile', 'order')
+        );
+    }
+
+    public function edit(Order $order)
+    {
+        $order = Order::find($order->id);
+        $profile = Setting::all();
+
+        return view('backend.pages.order.edit',
+            compact('profile', 'order')
+        );
     }
 }
 
