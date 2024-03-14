@@ -59,15 +59,43 @@
                                         </p>
                                     </div>
                                     <div class="col-md-3">
-                                        <p class="mb-1 text-muted">Nama Paket</p>
+                                        <p class="mb-1 text-muted">Nomor Telefon</p>
                                         <p class="mb-0">
-                                            {{ $order->paket->nama_paket }}
+                                            {{ $order->customer->nomor_telephone }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item px-0">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <p class="mb-1 text-muted">Kota</p>
+                                        <p class="mb-0">
+                                            {{ $order->customer->village->district->regency->name }}
+                                        </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="mb-1 text-muted">Kecamatan</p>
+                                        <p class="mb-0">
+                                            {{ $order->customer->village->district->name }}
+                                        </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="mb-1 text-muted">Kelurahan</p>
+                                        <p class="mb-0">
+                                            {{ $order->customer->village->name }}
+                                        </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="mb-1 text-muted">Alamat</p>
+                                        <p class="mb-0">
+                                            {{ $order->customer->alamat_customer }}
                                         </p>
                                     </div>
                                 </div>
                             </li>
                             {{-- Paket --}}
-                            <li class="list-group-item px-0 pt-0">
+                            <li class="list-group-item px-0">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <p class="mb-1 text-muted">Nama Paket</p>
@@ -78,16 +106,29 @@
                                     <div class="col-md-3">
                                         <p class="mb-1 text-muted">Harga Paket</p>
                                         <p class="mb-0">
-                                            {{ $order->customer->nama_customer }}
+                                            @php
+                                                $formatted_price = Number::currency(
+                                                    $order->paket->harga_paket,
+                                                    'IDR',
+                                                    'id',
+                                                );
+                                            @endphp
+                                            {{ str_replace(',00', '', $formatted_price) }}
                                         </p>
                                     </div>
                                     <div class="col-md-3">
                                         <p class="mb-1 text-muted">Tanggal Pemesanan</p>
-                                        <p class="mb-0">{{ $order->created_at }}</p>
+                                        <p class="mb-0">
+                                            {{ date('d F Y', strtotime($order->created_at)) }}
+                                        </p>
                                     </div>
                                     <div class="col-md-3">
                                         <p class="mb-1 text-muted">Tanggal Pemasangan</p>
-                                        <p class="mb-0">{{ $order->installed_date }}</p>
+                                        <p class="mb-0">
+                                            @if ($order->installed_date != null)
+                                                {{ date('d F Y', strtotime($order->installed_date)) }}
+                                            @endif
+                                        </p>
                                     </div>
                                 </div>
                             </li>

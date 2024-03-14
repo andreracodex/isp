@@ -150,6 +150,16 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::get('{order}/delete', [OrderController::class, 'delete'])->name('order.delete');
     });
 
+    Route::prefix('orderdetail')->group(function() {
+        Route::get('', [OrderDetailController::class, 'index'])->name('orderdetail.index');
+        Route::get('/create', [OrderDetailController::class, 'create'])->name('orderdetail.create');
+        Route::get('{orderdetail}/view', [OrderDetailController::class, 'view'])->name('orderdetail.view');
+        Route::post('/store', [OrderDetailController::class, 'store'])->name('orderdetail.store');
+        Route::get('{orderdetail}/edit', [OrderDetailController::class, 'edit'])->name('orderdetail.edit');
+        Route::put('{orderdetail}/update', [OrderDetailController::class, 'update'])->name('orderdetail.update');
+        Route::get('{orderdetail}/delete', [OrderDetailController::class, 'delete'])->name('orderdetail.delete');
+    });
+
     // Payment Type
     Route::prefix('paymenttype')->group(function() {
         Route::get('', [PaymentTypeController::class, 'index'])->name('paymenttype.index');

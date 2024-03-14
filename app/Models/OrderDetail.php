@@ -14,8 +14,12 @@ class OrderDetail extends Model
 
     protected $fillable = [
         'order_id',
+        'payment_id',
         'pay_image',
         'pay_description',
+        'diskon',
+        'biaya_pasang',
+        'due_date',
         'is_payed',
         'is_active',
     ];

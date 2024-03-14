@@ -98,21 +98,30 @@ class OrderController extends Controller
         return view('backend.pages.order.index', compact('profile', 'customer', 'date'));
     }
 
-
-    public function delete(String $id){
-        $order = Order::find($id);
-        if($order){
-            Order::where('id', $id)->delete();
-            return redirect()->back()->with(['success' => 'Data berhasil dihapus !']);
-        }else{
-            return redirect()->back()->with(['error' => 'Data failed dihapus !']);
-        }
-    }
-
-    public function view(Order $order)
+    public function view(Order $order, Request $request)
     {
         $order = Order::find($order->id);
         $profile = Setting::all();
+        $data_table = OrderDetail::orderBy('created_at', 'ASC')->get();
+
+        if ($request->ajax()) {
+            return DataTables::of($data_table)
+            ->addIndexColumn()
+            ->editColumn('orderdetail_id', function (OrderDetail $orderdetail) {
+                return $orderdetail->id;
+            })
+            ->addColumn('paket', function (OrderDetail $orderdetail) {
+                return $orderdetail->paket->nama_paket;
+            })
+            ->addColumn('action', function (OrderDetail $orderdetail) {
+                return "
+                <a href=". route('orderdetail.view', $orderdetail->id) ." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
+                <a href=". route('orderdetail.edit', $orderdetail->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Data'><i class='fa fa-pencil-alt'></i></a>
+                <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusOrderDetail' data-id='$orderdetail->id'><i class='fa fa-trash-alt'></i></button>
+            ";
+            })
+            ->make(true);
+        }
 
         return view('backend.pages.order.view',
             compact('profile', 'order')
@@ -122,11 +131,22 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         $order = Order::find($order->id);
+        $orderdetail = OrderDetail::orderBy('created-at', 'ASC')->get();
         $profile = Setting::all();
 
         return view('backend.pages.order.edit',
-            compact('profile', 'order')
+            compact('profile', 'order', 'orderdetail')
         );
+    }
+
+    public function delete(String $id){
+        $order = Order::find($id);
+        if ($order) {
+            Order::where('id', $id)->delete();
+            return redirect()->back()->with(['success' => 'Data berhasil dihapus !']);
+        } else {
+            return redirect()->back()->with(['error' => 'Data failed dihapus !']);
+        }
     }
 }
 
