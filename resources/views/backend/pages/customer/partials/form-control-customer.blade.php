@@ -63,9 +63,9 @@
     @endif
 
     <div class="col-md-3 mb-3">
-        <label class="form-label" for="nomor_ktp">Nomor KTP <sup class="text-danger" data-bs-toggle="tooltip"
+        <label class="form-label" for="nomor_ktp">Nomor KTP <sup class="text-primary" data-bs-toggle="tooltip"
                 data-bs-placement="top"
-                data-bs-original-title="ktp wajib di input dibutuhkan untuk verifikasi">*</sup></label>
+                data-bs-original-title="ktp dapat di input opsional">*</sup></label>
         <input type="number" min="0" class="form-control" name="nomor_ktp" id="nomor_ktp"
             value="{{ old('nomor_ktp') ?? $customer->nomor_ktp }}" placeholder="Nomor KTP">
         <div class="valid-feedback"> Opsional ! </div>
@@ -83,14 +83,18 @@
 
 <div class="row">
     <div class="col-md-6 mb-3">
-        <label class="form-label" for="alamat_customer">Alamat Customer</label>
+        <label class="form-label" for="alamat_customer">Alamat Customer <sup class="text-danger" data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-original-title="alamat wajib di isi untuk lokasi pemasangan">*</sup></label>
         <textarea class="form-control" placeholder="Alamat Customer" id="exampleTextarea" name="alamat_customer"
             rows="3" required>{{ old('alamat_customer') ?? $customer->alamat_customer }}</textarea>
         <div class="invalid-feedback"> Harap isi alamat. </div>
     </div>
 
     <div class="col-md-3 mb-3">
-        <label class="form-label" for="kodepos">Kode POS</label>
+        <label class="form-label" for="kodepos">Kode POS <sup class="text-primary" data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-original-title="kodepos dapat di input opsional">*</sup></label>
         <input type="number" min="0" placeholder="602xxx" class="form-control" name="kodepos_customer"
             id="kodepos_customer" placeholder="Kode POS"
             value="{{ old('kodepos_customer') ?? $customer->kodepos_customer }}" required>
@@ -98,7 +102,9 @@
     </div>
 
     <div class="col-md-3 mb-3">
-        <label class="form-label" for="nomor_telephone">Nomor HP</label>
+        <label class="form-label" for="nomor_telephone">Nomor HP <sup class="text-danger" data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-original-title="nomor hp wajib di isi untuk wa gateway">*</sup></label>
         <div class="input-group">
             <span class="input-group-text" id="nomor_telephone"><i class="ti ti-phone-call"></i></span>
             <input type="number" min="0" name="nomor_telephone" class="form-control" id="nomor_telephone"
@@ -111,7 +117,9 @@
 
 <div class="row">
     <div class="col-md-6 mb-3">
-        <label class="form-label" for="nama">Email Customer</label>
+        <label class="form-label" for="nama">Email Customer <sup class="text-danger" data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-original-title="wajib di isi untuk pemberitahuan melalui email">*</sup></label>
         <input type="email" class="form-control" name="email" id="email"
             value="{{ old('email') ?? $customer->email }}@if ($submit != 'Create') {{ $customer->user->email }}@else{{ $customer->email }} @endif"
             placeholder="mail@example" required>

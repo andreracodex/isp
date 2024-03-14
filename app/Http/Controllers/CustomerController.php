@@ -64,6 +64,8 @@ class CustomerController extends Controller
             'nama_customer' => 'required',
             'nomor_telephone' => 'required|min:10|max:14',
             'email' => 'required|email:dns|unique:users',
+            'installed_date' => 'required',
+            'due_date' => 'required',
         ]);
 
         if(!$validated){
@@ -118,15 +120,21 @@ class CustomerController extends Controller
             'customer_id' => $customer->id,
             'location_id' => $request->lokasi,
             'paket_id' => $request->paket_internet,
-            'biaya_pasang' => $request->biaya_pasang,
             'installed_date' => $request->installed_date,
             'installed_status' => $is_installed,
-            'order_date' => Date::now(),
-            'due_date' => $due_date,
         ]);
+
+        $new = $request->input('is_new');
+        if($new == 'ON' || $new == 'on'){
+            $due_date = Carbon::parse($request->input('due_date'))->addMonths(1);
+        }else{
+            $due_date = $request->input('due_date');
+        }
 
         OrderDetail::create([
             'order_id' => $order->id,
+            'biaya_pasang' => $request->biaya_pasang,
+            'due_date' => $due_date,
             'is_payed' => $is_active,
         ]);
 

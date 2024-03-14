@@ -24,4 +24,9 @@ class OrderDetail extends Model
     {
         return $this->belongsTo(Order::class, 'order_id', 'id');
     }
+
+    public function paymenttype()
+    {
+        return $this->belongsTo(PaymentType::class, 'payment_id', 'id');
+    }
 }

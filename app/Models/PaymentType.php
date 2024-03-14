@@ -22,8 +22,8 @@ class PaymentType extends Model
         return $this->hasMany(Bank::class, 'payment_id', 'id');
     }
 
-    public function orders()
+    public function orderdetails()
     {
-        return $this->hasMany(Order::class, 'payment_id', 'id');
+        return $this->hasMany(OrderDetail::class, 'payment_id', 'id');
     }
 }
