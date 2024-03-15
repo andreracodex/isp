@@ -39,8 +39,6 @@ class Sendtagihan extends Command
             $first = Carbon::now()->addMonth(1)->firstOfMonth()->format('Y-m-d');
             $last = Carbon::now()->addMonth(1)->lastOfMonth()->format('Y-m-d');
 
-            var_dump($first, $last);
-
             $count = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
             ->where('orders.customer_id', '=', $customer->id)
             ->whereBetween('due_date', [$first, $last])
