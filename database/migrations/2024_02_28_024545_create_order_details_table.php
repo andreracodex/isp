@@ -20,7 +20,8 @@ return new class extends Migration
             $table->text('pay_image')->nullable();
             $table->text('pay_description')->nullable();
             $table->double('diskon')->default(0);
-            $table->double('biaya_pasang')->default(0);
+            $table->double('biaya_admin')->default(0);
+            $table->double('ppn')->default(0);
             $table->datetime('due_date'); //tanggal jatuh tempo
             $table->integer('is_payed')->default(0);
             $table->integer('is_active')->default(1);
