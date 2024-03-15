@@ -38,7 +38,7 @@ class Sendtagihan extends Command
         foreach ($customers as $customer) {
             $list = Order::where('customer_id', '=', $customer->id)->orderBy('created_at', 'DESC')->first();
             $count = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')->orderBy('order_details.order_id', 'ASC')->where('customer_id', '=', $customer->id)->where('due_date', Carbon::now()->addMonth(1)->format('Y-m-d'))->count();
-            dd($count);
+
             if ($count == 0) {
                 $order = Order::create([
                     'customer_id' => $list->customer_id,

@@ -122,6 +122,7 @@ class CustomerController extends Controller
                     'paket_id' => $request->paket_internet,
                     'installed_date' => $request->installed_date,
                     'installed_status' => $is_installed,
+                    'biaya_pasang' => $request->biaya_pasang,
                 ]);
 
                 $new = $request->input('is_new');
@@ -133,14 +134,14 @@ class CustomerController extends Controller
 
                 OrderDetail::create([
                     'order_id' => $order->id,
-                    'biaya_pasang' => $request->biaya_pasang,
+                    'biaya_admin' => 0,
                     'due_date' => $due_date,
                     'is_payed' => $is_active,
                 ]);
 
                 return redirect()->route('customer.index')->with('success', 'Berhasil Tambah Customer.');
             } catch (Exception $e) {
-                return redirect()->back()->with(['error' => 'Check data kembali !']);
+                return redirect()->back()->with(['error' => 'Check data kembali !'+$e]);
             }
         }
     }

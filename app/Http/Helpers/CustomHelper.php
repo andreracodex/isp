@@ -10,14 +10,14 @@ use Carbon\Carbon;
 function count_order()
 {
     $now = Carbon::now();
-    $order = OrderDetail::whereYear('due_date', date('Y'))->whereMonth('due_date', $now->month)->where('is_active', 1)->sum('biaya_pasang');
+    $order = Order::whereYear('created_at', date('Y'))->whereMonth('created_at', $now->month)->sum('biaya_pasang');
     return $order;
 }
 
 function count_last_order()
 {
     $now = Carbon::now()->subMonths(1);
-    $lastorder = OrderDetail::whereYear('due_date', date('Y'))->whereMonth('due_date', $now->month)->where('is_active', 1)->sum('biaya_pasang');
+    $lastorder = Order::whereYear('created_at', date('Y'))->whereMonth('created_at', $now->month)->sum('biaya_pasang');
     return $lastorder;
 }
 
@@ -125,40 +125,40 @@ function pengeluaran_chart()
 
 function pemasukan_chart()
 {
-    $JanPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 1)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('order_details.biaya_pasang');
+    $JanPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 1)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('orders.biaya_pasang');
     $JanPaket = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereMonth('order_details.due_date', 1)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('pakets.harga_paket');
 
-    $FebPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 2)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('order_details.biaya_pasang');
+    $FebPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 2)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('orders.biaya_pasang');
     $FebPaket = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereMonth('order_details.due_date', 2)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('pakets.harga_paket');
 
-    $MarPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 3)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('order_details.biaya_pasang');
+    $MarPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 3)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('orders.biaya_pasang');
     $MarPaket = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereMonth('order_details.due_date', 3)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('pakets.harga_paket');
 
-    $AprPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 4)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('order_details.biaya_pasang');
+    $AprPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 4)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('orders.biaya_pasang');
     $AprPaket = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereMonth('order_details.due_date', 4)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('pakets.harga_paket');
 
-    $MeiPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 5)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('order_details.biaya_pasang');
+    $MeiPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 5)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('orders.biaya_pasang');
     $MeiPaket = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereMonth('order_details.due_date', 5)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('pakets.harga_paket');
 
-    $JunPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 6)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('order_details.biaya_pasang');
+    $JunPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 6)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('orders.biaya_pasang');
     $JunPaket = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereMonth('order_details.due_date', 6)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('pakets.harga_paket');
 
-    $JulPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 7)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('order_details.biaya_pasang');
+    $JulPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 7)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('orders.biaya_pasang');
     $JulPaket = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereMonth('order_details.due_date', 7)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('pakets.harga_paket');
 
-    $AguPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 8)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('order_details.biaya_pasang');
+    $AguPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 8)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('orders.biaya_pasang');
     $AguPaket = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereMonth('order_details.due_date', 8)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('pakets.harga_paket');
 
-    $SepPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 9)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('order_details.biaya_pasang');
+    $SepPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 9)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('orders.biaya_pasang');
     $SepPaket = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereMonth('order_details.due_date', 9)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('pakets.harga_paket');
 
-    $OktPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 10)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('order_details.biaya_pasang');
+    $OktPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 10)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('orders.biaya_pasang');
     $OktPaket = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereMonth('order_details.due_date', 10)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('pakets.harga_paket');
 
-    $NovPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 11)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('order_details.biaya_pasang');
+    $NovPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 11)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('orders.biaya_pasang');
     $NovPaket = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereMonth('order_details.due_date', 11)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('pakets.harga_paket');
 
-    $DesPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 12)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('order_details.biaya_pasang');
+    $DesPasang = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->whereMonth('order_details.due_date', 12)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('orders.biaya_pasang');
     $DesPaket = Order::leftJoin('order_details', 'order_details.order_id','=', 'orders.id')->leftJoin('pakets', 'orders.paket_id', '=', 'pakets.id')->whereMonth('order_details.due_date', 12)->whereYear('order_details.due_date', date('Y'))->where('order_details.is_active', 1)->sum('pakets.harga_paket');
 
     $Jan = $JanPasang+$JanPaket;

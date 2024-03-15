@@ -42,13 +42,13 @@ class OrderController extends Controller
             $data_table = $data_table;
         }
 
-        if($request->input('status') != "null"){
+        if($request->input('status') == "null" || $request->input('status') == null){
             // Non Active
-            $status = $request->input('status');
-            $data_table = $data_table->where('is_payed', '=', $status);
+            $data_table = $data_table;
         }else{
             // All
-            $data_table = $data_table;
+            $status = $request->input('status');
+            $data_table = $data_table->where('is_payed', '=', $status);
         }
 
         if ($request->ajax()){
