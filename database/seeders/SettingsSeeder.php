@@ -419,6 +419,22 @@ class SettingsSeeder extends Seeder
                 'user_id' => 1,
             ),
         );
+        User::insert(
+            array(
+                'name' => 'User',
+                'user_name' => 'User',
+                'email' => 'user@isp.com',
+                'is_active' => 1,
+                'password' => bcrypt(12345678),
+                'path' => '',
+                'user_type' => 'user',
+            ),
+        );
+        UserSetting::insert(
+            array(
+                'user_id' => 2,
+            ),
+        );
         // Insert Paket
         Paket::insert(
             array(
