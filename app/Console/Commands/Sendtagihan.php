@@ -36,25 +36,34 @@ class Sendtagihan extends Command
         $customers = Customer::where('is_active', 1)->get();
 
         foreach ($customers as $customer) {
-            $list = Order::where('customer_id', '=', $customer->id)->orderBy('created_at', 'DESC')->first();
-            $count = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')->orderBy('order_details.order_id', 'ASC')->where('customer_id', '=', $customer->id)->where('due_date', Carbon::now()->addMonth(1)->format('Y-m-d'))->count();
+            $first = Carbon::now()->addMonth(1)->firstOfMonth()->format('Y-m-d');
+            $last = Carbon::now()->addMonth(1)->lastOfMonth()->format('Y-m-d');
+
+            var_dump($first, $last);
+
+            $count = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
+            ->where('orders.customer_id', '=', $customer->id)
+            ->whereBetween('due_date', [$first, $last])
+            ->orderBy('order_id', 'DESC')
+            ->groupBy('orders.customer_id', 'due_date','order_details.id')
+            ->count();
+
+            $first_month = Carbon::now()->firstOfMonth()->format('Y-m-d');
+            $last_month = Carbon::now()->lastOfMonth()->format('Y-m-d');
+
+            $list = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
+            ->where('orders.customer_id', '=', $customer->id)
+            ->whereBetween('due_date', [$first_month, $last_month])
+            ->orderBy('order_id', 'DESC')
+            ->groupBy('orders.customer_id', 'due_date','order_details.id')
+            ->first();
 
             if ($count == 0) {
-                $order = Order::create([
-                    'customer_id' => $list->customer_id,
-                    'location_id' => $list->location_id,
-                    'paket_id' => $list->paket_id,
-                    'biaya_pasang' => 0,
-                    'installed_date' => $list->installed_date,
-                    'installed_status' => $list->installed_status,
-                ]);
-
                 OrderDetail::create([
                     'due_date' => Carbon::parse($list->due_date)->addMonth(1)->format('Y-m-d'),
                     'payment_id' => $list->payment_id,
-                    'order_id' => $order->id,
+                    'order_id' => $list->id,
                 ]);
-
 
                 Mail::to($customer->user->email)->send(new OrderCreated($customer));
                 $curl = curl_init();
@@ -87,10 +96,21 @@ class Sendtagihan extends Command
                 if (isset($error_msg)) {
                     var_dump($error_msg);
                 }
-                echo $response;
-                var_dump('Input Tagihan : ' . $list->customer->nama_customer . '');
+                var_dump('================================');
+                var_dump('Berhasil Mengirim : ' . $list->order->customer->nama_customer);
+                var_dump('Nomor Pelanggan : '.$list->order->customer->nomor_layanan);
+                var_dump('Via WA dan Email');
+                var_dump('================================');
+                $isi = json_decode($response, true);
+                var_dump($isi['detail']);
+                var_dump($isi['process']);
+                var_dump('================================');
             } else {
-                var_dump('Sudah ada tagihan customer : ' . $list->customer->nama_customer . '');
+                var_dump('================================');
+                var_dump('Sudah ada tagihan customer : ' . $list->order->customer->nama_customer);
+                var_dump('Nomor Pelanggan : '.$list->order->customer->nomor_layanan);
+                var_dump('Via WA dan Email');
+                var_dump('================================');
             }
         }
     }
