@@ -81,7 +81,7 @@ class Sendtagihan extends Command
                         'countryCode' => '62', //optional
                     ),
                     CURLOPT_HTTPHEADER => array(
-                        'Authorization: Ap+@#H3Bk464yp3kaSBo' //change TOKEN to your actual token
+                        'Authorization: F#3Ny@o4WUtC7SYuiEUx' //change TOKEN to your actual token
                     ),
                 ));
 
