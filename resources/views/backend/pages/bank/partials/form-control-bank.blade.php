@@ -44,7 +44,9 @@
     </div>
 
     <div class="col-md-5 mb-3">
-        <label class="form-label" for="payment">Payment</label>
+        <label class="form-label headerbutton" for="payment">Payment <sup class="mt-2"><b><a
+            href="{{ route('paymenttype.index') }}">
+            <i class="ti ti-plus me-1"></i>Tambah Payment</a></b></sup></label>
         <select class="form-select select2 @error('payment') is-invalid @enderror" name="payment" id="payment"
             required>
             @foreach ($payments as $payment)

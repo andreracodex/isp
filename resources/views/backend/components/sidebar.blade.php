@@ -155,12 +155,12 @@
                                 <use xlink:href="#custom-user-square"></use>
                             </svg> </span><span class="pc-mtext">Employee</span></a>
                 </li>
-                <li class="pc-item pc-hasmenu">
+                {{-- <li class="pc-item pc-hasmenu">
                     <a href="{{ route('paymenttype.index') }}" class="pc-link"><span class="pc-micon">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-notification-status"></use>
                             </svg> </span><span class="pc-mtext">Payment Type</span></a>
-                </li>
+                </li> --}}
                 <li class="pc-item pc-hasmenu">
                     <a href="{{ route('bank.index') }}" class="pc-link"><span class="pc-micon">
                             <svg class="pc-icon">

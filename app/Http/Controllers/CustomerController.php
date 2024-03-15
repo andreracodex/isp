@@ -53,9 +53,7 @@ class CustomerController extends Controller
         $districts = Regency::where('province_id')->get();
         $villages = Regency::where('province_id')->get();
         $order = new Order;
-        return view(
-            'backend.pages.customer.create',
-            compact('profile', 'customer', 'lokasi', 'paket', 'order', 'kotas', 'districts', 'villages')
+        return view('backend.pages.customer.create', compact('profile', 'customer', 'lokasi', 'paket', 'order', 'kotas', 'districts', 'villages')
         );
     }
 

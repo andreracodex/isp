@@ -20,7 +20,7 @@ class LocationSeeder extends Seeder
         DB::table('locations')->insert([
             'nama_location'=> 'Lokasi 2',
             'alamat_location'=> 'Jl. test 2',
-            'employee_id' => 2,
+            'employee_id' => 1,
             'created_at' => Carbon::now(),
         ]);
         DB::table('locations')->insert([
@@ -32,7 +32,7 @@ class LocationSeeder extends Seeder
         DB::table('locations')->insert([
             'nama_location'=> 'Lokasi 4',
             'alamat_location'=> 'Jl. test 4',
-            'employee_id' => 2,
+            'employee_id' => 1,
             'created_at' => Carbon::now(),
         ]);
         DB::table('locations')->insert([

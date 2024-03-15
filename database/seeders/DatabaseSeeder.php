@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             IndoRegionSeeder::class
         ]);
 
-        \App\Models\Employee::factory(2)->create();
+        \App\Models\Employee::factory(1)->create();
 
         $this->call([
             LocationSeeder::class,
@@ -28,9 +28,9 @@ class DatabaseSeeder extends Seeder
             InventarisSeeder::class,
         ]);
 
-        \App\Models\Customer::factory(10)->create();
-        \App\Models\Order::factory(100)->create();
-        \App\Models\OrderDetail::factory(100)->create();
+        // \App\Models\Customer::factory(10)->create();
+        // \App\Models\Order::factory(100)->create();
+        // \App\Models\OrderDetail::factory(100)->create();
 
         $startDate = Carbon::create(2023, 1, 1);
         $endDate = Carbon::create(2024, 12, 1);
