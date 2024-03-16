@@ -182,3 +182,19 @@ function pemasukan_chart()
 
     return $chart_bulan;
 }
+
+function convert_phone($phoneNumber)
+{
+    // Remove non-numeric characters from the phone number
+    $cleanedPhoneNumber = preg_replace('/\D/', '', $phoneNumber);
+
+    // Check if the phone number starts with '62'
+    if (substr($cleanedPhoneNumber, 0, 2) === '62') {
+        // Convert the phone number to the local format starting with '08'
+        $convertedNumber = '0' . substr($cleanedPhoneNumber, 2);
+        return $convertedNumber;
+    } else {
+        // Return the phone number as is if it does not start with '+62'
+        return $phoneNumber;
+    }
+}

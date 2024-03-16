@@ -136,7 +136,8 @@ class CustomerController extends Controller
                     'order_id' => $order->id,
                     'biaya_admin' => 0,
                     'due_date' => $due_date,
-                    'is_payed' => $is_active,
+                    'is_active' => $is_active,
+                    'is_payed' => 1,
                 ]);
 
                 return redirect()->route('customer.index')->with('success', 'Berhasil Tambah Customer.');

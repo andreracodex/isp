@@ -3,34 +3,18 @@
 namespace App\Console\Commands;
 
 use App\Mail\OrderCreated;
+use App\Models\Bank;
 use App\Models\Customer;
-use App\Models\Order;
 use App\Models\OrderDetail;
-use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Mail;
 
-class Sendtagihan extends Command
+class SendTagihan extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'send:tagihan';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Send Tagihan To Customer';
 
-    /**
-     * Execute the console command.
-     */
     public function handle()
     {
         $customers = Customer::where('is_active', 1)->get();
@@ -39,31 +23,55 @@ class Sendtagihan extends Command
             $first = Carbon::now()->addMonth(1)->firstOfMonth()->format('Y-m-d');
             $last = Carbon::now()->addMonth(1)->lastOfMonth()->format('Y-m-d');
 
+            $banks = Bank::where('is_active', 1)->get();
+
             $count = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
-            ->where('orders.customer_id', '=', $customer->id)
-            ->whereBetween('due_date', [$first, $last])
-            ->orderBy('order_id', 'DESC')
-            ->groupBy('orders.customer_id', 'due_date','order_details.id')
-            ->count();
-
-            $first_month = Carbon::now()->firstOfMonth()->format('Y-m-d');
-            $last_month = Carbon::now()->lastOfMonth()->format('Y-m-d');
-
-            $list = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
-            ->where('orders.customer_id', '=', $customer->id)
-            ->whereBetween('due_date', [$first_month, $last_month])
-            ->orderBy('order_id', 'DESC')
-            ->groupBy('orders.customer_id', 'due_date','order_details.id')
-            ->first();
+                ->where('orders.customer_id', '=', $customer->id)
+                ->whereBetween('due_date', [$first, $last])
+                ->orderBy('order_id', 'DESC')
+                ->groupBy('orders.customer_id', 'due_date', 'order_details.id')
+                ->count();
 
             if ($count == 0) {
+                $orderDetail = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
+                    ->where('orders.customer_id', '=', $customer->id)
+                    ->orderBy('order_id', 'DESC')
+                    ->groupBy('orders.customer_id', 'due_date', 'order_details.id')
+                    ->first();
+
+                $belum = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
+                    ->leftJoin('pakets', 'pakets.id', '=', 'orders.paket_id')
+                    ->where('orders.customer_id', '=', $customer->id)
+                    ->where('is_payed', 0)
+                    ->sum('pakets.harga_paket');
+
+                $newDueDate = Carbon::parse($orderDetail->due_date)->addMonth(1)->format('Y-m-d');
+
                 OrderDetail::create([
-                    'due_date' => Carbon::parse($list->due_date)->addMonth(1)->format('Y-m-d'),
-                    'payment_id' => $list->payment_id,
-                    'order_id' => $list->id,
+                    'due_date' => $newDueDate,
+                    'payment_id' => $orderDetail->payment_id,
+                    'order_id' => $orderDetail->id,
                 ]);
 
                 Mail::to($customer->user->email)->send(new OrderCreated($customer));
+
+                // Send WhatsApp message
+                $message = "*Yth Pelanggan GNET*\n\n";
+                $message .= "Hallo Bapak/Ibu,\n";
+                $message .= "*" . $customer->nama_customer . "*,\n\n";
+                $message .= "Tagihan Internet Anda jatuh tempo pada:\n\n";
+                $message .= "Bulan : *" . Carbon::parse($newDueDate)->format('F Y') . "*\n";
+                $message .= "Total Tagihan : *Rp ". number_format($belum, 0, ',', '.'). "*,-\n";
+                $message .= "Pembayaran maksimal : *" . Carbon::parse($newDueDate)->addMonth(1)->endOfMonth()->format('d F Y') . "*.\n\n";
+                $message .= "Bank Tersedia :\n";
+                $message .= "*BANK MANDIRI* : ". $banks[3]['nomor_akun_rekening']."\n";
+                $message .= "*BANK BCA* : ". $banks[2]['nomor_akun_rekening']."\n";
+                $message .= "*BANK BRI* : ". $banks[0]['nomor_akun_rekening']."\n";
+                $message .= "*BANK BNI* : ". $banks[1]['nomor_akun_rekening']."\n";
+                $message .= "A/N PUTUT WAHYUDI\n\n";
+                $message .= "Segera lakukan pembayaran sebelum tanggal jatuh tempo\n\n";
+                $message .= "Hormat kami\nPT Global Data Network\nJl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.\nPhone : 085731770730 / 085648747901\nhttps://www.gnet.co.id";
+
                 $curl = curl_init();
 
                 curl_setopt_array($curl, array(
@@ -76,8 +84,8 @@ class Sendtagihan extends Command
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                     CURLOPT_CUSTOMREQUEST => 'POST',
                     CURLOPT_POSTFIELDS => array(
-                        'target' => $customer->nomor_telephone,
-                        'message' => 'test message',
+                        'target' => convert_phone($customer->nomor_telephone),
+                        'message' => $message,
                         'countryCode' => '62', //optional
                     ),
                     CURLOPT_HTTPHEADER => array(
@@ -86,29 +94,22 @@ class Sendtagihan extends Command
                 ));
 
                 $response = curl_exec($curl);
-                if (curl_errno($curl)) {
-                    $error_msg = curl_error($curl);
-                }
                 curl_close($curl);
 
-                if (isset($error_msg)) {
-                    var_dump($error_msg);
-                }
-                var_dump('================================');
-                var_dump('Berhasil Mengirim : ' . $list->order->customer->nama_customer);
-                var_dump('Nomor Pelanggan : '.$list->order->customer->nomor_layanan);
-                var_dump('Via WA dan Email');
-                var_dump('================================');
                 $isi = json_decode($response, true);
-                var_dump($isi['detail']);
-                var_dump($isi['process']);
-                var_dump('================================');
+                if (isset($isi['detail']) && isset($isi['process'])) {
+                    $this->info('==============================');
+                    $this->info('Berhasil Mengirim WA dan Email atas Nama : ' . $customer->nama_customer);
+                    $this->info('Nomor Pelanggan : ' . convert_phone($customer->nomor_telephone));
+                    $this->info('Nomor Telephone : ' . $customer->nomor_layanan);
+                    $this->info('==============================');
+                }
             } else {
-                var_dump('================================');
-                var_dump('Sudah ada tagihan customer : ' . $list->order->customer->nama_customer);
-                var_dump('Nomor Pelanggan : '.$list->order->customer->nomor_layanan);
-                var_dump('Via WA dan Email');
-                var_dump('================================');
+                $this->info('==============================');
+                $this->info('Sudah ada tagihan customer : ' . $customer->nama_customer);
+                $this->info('Nomor Pelanggan : ' . $customer->nomor_layanan);
+                $this->info('Via WA dan Email');
+                $this->info('==============================');
             }
         }
     }
