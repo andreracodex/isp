@@ -128,6 +128,15 @@ class CustomerController extends Controller
                 $new = $request->input('is_new');
                 if ($new == 'ON' || $new == 'on') {
                     $due_date = Carbon::parse($request->input('due_date'))->addMonths(1);
+
+                    OrderDetail::create([
+                        'order_id' => $order->id,
+                        'biaya_admin' => 0,
+                        'due_date' => $request->input('due_date'),
+                        'is_active' => $is_active,
+                        'is_payed' => 1,
+                    ]);
+
                 } else {
                     $due_date = $request->input('due_date');
                 }
