@@ -125,6 +125,7 @@ class CustomerController extends Controller
                     'biaya_pasang' => $request->biaya_pasang,
                 ]);
 
+                // Tgaihan Buat dua (Koment)
                 // $new = $request->input('is_new');
                 // if ($new == 'ON' || $new == 'on') {
                 //     $due_date = Carbon::parse($request->input('due_date'))->addMonths(1);
