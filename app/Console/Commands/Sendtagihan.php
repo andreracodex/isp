@@ -62,7 +62,7 @@ class SendTagihan extends Command
                 $message .= "Tagihan Internet Anda jatuh tempo pada:\n\n";
                 $message .= "Bulan : *" . Carbon::parse($newDueDate)->format('F Y') . "*\n";
                 $message .= "Total Tagihan : *Rp ". number_format($belum, 0, ',', '.'). "*,-\n";
-                $message .= "Pembayaran maksimal : *" . Carbon::parse($newDueDate)->addMonth(1)->endOfMonth()->format('d F Y') . "*.\n\n";
+                $message .= "Pembayaran maksimal : *" . Carbon::parse($newDueDate)->format('d F Y') . "*.\n\n";
                 $message .= "Bank Tersedia :\n";
                 $message .= "*BANK MANDIRI* : ". $banks[3]['nomor_akun_rekening']."\n";
                 $message .= "*BANK BCA* : ". $banks[2]['nomor_akun_rekening']."\n";
