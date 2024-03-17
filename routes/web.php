@@ -11,6 +11,7 @@ use App\Http\Controllers\InventarisKategoriController;
 use App\Http\Controllers\InventarisSatuanController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\PaymentTypeController;
 use App\Http\Controllers\PeriodeController;

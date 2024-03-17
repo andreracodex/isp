@@ -171,6 +171,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
+        Andreracodex\Tripay\TripayServiceProvider::class,
     ])->toArray(),
 
     /*
