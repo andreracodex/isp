@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('location_id')->references('id')->on('locations');
             $table->unsignedBigInteger('paket_id')->nullable();
             $table->foreign('paket_id')->references('id')->on('pakets');
+            $table->string('uuid')->unique();
             $table->double('biaya_pasang')->default(0);
             $table->unsignedBigInteger('coordinates_id')->nullable();
             $table->foreign('coordinates_id')->references('id')->on('coordinates');

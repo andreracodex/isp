@@ -172,7 +172,7 @@ class OrderController extends Controller
         );
     }
 
-    public function delete(String $id){
+    public function delete(String $id) {
         $order = Order::find($id);
         if ($order) {
             Order::where('id', $id)->delete();

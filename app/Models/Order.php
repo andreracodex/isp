@@ -16,6 +16,7 @@ class Order extends Model
         'customer_id',
         'location_id',
         'paket_id',
+        'uuid',
         'biaya_pasang',
         'coordinates_id',
         'path_ktp',
