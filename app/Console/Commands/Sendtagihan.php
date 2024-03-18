@@ -34,27 +34,14 @@ class SendTagihan extends Command
                 ->count();
 
             if ($count == 0) {
-                $orderDetail = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
+                $orderDetail = OrderDetail::select('order_details.payment_id', 'order_details.due_date', 'orders.id',)
+                    ->leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
                     ->where('orders.customer_id', '=', $customer->id)
-                    ->orderBy('order_id', 'DESC')
+                    ->orderBy('order_details.order_id', 'DESC')
                     ->groupBy('orders.customer_id',
                     'orders.id',
                     'order_details.due_date',
-                    'order_details.id',
-                    'order_details.order_id',
-                    'order_details.uuid',
-                    'order_details.invoice_number',
-                    'order_details.payment_id',
-                    'order_details.pay_image',
-                    'order_details.pay_description',
-                    'order_details.diskon',
-                    'order_details.biaya_admin',
-                    'order_details.ppn',
-                    'order_details.is_payed',
-                    'order_details.is_active',
-                    'order_details.created_at',
-                    'order_details.updated_at',
-                    'order_details.deleted_at',
+                    'order_details.payment_id'
                     )
                     ->first();
 
