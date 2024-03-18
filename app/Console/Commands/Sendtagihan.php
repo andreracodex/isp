@@ -50,6 +50,9 @@ class SendTagihan extends Command
                     'order_details.ppn',
                     'order_details.is_payed',
                     'order_details.is_active',
+                    'order_details.created_at',
+                    'order_details.updated_at',
+                    'order_details.deleted_at',
                     )
                     ->first();
 
