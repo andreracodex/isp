@@ -64,15 +64,6 @@
                 <p class="mb-0">© Handcrafted by Team <a href="https://berdikari.web.id"
                         target="_blank">Berdikari.Web.Id</a></p>
             </div>
-            <div class="col-auto my-1">
-                <ul class="list-inline footer-sos-link mb-0">
-                    <li class="list-inline-item wow fadeInUp" data-wow-delay="0.4s"><a
-                            href="#">
-                            <svg class="pc-icon">
-                                <use xlink:href="#custom-facebook"></use>
-                            </svg> </a></li>
-                </ul>
-            </div>
         </div>
     </div>
 </footer>

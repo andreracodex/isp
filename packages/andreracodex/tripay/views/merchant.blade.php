@@ -36,25 +36,30 @@
     @include('tripay::header')
 
     <div class="container" style="margin-top: 100px;">
-        @if (is_array($data))
-
+        <div class="row">
             @foreach ($data as $item)
-                <div class="card mt-5">
-                    <div class="card-body">
-                        @if (is_array($item) && isset($item['title']) && isset($item['steps']) && is_array($item['steps']))
-                            <h2 class="mt-4">{{ $item['title'] }}</h2>
-                            <ul class="list-group list-group-flush product-check-list">
-                                @foreach ($item['steps'] as $step)
-                                    <li class="list-group-item enable">{!! $step !!}</li>
-                                @endforeach
-                            </ul>
-                        @endif
+                <div class="col-md-3 mb-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="{{ $item['icon_url'] }}" class="card-img-top" alt="{{ $item['name'] }}">
+                        </div>
+                        <div class="card-body">
+                            {{-- <h4 class="card-title">{{ $item['name'] }}</h4> --}}
+                            <p class="card-text">Code : <b>{{ $item['code'] }}</b></p>
+                            {{-- <p class="card-text">Type: {{ $item['type'] }}</p>
+                            <p class="card-text">Fee Merchant: {{ $item['fee_merchant']['flat'] }} + {{ $item['fee_merchant']['percent'] }}%</p>
+                            <p class="card-text">Fee Customer: {{ $item['fee_customer']['flat'] }} + {{ $item['fee_customer']['percent'] }}%</p> --}}
+                            <p class="card-text">Admin Fee : <b>{{ $item['total_fee']['flat'] }} +
+                                    {{ $item['total_fee']['percent'] }}%</b></p>
+                            <p class="card-text">Active : <b>{{ $item['active'] ? 'Yes' : 'No' }}</b></p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ route('tripay.paybills') }}" class="btn btn-sm btn-primary">Pay Via</a>
+                        </div>
                     </div>
                 </div>
             @endforeach
-        @else
-            <p class="alert alert-danger">Data is not an array.</p>
-        @endif
+        </div>
     </div>
 
     <script src="{{ asset('/js/jquery.min.js') }}"></script>

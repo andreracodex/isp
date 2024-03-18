@@ -20,10 +20,12 @@ class TripayServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        include __DIR__.'/routes.php';
+        // include __DIR__.'/routes/routes.php';
 
+        $this->loadRoutesFrom(__DIR__.'/routes/routes.php');
         $this->publishes([
-            __DIR__.'/../resources/views/backend/pages/tripay/' => resource_path('views/'),
+            __DIR__.'/config/tripays.php' => config_path('tripays.php'),
+            __DIR__.'/views/' => resource_path('views/*'),
         ]);
     }
 }
