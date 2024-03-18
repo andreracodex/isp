@@ -37,7 +37,9 @@ class SendTagihan extends Command
                 $orderDetail = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
                     ->where('orders.customer_id', '=', $customer->id)
                     ->orderBy('order_id', 'DESC')
-                    ->groupBy('orders.customer_id', 'order_details.due_date',
+                    ->groupBy('orders.customer_id',
+                    'orders.id',
+                    'order_details.due_date',
                     'order_details.id',
                     'order_details.order_id',
                     'order_details.uuid',
