@@ -37,7 +37,7 @@ class SendTagihan extends Command
                 $orderDetail = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
                     ->where('orders.customer_id', '=', $customer->id)
                     ->orderBy('order_id', 'DESC')
-                    ->groupBy('orders.customer_id', 'due_date', 'order_details.id', 'order_details.order_id', 'order_details.uuid')
+                    ->groupBy('orders.customer_id', 'due_date', 'order_details.id', 'order_details.order_id', 'order_details.uuid', 'order_details.invoice_number')
                     ->first();
 
                 $newDueDate = Carbon::parse($orderDetail->due_date)->addMonth(1)->format('Y-m-d');
