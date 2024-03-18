@@ -147,7 +147,9 @@ class CustomerController extends Controller
                     'biaya_admin' => 0,
                     'due_date' => $due_date,
                     'is_active' => $is_active,
-                    'is_payed' => 0,
+                    'is_payed' => 1,
+                    'invoice_number' => 'INV'.rand(11111111, 99999999),
+                    'uuid' => Str::uuid(64),
                 ]);
 
                 return redirect()->route('customer.index')->with('success', 'Berhasil Tambah Customer.');

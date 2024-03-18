@@ -73,14 +73,15 @@ class TripayController extends Controller
         }
     }
 
-    public function transaction()
+    public function transaction($invoices, $amount)
     {
 
         $apiKey = env('TRIPAY_API_KEY');
         $privateKey   = env('TRIPAY_API_SECRET');
         $merchantCode = env('TRIPAY_MERCHANT_CODE');
-        $merchantRef  = 'nomor referensi merchant anda';
-        $amount       = 1000000;
+        $baseURL = env('TRIPAY_API_DEBUG') ? 'https://tripay.co.id/api-sandbox/' : 'https://tripay.co.id/api/';
+        $merchantRef  = $invoices;
+        $amount       = $amount;
 
         $data = [
             'method'         => 'BRIVA',
@@ -92,22 +93,14 @@ class TripayController extends Controller
             'order_items'    => [
                 [
                     'sku'         => 'FB-06',
-                    'name'        => 'Nama Produk 1',
-                    'price'       => 500000,
+                    'name'        => 'Paket Internet',
+                    'price'       => $amount,
                     'quantity'    => 1,
                     'product_url' => 'https://tokokamu.com/product/nama-produk-1',
                     'image_url'   => 'https://tokokamu.com/product/nama-produk-1.jpg',
                 ],
-                [
-                    'sku'         => 'FB-07',
-                    'name'        => 'Nama Produk 2',
-                    'price'       => 500000,
-                    'quantity'    => 1,
-                    'product_url' => 'https://tokokamu.com/product/nama-produk-2',
-                    'image_url'   => 'https://tokokamu.com/product/nama-produk-2.jpg',
-                ]
             ],
-            'return_url'   => 'https://domainanda.com/redirect',
+            'return_url'   => 'https://billing.berdikari.web.id/redirect',
             'expired_time' => (time() + (24 * 60 * 60)), // 24 jam
             'signature'    => hash_hmac('sha256', $merchantCode . $merchantRef . $amount, $privateKey)
         ];
@@ -116,7 +109,7 @@ class TripayController extends Controller
 
         curl_setopt_array($curl, [
             CURLOPT_FRESH_CONNECT  => true,
-            CURLOPT_URL            => 'https://tripay.co.id/api/transaction/create',
+            CURLOPT_URL            =>  $baseURL . 'transaction/create',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HEADER         => false,
             CURLOPT_HTTPHEADER     => ['Authorization: Bearer ' . $apiKey],
