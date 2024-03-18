@@ -68,7 +68,6 @@ class SendTagihan extends Command
                 $message .= "Hallo Bapak/Ibu,\n";
                 $message .= "*" . $customer->nama_customer . "*,\n\n";
                 $message .= "No Invocie Tagihan : *" . $invoice_real . "*\n";
-                $message .= "Tagihan Internet Anda jatuh tempo pada:\n\n";
                 $message .= "Bulan : *" . Carbon::parse($newDueDate)->format('F Y') . "*\n";
                 $message .= "Total Tagihan : *Rp " . number_format($belum, 0, ',', '.') . "*,-\n";
                 $message .= "Pembayaran maksimal : *" . Carbon::parse($newDueDate)->format('d F Y') . "*.\n\n";
