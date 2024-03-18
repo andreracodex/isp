@@ -11,7 +11,8 @@ class TripayServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->make('Andreracodex\Tripay\TripayController');
+        $this->loadViewsFrom(__DIR__.'/views', 'tripay');
     }
 
     /**
@@ -20,5 +21,9 @@ class TripayServiceProvider extends ServiceProvider
     public function boot(): void
     {
         include __DIR__.'/routes.php';
+
+        $this->publishes([
+            __DIR__.'/../resources/views/backend/pages/tripay/' => resource_path('views/'),
+        ]);
     }
 }
