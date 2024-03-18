@@ -25,10 +25,22 @@ class SettingsController extends Controller
         $roles = Role::get();
         $ip = Location::get($ip);
         $profile = Setting::all();
+        $websetting = Setting::where('name', 'title_text')
+            ->orWhere('name', 'subtitle_text')
+            ->orWhere('name', 'site_currency')
+            ->orWhere('name', 'site_currency_symbol')
+            ->orWhere('name', 'company_name')
+            ->orWhere('name', 'company_address')
+            ->orWhere('name', 'company_city')
+            ->orWhere('name', 'company_state')
+            ->orWhere('name', 'company_zipcode')
+            ->orWhere('name', 'company_telephone')
+            ->orWhere('name', 'company_email')
+            ->get();
         $usersetting = UserSetting::all();
         $sess = Sessions::where('user_id', Auth::user()->id)->get();
 
-        return view('backend.pages.setting.index', compact('profile', 'usersetting', 'sess', 'ip', 'roles'));
+        return view('backend.pages.setting.index', compact('profile', 'usersetting', 'sess', 'ip', 'roles', 'websetting'));
     }
 
     public function store() {

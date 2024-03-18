@@ -228,6 +228,12 @@
                                     <i class="ti ti-box me-2"></i>Role & Hak Akses
                                 </a>
                             </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="profile-tab-6" data-bs-toggle="tab" href="#profile-6" role="tab"
+                                    aria-selected="false" tabindex="-1">
+                                    <i class="ti ti-settings me-2"></i>Web Setting
+                                </a>
+                            </li>
                         @endcan
                     </ul>
                 </div>
@@ -454,6 +460,9 @@
                 </div>
                 <div class="tab-pane" id="profile-5" role="tabpanel" aria-labelledby="profile-tab-5">
                     @include('backend.pages.setting.partials.form-roles')
+                </div>
+                <div class="tab-pane" id="profile-6" role="tabpanel" aria-labelledby="profile-tab-6">
+                    @include('backend.pages.setting.partials.form-setting')
                 </div>
             </div>
         </div>
