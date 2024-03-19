@@ -52,7 +52,7 @@
             <li>Jumlah yang Harus Dibayar:</li>
                 <p><b><i>{{ Number::currency($data['amount'], in: 'IDR', locale: 'id') }}</i></b></p>
             <li>Customer Fee: </li>
-                <p><b><i>{{ $data['fee_customer'] }}</i></b></p>
+                <p><b><i>{{ Number::currency($data['fee_merchant'], in: 'IDR', locale: 'id') }}</i></b></p>
             <li>Harga Paket: </li>
                 <p><b><i>{{ Number::currency($data['amount_received'], in: 'IDR', locale: 'id') }}</i></b></p>
             <li>Pay Code (Virtual Number): </li>
