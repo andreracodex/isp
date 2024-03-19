@@ -46,4 +46,19 @@ class SettingsController extends Controller
     public function store() {
 
     }
+
+    public function updateSettings(Request $request)
+    {
+        $settings = $request->input('settings');
+
+        foreach ($settings as $settingId => $value) {
+            $setting = Setting::find($settingId);
+            if ($setting) {
+                $setting->value = $value;
+                $setting->save();
+            }
+        }
+
+        return redirect()->back()->with('success', 'Settings updated successfully.');
+    }
 }

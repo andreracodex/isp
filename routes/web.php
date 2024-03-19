@@ -41,7 +41,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::get('/create', [ProfileController::class, 'create'])->name('settings.profile-show');
         Route::post('', [ProfileController::class, 'store'])->name('settings.profile-store');
         Route::put('/profile', [ProfileController::class, 'update'])->name('settings.profile-update');
-        Route::delete('', [ProfileController::class, 'destroy'])->name('settings.profile-destroy');
+        Route::put('{setting}/update', [EmployeeController::class, 'update'])->name('employee.update');
         Route::post('/logout', [ProfileController::class, 'logout'])->name('settings.profile-logout');
     });
 
@@ -191,6 +191,11 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::put('{ticket}/update', [TicketController::class, 'update'])->name('ticket.update');
         Route::get('{ticket}/updateStatus', [TicketController::class, 'updateStatus'])->name('ticket.updateStatus');
         Route::get('{ticket}/delete', [TicketController::class, 'delete'])->name('ticket.delete');
+    });
+
+    // Web Setting
+    Route::prefix('websetting')->group(function(){
+        Route::post('/updateSettings', [SettingsController::class, 'updateSettings'])->name('websetting.updateSettings');
     });
 
     Route::get('/pdf', [PDFController::class, 'PDFInventaris'])->name('pdf.inventaris');
