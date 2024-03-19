@@ -3,8 +3,11 @@
 namespace Andreracodex\Tripay;
 
 use App\Http\Controllers\Controller;
+use App\Models\OrderDetail;
 use App\Models\Setting;
-use config\tripay;
+use App\Models\ShortURL;
+use Illuminate\Support\Str;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 
 class TripayController extends Controller
@@ -73,34 +76,39 @@ class TripayController extends Controller
         }
     }
 
-    public function transaction($invoices, $amount)
+    public function transaction($tripay, $invoices, $amount)
     {
-
+        $profile = Setting::all();
         $apiKey = env('TRIPAY_API_KEY');
         $privateKey   = env('TRIPAY_API_SECRET');
         $merchantCode = env('TRIPAY_MERCHANT_CODE');
+        $base = env('APP_URL');
         $baseURL = env('TRIPAY_API_DEBUG') ? 'https://tripay.co.id/api-sandbox/' : 'https://tripay.co.id/api/';
         $merchantRef  = $invoices;
         $amount       = $amount;
 
+        $inv = OrderDetail::leftJoin('orders', 'order_details.order_id', 'orders.id')
+            ->leftJoin('customers', 'orders.customer_id', 'customers.id')
+            ->leftJoin('users', 'customers.user_id', 'users.id')
+            ->leftJoin('pakets', 'orders.paket_id', 'pakets.id')
+            ->where('order_details.invoice_number', $invoices)->first();
+
         $data = [
-            'method'         => 'BRIVA',
+            'method'         => $tripay,
             'merchant_ref'   => $merchantRef,
             'amount'         => $amount,
-            'customer_name'  => 'Nama Pelanggan',
-            'customer_email' => 'emailpelanggan@domain.com',
-            'customer_phone' => '081234567890',
+            'customer_name'  => $inv->nama_customer,
+            'customer_email' => $inv->email,
+            'customer_phone' => $inv->nomor_telephone,
             'order_items'    => [
                 [
-                    'sku'         => 'FB-06',
-                    'name'        => 'Paket Internet',
+                    'sku'         => $inv->nama_paket,
+                    'name'        => $inv->jenis_paket,
                     'price'       => $amount,
                     'quantity'    => 1,
-                    'product_url' => 'https://tokokamu.com/product/nama-produk-1',
-                    'image_url'   => 'https://tokokamu.com/product/nama-produk-1.jpg',
                 ],
             ],
-            'return_url'   => 'https://billing.berdikari.web.id/redirect',
+            'return_url'   => $baseURL . '/tripay/redirect',
             'expired_time' => (time() + (24 * 60 * 60)), // 24 jam
             'signature'    => hash_hmac('sha256', $merchantCode . $merchantRef . $amount, $privateKey)
         ];
@@ -123,12 +131,36 @@ class TripayController extends Controller
         $error = curl_error($curl);
 
         curl_close($curl);
+        $data = json_decode($response, true)['data'];
 
-        echo empty($error) ? $response : $error;
+        return view('tripay::result', compact('data', 'profile'));
     }
 
     public function callback()
     {
         return view('tripay::callback', compact('callback'));
+    }
+
+    public function short(Request $request)
+    {
+        $request->validate([
+            'url' => 'required|url',
+        ]);
+
+        $shortURL = ShortURL::create([
+            'original_url' => $request->url,
+            'short_code' => Str::random(6), // Generate a random short code
+        ]);
+
+        return response()->json([
+            'short_url' => route('short-url.redirect', $shortURL->short_code),
+        ]);
+    }
+
+    public function redirect($code)
+    {
+        $shortURL = ShortURL::where('short_code', $code)->firstOrFail();
+
+        return redirect($shortURL->original_url);
     }
 }
