@@ -283,7 +283,7 @@
                                     <th></th>
                                     <th>Nama Karyawan</th>
                                     <th>Alamat</th>
-                                    <th>Nomor Telephone</th>
+                                    <th>Nomor Telepon</th>
                                     <th>Email</th>
                                     <th>Active</th>
                                     <th>Action</th>
