@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Number;
@@ -45,6 +46,23 @@ class DashboardController extends Controller
         $income = pemasukan_chart();
         $outcome = pengeluaran_chart();
 
+        $payments = OrderDetail::leftJoin('orders', 'order_details.order_id', 'orders.id')
+        ->leftJoin('customers', 'orders.customer_id', 'customers.id')
+        ->leftJoin('pakets', 'orders.paket_id', 'pakets.id')
+        ->orderBy('order_details.created_at', 'desc')->take(10)->get();
+
+        $sudah = OrderDetail::leftJoin('orders', 'order_details.order_id', 'orders.id')
+        ->leftJoin('customers', 'orders.customer_id', 'customers.id')
+        ->leftJoin('pakets', 'orders.paket_id', 'pakets.id')
+        ->where('order_details.is_payed', 1)
+        ->orderBy('order_details.created_at', 'desc')->take(10)->get();
+
+        $belum = OrderDetail::leftJoin('orders', 'order_details.order_id', 'orders.id')
+        ->leftJoin('customers', 'orders.customer_id', 'customers.id')
+        ->leftJoin('pakets', 'orders.paket_id', 'pakets.id')
+        ->where('order_details.is_payed', 0)
+        ->orderBy('order_details.created_at', 'desc')->take(10)->get();
+
         return view(
             'backend.pages.dashboard',
             compact(
@@ -70,7 +88,10 @@ class DashboardController extends Controller
                 'tagihan_count',
                 'pembayaran',
                 'pembayaran_last',
-                'pembayaran_count'
+                'pembayaran_count',
+                'payments',
+                'sudah',
+                'belum'
             )
         );
     }

@@ -514,18 +514,17 @@
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="analytics-tab-1" data-bs-toggle="tab"
                                 data-bs-target="#analytics-tab-1-pane" type="button" role="tab"
-                                aria-controls="analytics-tab-1-pane" aria-selected="true">All
-                                Transaction</button>
+                                aria-controls="analytics-tab-1-pane" aria-selected="true">10 Transaksi Terakhir</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="analytics-tab-2" data-bs-toggle="tab"
                                 data-bs-target="#analytics-tab-2-pane" type="button" role="tab"
-                                aria-controls="analytics-tab-2-pane" aria-selected="false">Success</button>
+                                aria-controls="analytics-tab-2-pane" aria-selected="false">Belum Bayar</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="analytics-tab-3" data-bs-toggle="tab"
                                 data-bs-target="#analytics-tab-3-pane" type="button" role="tab"
-                                aria-controls="analytics-tab-3-pane" aria-selected="false">Pending</button>
+                                aria-controls="analytics-tab-3-pane" aria-selected="false">Sudah Bayar</button>
                         </li>
                     </ul>
                 </div>
@@ -533,6 +532,7 @@
                     <div class="tab-pane fade show active" id="analytics-tab-1-pane" role="tabpanel"
                         aria-labelledby="analytics-tab-1" tabindex="0">
                         <ul class="list-group list-group-flush">
+                            @foreach ($payments as $payment)
                             <li class="list-group-item">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0">
@@ -541,289 +541,25 @@
                                     <div class="flex-grow-1 ms-3">
                                         <div class="row g-1">
                                             <div class="col-6">
-                                                <h6 class="mb-0">Apple Inc.</h6>
-                                                <p class="text-muted mb-0"><small>#ABLE-PRO-T00232</small></p>
+                                                <h6 class="mb-0">{{ $payment->nama_customer }}</h6>
+                                                <p class="text-muted mb-0"><small>Invoice : {{ $payment->invoice_number }}</small></p>
                                             </div>
                                             <div class="col-6 text-end">
-                                                <h6 class="mb-1">$210,000</h6>
-                                                <p class="text-danger mb-0"><i class="ti ti-arrow-down-left"></i> 10.6%
-                                                </p>
+                                                <h6 class="mb-1">{{ $payment->jenis_paket }}</h6>
+                                                <span class="badge bg-light rounded-pill f-12"><p class="@if($payment->is_payed == 1) text-success @else text-danger @endif mb-0"><i class="ti ti-money"></i>{{ \Carbon\Carbon::parse($payment->due_date)->format('d F Y') }}
+                                                </p></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </li>
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0">
-                                        <div class="avtar avtar-s border" data-bs-toggle="tooltip"
-                                            data-bs-title="10,000 Tracks"><span>SM</span></div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <div class="row g-1">
-                                            <div class="col-6">
-                                                <h6 class="mb-0">Spotify Music</h6>
-                                                <p class="text-muted mb-0"><small>#ABLE-PRO-T10232</small></p>
-                                            </div>
-                                            <div class="col-6 text-end">
-                                                <h6 class="mb-1">- 10,000</h6>
-                                                <p class="text-success mb-0"><i class="ti ti-arrow-up-right"></i> 30.6%
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0">
-                                        <div class="avtar avtar-s border bg-light-primary" data-bs-toggle="tooltip"
-                                            data-bs-title="143 Posts">
-                                            <span>MD</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <div class="row g-1">
-                                            <div class="col-6">
-                                                <h6 class="mb-0">Medium</h6>
-                                                <p class="text-muted mb-0"><small>06:30 pm</small></p>
-                                            </div>
-                                            <div class="col-6 text-end">
-                                                <h6 class="mb-1">-26</h6>
-                                                <p class="text-warning mb-0"><i class="ti ti-arrows-left-right"></i> 5%
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0">
-                                        <div class="avtar avtar-s border" data-bs-toggle="tooltip"
-                                            data-bs-title="143 Posts"><span>U</span> </div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <div class="row g-1">
-                                            <div class="col-6">
-                                                <h6 class="mb-0">Uber</h6>
-                                                <p class="text-muted mb-0"><small>08:40 pm</small></p>
-                                            </div>
-                                            <div class="col-6 text-end">
-                                                <h6 class="mb-1">+210,000</h6>
-                                                <p class="text-success mb-0"><i class="ti ti-arrow-up-right"></i> 10.6%
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0">
-                                        <div class="avtar avtar-s border bg-light-warning" data-bs-toggle="tooltip"
-                                            data-bs-title="143 Posts">
-                                            <span>OC</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <div class="row g-1">
-                                            <div class="col-6">
-                                                <h6 class="mb-0">Ola Cabs</h6>
-                                                <p class="text-muted mb-0"><small>07:40 pm</small></p>
-                                            </div>
-                                            <div class="col-6 text-end">
-                                                <h6 class="mb-1">+210,000</h6>
-                                                <p class="text-success mb-0"><i class="ti ti-arrow-up-right"></i> 10.6%
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="tab-pane fade" id="analytics-tab-2-pane" role="tabpanel"
                         aria-labelledby="analytics-tab-2" tabindex="0">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0">
-                                        <div class="avtar avtar-s border" data-bs-toggle="tooltip"
-                                            data-bs-title="143 Posts"><span>U</span> </div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <div class="row g-1">
-                                            <div class="col-6">
-                                                <h6 class="mb-0">Uber</h6>
-                                                <p class="text-muted mb-0"><small>08:40 pm</small></p>
-                                            </div>
-                                            <div class="col-6 text-end">
-                                                <h6 class="mb-1">+210,000</h6>
-                                                <p class="text-success mb-0"><i class="ti ti-arrow-up-right"></i> 10.6%
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0">
-                                        <div class="avtar avtar-s border bg-light-warning" data-bs-toggle="tooltip"
-                                            data-bs-title="143 Posts">
-                                            <span>OC</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <div class="row g-1">
-                                            <div class="col-6">
-                                                <h6 class="mb-0">Ola Cabs</h6>
-                                                <p class="text-muted mb-0"><small>07:40 pm</small></p>
-                                            </div>
-                                            <div class="col-6 text-end">
-                                                <h6 class="mb-1">+210,000</h6>
-                                                <p class="text-success mb-0"><i class="ti ti-arrow-up-right"></i> 10.6%
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0">
-                                        <div class="avtar avtar-s border">AI</div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <div class="row g-1">
-                                            <div class="col-6">
-                                                <h6 class="mb-0">Apple Inc.</h6>
-                                                <p class="text-muted mb-0"><small>#ABLE-PRO-T00232</small></p>
-                                            </div>
-                                            <div class="col-6 text-end">
-                                                <h6 class="mb-1">$210,000</h6>
-                                                <p class="text-danger mb-0"><i class="ti ti-arrow-down-left"></i> 10.6%
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0">
-                                        <div class="avtar avtar-s border" data-bs-toggle="tooltip"
-                                            data-bs-title="10,000 Tracks"><span>SM</span></div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <div class="row g-1">
-                                            <div class="col-6">
-                                                <h6 class="mb-0">Spotify Music</h6>
-                                                <p class="text-muted mb-0"><small>#ABLE-PRO-T10232</small></p>
-                                            </div>
-                                            <div class="col-6 text-end">
-                                                <h6 class="mb-1">- 10,000</h6>
-                                                <p class="text-success mb-0"><i class="ti ti-arrow-up-right"></i> 30.6%
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0">
-                                        <div class="avtar avtar-s border bg-light-primary" data-bs-toggle="tooltip"
-                                            data-bs-title="143 Posts">
-                                            <span>MD</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <div class="row g-1">
-                                            <div class="col-6">
-                                                <h6 class="mb-0">Medium</h6>
-                                                <p class="text-muted mb-0"><small>06:30 pm</small></p>
-                                            </div>
-                                            <div class="col-6 text-end">
-                                                <h6 class="mb-1">-26</h6>
-                                                <p class="text-warning mb-0"><i class="ti ti-arrows-left-right"></i> 5%
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane fade" id="analytics-tab-3-pane" role="tabpanel"
-                        aria-labelledby="analytics-tab-3" tabindex="0">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0">
-                                        <div class="avtar avtar-s border" data-bs-toggle="tooltip"
-                                            data-bs-title="10,000 Tracks"><span>SM</span></div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <div class="row g-1">
-                                            <div class="col-6">
-                                                <h6 class="mb-0">Spotify Music</h6>
-                                                <p class="text-muted mb-0"><small>#ABLE-PRO-T10232</small></p>
-                                            </div>
-                                            <div class="col-6 text-end">
-                                                <h6 class="mb-1">- 10,000</h6>
-                                                <p class="text-success mb-0"><i class="ti ti-arrow-up-right"></i> 30.6%
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0">
-                                        <div class="avtar avtar-s border bg-light-primary" data-bs-toggle="tooltip"
-                                            data-bs-title="143 Posts">
-                                            <span>MD</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <div class="row g-1">
-                                            <div class="col-6">
-                                                <h6 class="mb-0">Medium</h6>
-                                                <p class="text-muted mb-0"><small>06:30 pm</small></p>
-                                            </div>
-                                            <div class="col-6 text-end">
-                                                <h6 class="mb-1">-26</h6>
-                                                <p class="text-warning mb-0"><i class="ti ti-arrows-left-right"></i> 5%
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0">
-                                        <div class="avtar avtar-s border" data-bs-toggle="tooltip"
-                                            data-bs-title="143 Posts"><span>U</span> </div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <div class="row g-1">
-                                            <div class="col-6">
-                                                <h6 class="mb-0">Uber</h6>
-                                                <p class="text-muted mb-0"><small>08:40 pm</small></p>
-                                            </div>
-                                            <div class="col-6 text-end">
-                                                <h6 class="mb-1">+210,000</h6>
-                                                <p class="text-success mb-0"><i class="ti ti-arrow-up-right"></i> 10.6%
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                            @foreach ($belum as $bel)
                             <li class="list-group-item">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0">
@@ -832,57 +568,54 @@
                                     <div class="flex-grow-1 ms-3">
                                         <div class="row g-1">
                                             <div class="col-6">
-                                                <h6 class="mb-0">Apple Inc.</h6>
-                                                <p class="text-muted mb-0"><small>#ABLE-PRO-T00232</small></p>
+                                                <h6 class="mb-0">{{ $bel->nama_customer }}</h6>
+                                                <p class="text-muted mb-0"><small>Invoice : {{ $bel->invoice_number }}</small></p>
                                             </div>
                                             <div class="col-6 text-end">
-                                                <h6 class="mb-1">$210,000</h6>
-                                                <p class="text-danger mb-0"><i class="ti ti-arrow-down-left"></i> 10.6%
-                                                </p>
+                                                <h6 class="mb-1">{{ $bel->jenis_paket }}</h6>
+                                                <span class="badge bg-light rounded-pill f-12"><p class="text-danger mb-0"><i class="ti ti-money"></i>{{ \Carbon\Carbon::parse($bel->due_date)->format('d F Y') }}
+                                                </p></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="analytics-tab-3-pane" role="tabpanel"
+                        aria-labelledby="analytics-tab-3" tabindex="0">
+                        <ul class="list-group list-group-flush">
+                            @foreach ($sudah as $sdh)
                             <li class="list-group-item">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0">
-                                        <div class="avtar avtar-s border bg-light-warning" data-bs-toggle="tooltip"
-                                            data-bs-title="143 Posts">
-                                            <span>OC</span>
-                                        </div>
+                                        <div class="avtar avtar-s border"> AI </div>
                                     </div>
                                     <div class="flex-grow-1 ms-3">
                                         <div class="row g-1">
                                             <div class="col-6">
-                                                <h6 class="mb-0">Ola Cabs</h6>
-                                                <p class="text-muted mb-0"><small>07:40 pm</small></p>
+                                                <h6 class="mb-0">{{ $sdh->nama_customer }}</h6>
+                                                <p class="text-muted mb-0"><small>Invoice : {{ $sdh->invoice_number }}</small></p>
                                             </div>
                                             <div class="col-6 text-end">
-                                                <h6 class="mb-1">+210,000</h6>
-                                                <p class="text-success mb-0"><i class="ti ti-arrow-up-right"></i> 10.6%
-                                                </p>
+                                                <h6 class="mb-1">{{ $sdh->jenis_paket }}</h6>
+                                                <span class="badge bg-light rounded-pill f-12"><p class="text-success mb-0"><i class="ti ti-money"></i>{{ \Carbon\Carbon::parse($sdh->due_date)->format('d F Y') }}
+                                                </p></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
                 <div class="card-footer">
                     <div class="row g-2">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="d-grid">
-                                <button class="btn btn-outline-secondary d-grid"><span class="text-truncate w-100">View
-                                        all Transaction
-                                        History</span></button>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="d-grid">
-                                <button class="btn btn-primary d-grid"><span class="text-truncate w-100">Create new
-                                        Transaction</span></button>
+                                <a href="{{ route('order.index') }}"  class="btn btn-outline-primary d-grid"><span class="text-truncate w-100">View Tagihan History</span></a>
                             </div>
                         </div>
                     </div>

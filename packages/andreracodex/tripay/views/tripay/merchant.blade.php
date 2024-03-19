@@ -54,7 +54,7 @@
                             <p class="card-text">Active : <b>{{ $item['active'] ? 'Yes' : 'No' }}</b></p>
                         </div>
                         <div class="card-footer">
-                            <a href="{{ route('tripay.paybills') }}" class="btn btn-sm btn-primary">Pay Via</a>
+                            <a href="" class="btn btn-sm btn-primary">Pay Via</a>
                         </div>
                     </div>
                 </div>
