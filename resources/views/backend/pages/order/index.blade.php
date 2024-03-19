@@ -121,14 +121,9 @@
                         target: 0
                     }
                 },
-                columnDefs: [{
-                        targets: 0,
-                        className: 'customer',
-                        orderable: false,
-                        searchable: false,
-                    },
+                columnDefs: [
                     {
-                        targets: 1,
+                        targets: 0,
                         orderable: false,
                         searchable: false,
                         checkboxes: {
@@ -142,8 +137,8 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'order_id',
-                        name: 'order_id'
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
                     },
                     {
                         data: 'nama_customer',
@@ -431,7 +426,7 @@
                             <thead>
                                 <tr>
                                     <th style="width: 10px;">#</th>
-                                    <th></th>
+                                    <th>No</th>
                                     <th>Nama Customer & Nomor ID</th>
                                     <th>Alamat & Lokasi</th>
                                     <th>Telpon</th>

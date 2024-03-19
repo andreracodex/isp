@@ -1,7 +1,17 @@
 <div class="row">
     <div class="col-md-6 mb-3">
+        <label class="form-label" for="nama_barang">Nama Barang</label>
+        <input type="text" class="form-control @error('nama_barang') is-invalid @enderror" name="nama_barang"
+            id="nama_barang" value="{{ old('nama_barang') ?? $inve->nama_barang }}" placeholder="Nama Barang" required>
+
+        @error('nama_barang')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="col-md-6 mb-3">
         <label class="form-label headerbutton" for="location">Lokasi Barang <sup class="mt-2"><b><a
-                        href="{{ route('location.index') }}">
+                        href="{{ route('location.create') }}">
                         <i class="ti ti-plus me-1"></i>Tambah Lokasi</a></b></sup></label>
         <select class="form-select select2 @error('location') is-invalid @enderror" name="location" id="location">
             @foreach ($locations as $location)
@@ -16,22 +26,12 @@
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
-
-    <div class="col-md-6 mb-3">
-        <label class="form-label" for="nama_barang">Nama Barang</label>
-        <input type="text" class="form-control @error('nama_barang') is-invalid @enderror" name="nama_barang"
-            id="nama_barang" value="{{ old('nama_barang') ?? $inve->nama_barang }}" placeholder="Nama Barang" required>
-
-        @error('nama_barang')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
-    </div>
 </div>
 
 <div class="row">
     <div class="col-md-4 mb-3">
         <label class="form-label headerbutton" for="jenis_id">Jenis Kategori<sup class="mt-2"><b><a
-                        href="{{ route('invekategori.index') }}">
+                        href="{{ route('invekategori.create') }}">
                         <i class="ti ti-plus me-1"></i>Tambah Kategori</a></b></sup></label>
         <select class="form-select select2 @error('jenis_id') is-invalid @enderror" name="jenis_id" id="jenis_id">
             @foreach ($kategories as $kategor)
@@ -60,7 +60,7 @@
 
     <div class="col-md-3 mb-3">
         <label class="form-label headerbutton" for="satuan_id">Satuan Barang<sup class="mt-2"><b><a
-                        href="{{ route('invesatuan.index') }}">
+                        href="{{ route('invesatuan.create') }}">
                         <i class="ti ti-plus me-1"></i>Tambah Satuan</a></b></sup></label>
         <select class="form-select select2 @error('satuan_id') is-invalid @enderror" name="satuan_id" id="satuan_id">
             @foreach ($satuan as $sat)

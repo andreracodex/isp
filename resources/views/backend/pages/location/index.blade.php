@@ -62,14 +62,9 @@
                         target: 0
                     }
                 },
-                columnDefs: [{
-                        targets: 0,
-                        className: 'paket',
-                        orderable: false,
-                        searchable: false,
-                    },
+                columnDefs: [
                     {
-                        targets: 1,
+                        targets: 0,
                         orderable: false,
                         searchable: false,
                         checkboxes: {
@@ -261,7 +256,7 @@
                             <thead>
                                 <tr>
                                     <th style="width: 10px;">#</th>
-                                    <th></th>
+                                    <th>No</th>
                                     <th>Nama Lokasi Server</th>
                                     <th>Alamat Lokasi Server</th>
                                     <th>Penanggung Jawab</th>

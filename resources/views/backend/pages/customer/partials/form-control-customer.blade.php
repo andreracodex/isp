@@ -129,7 +129,7 @@
 
     <div class="col-md-3 mb-3">
         <label class="form-label headerbutton">Lokasi Server <sup class="mt-2"><b><a
-                        href="{{ route('location.index') }}">
+                        href="{{ route('location.create') }}">
                         <i class="ti ti-plus me-1"></i>Tambah Lokasi</a></b></sup></label>
         <select class="form-select @error('lokasi') is-invalid @enderror" name="lokasi" id="lokasi" required>
             @foreach ($lokasi as $lokasi_detail)
@@ -146,7 +146,7 @@
 
     <div class="col-md-3 mb-3">
         <label class="form-label headerbutton">Paket Internet <sup class="mt-2"><b><a
-                        href="{{ route('paket.index') }}">
+                        href="{{ route('paket.create') }}">
                         <i class="ti ti-plus me-1"></i>Tambah Paket</a></b></sup></label>
         <select class="form-select @error('paket_internet') is-invalid @enderror" name="paket_internet"
             id="paket_internet" required>

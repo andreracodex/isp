@@ -15,7 +15,9 @@
         @enderror
     </div>
     <div class="col-md-3 mb-3">
-        <label class="form-label">Ticket Opsi</label>
+        <label class="form-label headerbutton">Ticket Opsi<sup class="mt-2"><b><a
+            href="{{ route('ticketcat.create') }}">
+            <i class="ti ti-plus me-1"></i>Tambah Opsi</a></b></sup></label>
         <select class="form-select select2 @error('ticket_detail') is-invalid @enderror" name="ticket_detail" id="ticket_detail">
             <option selected disabled>Ticket Opsi...</option>
             @foreach ($ticket_details as $ticket)

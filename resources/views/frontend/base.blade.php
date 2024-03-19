@@ -120,13 +120,13 @@
         // marquee start
     </script>
     <!-- [Page Specific JS] end -->
-    <div class="pct-c-btn">
+    {{-- <div class="pct-c-btn">
         <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvas_pc_layout">
             <svg class="pc-icon">
                 <use xlink:href="#custom-setting-2"></use>
             </svg>
         </a>
-    </div>
+    </div> --}}
     <div class="offcanvas border-0 pct-offcanvas offcanvas-end" tabindex="-1" id="offcanvas_pc_layout">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title">Settings</h5>

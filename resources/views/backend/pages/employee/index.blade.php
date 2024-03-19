@@ -49,7 +49,7 @@
                     [10, 25, 50, "All"]
                 ],
                 order: [
-                    [2, 'asc']
+                    [1, 'asc']
                 ],
                 select: {
                     style: 'multi',
@@ -62,14 +62,9 @@
                         target: 0
                     }
                 },
-                columnDefs: [{
-                        targets: 0,
-                        className: 'customer',
-                        orderable: false,
-                        searchable: false,
-                    },
+                columnDefs: [
                     {
-                        targets: 1,
+                        targets: 0,
                         orderable: false,
                         searchable: false,
                         checkboxes: {
@@ -280,7 +275,7 @@
                             <thead>
                                 <tr>
                                     <th style="width: 10px;">#</th>
-                                    <th></th>
+                                    <th>No</th>
                                     <th>Nama Karyawan</th>
                                     <th>Alamat</th>
                                     <th>Nomor Telepon</th>

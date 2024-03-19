@@ -14,8 +14,10 @@
 
     <div class="col-md-6">
         <div class="mb-3">
-            <label class="form-label">Penanggung Jawab</label>
-            <select class="form-select @error('employee') is-invalid @enderror" name="employee" id="employee">
+            <label class="form-label headerbutton">Penanggung Jawab (Employee) <sup class="mt-2"><b><a
+                href="{{ route('employee.create') }}">
+                <i class="ti ti-plus me-1"></i>Tambah Employee</a></b></sup></label>
+            <select class="form-select select2  @error('employee') is-invalid @enderror" name="employee" id="employee">
                 <option selected disabled>Pilih Karyawan...</option>
                 @foreach ($employees as $employee)
                     <option value="{{ $employee->id }}" @if($employee->id == $location->employee_id) @selected(true) @endif)>

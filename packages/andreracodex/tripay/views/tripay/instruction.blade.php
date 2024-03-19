@@ -64,7 +64,6 @@
     <script src="{{ asset('/js/plugins/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/js/fonts/custom-font.js') }}"></script>
     <script src="{{ asset('/js/config.js') }}"></script>
-    <script src="{{ asset('/js/pcoded.js') }}"></script>
     <script src="{{ asset('/js/plugins/feather.min.js') }}"></script>
 
     <!-- [Page Specific JS] start -->

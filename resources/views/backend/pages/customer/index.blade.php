@@ -62,14 +62,9 @@
                         target: 0
                     }
                 },
-                columnDefs: [{
-                        targets: 0,
-                        className: 'customer',
-                        orderable: false,
-                        searchable: false,
-                    },
+                columnDefs: [
                     {
-                        targets: 1,
+                        targets: 0,
                         orderable: false,
                         searchable: false,
                         checkboxes: {
@@ -100,7 +95,14 @@
                     },
                     {
                         data: 'nomor_layanan',
-                        name: 'nomor_layanan'
+                        name: 'nomor_layanan',
+                        render: function(data, type, row) {
+                            if (row.nomor_layanan != null) {
+                                return '<span class="badge bg-light-primary rounded-pill f-12"> GDN-'+row.nomor_layanan+' </span>'
+                            } else {
+                                return '<span class="badge bg-light-warning rounded-pill f-12"> - </span>';
+                            }
+                        }
                     },
                     {
                         data: 'alamat_customer',
@@ -274,7 +276,7 @@
                             <thead>
                                 <tr>
                                     <th style="width: 10px;">#</th>
-                                    <th></th>
+                                    <th>No</th>
                                     <th>Nama</th>
                                     <th>Nomor ID</th>
                                     <th>Alamat</th>

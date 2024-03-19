@@ -19,6 +19,7 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\TicketKategoriController;
 use App\Http\Controllers\WhatsappController;
 use Illuminate\Support\Facades\Route;
 
@@ -191,6 +192,16 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::put('{ticket}/update', [TicketController::class, 'update'])->name('ticket.update');
         Route::get('{ticket}/updateStatus', [TicketController::class, 'updateStatus'])->name('ticket.updateStatus');
         Route::get('{ticket}/delete', [TicketController::class, 'delete'])->name('ticket.delete');
+    });
+
+     // Tiket Opsi Satuan
+    Route::prefix('ticketcat')->group(function() {
+        Route::get('', [TicketKategoriController::class, 'index'])->name('ticketcat.index');
+        Route::get('/create', [TicketKategoriController::class, 'create'])->name('ticketcat.create');
+        Route::post('/store', [TicketKategoriController::class, 'store'])->name('ticketcat.store');
+        Route::get('{ticketcat}/edit', [TicketKategoriController::class, 'edit'])->name('ticketcat.edit');
+        Route::put('{ticketcat}/update', [TicketKategoriController::class, 'update'])->name('ticketcat.update');
+        Route::get('{ticketcat}/delete', [TicketKategoriController::class, 'delete'])->name('ticketcat.delete');
     });
 
     // Web Setting

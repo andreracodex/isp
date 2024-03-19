@@ -319,15 +319,13 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <p class="mb-1 text-primary">Nama Customer :</p>
                                 <p class="mb-0">
                                     {{ $order->customer->nama_customer }}
                                 </p>
                             </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <p class="mb-1 text-primary">Gender :</p>
                                 <p class="mb-0">
                                     @if ($order->gender == '1')
@@ -338,40 +336,50 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="row mt-2">
-                            <div class="col-md-12">
+                        <div class="row mt-4">
+                            <div class="col-md-6">
                                 <p class="mb-1 text-primary">Nomor Telefon :</p>
                                 <p class="mb-0">
                                     {{ $order->customer->nomor_telephone }}
                                 </p>
                             </div>
+                            <div class="col-md-6">
+                                <p class="mb-1 text-primary">Email :</p>
+                                <p class="mb-0">
+                                    {{ $order->customer->user->email }}
+                                </p>
+                            </div>
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <p class="mb-1 text-primary">Kota :</p>
                                 <p class="mb-0">
                                     {{ $order->customer->village->district->regency->name }}
                                 </p>
                             </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <p class="mb-1 text-primary">Kecamatan :</p>
                                 <p class="mb-0">
                                     {{ $order->customer->village->district->name }}
                                 </p>
                             </div>
                         </div>
-                        <div class="row mt-2">
-                            <div class="col-md-12">
+                        <div class="row mt-4">
+                            <div class="col-md-6">
                                 <p class="mb-1 text-primary">Kelurahan :</p>
                                 <p class="mb-0">
                                     {{ $order->customer->village->name }}
                                 </p>
                             </div>
+                            <div class="col-md-6">
+                                <p class="mb-1 text-primary">Lokasi :</p>
+                                <p class="mb-0">
+                                    {{ $order->lokasi->nama_location }}
+                                </p>
+                            </div>
                         </div>
-                        <div class="row mt-3">
+                        <div class="row mt-4">
                             <div class="col-md-12">
                                 <p class="mb-1 text-primary">Alamat :</p>
                                 <p class="mb-0">
@@ -381,15 +389,21 @@
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <p class="mb-1 text-primary">Nama Paket :</p>
                                 <p class="mb-0">
                                     {{ $order->paket->nama_paket }}
                                 </p>
                             </div>
+                            <div class="col-md-6">
+                                <p class="mb-1 text-primary">Speed :</p>
+                                <p class="mb-0">
+                                    {{ $order->paket->jenis_paket }}
+                                </p>
+                            </div>
                         </div>
-                        <div class="row mt-2">
-                            <div class="col-md-12">
+                        <div class="row mt-4">
+                            <div class="col-md-6">
                                 <p class="mb-1 text-primary">Harga Paket :</p>
                                 <p class="mb-0">
                                     @php
@@ -398,18 +412,8 @@
                                     {{ str_replace(',00', '', $formatted_price) }}
                                 </p>
                             </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-md-12">
-                                <p class="mb-1 text-primary">Tanggal Pemesanan :</p>
-                                <p class="mb-0">
-                                    {{ date('d F Y', strtotime($order->created_at)) }}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-md-12">
-                                <p class="mb-1 text-primary">Tanggal Pemasangan :</p>
+                            <div class="col-md-6">
+                                <p class="mb-1 text-primary">Pemasangan :</p>
                                 <p class="mb-0">
                                     @if ($order->installed_date != null)
                                         {{ date('d F Y', strtotime($order->installed_date)) }}
