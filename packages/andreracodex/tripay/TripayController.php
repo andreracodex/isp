@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\OrderDetail;
 use App\Models\Setting;
 use App\Models\ShortURL;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Number;
 
 class TripayController extends Controller
 {
@@ -221,6 +223,46 @@ class TripayController extends Controller
         curl_close($curl);
         $data = json_decode($response, true)['data'];
 
+        // Kirim WA
+        $message = "*Yth Pelanggan GNET*\n\n";
+        $message .= "Hallo Bapak/Ibu,\n";
+        $message .= "Customer Name :\n*".$data['customer_name']."*\n\n";
+        $message .= "Berikut detail, pembayaran melalui virtual account :\n\n";
+        $message .= "Merchant Ref : _*".$data['reference']."*_\n";
+        $message .= "Payment Name : *".$data['payment_name']."*\n";
+        $message .= "Pay Code (Virtual Number) : *".$data['pay_code']."*\n\n";
+        $message .= "Harga Paket : _*".'Rp ' . number_format($data['amount_received'], 0, ',', '.')."*_\n";
+        $message .= "Customer Fee : _*".'Rp ' . number_format($data['fee_merchant'], 0, ',', '.')."*_\n";
+        $message .= "Jumlah yang Harus Dibayar : _*".'Rp ' . number_format($data['amount'], 0, ',', '.')."*_\n";
+        $message .= "Status : *".$data['status']."*\n";
+        $message .= "Bayar Sebelum : *".date('d F Y H:i', $data['expired_time'])."*\n\n";
+        $message .= "Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir\n";
+        $message .= "Terima Kasih, Untuk perhatiannya \n\n";
+        $message .= "Hormat kami\n*PT. Global Data Network*\nJl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.\nPhone : 085731770730 / 085648747901\n\n";
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.fonnte.com/send',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => array(
+                'target' => convert_phone($inv->nomor_telephone),
+                'message' => $message,
+                'countryCode' => '62', //optional
+            ),
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: F#3Ny@o4WUtC7SYuiEUx' //change TOKEN to your actual token
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
         return view('tripay::result', compact('data', 'profile'));
     }
 

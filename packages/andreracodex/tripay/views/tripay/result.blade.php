@@ -36,41 +36,31 @@
     <div class="container" style="margin-top: 100px;">
 
         <h1>Payment Details</h1>
-        <ul>
-            <li>Reference: {{ $data['reference'] }}</li>
-            <li>Merchant Ref: {{ $data['merchant_ref'] }}</li>
-            <li>Payment Selection Type: {{ $data['payment_selection_type'] }}</li>
-            <li>Payment Method: {{ $data['payment_method'] }}</li>
-            <li>Payment Name: {{ $data['payment_name'] }}</li>
-            <li>Customer Name: {{ $data['customer_name'] }}</li>
-            <li>Customer Email: {{ $data['customer_email'] }}</li>
-            <li>Customer Phone: {{ $data['customer_phone'] }}</li>
-            <li>Callback URL: {{ $data['callback_url'] }}</li>
-            <li>Return URL: {{ $data['return_url'] }}</li>
-            <li>Amount: {{ $data['amount'] }}</li>
-            <li>Merchant Fee: {{ $data['fee_merchant'] }}</li>
-            <li>Customer Fee: {{ $data['fee_customer'] }}</li>
-            <li>Total Fee: {{ $data['total_fee'] }}</li>
-            <li>Amount Received: {{ $data['amount_received'] }}</li>
-            <li>Pay Code: {{ $data['pay_code'] }}</li>
-            <li>Status: {{ $data['status'] }}</li>
-            <li>Expired Time: {{ $data['expired_time'] }}</li>
-            <li>Order Items:</li>
-            <ul>
-                @foreach($data['order_items'] as $item)
-                    <li>
-                        <ul>
-                            <li>SKU: {{ $item['sku'] }}</li>
-                            <li>Name: {{ $item['name'] }}</li>
-                            <li>Price: {{ $item['price'] }}</li>
-                            <li>Quantity: {{ $item['quantity'] }}</li>
-                            <li>Subtotal: {{ $item['subtotal'] }}</li>
-                            <li>Product URL: {{ $item['product_url'] }}</li>
-                            <li>Image URL: {{ $item['image_url'] }}</li>
-                        </ul>
-                    </li>
-                @endforeach
-            </ul>
+        <ul class="mt-3">
+            <li>Nomor Refrensi Bayar:</li>
+                <p><b><i>{{ $data['reference'] }}</i></b></p>
+            <li>Merchant Ref:</li>
+                <p><b><i>{{ $data['merchant_ref'] }}</i></b></p>
+            <li>Payment Name:</li>
+                <p><b><i>{{ $data['payment_name'] }}</i></b></p>
+            <li>Customer Name:</li>
+                <p><b><i>{{ $data['customer_name'] }}</i></b></p>
+            <li>Customer Email:</li>
+                <p><b><i>{{ $data['customer_email'] }}</i></b></p>
+            <li>Customer Phone:</li>
+                <p><b><i>{{ $data['customer_phone'] }}</i></b></p>
+            <li>Jumlah yang Harus Dibayar:</li>
+                <p><b><i>{{ Number::currency($data['amount'], in: 'IDR', locale: 'id') }}</i></b></p>
+            <li>Customer Fee: </li>
+                <p><b><i>{{ $data['fee_customer'] }}</i></b></p>
+            <li>Harga Paket: </li>
+                <p><b><i>{{ Number::currency($data['amount_received'], in: 'IDR', locale: 'id') }}</i></b></p>
+            <li>Pay Code (Virtual Number): </li>
+                <p><b><i>{{ $data['pay_code'] }}</i></b></p>
+            <li>Status: </li>
+                <p><b><i>{{ $data['status'] }}</i></b></p>
+            <li>Expired Time to Pay: </li>
+                <p><b><i>{{ date('Y-m-d H:i', $data['expired_time']) }}</i></b></p>
         </ul>
 
     </div>

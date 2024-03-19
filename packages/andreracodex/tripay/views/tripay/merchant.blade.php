@@ -54,7 +54,7 @@
                         <div class="card-footer">
                             <button data-pc-animate="blur" type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#animateModal{{ $item['code'] }}">
-                                Blur
+                                Bayar
                             </button>
                         </div>
                     </div>
