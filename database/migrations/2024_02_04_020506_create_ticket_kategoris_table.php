@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama', 50);
             $table->integer('is_active')->default(1);
             $table->timestamps();
-
+            $table->softDeletes();
         });
     }
 
