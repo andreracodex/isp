@@ -1,6 +1,6 @@
 @extends('backend.base')
 
-@section('title', 'Customer Add')
+@section('title', 'Keluhan Add')
 
 @section('styles')
 @endsection
@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Tambah Ticket</h2>
+                        <h2 class="mb-0">Tambah Keluhan</h2>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>Tambah Ticket Form</h5>
+                    <h5>Tambah Keluhan Form</h5>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('ticket.store') }}" enctype="multipart/form-data" method="POST"

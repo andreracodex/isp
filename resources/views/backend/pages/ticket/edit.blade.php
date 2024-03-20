@@ -1,6 +1,6 @@
 @extends('backend.base')
 
-@section('title', 'Pelanggan Edit')
+@section('title', 'Keluhan Edit')
 
 @section('styles')
 @endsection
@@ -24,26 +24,26 @@
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Edit Pelanggan</h2>
+                        <h2 class="mb-0">Edit Keluhan</h2>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    @can('edit customer')
+    @can('edit ticket')
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Edit Customer</h5>
+                        <h5>Edit Keluhan</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('customer.update', $customer->id) }}" enctype="multipart/form-data"
-                            method="POST" class="needs-validation" novalidate="">
+                        <form action="{{ route('ticket.update', $customer->id) }}" enctype="multipart/form-data" method="POST"
+                            class="needs-validation" novalidate="">
                             @csrf
                             @method('PUT')
-                            @include('backend.pages.customer.partials.form-control-customer', [
+                            @include('backend.pages.ticket.partials.form-control-ticket', [
                                 'submit' => 'Update',
                             ])
                         </form>
