@@ -210,6 +210,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     });
 
     Route::get('/pdf', [PDFController::class, 'PDFInventaris'])->name('pdf.inventaris');
+    Route::get('/pdf/ticketcat', [PDFController::class, 'PDFTicketKategori'])->name('pdf.ticketcat');
 
     //Indoregion
     Route::post('/kota', [IndoregionController::class, 'getKota'])->name('region.kota');

@@ -14,7 +14,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            let table = $('#kateticket').DataTable({
+            let table = $('#ticketcat').DataTable({
                 dom: "<'row'<'col-sm-12 col-md-6'Bl><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 deferRender: true,
                 processing: true,
@@ -76,8 +76,8 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'ticketkategori_id',
-                        name: 'ticketkategori_id'
+                        data: 'ticketcat_id',
+                        name: 'ticketcat_id'
                     },
                     {
                         data: 'nama',
@@ -160,7 +160,7 @@
     <script src="{{ asset('/js/plugins/sweetalert2.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#kateticket').on('click', '.hapusKateticket', function() {
+            $('#ticketcat').on('click', '.hapusTicketcat', function() {
                 let idItem = $(this).data('id');
 
                 Swal.fire({
@@ -242,7 +242,7 @@
                 </div>
                 <div class="card-body">
                     <div class="dt-responsive table-responsive">
-                        <table id="kateticket" class="table compact table-striped table-hover table-bordered wrap"
+                        <table id="ticketcat" class="table compact table-striped table-hover table-bordered wrap"
                             style="width:100%">
                             <thead>
                                 <tr>

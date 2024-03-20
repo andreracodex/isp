@@ -65,11 +65,11 @@
                         <h5>Edit Kategori Ticket</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('ticketcat.update', $ticketkategori->id) }}" enctype="multipart/form-data"
+                        <form action="{{ route('ticketcat.update', $ticketcat->id) }}" enctype="multipart/form-data"
                             method="POST" class="needs-validation" novalidate="">
                             @csrf
                             @method('PUT')
-                            @include('backend.pages.ticketcategory.partials.form-ticketktg', [
+                            @include('backend.pages.ticketcategory.partials.form-ticketcat', [
                                 'submit' => 'Update',
                             ])
                         </form>

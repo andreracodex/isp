@@ -2,7 +2,7 @@
     <div class="col-md-9 mb-3">
         <label class="form-label" for="nama">Nama Kategori</label>
         <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama"
-            value="{{ old('nama') ?? $invekategori->nama }}" placeholder="Nama Kategori" required>
+            value="{{ old('nama') ?? $ticketcat->nama }}" placeholder="Nama Kategori" required>
 
         @error('nama')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -14,7 +14,7 @@
         <div class="form-check form-switch custom-switch-v1">
             <input type="checkbox" class="form-check-input input-success @error('is_active') is-invalid @enderror"
                 id="customswitchlightv1-3" name="is_active"
-                @if ($invekategori->is_active == 1) @checked(true) @else @checked(false) @endif>
+                @if ($ticketcat->is_active == 1) @checked(true) @else @checked(false) @endif>
             <label class="form-check-label" for="customswitchlightv1-3">Active</label>
         </div>
     </div>

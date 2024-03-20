@@ -1,6 +1,6 @@
 @extends('backend.base')
 
-@section('title', 'Inventory Category Add')
+@section('title', 'Ticket Category Add')
 
 @section('styles')
 @endsection
@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Tambah Kategori Inventaris</h2>
+                        <h2 class="mb-0">Tambah Kategori Ticket</h2>
                     </div>
                 </div>
             </div>
@@ -29,13 +29,13 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>Form Tambah Kategori Inventaris</h5>
+                    <h5>Form Tambah Kategori Ticket</h5>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('ticketcat.store') }}" enctype="multipart/form-data" method="POST"
                         class="needs-validation" novalidate="">
                         @csrf
-                        @include('backend.pages.inventaris_kategori.partials.form-inventaris_ktg', [
+                        @include('backend.pages.ticketcategory.partials.form-ticketcat', [
                             'submit' => 'Create',
                         ])
                     </form>
