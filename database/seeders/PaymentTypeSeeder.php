@@ -25,5 +25,6 @@ class PaymentTypeSeeder extends Seeder
             'payment_methode_name' => 'E-Wallet',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
+
     }
 }

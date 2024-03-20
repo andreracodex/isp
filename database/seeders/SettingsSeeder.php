@@ -8,6 +8,7 @@ use App\Models\Location;
 use App\Models\Paket;
 use App\Models\PaketWa;
 use App\Models\Setting;
+use App\Models\SettingsWA;
 use App\Models\User;
 use App\Models\UserSetting;
 use DateTime;
@@ -474,6 +475,49 @@ class SettingsSeeder extends Seeder
                 'jenis_paket'=> '5 Mbps',
                 'harga_paket'=> rand(100000, 150000),
                 'disc'=> 0,
+            ),
+        );
+
+        SettingsWA::insert(
+            array(
+                'nama_settings'=> 'Notifikasi Tanggal Jatuh Tempo',
+                'is_active'=> 1,
+                'value' => 1,
+            ),
+        );
+        SettingsWA::insert(
+            array(
+                'nama_settings'=> 'Notifikasi Tagihan 1 Hari Sebelum Jatuh Tempo',
+                'is_active'=> 1,
+                'value' => 1,
+            ),
+        );
+        SettingsWA::insert(
+            array(
+                'nama_settings'=> 'Notifikasi Tagihan 3 Hari Sebelum Jatuh Tempo',
+                'is_active'=> 1,
+                'value' => 1,
+            ),
+        );
+        SettingsWA::insert(
+            array(
+                'nama_settings'=> 'Notifikasi Tagihan 7 Hari Sebelum Jatuh Tempo',
+                'is_active'=> 1,
+                'value' => 1,
+            ),
+        );
+        SettingsWA::insert(
+            array(
+                'nama_settings'=> 'Notifikasi Saat Pelanggan Isolir',
+                'is_active'=> 1,
+                'value' => 1,
+            ),
+        );
+        SettingsWA::insert(
+            array(
+                'nama_settings'=> 'Notifikasi Saat Pelanggan Baru',
+                'is_active'=> 1,
+                'value' => 1,
             ),
         );
         // Paket WA

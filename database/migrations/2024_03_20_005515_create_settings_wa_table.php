@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('short_u_r_l_s', function (Blueprint $table) {
+        Schema::create('settings_wa', function (Blueprint $table) {
             $table->id();
-            $table->string('original_url');
-            $table->string('short_code')->unique();
+            $table->string('nama_settings');
+            $table->integer('value');
+            $table->integer('is_active')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('short_u_r_l_s');
+        Schema::dropIfExists('settings_wa');
     }
 };
