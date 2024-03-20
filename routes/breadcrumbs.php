@@ -231,23 +231,6 @@ Breadcrumbs::for('employee.store', function (BreadcrumbTrail $trail): void {
     $trail->push('Simpan Karyawan', route('employee.store'));
 });
 
-// Ticket
-Breadcrumbs::for('ticket.index', function (BreadcrumbTrail $trail): void {
-    $trail->parent('dashboard');
-    $trail->push('Ticket', route('ticket.index'));
-});
-Breadcrumbs::for('ticket.create', function (BreadcrumbTrail $trail): void {
-    $trail->parent('dashboard');
-    $trail->push('Tambah Ticket', route('ticket.create'));
-});
-Breadcrumbs::for('ticket.edit', function (BreadcrumbTrail $trail): void {
-    $trail->push('Edit Ticket', route('ticket.edit', 'ticket'));
-});
-Breadcrumbs::for('ticket.store', function (BreadcrumbTrail $trail): void {
-    $trail->parent('dashboard');
-    $trail->push('Simpan Ticket', route('ticket.store'));
-});
-
 // Payment Method
 Breadcrumbs::for('paymenttype.index', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
@@ -267,4 +250,38 @@ Breadcrumbs::for('paymenttype.store', function (BreadcrumbTrail $trail): void {
 Breadcrumbs::for('paymenttype.update', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Update Metode Pembayaran', route('paymenttype.update', 'paymenttype'));
+});
+
+// Ticket
+Breadcrumbs::for('ticket.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Ticket', route('ticket.index'));
+});
+Breadcrumbs::for('ticket.create', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Tambah Ticket', route('ticket.create'));
+});
+Breadcrumbs::for('ticket.edit', function (BreadcrumbTrail $trail): void {
+    $trail->push('Edit Ticket', route('ticket.edit', 'ticket'));
+});
+Breadcrumbs::for('ticket.store', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Simpan Ticket', route('ticket.store'));
+});
+
+// Ticket Category
+Breadcrumbs::for('ticketcat.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Ticket', route('ticketcat.index'));
+});
+Breadcrumbs::for('ticketcat.create', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Tambah Ticket', route('ticketcat.create'));
+});
+Breadcrumbs::for('ticketcat.edit', function (BreadcrumbTrail $trail): void {
+    $trail->push('Edit Ticket', route('ticketcat.edit', 'ticket'));
+});
+Breadcrumbs::for('ticketcat.store', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Simpan Ticket', route('ticketcat.store'));
 });

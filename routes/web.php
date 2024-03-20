@@ -194,7 +194,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::get('{ticket}/delete', [TicketController::class, 'delete'])->name('ticket.delete');
     });
 
-     // Tiket Opsi Satuan
+    // Tiket Opsi Satuan
     Route::prefix('ticketcat')->group(function() {
         Route::get('', [TicketKategoriController::class, 'index'])->name('ticketcat.index');
         Route::get('/create', [TicketKategoriController::class, 'create'])->name('ticketcat.create');
