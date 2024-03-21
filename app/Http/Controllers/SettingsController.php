@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\Sessions;
 use App\Models\Setting;
+use App\Models\SettingsWA;
 use App\Models\UserSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,17 +38,18 @@ class SettingsController extends Controller
             ->orWhere('name', 'company_telephone')
             ->orWhere('name', 'company_email')
             ->get();
+        $webwa = SettingsWA::all();
         $usersetting = UserSetting::all();
         $sess = Sessions::where('user_id', Auth::user()->id)->get();
 
-        return view('backend.pages.setting.index', compact('profile', 'usersetting', 'sess', 'ip', 'roles', 'websetting'));
+        return view('backend.pages.setting.index', compact('profile', 'usersetting', 'sess', 'ip', 'roles', 'websetting', 'webwa'));
     }
 
     public function store() {
 
     }
 
-    public function updateSettings(Request $request)
+    public function settings(Request $request)
     {
         $settings = $request->input('settings');
 
@@ -60,5 +62,9 @@ class SettingsController extends Controller
         }
 
         return redirect()->back()->with('success', 'Settings updated successfully.');
+    }
+
+    public function wasettings(Request $request){
+        dd($request);
     }
 }

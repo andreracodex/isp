@@ -1,13 +1,12 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
-            <div class="card-header">
-                <h5>Web Setting</h5>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('websetting.updateSettings') }}" method="POST">
-                    @csrf
-
+            <form action="{{ route('websetting.settings') }}" method="POST">
+                @csrf
+                <div class="card-header">
+                    <h5>Web Setting</h5>
+                </div>
+                <div class="card-body">
                     <div class="row">
                         @foreach ($websetting as $websetting)
                             @php
@@ -47,12 +46,12 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="card-footer text-end btn-page">
-                        <div class="btn btn-outline-secondary">Cancel</div>
-                        <button class="btn btn-primary" type="submit">Update Profile</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="card-footer text-end btn-page">
+                    <div class="btn btn-outline-secondary">Cancel</div>
+                    <button class="btn btn-primary" type="submit">Update Profile</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

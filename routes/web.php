@@ -206,8 +206,10 @@ Route::middleware('auth','has.role','auth.session')->group(function()
 
     // Web Setting
     Route::prefix('websetting')->group(function(){
-        Route::post('/updateSettings', [SettingsController::class, 'updateSettings'])->name('websetting.updateSettings');
+        Route::post('/updatesetting', [SettingsController::class, 'settings'])->name('websetting.settings');
+        Route::post('/updatewa', [SettingsController::class, 'wasettings'])->name('websetting.wasettings');
     });
+
 
     Route::get('/pdf', [PDFController::class, 'PDFInventaris'])->name('pdf.inventaris');
     Route::get('/pdf/ticketcat', [PDFController::class, 'PDFTicketKategori'])->name('pdf.ticketcat');

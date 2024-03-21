@@ -234,6 +234,12 @@
                                     <i class="ti ti-settings me-2"></i>Web Setting
                                 </a>
                             </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="profile-tab-7" data-bs-toggle="tab" href="#profile-7" role="tab"
+                                    aria-selected="false" tabindex="-1">
+                                    <i class="fab fa-whatsapp" aria-hidden="true">&nbsp;&nbsp;</i>WA Setting
+                                </a>
+                            </li>
                         @endcan
                     </ul>
                 </div>
@@ -463,6 +469,9 @@
                 </div>
                 <div class="tab-pane" id="profile-6" role="tabpanel" aria-labelledby="profile-tab-6">
                     @include('backend.pages.setting.partials.form-setting')
+                </div>
+                <div class="tab-pane" id="profile-7" role="tabpanel" aria-labelledby="profile-tab-7">
+                    @include('backend.pages.setting.partials.form-settingwa')
                 </div>
             </div>
         </div>

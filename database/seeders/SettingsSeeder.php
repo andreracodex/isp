@@ -478,11 +478,12 @@ class SettingsSeeder extends Seeder
             ),
         );
 
+        // Settings WA
         SettingsWA::insert(
             array(
                 'nama_settings'=> 'Notifikasi Tanggal Jatuh Tempo',
                 'is_active'=> 1,
-                'value' => 1,
+                'value' => 0,
             ),
         );
         SettingsWA::insert(
@@ -496,28 +497,35 @@ class SettingsSeeder extends Seeder
             array(
                 'nama_settings'=> 'Notifikasi Tagihan 3 Hari Sebelum Jatuh Tempo',
                 'is_active'=> 1,
-                'value' => 1,
+                'value' => 3,
             ),
         );
         SettingsWA::insert(
             array(
                 'nama_settings'=> 'Notifikasi Tagihan 7 Hari Sebelum Jatuh Tempo',
                 'is_active'=> 1,
-                'value' => 1,
+                'value' => 7,
             ),
         );
         SettingsWA::insert(
             array(
                 'nama_settings'=> 'Notifikasi Saat Pelanggan Isolir',
                 'is_active'=> 1,
-                'value' => 1,
+                'value' => 0,
             ),
         );
         SettingsWA::insert(
             array(
                 'nama_settings'=> 'Notifikasi Saat Pelanggan Baru',
                 'is_active'=> 1,
-                'value' => 1,
+                'value' => 0,
+            ),
+        );
+        SettingsWA::insert(
+            array(
+                'nama_settings'=> 'Notifikasi Saat Pembayaran',
+                'is_active'=> 1,
+                'value' => 0,
             ),
         );
         // Paket WA
