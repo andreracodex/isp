@@ -39,7 +39,7 @@
                                         </div>
                                         <div class="form-check form-switch p-0">
                                             <input class="form-check-input h4 position-relative m-0" type="checkbox"
-                                                role="switch"  name="settings[{{ $waweb->id }}]" @if ($waweb->is_active == 1) @checked(true) @else @checked(false) @endif>
+                                                role="switch"  name="is_active[{{ $waweb->id }}]" @if ($waweb->is_active == 1) @checked(true) @else @checked(false) @endif">
                                         </div>
                                     </div>
                                 </li>

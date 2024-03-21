@@ -65,6 +65,25 @@ class SettingsController extends Controller
     }
 
     public function wasettings(Request $request){
-        dd($request);
+        $settings = $request->input('is_active');
+        $seting_lengkap = [];
+        for ($i = 1; $i <= 7; $i++) {
+            $seting_lengkap[$i] = isset($settings[$i]) ? $settings[$i] : "off";
+        }
+        foreach ($seting_lengkap as $settingId => $value) {
+            $wa = SettingsWA::find($settingId);
+
+            if ($wa) {
+                if($value == "on" || $value == "ON"){
+                    $nilai = 1;
+                }else{
+                    $nilai = 0;
+                }
+                $wa->is_active = $nilai;
+                $wa->save();
+            }
+        }
+
+        return redirect()->back()->with('success', 'Settings updated successfully.');
     }
 }
