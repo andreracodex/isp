@@ -328,7 +328,7 @@
                             <div class="col-md-6">
                                 <p class="mb-1 text-primary">Gender :</p>
                                 <p class="mb-0">
-                                    @if ($order->gender == '1')
+                                    @if ($order->customer->gender == '1')
                                         Laki-laki
                                     @else
                                         Perempuan
