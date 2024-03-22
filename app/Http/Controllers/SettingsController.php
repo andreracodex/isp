@@ -40,10 +40,15 @@ class SettingsController extends Controller
             ->get();
         $webwa = SettingsWA::all();
         $settingwatoken = Setting::where('name', 'wa_token')->get();
+        $settingtripay = Setting::where('name', 'tripay_api_key')
+            ->orWhere('name', 'tripay_api_secret')
+            ->orWhere('name', 'tripay_api_debug')
+            ->orWhere('name', 'tripay_merchant_code')
+            ->get();
         $usersetting = UserSetting::all();
         $sess = Sessions::where('user_id', Auth::user()->id)->get();
 
-        return view('backend.pages.setting.index', compact('profile', 'usersetting', 'sess', 'ip', 'roles', 'websetting', 'webwa', 'settingwatoken'));
+        return view('backend.pages.setting.index', compact('profile', 'usersetting', 'sess', 'ip', 'roles', 'websetting', 'webwa', 'settingwatoken', 'settingtripay'));
     }
 
     public function store() {
@@ -63,6 +68,30 @@ class SettingsController extends Controller
         }
 
         return redirect()->back()->with('success', 'Settings updated successfully.');
+    }
+
+    public function updatetripay(Request $request)
+    {
+        $settings = $request->input('settings');
+
+        foreach ($settings as $settingId => $value) {
+            $setting = Setting::find($settingId);
+
+            if ($setting) {
+                // Check the type of input field
+                if ($setting->name == 'tripay_api_debug') {
+                    // For toggle input
+                    $setting->value = ($value == 'on') ? 'on' : 'off';
+                } else {
+                    // For text input
+                    $setting->value = $value;
+                }
+
+                $setting->save();
+            }
+        }
+
+        return redirect()->back()->with('success', 'Tripay Settings updated successfully.');
     }
 
     public function wasettings(Request $request){

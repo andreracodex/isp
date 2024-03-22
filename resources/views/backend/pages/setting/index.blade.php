@@ -240,6 +240,12 @@
                                     <i class="fab fa-whatsapp" aria-hidden="true">&nbsp;&nbsp;</i>WA Setting
                                 </a>
                             </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="profile-tab-8" data-bs-toggle="tab" href="#profile-8" role="tab"
+                                    aria-selected="false" tabindex="-1">
+                                    <i class="ti ti-settings" aria-hidden="true">&nbsp;&nbsp;</i>Tripay Setting
+                                </a>
+                            </li>
                         @endcan
                     </ul>
                 </div>
@@ -255,8 +261,8 @@
                                     </div>
                                     <div class="text-center mt-3">
                                         <div class="chat-avtar d-inline-flex mx-auto">
-                                            <img class="rounded-circle img-fluid wid-70" src="{{ Auth::user()->real_path }}"
-                                                alt="User image">
+                                            <img class="rounded-circle img-fluid wid-70"
+                                                src="{{ Auth::user()->real_path }}" alt="User image">
                                         </div>
                                         <h5 class="mb-0">
                                             @if (Auth::user()->name != null)
@@ -472,6 +478,9 @@
                 </div>
                 <div class="tab-pane" id="profile-7" role="tabpanel" aria-labelledby="profile-tab-7">
                     @include('backend.pages.setting.partials.form-settingwa')
+                </div>
+                <div class="tab-pane" id="profile-8" role="tabpanel" aria-labelledby="profile-tab-8">
+                    @include('backend.pages.setting.partials.form-settingtripay')
                 </div>
             </div>
         </div>

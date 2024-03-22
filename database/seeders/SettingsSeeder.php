@@ -274,7 +274,7 @@ class SettingsSeeder extends Seeder
             ),
             array(
                 'name' => "tripay_api_debug",
-                'value' => 'false',
+                'value' => 'off',
                 'created_by' => 1,
             ),
             array(
