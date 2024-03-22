@@ -241,6 +241,48 @@
     <script src="{{ asset('/js/plugins/sweetalert2.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            $('#orderdetail').on('click', '.updateStatus', function() {
+                let idItem = $(this).data('id');
+                Swal.fire({
+                    title: 'Konfirmasi Tagihan',
+                    text: "Anda yakin tagihan ini sudah lunas?",
+                    icon: 'warning',
+                    data: idItem,
+                    showCancelButton: true,
+                    confirmButtonColor: '#10bd9d',
+                    cancelButtonColor: '#ca2062',
+                    confirmButtonText: 'Ya, Lunas !'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            method: 'GET',
+                            url: "{{ route('orderdetail.updateStatus', ':id') }}".replace(
+                                ':id', idItem),
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                id: idItem,
+                            },
+                            success: function(data) {
+                                window.location.reload();
+                                Swal.fire(
+                                    'Berhasil!',
+                                    'Tagihan sudah lunas',
+                                    'success'
+                                )
+                            },
+                            error: function(error) {
+                                Swal.fire('Error', 'Gagal tagihan belum lunas',
+                                    'error');
+                                // Handle error
+                            }
+                        });
+                    }
+                })
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
             $('#orderdetail').on('click', '.hapusOrderDetail', function() {
                 let idItem = $(this).data('id');
 

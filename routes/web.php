@@ -159,6 +159,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::post('/store', [OrderDetailController::class, 'store'])->name('orderdetail.store');
         Route::get('{orderdetail}/edit', [OrderDetailController::class, 'edit'])->name('orderdetail.edit');
         Route::put('{orderdetail}/update', [OrderDetailController::class, 'update'])->name('orderdetail.update');
+        Route::get('{orderdetail}/updateStatus', [OrderDetailController::class, 'updateStatus'])->name('orderdetail.updateStatus');
         Route::get('{orderdetail}/delete', [OrderDetailController::class, 'delete'])->name('orderdetail.delete');
     });
 

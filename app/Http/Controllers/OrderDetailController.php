@@ -24,4 +24,26 @@ class OrderDetailController extends Controller
             compact('profile', 'orderdetail')
         );
     }
+
+    public function updateStatus(string $id) {
+        $orderdetail = OrderDetail::findOrFail($id);
+
+        if ($orderdetail) {
+            if ($orderdetail->is_payed == 0) {
+                $orderdetail->update([
+                    'is_payed' => 1
+                ]);
+                return redirect()->back()->with(['success' => 'Tagihan sudah lunas !']);
+
+            } else {
+                $orderdetail->update([
+                    'is_payed' => 0
+                ]);
+                return redirect()->back()->with(['success' => 'Tagihan belum lunas !']);
+            }
+
+        } else {
+            return redirect()->back()->with(['error' => 'Gagal tagihan belum lunas !']);
+        }
+    }
 }

@@ -19,7 +19,7 @@ class OrderController extends Controller
         $profile = Setting::all();
         $customer = Customer::all();
         $date = Periode::where('is_active', 1)->get();
-        $data_table = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')->orderBy('order_details.order_id', 'ASC')->get();
+        $data_table = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')->orderBy('order_details.created_at', 'DESC')->get();
 
         if($request->input('customerid') != null && $request->input('customerid') != 0){
             // Non Active
@@ -149,7 +149,7 @@ class OrderController extends Controller
             ->addColumn('action', function (OrderDetail $orderdetail) {
                 return "
                 <a href=". route('orderdetail.view', $orderdetail->id) ." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
-                <a href=". route('orderdetail.edit', $orderdetail->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Data'><i class='fa fa-pencil-alt'></i></a>
+                <button class='avtar avtar-xs btn-link-warning btn-pc-default updateStatus' data-id='$orderdetail->id' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Data'><i class='fa fa-pencil-alt'></i></button>
                 <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusOrderDetail' data-id='$orderdetail->id'><i class='fa fa-trash-alt'></i></button>
             ";
             })
