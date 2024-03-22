@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 
 class SendTagihan extends Command
 {
-    protected $signature = 'send:tagihan';
+    protected $signature = 'make:tagihan';
     protected $description = 'Create Tagihan To Customer Bulan Berjalan';
 
     public function handle()
@@ -60,11 +60,11 @@ class SendTagihan extends Command
                 $this->info('Nomor Pelanggan : ' . $customer->nomor_layanan);
                 $this->info('==============================');
             } else {
-                $this->info('==============================');
-                $this->info('Sudah ada tagihan customer : ' . $customer->nama_customer);
-                $this->info('Nomor Telephone : ' . convert_phone($customer->nomor_telephone));
-                $this->info('Nomor Pelanggan : ' . $customer->nomor_layanan);
-                $this->info('==============================');
+                $this->warn('==============================');
+                $this->warn('Sudah ada tagihan customer : ' . $customer->nama_customer);
+                $this->warn('Nomor Telephone : ' . convert_phone($customer->nomor_telephone));
+                $this->warn('Nomor Pelanggan : ' . $customer->nomor_layanan);
+                $this->warn('==============================');
             }
         }
     }
