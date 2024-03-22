@@ -39,10 +39,11 @@ class SettingsController extends Controller
             ->orWhere('name', 'company_email')
             ->get();
         $webwa = SettingsWA::all();
+        $settingwatoken = Setting::where('name', 'wa_token')->get();
         $usersetting = UserSetting::all();
         $sess = Sessions::where('user_id', Auth::user()->id)->get();
 
-        return view('backend.pages.setting.index', compact('profile', 'usersetting', 'sess', 'ip', 'roles', 'websetting', 'webwa'));
+        return view('backend.pages.setting.index', compact('profile', 'usersetting', 'sess', 'ip', 'roles', 'websetting', 'webwa', 'settingwatoken'));
     }
 
     public function store() {

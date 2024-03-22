@@ -255,6 +255,33 @@ class SettingsSeeder extends Seeder
                 'value' => 'https://berdikari.web.id',
                 'created_by' => 1,
             ),
+            // whatsapp token
+            array(
+                'name' => "wa_token",
+                'value' => 'F#3Ny@o4WUtC7SYuiEUx',
+                'created_by' => 1,
+            ),
+            // tripay
+            array(
+                'name' => "tripay_api_key",
+                'value' => 'DmtwE8WcgKBDYbIwAvB3PoFGWPmfgxeCzzhrSBf6',
+                'created_by' => 1,
+            ),
+            array(
+                'name' => "tripay_api_secret",
+                'value' => 'zw1x5-sKnfk-U4B1q-hGnPS-ItHxy',
+                'created_by' => 1,
+            ),
+            array(
+                'name' => "tripay_api_debug",
+                'value' => 'false',
+                'created_by' => 1,
+            ),
+            array(
+                'name' => "tripay_merchant_code",
+                'value' => 'T16176',
+                'created_by' => 1,
+            ),
         ));
 
         Role::insert(array(

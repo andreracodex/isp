@@ -30,7 +30,6 @@
                                     }
                                 @endphp
 
-
                                 <li class="list-group-item">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div>
@@ -39,7 +38,8 @@
                                         </div>
                                         <div class="form-check form-switch p-0">
                                             <input class="form-check-input h4 position-relative m-0" type="checkbox"
-                                                role="switch"  name="is_active[{{ $waweb->id }}]" @if ($waweb->is_active == 1) @checked(true) @else @checked(false) @endif">
+                                                role="switch" name="is_active[{{ $waweb->id }}]"
+                                                @if ($waweb->is_active == 1) @checked(true) @else @checked(false) @endif>
                                         </div>
                                     </div>
                                 </li>
@@ -50,6 +50,37 @@
                 <div class="card-footer text-end btn-page">
                     <div class="btn btn-outline-secondary">Cancel</div>
                     <button class="btn btn-primary" type="submit">Update WA Settings</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <form action="{{ route('websetting.settings') }}" method="POST">
+                @csrf
+                <div class="card-header">
+                    <h5>WA Setting</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <ul class="list-group list-group-flush">
+                            @foreach ($settingwatoken as $settingwa)
+                                <li class="list-group-item">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="form-group">
+                                            <label class="form-label">Whatsapp Token</label>
+                                            <input type="text" name="settings[{{ $settingwa->id }}]"
+                                                class="form-control" value="{{ $settingwa->value }}" required>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer text-end btn-page">
+                    <div class="btn btn-outline-secondary">Cancel</div>
+                    <button class="btn btn-primary" type="submit">Update WA Token</button>
                 </div>
             </form>
         </div>
