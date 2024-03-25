@@ -183,11 +183,21 @@ class OrderController extends Controller
     }
 
     public function execute(){
-        $command = Artisan::call('make:tagihan');
-        if(!$command){
-            return redirect()->route('orderdetail.index')->with('error', 'Command Tagihan Not executed');
+        $first = Carbon::now()->addMonth(1)->firstOfMonth()->format('Y-m-d');
+        $last = Carbon::now()->addMonth(1)->lastOfMonth()->format('Y-m-d');
+
+        $count = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
+        ->whereBetween('due_date', [$first, $last])
+        ->where('orders.customer_id', '=', 1)
+        ->orderBy('order_id', 'DESC')
+        ->groupBy('orders.customer_id', 'due_date', 'order_details.id')
+        ->count();
+
+        if($count != 0){
+            return redirect()->route('order.index')->with('info', 'Tagihan Sudah Ada.');
         }else{
-            return redirect()->route('orderdetail.index')->with('success', 'Command Tagihan executed');
+            Artisan::call('make:tagihan');
+            return redirect()->route('order.index')->with('success', 'Tagihan Berhasil Dibuat.');
         }
 
     }

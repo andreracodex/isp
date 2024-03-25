@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama_settings');
             $table->integer('value');
             $table->integer('is_active')->default(1);
+            $table->longText('messages')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

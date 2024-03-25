@@ -123,15 +123,10 @@ class CustomerController extends Controller
                 $due_date = $request->input('due_date');
                 // Get the current year
                 $currentYear = date('Y');
-
-                // Get the current date
-                $currentDate = date('Ymd');
-
                 // Generate a random number between 1111 and 9999
                 $randomNumber = rand(1111, 9999);
-
                 // Concatenate the current year, date, and random number to create the invoice number
-                $invoiceNumber = 'INV' . $currentYear . $currentDate . $randomNumber;
+                $invoiceNumber = 'INV' . $currentYear . $randomNumber;
                 OrderDetail::create([
                     'order_id' => $order->id,
                     'biaya_admin' => 0,

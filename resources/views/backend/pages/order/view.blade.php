@@ -356,9 +356,7 @@
         <div class="row">
             <div class="col-lg-4">
                 <div class="card">
-                    <div class="card-header">
-                        <h5>Detail Tagihan</h5>
-                    </div>
+                        <img class="img-fluid card-img-top" src="{{ asset('/images/authentication/card.jpeg') }}" alt="Card image cap">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
