@@ -9,6 +9,7 @@ use App\Models\Periode;
 use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Number;
 use Yajra\DataTables\Facades\DataTables;
@@ -148,10 +149,9 @@ class OrderController extends Controller
             })
             ->addColumn('action', function (OrderDetail $orderdetail) {
                 return "
-                <a href=". route('orderdetail.view', $orderdetail->id) ." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
-                <button class='avtar avtar-xs btn-link-warning btn-pc-default updateStatus' data-id='$orderdetail->id' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Data'><i class='fa fa-pencil-alt'></i></button>
-                <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusOrderDetail' data-id='$orderdetail->id'><i class='fa fa-trash-alt'></i></button>
-            ";
+                <button class='avtar avtar-xs btn-link-warning btn-pc-default updateStatus' data-id='$orderdetail->id' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Payment Status'><i class='material-icons-two-tone'>attach_money</i> </button>
+                ";// <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusOrderDetail' data-id='$orderdetail->id'><i class='fa fa-trash-alt'></i></button>
+            // <a href=". route('orderdetail.view', $orderdetail->id) ." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
             })
             ->make(true);
         }
@@ -180,6 +180,16 @@ class OrderController extends Controller
         } else {
             return redirect()->back()->with(['error' => 'Data failed dihapus !']);
         }
+    }
+
+    public function execute(){
+        $command = Artisan::call('make:tagihan');
+        if(!$command){
+            return redirect()->route('orderdetail.index')->with('error', 'Command Tagihan Not executed');
+        }else{
+            return redirect()->route('orderdetail.index')->with('success', 'Command Tagihan executed');
+        }
+
     }
 }
 

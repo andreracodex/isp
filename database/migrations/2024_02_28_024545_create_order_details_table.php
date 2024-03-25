@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('order_id');
-            $table->foreign('order_id')->references('id')->on('orders');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
             $table->string('uuid')->unique();
             $table->string('invoice_number');
             $table->unsignedBigInteger('payment_id')->nullable();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->double('diskon')->default(0);
             $table->double('biaya_admin')->default(0);
             $table->double('ppn')->default(0);
-            $table->datetime('due_date'); //tanggal jatuh tempo
+            $table->datetime('due_date')->nullable(); //tanggal jatuh tempo
             $table->integer('is_payed')->default(0);
             $table->integer('is_active')->default(1);
             $table->timestamps();

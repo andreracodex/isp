@@ -395,8 +395,8 @@
                             {{-- <a href="{{ route('customer.create') }}" type="button"
                                 class="btn btn-sm btn-outline-primary d-inline-flex"><i
                                     class="ti ti-plus me-1"></i>Tagihan</a> --}}
-                            <button type="button" class="btn btn-sm btn-outline-success d-inline-flex"><i
-                                    class="ti ti-inbox me-1"></i>Import Excel</button>
+                            <a href="{{ route('order.execute') }}" class="btn btn-sm btn-outline-success d-inline-flex"><i
+                                    class="ti ti-inbox me-1"></i>Buat Tagihan Bulan Depan</a>
                         </div>
                         <div>
                             <button type="button" class="btn btn-sm btn-outline-danger d-inline-flex"><i

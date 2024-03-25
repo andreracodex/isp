@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('customer_id')->nullable();
-            $table->foreign('customer_id')->references('id')->on('customers');
-            $table->unsignedBigInteger('location_id')->nullable();
+            $table->unsignedBigInteger('customer_id');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('location_id');
             $table->foreign('location_id')->references('id')->on('locations');
-            $table->unsignedBigInteger('paket_id')->nullable();
+            $table->unsignedBigInteger('paket_id');
             $table->foreign('paket_id')->references('id')->on('pakets');
             $table->double('biaya_pasang')->default(0);
             $table->unsignedBigInteger('coordinates_id')->nullable();

@@ -31,6 +31,7 @@ class SendTagihan extends Command
                 ->groupBy('orders.customer_id', 'due_date', 'order_details.id')
                 ->count();
 
+                // dd($count);
             if ($count == 0) {
                 $orderDetail = OrderDetail::select('order_details.payment_id', 'order_details.due_date', 'orders.id',)
                     ->leftJoin('orders', 'orders.id', '=', 'order_details.order_id')

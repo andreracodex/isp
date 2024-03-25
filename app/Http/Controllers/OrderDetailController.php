@@ -20,8 +20,7 @@ class OrderDetailController extends Controller
         $orderdetail = OrderDetail::find($orderdetail->id);
         $profile = Setting::all();
 
-        return view('backend.pages.orderdetail.view',
-            compact('profile', 'orderdetail')
+        return view('backend.pages.orderdetail.view', compact('profile', 'orderdetail')
         );
     }
 
@@ -36,10 +35,7 @@ class OrderDetailController extends Controller
                 return redirect()->back()->with(['success' => 'Tagihan sudah lunas !']);
 
             } else {
-                $orderdetail->update([
-                    'is_payed' => 0
-                ]);
-                return redirect()->back()->with(['success' => 'Tagihan belum lunas !']);
+                return redirect()->back()->with(['success' => 'Tagihan sudah dibayarkan lunas !']);
             }
 
         } else {

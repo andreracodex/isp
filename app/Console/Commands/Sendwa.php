@@ -6,6 +6,7 @@ use App\Mail\OrderCreated;
 use App\Models\Bank;
 use App\Models\Customer;
 use App\Models\OrderDetail;
+use App\Models\Setting;
 use App\Models\SettingsWA;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -21,7 +22,7 @@ class SendWa extends Command
     {
         $customers = Customer::where('is_active', 1)->get();
         $now = Carbon::now()->format('Y-m-d');
-
+        $set = Setting::find(46);
         $was = SettingsWA::where('is_active', 1)->get();
         foreach ($was as $has) {
             // Notifikasi Tanggal Jatuh Tempo
@@ -75,7 +76,7 @@ class SendWa extends Command
                                 'countryCode' => '62', //optional
                             ),
                             CURLOPT_HTTPHEADER => array(
-                                'Authorization: F#3Ny@o4WUtC7SYuiEUx' //change TOKEN to your actual token
+                                'Authorization: '.$set->value //change TOKEN to your actual token
                             ),
                         ));
 
@@ -148,7 +149,7 @@ class SendWa extends Command
                                     'countryCode' => '62', //optional
                                 ),
                                 CURLOPT_HTTPHEADER => array(
-                                    'Authorization: F#3Ny@o4WUtC7SYuiEUx' //change TOKEN to your actual token
+                                    'Authorization: '.$set->value //change TOKEN to your actual token
                                 ),
                             ));
 
@@ -225,7 +226,7 @@ class SendWa extends Command
                                     'countryCode' => '62', //optional
                                 ),
                                 CURLOPT_HTTPHEADER => array(
-                                    'Authorization: F#3Ny@o4WUtC7SYuiEUx' //change TOKEN to your actual token
+                                    'Authorization: '.$set->value //change TOKEN to your actual token
                                 ),
                             ));
 
@@ -302,7 +303,7 @@ class SendWa extends Command
                                     'countryCode' => '62', //optional
                                 ),
                                 CURLOPT_HTTPHEADER => array(
-                                    'Authorization: F#3Ny@o4WUtC7SYuiEUx' //change TOKEN to your actual token
+                                    'Authorization: '.$set->value //change TOKEN to your actual token
                                 ),
                             ));
 

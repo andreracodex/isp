@@ -145,6 +145,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     Route::prefix('order')->group(function() {
         Route::get('', [OrderController::class, 'index'])->name('order.index');
         Route::get('/create', [OrderController::class, 'create'])->name('order.create');
+        Route::get('/execute', [OrderController::class, 'execute'])->name('order.execute');
         Route::get('{order}/view', [OrderController::class, 'view'])->name('order.view');
         Route::post('/store', [OrderController::class, 'store'])->name('order.store');
         Route::get('{order}/edit', [OrderController::class, 'edit'])->name('order.edit');

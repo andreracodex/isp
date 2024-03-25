@@ -10,6 +10,7 @@ use App\Models\Regency;
 use App\Models\District;
 use App\Models\OrderDetail;
 use App\Models\Setting;
+use App\Models\SettingsWA;
 use App\Models\User;
 use App\Models\Village;
 use Carbon\Carbon;
@@ -18,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
+use Sabberworm\CSS\Settings;
 
 class CustomerController extends Controller
 {
@@ -53,7 +55,9 @@ class CustomerController extends Controller
         $districts = Regency::where('province_id')->get();
         $villages = Regency::where('province_id')->get();
         $order = new Order;
-        return view('backend.pages.customer.create', compact('profile', 'customer', 'lokasi', 'paket', 'order', 'kotas', 'districts', 'villages')
+        return view(
+            'backend.pages.customer.create',
+            compact('profile', 'customer', 'lokasi', 'paket', 'order', 'kotas', 'districts', 'villages')
         );
     }
 
@@ -86,15 +90,6 @@ class CustomerController extends Controller
                     $is_active = 0;
                 }
 
-                $new = $request->input('is_new');
-                if ($new == 'ON' || $new == 'on') {
-                    $is_new = 1;
-                    $due_date = Carbon::parse($request->input('due_date'))->addMonths(1);
-                } else {
-                    $is_new = 0;
-                    $due_date = $request->input('due_date');
-                }
-
                 $installed = $request->input('is_installed');
                 if ($installed == 'ON' || $installed == 'on') {
                     $is_installed = 1;
@@ -113,7 +108,7 @@ class CustomerController extends Controller
                     'nomor_telephone' => preg_replace("/[^0-9,]/", "", $request->nomor_telephone),
                     'kelurahan_id' => $request->kelurahan,
                     'is_active' => $is_active,
-                    'is_new' => $is_new,
+                    'is_new' => 1,
                 ]);
 
                 $order = Order::create([
@@ -125,36 +120,69 @@ class CustomerController extends Controller
                     'biaya_pasang' => $request->biaya_pasang,
                 ]);
 
-                // Tgaihan Buat dua (Koment)
-                // $new = $request->input('is_new');
-                // if ($new == 'ON' || $new == 'on') {
-                //     $due_date = Carbon::parse($request->input('due_date'))->addMonths(1);
+                $due_date = $request->input('due_date');
+                // Get the current year
+                $currentYear = date('Y');
 
-                //     OrderDetail::create([
-                //         'order_id' => $order->id,
-                //         'biaya_admin' => 0,
-                //         'due_date' => $request->input('due_date'),
-                //         'is_active' => $is_active,
-                //         'is_payed' => 1,
-                //     ]);
+                // Get the current date
+                $currentDate = date('Ymd');
 
-                // } else {
-                    $due_date = $request->input('due_date');
-                // }
+                // Generate a random number between 1111 and 9999
+                $randomNumber = rand(1111, 9999);
 
+                // Concatenate the current year, date, and random number to create the invoice number
+                $invoiceNumber = 'INV' . $currentYear . $currentDate . $randomNumber;
                 OrderDetail::create([
                     'order_id' => $order->id,
                     'biaya_admin' => 0,
                     'due_date' => $due_date,
                     'is_active' => $is_active,
                     'is_payed' => 1,
-                    'invoice_number' => 'INV'.rand(11111111, 99999999),
+                    'invoice_number' => $invoiceNumber,
                     'uuid' => Str::uuid(64),
                 ]);
+                $was = SettingsWA::find(6);
+                $set = Setting::find(46);
+                if ($was->is_active == 1) {
+                    // Send WhatsApp message
+                    $message = "*Yth Pelanggan GNET*\n\n";
+                    $message .= "Hallo Bapak/Ibu,\n";
+                    $message .= "*" . $customer->nama_customer . "*,\n";
+                    $message .= "Tanggal Pendaftaran : *" . Carbon::parse($due_date)->format('d F Y') . "*.\n\n";
+                    $message .= "Kami ingin mengucapkan terima kasih atas kepercayaan Anda menggunakan layanan internet kami.\n";
+                    $message .= "Semoga layanan yang kami berikan dapat memenuhi kebutuhan Anda dengan baik.\n";
+                    $message .= "Terima kasih atas dukungan dan kesetiaan Anda sebagai pelanggan kami.\n\n";
+                    $message .= "Hormat kami\n*PT. Global Data Network*\nJl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.\nPhone : 085731770730 / 085648747901\n";
+
+                    $curl = curl_init();
+
+                    curl_setopt_array($curl, array(
+                        CURLOPT_URL => 'https://api.fonnte.com/send',
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => '',
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_FOLLOWLOCATION => true,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => 'POST',
+                        CURLOPT_POSTFIELDS => array(
+                            'target' => convert_phone($customer->nomor_telephone),
+                            'message' => $message,
+                            'countryCode' => '62', //optional
+                        ),
+                        CURLOPT_HTTPHEADER => array(
+                            'Authorization: '.$set->value //change TOKEN to your actual token
+                        ),
+                    ));
+
+                    $response = curl_exec($curl);
+                    curl_close($curl);
+                };
+
 
                 return redirect()->route('customer.index')->with('success', 'Berhasil Tambah Customer.');
             } catch (Exception $e) {
-                return redirect()->back()->with(['error' => 'Check data kembali !'+$e]);
+                return redirect()->back()->with(['error' => 'Check data kembali !' + $e]);
             }
         }
     }
@@ -276,10 +304,10 @@ class CustomerController extends Controller
     {
         $cust = Customer::find($id);
         if ($cust) {
-            Customer::where('id', $id)->delete();
-            if(Order::where('customer_id', $id)->exist()){
-                Order::where('customer_id', $id)->delete();
-            }
+            Customer::where('id', '=', $cust->id)->delete();
+            $order = Order::where('customer_id', '=', $cust->id)->first();
+            OrderDetail::where('order_id', '=', $order->id)->delete();
+            Order::where('customer_id', '=', $cust->id)->delete();
             return redirect()->back()->with(['success' => 'Data berhasil dihapus !']);
         } else {
             return redirect()->back()->with(['error' => 'Data failed dihapus !']);
