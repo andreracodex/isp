@@ -4,9 +4,9 @@
     </script>
 @endif
 
-@if ($erorr = session()->get('erorr'))
+@if ($erorr = session()->get('erorrs'))
     <script>
-        notifier.show("Error !!", "{{ $erorr }}", "error", "{{ asset('/images/notification/high_priority-48.png') }}", 5000);
+        notifier.show("Error !!", "{{ $erorr }}", "danger", "{{ asset('/images/notification/high_priority-48.png') }}", 5000);
     </script>
 @endif
 

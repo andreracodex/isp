@@ -40,6 +40,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     Route::prefix('settings')->group(function(){
         Route::get('', [SettingsController::class, 'index'])->name('settings.index');
         // Roles
+        Route::post('rolestore', [SettingsController::class, 'rolestore'])->name('settings.rolestore');
         Route::get('{setting}/editrole', [SettingsController::class, 'roleedit'])->name('settings.roleedit');
         Route::put('{setting}/updaterole', [SettingsController::class, 'roleupdate'])->name('settings.roleupdate');
 

@@ -66,6 +66,16 @@ class SettingsController extends Controller
         return view('backend.pages.setting.partials.roles.form-edit-roles', compact('setting', 'users', 'user', 'profile', 'roles'));
     }
 
+    public function rolestore(Request $request){
+        $user = User::where('email', $request->input('email'))->first();
+        if($user == null){
+            return back()->with('erorrs','User Email Not Found');
+        }
+        $role = $request->input('roles');
+        $user->roles()->sync($role);
+        return redirect()->route('settings.index')->with('success','User Role Has Registered');
+    }
+
     public function roleupdate($setting, Request $request){
         $user = User::find($setting);
         $role = $request->input('roles');
