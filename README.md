@@ -11,7 +11,7 @@
     - Inventaris -- done
     - Inventaris Katgeory -- done
     - Inventaris Satuan -- done
-    - Ticket -- progress
+    - Ticket -- done
     - Wa Console -- progress
     - Tripay -- progress
 
@@ -24,6 +24,7 @@
 -   Delete = Tidak Berfungsi -- done
 -   ID Pelanggan = dibuat terpisah dan Otomatis tercreate 8 angka saat Add New Pelanggan -- done
 -   Edit Data = Kota, Kecamatan, kelurahan Double Data -- form is single (created, updated) -- done
+-   Customer Import Excel -- done
 
 2. Paket Internet
 

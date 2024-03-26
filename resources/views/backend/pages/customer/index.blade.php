@@ -62,16 +62,14 @@
                         target: 0
                     }
                 },
-                columnDefs: [
-                    {
-                        targets: 0,
-                        orderable: false,
-                        searchable: false,
-                        checkboxes: {
-                            selectRow: true
-                        }
-                    },
-                ],
+                columnDefs: [{
+                    targets: 0,
+                    orderable: false,
+                    searchable: false,
+                    checkboxes: {
+                        selectRow: true
+                    }
+                }, ],
                 // Ini Option supaya semua
                 columns: [{
                         data: 'DT_RowIndex',
@@ -98,7 +96,8 @@
                         name: 'nomor_layanan',
                         render: function(data, type, row) {
                             if (row.nomor_layanan != null) {
-                                return '<span class="badge bg-light-primary rounded-pill f-12"> GDN-'+row.nomor_layanan+' </span>'
+                                return '<span class="badge bg-light-primary rounded-pill f-12"> GDN-' +
+                                    row.nomor_layanan + ' </span>'
                             } else {
                                 return '<span class="badge bg-light-warning rounded-pill f-12"> - </span>';
                             }
@@ -254,18 +253,22 @@
                     <div class="headerbutton">
                         <div>
                             <a href="{{ route('customer.create') }}" type="button"
-                                class="btn btn-sm btn-outline-primary d-inline-flex"><i
-                                    class="ti ti-plus me-1"></i>Pelanggan</a>
-                            <button type="button" class="btn btn-sm btn-outline-success d-inline-flex"><i
-                                    class="ti ti-inbox me-1"></i>Import Excel</button>
+                                class="btn btn-sm btn-outline-primary d-inline-flex">
+                                <i class="ti ti-plus me-1"></i>Pelanggan</a>
+                            <button data-pc-animate="blur" type="button"
+                                class="btn btn-sm btn-outline-success d-inline-flex" data-bs-toggle="modal"
+                                data-bs-target="#importModal">
+                                <i class="ti ti-inbox me-1"></i>Import Excel
+                            </button>
                         </div>
+
                         <div>
-                            <button type="button" class="btn btn-sm btn-outline-danger d-inline-flex"><i
-                                    class="fa fa-file-pdf">&nbsp;</i>Ekspor PDF</button>
-                            <button type="button" class="btn btn-sm btn-outline-success d-inline-flex"><i
-                                    class="fa fa-file-excel">&nbsp;</i>Ekspor Excel</button>
-                            <button type="button" class="btn btn-sm btn-outline-warning d-inline-flex"><i
-                                    class="ti ti-trash me-1"></i>Hapus Filter</button>
+                            <button type="button" class="btn btn-sm btn-outline-danger d-inline-flex">
+                                <i class="fa fa-file-pdf">&nbsp;</i>Ekspor PDF</button>
+                            <button type="button" class="btn btn-sm btn-outline-success d-inline-flex">
+                                <i class="fa fa-file-excel">&nbsp;</i>Ekspor Excel</button>
+                            <button type="button" class="btn btn-sm btn-outline-warning d-inline-flex">
+                                <i class="ti ti-trash me-1"></i>Hapus Filter</button>
                         </div>
                     </div>
                 </div>
@@ -290,6 +293,32 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade modal-animate anim-blur" id="importModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Customer Import</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+
+                <form action="{{ route('customer.import') }}" enctype="multipart/form-data" method="POST"
+                    class="needs-validation" novalidate="">
+                    @csrf
+
+                    <div class="modal-body">
+                        <label class="form-label" for="file">Pilih file</label>
+                        <input type="file" name="file" id="file" class="form-control" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary shadow-2">Import</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

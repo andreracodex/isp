@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\CustomerImport;
 use App\Models\Customer;
 use App\Models\Location;
 use App\Models\Order;
@@ -17,9 +18,10 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
-use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 use Sabberworm\CSS\Settings;
+use Yajra\DataTables\Facades\DataTables;
 
 class CustomerController extends Controller
 {
@@ -295,6 +297,13 @@ class CustomerController extends Controller
                 return redirect()->back()->with(['error' => 'Check data kembali !']);
             }
         }
+    }
+
+    public function import()
+    {
+        Excel::import(new CustomerImport, request()->file('file'));
+
+        return redirect()->back()->with('success', 'Customer imported successfully.');
     }
 
     public function delete(String $id)
