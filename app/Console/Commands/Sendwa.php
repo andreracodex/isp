@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 
 class SendWa extends Command
 {
-    protected $signature = 'send:tagihan';
+    protected $signature = 'send:tagihanwa';
     protected $description = 'Send Tagihan Via WA dan Email to Customer';
 
     public function handle()
