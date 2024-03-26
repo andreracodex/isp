@@ -78,6 +78,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::get('', [CustomerController::class, 'index'])->name('customer.index');
         Route::get('/create', [CustomerController::class, 'create'])->name('customer.create');
         Route::post('', [CustomerController::class, 'store'])->name('customer.store');
+        Route::post('import', [CustomerController::class, 'import'])->name('customer.import');
         Route::get('{customer}/view', [CustomerController::class, 'view'])->name('customer.view');
         Route::get('{customer}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
         Route::put('{customer}/update', [CustomerController::class, 'update'])->name('customer.update');
