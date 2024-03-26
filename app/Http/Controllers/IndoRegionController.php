@@ -9,7 +9,7 @@ use App\Models\Village;
 
 class IndoregionController extends Controller
 {
-    public function getKota(Request $request) {
+    public function kota(Request $request) {
         // $id_provinsi = $request->id_provinsi;
         $kotas = Regency::where('province_id', 35)->get();
 
@@ -21,7 +21,7 @@ class IndoregionController extends Controller
         }
     }
 
-    public function getKecamatan(Request $request) {
+    public function kecamatan(Request $request) {
         $id_kota = $request->id_kota;
         $kecamatans = District::where('regency_id', $id_kota)->get();
 
@@ -33,7 +33,7 @@ class IndoregionController extends Controller
         }
     }
 
-    public function getKelurahan(Request $request) {
+    public function kelurahan(Request $request) {
         $id_kecamatan = $request->id_kecamatan;
         $kelurahans = Village::where('district_id', $id_kecamatan)->get();
 

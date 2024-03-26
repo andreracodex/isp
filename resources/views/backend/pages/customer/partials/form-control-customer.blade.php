@@ -308,7 +308,7 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    cache: false,
+                    cache: true,
                     success: function(msg) {
                         $('#kecamatan').html(msg);
                     },
@@ -333,7 +333,7 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    cache: false,
+                    cache: true,
                     success: function(msg) {
                         $('#kelurahan').html(msg);
                     },

@@ -23,7 +23,7 @@ use App\Http\Controllers\TicketKategoriController;
 use App\Http\Controllers\WhatsappController;
 use Illuminate\Support\Facades\Route;
 
-require __DIR__.'/auth.php';
+require __DIR__. '/auth.php';
 
 Route::get('/', [HomeController::class, 'index'])->name('frontend');
 Route::get('/forgot-password', [HomeController::class, 'forgotpass'])->name('forgotpassword');
@@ -32,12 +32,11 @@ Route::post('/send-mail', [HomeController::class, 'sendmail'])->name('sendmail')
 // Route::get('auth/google', [GoogleSocialiteController::class, 'redirectToGoogle']);
 // Route::get('callback/google', [GoogleSocialiteController::class, 'handleCallback']);
 
-Route::middleware('auth','has.role','auth.session')->group(function()
-{
+Route::middleware('auth', 'has.role', 'auth.session')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // PROFILE
-    Route::prefix('settings')->group(function(){
+    Route::prefix('settings')->group(function () {
         Route::get('', [SettingsController::class, 'index'])->name('settings.index');
         // Roles
         Route::post('rolestore', [SettingsController::class, 'rolestore'])->name('settings.rolestore');
@@ -49,11 +48,10 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::post('/logout', [ProfileController::class, 'logout'])->name('settings.profile-logout');
         Route::put('/profile', [ProfileController::class, 'update'])->name('settings.profile-update');
         Route::put('{setting}/update', [EmployeeController::class, 'update'])->name('employee.update');
-
     });
 
-     // Employee
-    Route::prefix('employee')->group(function(){
+    // Employee
+    Route::prefix('employee')->group(function () {
         Route::get('', [EmployeeController::class, 'index'])->name('employee.index');
         Route::get('/create', [EmployeeController::class, 'create'])->name('employee.create');
         Route::post('', [EmployeeController::class, 'store'])->name('employee.store');
@@ -64,7 +62,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     });
 
     // Bank
-    Route::prefix('bank')->group(function() {
+    Route::prefix('bank')->group(function () {
         Route::get('', [BankController::class, 'index'])->name('bank.index');
         Route::get('/create', [BankController::class, 'create'])->name('bank.create');
         Route::post('/store', [BankController::class, 'store'])->name('bank.store');
@@ -74,7 +72,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     });
 
     // Customer
-    Route::prefix('customer')->group(function(){
+    Route::prefix('customer')->group(function () {
         Route::get('', [CustomerController::class, 'index'])->name('customer.index');
         Route::get('/create', [CustomerController::class, 'create'])->name('customer.create');
         Route::post('', [CustomerController::class, 'store'])->name('customer.store');
@@ -86,7 +84,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     });
 
     // Paket
-    Route::prefix('paket')->group(function(){
+    Route::prefix('paket')->group(function () {
         Route::get('', [PaketController::class, 'index'])->name('paket.index');
         Route::get('/create', [PaketController::class, 'create'])->name('paket.create');
         Route::post('', [PaketController::class, 'store'])->name('paket.store');
@@ -96,7 +94,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     });
 
     // Location
-    Route::prefix('location')->group(function() {
+    Route::prefix('location')->group(function () {
         Route::get('', [LocationController::class, 'index'])->name('location.index');
         Route::get('/create', [LocationController::class, 'create'])->name('location.create');
         Route::post('/store', [LocationController::class, 'store'])->name('location.store');
@@ -107,7 +105,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     });
 
     // WA
-    Route::prefix('wa')->group(function() {
+    Route::prefix('wa')->group(function () {
         Route::get('', [WhatsappController::class, 'index'])->name('wa.index');
         Route::get('/create', [WhatsappController::class, 'create'])->name('wa.create');
         Route::get('/qr', [WhatsappController::class, 'link'])->name('wa.link');
@@ -118,7 +116,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     });
 
     // Inventaris Kategori
-    Route::prefix('invekategori')->group(function() {
+    Route::prefix('invekategori')->group(function () {
         Route::get('', [InventarisKategoriController::class, 'index'])->name('invekategori.index');
         Route::get('/create', [InventarisKategoriController::class, 'create'])->name('invekategori.create');
         Route::post('/store', [InventarisKategoriController::class, 'store'])->name('invekategori.store');
@@ -128,7 +126,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     });
 
     // Inventaris Satuan
-    Route::prefix('invesatuan')->group(function() {
+    Route::prefix('invesatuan')->group(function () {
         Route::get('', [InventarisSatuanController::class, 'index'])->name('invesatuan.index');
         Route::get('/create', [InventarisSatuanController::class, 'create'])->name('invesatuan.create');
         Route::post('/store', [InventarisSatuanController::class, 'store'])->name('invesatuan.store');
@@ -138,7 +136,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     });
 
     // Inventaris
-    Route::prefix('inve')->group(function() {
+    Route::prefix('inve')->group(function () {
         Route::get('', [InventarisController::class, 'index'])->name('inve.index');
         Route::get('/create', [InventarisController::class, 'create'])->name('inve.create');
         Route::post('/store', [InventarisController::class, 'store'])->name('inve.store');
@@ -149,7 +147,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     });
 
     // Order Customer
-    Route::prefix('order')->group(function() {
+    Route::prefix('order')->group(function () {
         Route::get('', [OrderController::class, 'index'])->name('order.index');
         Route::get('/create', [OrderController::class, 'create'])->name('order.create');
         Route::get('/execute', [OrderController::class, 'execute'])->name('order.execute');
@@ -160,7 +158,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
         Route::get('{order}/delete', [OrderController::class, 'delete'])->name('order.delete');
     });
 
-    Route::prefix('orderdetail')->group(function() {
+    Route::prefix('orderdetail')->group(function () {
         Route::get('', [OrderDetailController::class, 'index'])->name('orderdetail.index');
         Route::get('/create', [OrderDetailController::class, 'create'])->name('orderdetail.create');
         Route::get('{orderdetail}/view', [OrderDetailController::class, 'view'])->name('orderdetail.view');
@@ -172,7 +170,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     });
 
     // Payment Type
-    Route::prefix('paymenttype')->group(function() {
+    Route::prefix('paymenttype')->group(function () {
         Route::get('', [PaymentTypeController::class, 'index'])->name('paymenttype.index');
         Route::get('/create', [PaymentTypeController::class, 'create'])->name('paymenttype.create');
         Route::post('/store', [PaymentTypeController::class, 'store'])->name('paymenttype.store');
@@ -182,7 +180,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     });
 
     // Periode
-    Route::prefix('periode')->group(function() {
+    Route::prefix('periode')->group(function () {
         Route::get('', [PeriodeController::class, 'index'])->name('periode.index');
         Route::get('/create', [PeriodeController::class, 'create'])->name('periode.create');
         Route::post('/store', [PeriodeController::class, 'store'])->name('periode.store');
@@ -192,7 +190,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     });
 
     // Ticket
-    Route::prefix('ticket')->group(function() {
+    Route::prefix('ticket')->group(function () {
         Route::get('', [TicketController::class, 'index'])->name('ticket.index');
         Route::get('/create', [TicketController::class, 'create'])->name('ticket.create');
         Route::get('/view', [TicketController::class, 'view'])->name('ticket.view');
@@ -204,7 +202,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     });
 
     // Tiket Opsi Satuan
-    Route::prefix('ticketcat')->group(function() {
+    Route::prefix('ticketcat')->group(function () {
         Route::get('', [TicketKategoriController::class, 'index'])->name('ticketcat.index');
         Route::get('/create', [TicketKategoriController::class, 'create'])->name('ticketcat.create');
         Route::post('/store', [TicketKategoriController::class, 'store'])->name('ticketcat.store');
@@ -214,7 +212,7 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     });
 
     // Web Setting
-    Route::prefix('websetting')->group(function(){
+    Route::prefix('websetting')->group(function () {
         Route::post('/updatesetting', [SettingsController::class, 'settings'])->name('websetting.settings');
         Route::post('/updatetripay', [SettingsController::class, 'updatetripay'])->name('websetting.updatetripay');
         Route::post('/updatewa', [SettingsController::class, 'wasettings'])->name('websetting.wasettings');
@@ -225,8 +223,9 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     Route::get('/pdf/ticketcat', [PDFController::class, 'PDFTicketKategori'])->name('pdf.ticketcat');
 
     //Indoregion
-    Route::post('/kota', [IndoregionController::class, 'getKota'])->name('region.kota');
-    Route::post('/kecamatan', [IndoregionController::class, 'getKecamatan'])->name('region.kecamatan');
-    Route::post('/kelurahan', [IndoregionController::class, 'getKelurahan'])->name('region.kelurahan');
+    Route::prefix('region')->group(function () {
+        Route::post('kota', [IndoregionController::class, 'kota'])->name('region.kota');
+        Route::post('kecamatan', [IndoregionController::class, 'kecamatan'])->name('region.kecamatan');
+        Route::post('kelurahan', [IndoregionController::class, 'kelurahan'])->name('region.kelurahan');
+    });
 });
-
