@@ -35,17 +35,38 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h5>Detail Pelanggan</h5>
+                    <div class="card social-profile">
+                        <img src="{{ asset('/images/application/img-profile-cover.jpg') }}" alt="" class="w-100 card-img-top">
+                        <div class="card-body pt-0">
+                            <div class="row align-items-end">
+                                <div class="col-md-auto text-md-start">
+                                    <img class="img-fluid img-profile-avtar" src="{{ asset('/images/user/avatar-5.jpg') }}"
+                                        alt="User image">
+                                </div>
+                                <div class="col">
+                                    <div class="row justify-content-between align-items-end">
+                                        <div class="col-md-auto soc-profile-data">
+                                            <h5 class="mb-1">{{ $customer->nama_customer }}</h5>
+                                            <p class="mb-0">
+                                            @if ($customer->gender == '1')
+                                                Laki-laki
+                                            @else
+                                                Perempuan
+                                            @endif</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item px-0 pt-0">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <p class="mb-1 text-muted">Nama Pelanggan</p>
+                                    <div class="col-md-3">
+                                        <p class="mb-1 text-muted">Nomor Layanan</p>
                                         <p class="mb-0">
-                                            {{ $customer->nama_customer }}
+                                            {{ $customer->nomor_layanan }}
                                         </p>
                                     </div>
                                     <div class="col-md-3">
@@ -55,32 +76,12 @@
                                         </p>
                                     </div>
                                     <div class="col-md-3">
-                                        <p class="mb-1 text-muted">Gender</p>
-                                        <p class="mb-0">
-                                            @if ($customer->gender == '1')
-                                                Laki-laki
-                                            @else
-                                                Perempuan
-                                            @endif
-                                        </p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item px-0">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <p class="mb-1 text-muted">Nomor Layanan</p>
-                                        <p class="mb-0">
-                                            {{ $customer->nomor_layanan }}
-                                        </p>
-                                    </div>
-                                    <div class="col-md-4">
                                         <p class="mb-1 text-muted">Phone</p>
                                         <p class="mb-0">
                                             {{ $customer->nomor_telephone }}
                                         </p>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <p class="mb-1 text-muted">Kode POS</p>
                                         <p class="mb-0">
                                             {{ $customer->kodepos_customer }}
@@ -94,7 +95,7 @@
                                         <p class="mb-1 text-muted">Email</p>
                                         <p class="mb-0">
                                             @if ($customer->user_id != null)
-                                                {{ $customer->user->email }}
+                                                {{ ucwords($customer->user->email) }}
                                             @endif
                                         </p>
                                     </div>
@@ -102,45 +103,41 @@
                                         <p class="mb-1 text-muted">Tipe User</p>
                                         <p class="mb-0">
                                             @if ($customer->user_id != null)
-                                                {{ $customer->user->user_type }}
+                                                {{ ucwords($customer->user->user_type) }}
                                             @endif
                                         </p>
                                     </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item px-0">
-                                <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6 mt-4">
                                         <p class="mb-1 text-muted">Kota</p>
                                         <p class="mb-0">
                                             @if ($customer->kelurahan_id != null)
-                                                {{ $customer->village->district->regency->name }}
+                                                {{ ucwords(strtolower($customer->village->district->regency->name)) }}
                                             @endif
                                         </p>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3 mt-4">
                                         <p class="mb-1 text-muted">Kecamatan</p>
                                         <p class="mb-0">
                                             @if ($customer->kelurahan_id != null)
-                                                {{ $customer->village->district->name }}
+                                                {{ ucwords(strtolower($customer->village->district->name)) }}
                                             @endif
                                         </p>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3 mt-4">
                                         <p class="mb-1 text-muted">Desa</p>
                                         <p class="mb-0">
                                             @if ($customer->kelurahan_id != null)
-                                                {{ $customer->village->name }}
+                                                {{ ucwords(strtolower($customer->village->name)) }}
                                             @endif
                                         </p>
                                     </div>
+                                    <div class="col-md-12 mt-4">
+                                        <p class="mb-1 text-muted">Alamat</p>
+                                        <p class="mb-0">
+                                            {{ $customer->alamat_customer }}
+                                        </p>
+                                    </div>
                                 </div>
-                            </li>
-                            <li class="list-group-item px-0 pb-0">
-                                <p class="mb-1 text-muted">Alamat</p>
-                                <p class="mb-0">
-                                    {{ $customer->alamat_customer }}
-                                </p>
                             </li>
                         </ul>
                     </div>

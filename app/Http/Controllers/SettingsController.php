@@ -6,10 +6,12 @@ use App\Models\Employee;
 use App\Models\Sessions;
 use App\Models\Setting;
 use App\Models\SettingsWA;
+use App\Models\User;
 use App\Models\UserSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Sabberworm\CSS\Settings;
 use Spatie\Permission\Models\Role;
 use Stevebauman\Location\Facades\Location;
 use Yajra\DataTables\Facades\DataTables;
@@ -23,6 +25,7 @@ class SettingsController extends Controller
         }else{
             $ip = $ip;
         }
+        $users = User::has('roles')->get();
         $roles = Role::get();
         $ip = Location::get($ip);
         $profile = Setting::all();
@@ -48,11 +51,27 @@ class SettingsController extends Controller
         $usersetting = UserSetting::all();
         $sess = Sessions::where('user_id', Auth::user()->id)->get();
 
-        return view('backend.pages.setting.index', compact('profile', 'usersetting', 'sess', 'ip', 'roles', 'websetting', 'webwa', 'settingwatoken', 'settingtripay'));
+        return view('backend.pages.setting.index', compact('users', 'profile', 'usersetting', 'sess', 'ip', 'roles', 'websetting', 'webwa', 'settingwatoken', 'settingtripay'));
     }
 
     public function store() {
 
+    }
+
+    public function roleedit(User $user, $setting){
+        $profile = Setting::all();
+        $users = User::has('roles')->where('id', $setting)->get();
+        $roles = Role::get();
+
+        return view('backend.pages.setting.partials.roles.form-edit-roles', compact('setting', 'users', 'user', 'profile', 'roles'));
+    }
+
+    public function roleupdate($setting, Request $request){
+        $user = User::find($setting);
+        $role = $request->input('roles');
+        $user->roles()->sync($role);
+
+        return redirect()->route('settings.index')->with('success','User Assign Role Updated');
     }
 
     public function settings(Request $request)

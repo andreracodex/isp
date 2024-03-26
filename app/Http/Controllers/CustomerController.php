@@ -174,6 +174,8 @@ class CustomerController extends Controller
                     curl_close($curl);
                 };
 
+                $user = User::find($user->id);
+                $user->assignRole(\Spatie\Permission\Models\Role::findByName('User'));
 
                 return redirect()->route('customer.index')->with('success', 'Berhasil Tambah Customer.');
             } catch (Exception $e) {

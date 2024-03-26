@@ -39,11 +39,16 @@ Route::middleware('auth','has.role','auth.session')->group(function()
     // PROFILE
     Route::prefix('settings')->group(function(){
         Route::get('', [SettingsController::class, 'index'])->name('settings.index');
+        // Roles
+        Route::get('{setting}/editrole', [SettingsController::class, 'roleedit'])->name('settings.roleedit');
+        Route::put('{setting}/updaterole', [SettingsController::class, 'roleupdate'])->name('settings.roleupdate');
+
         Route::get('/create', [ProfileController::class, 'create'])->name('settings.profile-show');
         Route::post('', [ProfileController::class, 'store'])->name('settings.profile-store');
+        Route::post('/logout', [ProfileController::class, 'logout'])->name('settings.profile-logout');
         Route::put('/profile', [ProfileController::class, 'update'])->name('settings.profile-update');
         Route::put('{setting}/update', [EmployeeController::class, 'update'])->name('employee.update');
-        Route::post('/logout', [ProfileController::class, 'logout'])->name('settings.profile-logout');
+
     });
 
      // Employee

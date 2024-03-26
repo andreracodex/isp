@@ -61,8 +61,8 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col my-1 wow fadeInUp" data-wow-delay="0.4s">
-                <p class="mb-0">© Handcrafted by Team <a href="https://berdikari.web.id"
-                        target="_blank">Berdikari.Web.Id</a></p>
+                <p class="mb-0">© Handcrafted by Team <a href="{{ $profile[44]->value }}"
+                        target="_blank">Berdikari</a></p>
             </div>
         </div>
     </div>

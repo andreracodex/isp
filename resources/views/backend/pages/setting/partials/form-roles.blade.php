@@ -29,13 +29,25 @@
             <table class="table mb-0">
                 <thead>
                     <tr>
+                        <th>No</th>
+                        <th>Name</th>
                         <th>Email Register</th>
                         <th>Roles</th>
-                        <th class="text-end">State</th>
-                        <th></th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($users as $index => $user)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td><a href="{{ route('settings.roleedit', $user) }}">{{ implode(' | ', $user->getRoleNames()->toArray()) }}</a></td>
+                        <td><a href="{{ route('settings.roleedit', $user) }}" class="btn btn-primary btn-sm">Sync</a></td>
+                        <td></td>
+                    </tr>
+                    @endforeach
+
                 </tbody>
             </table>
         </div>
