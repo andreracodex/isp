@@ -46,7 +46,9 @@ class OrderDetailController extends Controller
                     $message .= "*" . $order->nama_customer . "*,\n\n";
                     $message .= "Pembayaran internet telah berhasil dilakukan.\n";
                     $message .= "Via : *CASH / TRANSFER*.\n";
-                    $message .= "Tanggal Pembayaran : *" . Carbon::now()->format('d F Y') . "*.\n\n";
+                    $message .= "Tanggal Pembayaran : *" . Carbon::now()->format('d F Y') . "*.\n";
+                    $message .= "No Invocie Tagihan : *" . $orderdetail->invoice_number . "*\n";
+                    $message .= "Bulan : *" . Carbon::parse($orderdetail->due_date)->format('F Y') . "*\n\n";
                     $message .= "Kami ingin mengucapkan terima kasih atas kepercayaan Anda menggunakan layanan internet kami.\n";
                     $message .= "Semoga layanan yang kami berikan dapat memenuhi kebutuhan Anda dengan baik.\n";
                     $message .= "Terima kasih atas dukungan dan kesetiaan Anda sebagai pelanggan kami.\n\n";
