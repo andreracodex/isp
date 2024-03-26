@@ -6,6 +6,6 @@ cat banner.txt
 # Change directory to the specified path
 cd "/home/u422026669/domains/berdikari.web.id/public_html/billing/"
 # Run the PHP artisan command
-php artisan make:tagihan
+php artisan send:tagihanwa
 # Pause the script
 read -p "Press Enter to continue..."
