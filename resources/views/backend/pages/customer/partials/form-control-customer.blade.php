@@ -294,7 +294,6 @@
     type="submit">{{ $submit }}</button>
 
 @push('script')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <script type="text/javascript">
         $(function() {
             $('#kota').on('change', function() {
@@ -305,9 +304,6 @@
                     url: "{{ route('region.kecamatan') }}",
                     data: {
                         id_kota: id_kota
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     cache: true,
                     success: function(msg) {
@@ -330,9 +326,6 @@
                     url: "{{ route('region.kelurahan') }}",
                     data: {
                         id_kecamatan: id_kecamatan
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     cache: true,
                     success: function(msg) {
