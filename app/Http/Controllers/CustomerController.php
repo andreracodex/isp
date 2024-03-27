@@ -20,7 +20,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
-use Sabberworm\CSS\Settings;
 use Yajra\DataTables\Facades\DataTables;
 
 class CustomerController extends Controller

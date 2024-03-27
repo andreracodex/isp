@@ -4,12 +4,14 @@ namespace App\Imports;
 
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Illuminate\Support\Str;
 
 class CustomerImport implements ToCollection, WithHeadingRow
 {
@@ -61,14 +63,28 @@ class CustomerImport implements ToCollection, WithHeadingRow
             ]);
 
             // Create order record if 'paket' and 'location' are provided
-            if ($row->has('paket') && $row->has('location')) {
-                $order = Order::create([
-                    'customer_id' => $customer->id,
-                    'paket_id' => $row['paket'],
-                    'location_id' => $row['location'],
-                    'installed_date' => $row['installed_date'],
-                ]);
-            }
+            $order = Order::create([
+                'customer_id' => $customer->id,
+                'location_id' => $row['location'],
+                'paket_id' => $row['paket'],
+                'installed_date' => $row['installed_date'],
+                'installed_status' => 1,
+                'biaya_pasang' => 0,
+            ]);
+
+            $currentYear = date('Y');
+            // Generate a random number between 1111 and 9999
+            $randomNumber = rand(1111, 9999);
+            // Concatenate the current year, date, and random number to create the invoice number
+            $invoiceNumber = 'INV' . $currentYear . $randomNumber;
+            OrderDetail::create([
+                'order_id' => $order->id,
+                'due_date' => $row['due_date'],
+                'is_active' => 1,
+                'is_payed' => 1,
+                'invoice_number' => $invoiceNumber,
+                'uuid' => Str::uuid(64),
+            ]);
         }
     }
 }
