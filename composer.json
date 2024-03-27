@@ -37,7 +37,8 @@
             "Andreracodex\\Tripay\\": "packages/andreracodex/tripay/"
         },
         "files": [
-            "app/Http/Helpers/CustomHelper.php"
+            "app/Http/Helpers/CustomHelper.php",
+            "app/Http/Helpers/ResponseApi.php"
         ]
     },
     "autoload-dev": {

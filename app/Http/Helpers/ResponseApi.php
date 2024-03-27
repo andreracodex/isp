@@ -5,7 +5,7 @@ namespace App\Helpers;
 /**
  * Format response.
  */
-class ResponApi
+class ResponseApi
 {
     /**
      * API Response
