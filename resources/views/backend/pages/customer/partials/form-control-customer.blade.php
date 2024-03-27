@@ -294,6 +294,7 @@
     type="submit">{{ $submit }}</button>
 
 @push('script')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <script type="text/javascript">
         $(function() {
             $('#kota').on('change', function() {
