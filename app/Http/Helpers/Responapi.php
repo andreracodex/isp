@@ -22,7 +22,7 @@ class ResponApi
     ];
 
     /**
-     * Give success response.
+     * Give success response to client
      */
     public static function success($data = null, $message = null)
     {
