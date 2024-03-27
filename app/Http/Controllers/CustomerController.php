@@ -23,8 +23,6 @@ use Maatwebsite\Excel\Facades\Excel;
 use Sabberworm\CSS\Settings;
 use Yajra\DataTables\Facades\DataTables;
 
-use function App\Http\Helpers\convert_phone;
-
 class CustomerController extends Controller
 {
     public function index(Request $request)

@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Number;
 use Yajra\DataTables\Facades\DataTables;
 
-use function App\Http\Helpers\convert_phone;
-
 class OrderDetailController extends Controller
 {
     public function view(OrderDetail $orderdetail)

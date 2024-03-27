@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Http\Helpers;
-
 use App\Models\Customer;
 use App\Models\Employee;
 use App\Models\Order;
