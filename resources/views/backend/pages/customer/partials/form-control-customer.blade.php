@@ -303,7 +303,8 @@
                     type: 'POST',
                     url: "{{ route('region.kecamatan') }}",
                     data: {
-                        id_kota: id_kota
+                        "_token": "{{ csrf_token() }}",
+                        "id_kota": id_kota
                     },
                     cache: true,
                     success: function(msg) {
@@ -325,7 +326,8 @@
                     type: 'POST',
                     url: "{{ route('region.kelurahan') }}",
                     data: {
-                        id_kecamatan: id_kecamatan
+                        "_token": "{{ csrf_token() }}",
+                        "id_kecamatan": id_kecamatan
                     },
                     cache: true,
                     success: function(msg) {
