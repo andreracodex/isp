@@ -7,7 +7,7 @@ use App\Models\Regency;
 use App\Models\District;
 use App\Models\Village;
 
-class IndoregionController extends Controller
+class IndoRegionController extends Controller
 {
     public function kota(Request $request) {
         // $id_provinsi = $request->id_provinsi;

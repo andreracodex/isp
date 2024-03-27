@@ -5,7 +5,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\IndoregionController;
+use App\Http\Controllers\IndoRegionController;
 use App\Http\Controllers\InventarisController;
 use App\Http\Controllers\InventarisKategoriController;
 use App\Http\Controllers\InventarisSatuanController;
@@ -224,8 +224,8 @@ Route::middleware('auth', 'has.role', 'auth.session')->group(function () {
 
     //Indoregion
     Route::prefix('region')->group(function () {
-        Route::post('kota', [IndoregionController::class, 'kota'])->name('region.kota');
-        Route::post('kecamatan', [IndoregionController::class, 'kecamatan'])->name('region.kecamatan');
-        Route::post('kelurahan', [IndoregionController::class, 'kelurahan'])->name('region.kelurahan');
+        Route::post('kota', [IndoRegionController::class, 'kota'])->name('region.kota');
+        Route::post('kecamatan', [IndoRegionController::class, 'kecamatan'])->name('region.kecamatan');
+        Route::post('kelurahan', [IndoRegionController::class, 'kelurahan'])->name('region.kelurahan');
     });
 });
