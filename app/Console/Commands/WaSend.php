@@ -18,7 +18,7 @@ use function App\Http\Helpers\convert_phone;
 
 class WaSend extends Command
 {
-    protected $signature = 'send:tagihanbywa';
+    protected $signature = 'send:sendwadua';
     protected $description = 'Send Tagihan Via WA dan Email to Customer';
 
     public function handle()
@@ -108,7 +108,7 @@ class WaSend extends Command
             }
         }catch (Exception $eror){
             $this->warn('==============================');
-            $this->warn('Gagal Mengirim WA Jatuh Tempo : ' . $customer->nama_customer);
+            $this->warn('Gagal Mengirim WA  '. $diff .'  Jatuh Tempo : ' . $customer->nama_customer);
             $this->warn('Nomor Telephone : ' . convert_phone($customer->nomor_telephone));
             $this->warn('Nomor Layanan : ' . $customer->nomor_layanan);
             $this->warn('==============================');
