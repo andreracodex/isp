@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 
 use function App\Http\Helpers\convert_phone;
 
-class SendTagihan extends Command
+class Tagihan extends Command
 {
     protected $signature = 'make:tagihan';
     protected $description = 'Create Tagihan To Customer Bulan Berjalan';
