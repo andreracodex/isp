@@ -88,7 +88,7 @@ class SendWa extends Command
                         $isi = json_decode($response, true);
                         if (isset($isi['detail']) && isset($isi['process'])) {
                             $this->info('==============================');
-                            $this->info('Berhasil Mengirim WA dan Email atas Nama : ' . $customer->nama_customer);
+                            $this->info('Berhasil Mengirim WA Jatuh Tempo : ' . $customer->nama_customer);
                             $this->info('Nomor Pelanggan : ' . convert_phone($customer->nomor_telephone));
                             $this->info('Nomor Telephone : ' . $customer->nomor_layanan);
                             $this->info('==============================');
@@ -161,7 +161,7 @@ class SendWa extends Command
                             $isi = json_decode($response, true);
                             if (isset($isi['detail']) && isset($isi['process'])) {
                                 $this->info('==============================');
-                                $this->info('Berhasil Mengirim WA dan Email atas Nama : ' . $customer->nama_customer);
+                                $this->info('Berhasil Mengirim WA -1 Jatuh Tempo : ' . $customer->nama_customer);
                                 $this->info('Nomor Pelanggan : ' . convert_phone($customer->nomor_telephone));
                                 $this->info('Nomor Telephone : ' . $customer->nomor_layanan);
                                 $this->info('==============================');
@@ -238,7 +238,7 @@ class SendWa extends Command
                             $isi = json_decode($response, true);
                             if (isset($isi['detail']) && isset($isi['process'])) {
                                 $this->info('==============================');
-                                $this->info('Berhasil Mengirim WA dan Email atas Nama : ' . $customer->nama_customer);
+                                $this->info('Berhasil Mengirim WA -3 Jatuh Tempo : ' . $customer->nama_customer);
                                 $this->info('Nomor Pelanggan : ' . convert_phone($customer->nomor_telephone));
                                 $this->info('Nomor Telephone : ' . $customer->nomor_layanan);
                                 $this->info('==============================');
@@ -315,7 +315,7 @@ class SendWa extends Command
                             $isi = json_decode($response, true);
                             if (isset($isi['detail']) && isset($isi['process'])) {
                                 $this->info('==============================');
-                                $this->info('Berhasil Mengirim WA dan Email atas Nama : ' . $customer->nama_customer);
+                                $this->info('Berhasil Mengirim WA -7 Jatuh Tempo : ' . $customer->nama_customer);
                                 $this->info('Nomor Pelanggan : ' . convert_phone($customer->nomor_telephone));
                                 $this->info('Nomor Telephone : ' . $customer->nomor_layanan);
                                 $this->info('==============================');
