@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Number;
 
+use function App\Http\Helpers\convert_phone;
+
 class TripayController extends Controller
 {
     public function instruction($tripay)
