@@ -8,6 +8,21 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Number;
 
+use function App\Http\Helpers\count_last_order;
+use function App\Http\Helpers\count_order;
+use function App\Http\Helpers\count_pembayaran;
+use function App\Http\Helpers\count_pembayaran_last;
+use function App\Http\Helpers\count_pendapatan;
+use function App\Http\Helpers\count_pendapatan_last;
+use function App\Http\Helpers\count_pengeluaran;
+use function App\Http\Helpers\count_pengeluaran_last;
+use function App\Http\Helpers\count_tagihan;
+use function App\Http\Helpers\count_tagihan_last;
+use function App\Http\Helpers\last_customer;
+use function App\Http\Helpers\new_customer;
+use function App\Http\Helpers\pemasukan_chart;
+use function App\Http\Helpers\pengeluaran_chart;
+
 class DashboardController extends Controller
 {
     public function index()
