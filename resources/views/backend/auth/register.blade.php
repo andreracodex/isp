@@ -18,7 +18,7 @@
                         <div class="text-center">
                             <a href="{{ route('frontend') }}"><img src="{{ asset('/images/logo.png') }}" width="150"
                                     alt="img"></a>
-                            <h5 class="text-center f-w-500 mb-3">Internet Provider Kesayangan Kamu</h5>
+                            <h5 class="text-center f-w-500 mb-3">{{ $profile[6]->value }}</h5>
                             <div class="d-grid my-3">
                                 <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
                                     <img src="{{ asset('/images/authentication/google.svg') }}" alt="img"> <span> Sign

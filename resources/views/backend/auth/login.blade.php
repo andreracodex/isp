@@ -15,7 +15,7 @@
                         <div class="text-center">
                             <a href="{{ route('frontend') }}"><img src="{{ asset('/images/logo.png') }}" width="150"
                                     alt="img"></a>
-                            <h5 class="text-center f-w-500 mb-3">Internet Provider Kesayangan Kamu</h5>
+                            <h5 class="text-center f-w-500 mb-3">{{ $profile[6]->value }}</h5>
                             <div class="d-grid my-3">
                                 <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
                                     <img src="{{ asset('/images/authentication/google.svg') }}" alt="img"> <span> Sign
@@ -58,7 +58,7 @@
                             </div>
                             <div class="d-flex justify-content-between align-items-end mt-4">
                                 <h6 class="f-w-500 mb-0">Don't have an Account?</h6>
-                                <a href="{{ route('register') }}" class="link-primary">Create Account</a>
+                                {{-- <a href="{{ route('register') }}" class="link-primary">Create Account</a> --}}
                             </div>
                         </form>
                     </div>

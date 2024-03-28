@@ -262,7 +262,7 @@
                                     <div class="text-center mt-3">
                                         <div class="chat-avtar d-inline-flex mx-auto">
                                             <img class="rounded-circle img-fluid wid-70"
-                                                src="{{ Auth::user()->real_path }}" alt="User image">
+                                                src="{{ asset(Auth::user()->real_path) }}" alt="User image">
                                         </div>
                                         <h5 class="mb-0">
                                             @if (Auth::user()->name != null)

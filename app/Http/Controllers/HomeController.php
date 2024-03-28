@@ -29,7 +29,8 @@ class HomeController extends Controller
 
     public function forgotpass(Request $request)
     {
-        return view('backend.auth.forgot-password');
+        $profile = Setting::all();
+        return view('backend.auth.forgot-password',  compact('profile'));
     }
 
     public function sendmail(Request $request)
