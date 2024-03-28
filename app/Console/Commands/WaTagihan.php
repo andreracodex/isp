@@ -122,7 +122,7 @@ class WaTagihan extends Command
                             $message .= "Hallo Bapak/Ibu,\n";
                             $message .= "*" . $customer->nama_customer . "*,\n\n";
                             $message .= "No Invocie Tagihan : *" . $due_date_one->invoice_number . "*\n";
-                            $message .= "Bulan : *" . Carbon::parse($now)->format('F Y') . "*\n";
+                            $message .= "Bulan : *" . Carbon::parse($due_date_one->due_date)->format('F Y') . "*\n";
                             $message .= "Total Tagihan : *Rp " . number_format($belum, 0, ',', '.') . "*,-\n";
                             $message .= "Pembayaran maksimal : *" . Carbon::parse($due_date_one->due_date)->format('d F Y') . "*.\n\n";
                             $message .= "Bank Tersedia :\n";
@@ -199,7 +199,7 @@ class WaTagihan extends Command
                             $message .= "Hallo Bapak/Ibu,\n";
                             $message .= "*" . $customer->nama_customer . "*,\n\n";
                             $message .= "No Invocie Tagihan : *" . $due_date_one->invoice_number . "*\n";
-                            $message .= "Bulan : *" . Carbon::parse($now)->format('F Y') . "*\n";
+                            $message .= "Bulan : *" . Carbon::parse($due_date_one->due_date)->format('F Y') . "*\n";
                             $message .= "Total Tagihan : *Rp " . number_format($belum, 0, ',', '.') . "*,-\n";
                             $message .= "Pembayaran maksimal : *" . Carbon::parse($due_date_one->due_date)->format('d F Y') . "*.\n\n";
                             $message .= "Bank Tersedia :\n";
@@ -276,7 +276,7 @@ class WaTagihan extends Command
                             $message .= "Hallo Bapak/Ibu,\n";
                             $message .= "*" . $customer->nama_customer . "*,\n\n";
                             $message .= "No Invocie Tagihan : *" . $due_date_one->invoice_number . "*\n";
-                            $message .= "Bulan : *" . Carbon::parse($now)->format('F Y') . "*\n";
+                            $message .= "Bulan : *" . Carbon::parse($due_date_one->due_date)->format('F Y') . "*\n";
                             $message .= "Total Tagihan : *Rp " . number_format($belum, 0, ',', '.') . "*,-\n";
                             $message .= "Pembayaran maksimal : *" . Carbon::parse($due_date_one->due_date)->format('d F Y') . "*.\n\n";
                             $message .= "Bank Tersedia :\n";
