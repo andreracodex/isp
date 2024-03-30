@@ -255,7 +255,7 @@
                             <a href="{{ route('customer.create') }}" type="button"
                                 class="btn btn-sm btn-outline-primary d-inline-flex">
                                 <i class="ti ti-plus me-1"></i>Pelanggan</a>
-                            <a href="{{ route('customer.create') }}" type="button"
+                            <a href="{{ asset('Import.xlsx') }}" type="button"
                                 class="btn btn-sm btn-outline-warning d-inline-flex">
                                 <i class="ti ti-inbox me-1"></i>Download Format</a>
                             <button data-pc-animate="blur" type="button"
