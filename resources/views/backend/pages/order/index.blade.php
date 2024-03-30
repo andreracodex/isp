@@ -7,6 +7,7 @@
 
 @push('script')
     <script src="{{ asset('/js/plugins/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('/js/plugins/sweetalert2.min.js') }}"></script>
     <script type="text/javascript">
         $(function() {
             $.ajaxSetup({
@@ -66,8 +67,8 @@
                         '</span>');
                 },
                 dom: "<'row'<'col-sm-12 col-md-6'Bl><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-                deferRender: true,
-                processing: true,
+                deferRender: false,
+                processing: false,
                 serverSide: true,
                 responsive: true,
                 ajax: {
@@ -135,8 +136,8 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex'
+                        data: 'id',
+                        name: 'id'
                     },
                     {
                         data: 'nama_customer',
@@ -282,10 +283,10 @@
             });
         });
     </script>
-    <script src="{{ asset('/js/plugins/sweetalert2.min.js') }}"></script>
+    {{-- Update payment --}}
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#order').on('click', '.updateStatus', function() {
+            $('#order').on('click', '.updatepayment', function() {
                 let idItem = $(this).data('id');
                 Swal.fire({
                     title: 'Konfirmasi Tagihan',
@@ -300,14 +301,14 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             method: 'GET',
-                            url: "{{ route('orderdetail.updateStatus', ':id') }}".replace(
+                            url: "{{ route('orderdetail.changestatus', ':id') }}".replace(
                                 ':id', idItem),
                             data: {
                                 _token: '{{ csrf_token() }}',
                                 id: idItem,
                             },
                             success: function(data) {
-                                window.location.reload();
+                                $('#order').DataTable().ajax.reload();
                                 Swal.fire(
                                     'Berhasil!',
                                     'Tagihan sudah lunas',
@@ -317,7 +318,6 @@
                             error: function(error) {
                                 Swal.fire('Error', 'Gagal tagihan belum lunas',
                                     'error');
-                                // Handle error
                             }
                         });
                     }
@@ -325,6 +325,7 @@
             });
         });
     </script>
+    {{-- Delete --}}
     <script type="text/javascript">
         $(document).ready(function() {
             $('#order').on('click', '.hapusOrder', function() {
@@ -350,7 +351,7 @@
                                 id: idItem,
                             },
                             success: function(data) {
-                                window.location.reload();
+                                $('#order').DataTable().ajax.reload();
                                 Swal.fire(
                                     'Berhasil!',
                                     'Item berhasil dihapus',

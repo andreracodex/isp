@@ -9,6 +9,7 @@
 
 @push('script')
     <script src="{{ asset('/js/plugins/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('/js/plugins/sweetalert2.min.js') }}"></script>
     <script type="text/javascript">
         $(function() {
             $.ajaxSetup({
@@ -238,11 +239,12 @@
             });
         });
     </script>
-    <script src="{{ asset('/js/plugins/sweetalert2.min.js') }}"></script>
+    {{-- Update --}}
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#orderdetail').on('click', '.updateStatus', function() {
+            $('#orderdetail').on('click', '.updatestatus', function() {
                 let idItem = $(this).data('id');
+                console.log(idItem);
                 Swal.fire({
                     title: 'Konfirmasi Tagihan',
                     text: "Anda yakin tagihan ini sudah lunas?",
@@ -256,14 +258,14 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             method: 'GET',
-                            url: "{{ route('orderdetail.updateStatus', ':id') }}".replace(
+                            url: "{{ route('orderdetail.changestatus', ':id') }}".replace(
                                 ':id', idItem),
                             data: {
                                 _token: '{{ csrf_token() }}',
                                 id: idItem,
                             },
                             success: function(data) {
-                                window.location.reload();
+                                $('#orderdetail').DataTable().ajax.reload();
                                 Swal.fire(
                                     'Berhasil!',
                                     'Tagihan sudah lunas',
@@ -273,7 +275,7 @@
                             error: function(error) {
                                 Swal.fire('Error', 'Gagal tagihan belum lunas',
                                     'error');
-                                // Handle error
+                                console.log(error);
                             }
                         });
                     }
@@ -281,6 +283,7 @@
             });
         });
     </script>
+    {{-- Delete --}}
     <script type="text/javascript">
         $(document).ready(function() {
             $('#orderdetail').on('click', '.hapusOrderDetail', function() {

@@ -20,8 +20,36 @@ class OrderController extends Controller
         $profile = Setting::all();
         $customer = Customer::all();
         $date = Periode::where('is_active', 1)->get();
-        $data_table = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')->orderBy('order_details.created_at', 'DESC')->get();
+        $data_table = OrderDetail::select('orders.id as orderid',
+        'orders.customer_id',
+        'orders.location_id',
+        'orders.paket_id',
+        'orders.biaya_pasang',
+        'orders.coordinates_id',
+        'orders.path_ktp',
+        'orders.path_image_rumah',
+        'orders.installed_date',
+        'orders.installed_image',
+        'orders.installed_status',
+        'order_details.id',
+        'order_details.order_id',
+        'order_details.uuid',
+        'order_details.invoice_number',
+        'order_details.payment_id',
+        'order_details.pay_image',
+        'order_details.pay_description',
+        'order_details.diskon',
+        'order_details.biaya_admin',
+        'order_details.ppn',
+        'order_details.due_date',
+        'order_details.is_payed',
+        'order_details.is_active'
+        )
+            ->leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
+            ->orderBy('order_details.created_at', 'DESC')
+            ->get();
 
+        // dd($data_table);
         if($request->input('customerid') != null && $request->input('customerid') != 0){
             // Non Active
             $customer_id = $request->input('customerid');
@@ -88,9 +116,16 @@ class OrderController extends Controller
                 return $formatted_price;
             })
             ->addColumn('action', function (OrderDetail $orderdetail) {
-                return "
-                <a href=". route('order.view', $orderdetail->id,)." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
-                ";
+                if($orderdetail->is_payed == 1){
+                    return "
+                    <a href=". route('order.view', $orderdetail->order_id)." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
+                    ";
+                }else{
+                    return "
+                    <a href=". route('order.view', $orderdetail->order_id)." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
+                    <button class='avtar avtar-xs btn btn-link-warning btn-pc-default updatepayment' data-id='$orderdetail->id' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Payment Status'><i class='material-icons-two-tone'>attach_money</i> </button>
+                    ";
+                }
             })
             ->make(true);
             // <a href=". route('order.edit', $orderdetail->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Data'><i class='fa fa-pencil-alt'></i></a>
@@ -148,9 +183,14 @@ class OrderController extends Controller
                 return $formatted_price;
             })
             ->addColumn('action', function (OrderDetail $orderdetail) {
-                return "
-                <button class='avtar avtar-xs btn-link-warning btn-pc-default updateStatus' data-id='$orderdetail->id' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Payment Status'><i class='material-icons-two-tone'>attach_money</i> </button>
-                ";// <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusOrderDetail' data-id='$orderdetail->id'><i class='fa fa-trash-alt'></i></button>
+                if($orderdetail->is_payed == 1){
+                    return "";
+                }else{
+                    return "
+                    <button class='avtar avtar-xs btn btn-link-warning btn-pc-default updatestatus' data-id='$orderdetail->id' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Payment Status'><i class='material-icons-two-tone'>attach_money</i> </button>
+                    ";
+                }
+                // <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusOrderDetail' data-id='$orderdetail->id'><i class='fa fa-trash-alt'></i></button>
             // <a href=". route('orderdetail.view', $orderdetail->id) ." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
             })
             ->make(true);
