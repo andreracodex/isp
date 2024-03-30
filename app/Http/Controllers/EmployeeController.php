@@ -95,11 +95,12 @@ class EmployeeController extends Controller
             $is_active = 0;
         }
 
-        $employee = Employee::create([
+        Employee::create([
             'user_id' => $user->id,
             'nama_karyawan' => $request->nama_karyawan,
             'nomor_ktp' => $request->nomor_ktp ?? 0,
             'gender' => $request->gender,
+            'gaji_pokok' => $request->gaji_pokok,
             'alamat_karyawan' => $request->alamat_karyawan,
             'kodepos_karyawan' => $request->kodepos_karyawan,
             'nomor_telephone' => $request->nomor_telephone,
@@ -171,6 +172,7 @@ class EmployeeController extends Controller
             'alamat_karyawan' => $request->alamat_karyawan,
             'kodepos_karyawan' => $request->kodepos_karyawan,
             'nomor_telephone' => $request->nomor_telephone,
+            'gaji_pokok' => $request->gaji_pokok,
             'kelurahan_id' => $request->kelurahan,
             'is_active' => $is_active,
         ]);

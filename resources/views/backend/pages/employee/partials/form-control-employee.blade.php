@@ -34,7 +34,7 @@
         <div class="valid-feedback"> Looks good! </div>
         <div class="invalid-feedback"> Harap isi nama karyawan. </div>
     </div>
-    <div class="col-md-3 mb-3">
+    <div class="col-md-2 mb-3">
         <label class="form-label" for="nomor_ktp">Nomor KTP <sup class="text-primary" data-bs-toggle="tooltip"
                 data-bs-placement="top" data-bs-original-title="ktp dapat di input opsional">*</sup></label>
         <input type="text" min="0" class="form-control" name="nomor_ktp" id="nomor_ktp"
@@ -42,9 +42,9 @@
         <div class="valid-feedback"> Opsional ! </div>
         <div class="invalid-feedback"> Harap isi nomor KTP. </div>
     </div>
-    <div class="col-md-2 mb-3">
+    <div class="col-md-3 mb-3">
         <label class="form-label" for="gender">Gender</label>
-        <select class="form-select" name="gender" id="gender">
+        <select class="form-select select2" name="gender" id="gender">
             <option value="1" @if ($employee->gender == 1) selected @endif>Laki - Laki</option>
             <option value="2" @if ($employee->gender == 2) selected @endif>Perempuan</option>
         </select>
@@ -129,13 +129,13 @@
 </div>
 
 <div class="row">
-    <div class="col-md-6 mb-3">
+    <div class="col-md-4 mb-3">
         <label class="form-label" for="alamat_karyawan">Alamat Karyawan</label>
         <textarea class="form-control" placeholder="Alamat Karyawan" id="exampleTextarea" name="alamat_karyawan"
             rows="3" required>{{ old('alamat_karyawan') ?? $employee->alamat_karyawan }}</textarea>
         <div class="invalid-feedback"> Harap isi alamat. </div>
     </div>
-    <div class="col-md-3 mb-3">
+    <div class="col-md-2 mb-3">
         <label class="form-label" for="kodepos">Kode POS</label>
         <input type="number" min="0" placeholder="602xxx" class="form-control" name="kodepos_karyawan"
             id="kodepos_karyawan" placeholder="Kode POS"
@@ -149,6 +149,16 @@
             <input type="number" min="0" name="nomor_telephone" class="form-control" id="nomor_telephone"
                 value="{{ old('nomor_telephone') ?? $employee->nomor_telephone }}" placeholder="0812xxxx"
                 aria-describedby="nomor_telephone" required>
+            <div class="invalid-feedback"> Harap isi nomor HP. </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label class="form-label" for="gaji_pokok">Gaji Pokok</label>
+        <div class="input-group">
+            <span class="input-group-text" id="gaji_pokok"><i class="ti ti-file"></i></span>
+            <input type="number" min="0" name="gaji_pokok" class="form-control" id="gaji_pokok"
+                value="{{ old('gaji_pokok') ?? $employee->gaji_pokok }}" placeholder="Gaji Pokok.."
+                aria-describedby="gaji_pokok" required>
             <div class="invalid-feedback"> Harap isi nomor HP. </div>
         </div>
     </div>

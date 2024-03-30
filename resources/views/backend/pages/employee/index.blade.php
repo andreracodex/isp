@@ -7,6 +7,7 @@
 
 @push('script')
     <script src="{{ asset('/js/plugins/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('/js/plugins/sweetalert2.min.js') }}"></script>
     <script type="text/javascript">
         $(function() {
             $.ajaxSetup({
@@ -180,7 +181,6 @@
             });
         });
     </script>
-    <script src="{{ asset('/js/plugins/sweetalert2.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#employee').on('click', '.hapusEmp', function() {
