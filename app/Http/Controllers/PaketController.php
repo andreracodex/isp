@@ -27,7 +27,7 @@ class PaketController extends Controller
                 return $paket->jenis_paket;
             })
             ->editColumn('harga_paket', function (Paket $paket) {
-                return Number::currency($paket->harga_paket, in: 'IDR', locale: 'us');
+                return Number::currency($paket->harga_paket, in: 'IDR', locale: 'id');
             })
             ->addColumn('action', function (Paket $paket) {
                 return "
