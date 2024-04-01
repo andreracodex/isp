@@ -302,6 +302,7 @@
         $(document).ready(function() {
             $('#order').on('click', '.updatepayment', function() {
                 let idItem = $(this).data('id');
+                let names = $(this).data('name');
                 Swal.fire({
                     title: 'Konfirmasi Tagihan',
                     text: "Anda yakin tagihan ini sudah lunas?",
@@ -320,6 +321,7 @@
                             data: {
                                 _token: '{{ csrf_token() }}',
                                 id: idItem,
+                                name: names
                             },
                             success: function(data) {
                                 $('#order').DataTable().ajax.reload();

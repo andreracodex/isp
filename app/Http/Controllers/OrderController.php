@@ -130,7 +130,7 @@ class OrderController extends Controller
                     return "
                     <a href=". route('order.view', $orderdetail->order_id)." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
                     <a href=". route('order.sendwa', $orderdetail->order_id)." class='avtar avtar-xs btn-link-info btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Send Tagihan'><i class='fab fa-whatsapp'></i></a>
-                    <button class='avtar avtar-xs btn btn-link-warning btn-pc-default updatepayment' data-id='$orderdetail->id' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Payment Status'><i class='material-icons-two-tone'>attach_money</i> </button>
+                    <button class='avtar avtar-xs btn btn-link-warning btn-pc-default updatepayment' data-id='$orderdetail->id' data-name='cash' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Payment Status'><i class='material-icons-two-tone'>attach_money</i> </button>
                     ";
                 }
             })
@@ -258,22 +258,6 @@ class OrderController extends Controller
                 $was = SettingsWA::find(7);
                 $banks = Bank::where('is_active', 1)->get();
                 if ($was->is_active == 1) {
-                    // Send WhatsApp message
-                    // $message = "*Yth Pelanggan GNET*\n\n";
-                    // $message .= "Hallo Bapak/Ibu,\n";
-                    // $message .= "*" . $order->nama_customer . "*,\n\n";
-                    // $message .= "No Invocie Tagihan : *" . $orderdetail->invoice_number . "*\n";
-                    // $message .= "Bulan : *" . Carbon::parse($orderdetail->due_date)->format('F Y') . "*\n";
-                    // $message .= "Total Tagihan : *Rp " . number_format($orderdetail->order->paket->harga_paket, 0, ',', '.') . "*,-\n";
-                    // $message .= "Jatuh Tempo : *" . Carbon::parse($orderdetail->due_date)->format('d F Y') . "*.\n\n";
-                    // $message .= "Bank Tersedia :\n";
-                    // $message .= "*BANK MANDIRI* : " . $banks[3]['nomor_akun_rekening'] . "\n";
-                    // $message .= "*BANK BCA* : " . $banks[2]['nomor_akun_rekening'] . "\n";
-                    // $message .= "*BANK BRI* : " . $banks[0]['nomor_akun_rekening'] . "\n";
-                    // $message .= "*BANK BNI* : " . $banks[1]['nomor_akun_rekening'] . "\n";
-                    // $message .= "A/N *PUTUT WAHYUDI*\n\n";
-                    // $message .= "Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir\n\n";
-                    // $message .= "Hormat kami\n*PT. Global Data Network*\nJl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.\nPhone : 085731770730 / 085648747901\n\nhttps://billing.berdikari.web.id/tripay/merchant";
                     $message = Setting::find(51);
                     // Replace <p> tags with newlines
                     $converted = preg_replace('/<p[^>]*>/', '', $message->value);
@@ -294,7 +278,7 @@ class OrderController extends Controller
                     $converted = preg_replace('/%customer%/', $order->nama_customer, $converted);
                     $converted = preg_replace('/%invoices%/', $orderdetail->invoice_number, $converted);
                     $converted = preg_replace('/%bulantahun%/', Carbon::parse($orderdetail->due_date)->format('F Y'), $converted);
-                    $converted = preg_replace('/%nominaltagihan%/', number_format($orderdetail->order->paket->harga_paket, 0, ',', '.'), $converted);
+                    $converted = preg_replace('/%nominaltagihan%/', "Rp ".number_format($orderdetail->order->paket->harga_paket, 0, ',', '.').",-", $converted);
                     $converted = preg_replace('/%jatuhtempo%/', Carbon::parse($orderdetail->due_date)->format('d F Y'), $converted);
                     $converted = preg_replace('/%bankmandiri%/',$banks[3]['nomor_akun_rekening'], $converted);
                     $converted = preg_replace('/%bankbca%/', $banks[2]['nomor_akun_rekening'], $converted);

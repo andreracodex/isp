@@ -43,7 +43,7 @@ class OrderDetailController extends Controller
         );
     }
 
-    public function updatestatus(string $id)
+    public function updatestatus(Request $request, string $id)
     {
         $orderdetail = OrderDetail::where('id', '=', $id)->first();
 
@@ -51,6 +51,22 @@ class OrderDetailController extends Controller
             if ($orderdetail->is_payed == 0) {
                 $order = Order::leftJoin('customers', 'customers.id', '=', 'orders.customer_id')->where('orders.id', '=', $orderdetail->order_id)->first();
                 if ($order != null) {
+                    if($request->name == "cash"){
+                        $metode_bayar = "CASH";
+                        $orderdetail->update([
+                            'is_payed' => 2
+                        ]);
+                    }elseif($request->name == "transfer"){
+                        $metode_bayar = "TRANSFER";
+                        $orderdetail->update([
+                            'is_payed' => 1
+                        ]);
+                    }else{
+                        $metode_bayar = "E-Wallet";
+                        $orderdetail->update([
+                            'is_payed' => 3
+                        ]);
+                    }
                     $orderdetail->update([
                         'is_payed' => 1
                     ]);
@@ -58,19 +74,28 @@ class OrderDetailController extends Controller
                     $was = SettingsWA::find(7);
 
                     if ($was->is_active == 1) {
-                        // Send WhatsApp message
-                        $message = "*Yth Pelanggan GNET*\n\n";
-                        $message .= "Hallo Bapak/Ibu,\n";
-                        $message .= "*" . $order->nama_customer . "*,\n\n";
-                        $message .= "Pembayaran internet telah berhasil dilakukan.\n";
-                        $message .= "Via : *CASH / TRANSFER*.\n";
-                        $message .= "Tanggal Pembayaran : *" . Carbon::now()->format('d F Y') . "*.\n";
-                        $message .= "No Invocie Tagihan : *" . $orderdetail->invoice_number . "*\n";
-                        $message .= "Bulan : *" . Carbon::parse($orderdetail->due_date)->format('F Y') . "*\n\n";
-                        $message .= "Kami ingin mengucapkan terima kasih atas kepercayaan Anda menggunakan layanan internet kami.\n";
-                        $message .= "Semoga layanan yang kami berikan dapat memenuhi kebutuhan Anda dengan baik.\n";
-                        $message .= "Terima kasih atas dukungan dan kesetiaan Anda sebagai pelanggan kami.\n\n";
-                        $message .= "Hormat kami\n*PT. Global Data Network*\nJl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.\nPhone : 085731770730 / 085648747901\n";
+                        $message = Setting::find(52);
+                        // Replace <p> tags with newlines
+                        $converted = preg_replace('/<p[^>]*>/', '', $message->value);
+                        $converted = preg_replace('/<\/p>/', "\n\n", $converted);
+
+                        // Remove <strong> tags
+                        $converted = preg_replace('/<strong[^>]*>/', "*", $converted);
+                        $converted = preg_replace('/<\/strong>/', "*", $converted);
+
+                        // Remove <i> tags
+                        $converted = preg_replace('/<i[^>]*>/', "_", $converted);
+                        $converted = preg_replace('/<\/i>/', "_", $converted);
+
+                        // Remove <br> tags
+                        $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
+                        $converted = preg_replace('/&nbsp;/', '', $converted);
+
+                        $converted = preg_replace('/%customer%/', $order->nama_customer, $converted);
+                        $converted = preg_replace('/%invoices%/', $orderdetail->invoice_number, $converted);
+                        $converted = preg_replace('/%bulantahun%/', Carbon::parse($orderdetail->due_date)->format('F Y'), $converted);
+                        $converted = preg_replace('/%metode_bayar%/', $metode_bayar, $converted);
+                        $converted = preg_replace('/%tanggalbayar%/', Carbon::parse($orderdetail->created_at)->format('d F Y'), $converted);
 
                         $curl = curl_init();
 
@@ -85,7 +110,7 @@ class OrderDetailController extends Controller
                             CURLOPT_CUSTOMREQUEST => 'POST',
                             CURLOPT_POSTFIELDS => array(
                                 'target' => convert_phone($order->nomor_telephone),
-                                'message' => $message,
+                                'message' => $converted,
                                 'countryCode' => '62', //optional
                             ),
                             CURLOPT_HTTPHEADER => array(
