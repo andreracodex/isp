@@ -23,8 +23,8 @@ class Tagihan extends Command
         $customers = Customer::where('is_active', 1)->get();
 
         foreach ($customers as $customer) {
-            $first = Carbon::now()->addMonth(1)->firstOfMonth()->format('Y-m-d');
-            $last = Carbon::now()->addMonth(1)->lastOfMonth()->format('Y-m-d');
+            $first = Carbon::now()->firstOfMonth()->format('Y-m-d');
+            $last = Carbon::now()->lastOfMonth()->format('Y-m-d');
 
             $count = OrderDetail::leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
                 ->where('orders.customer_id', '=', $customer->id)
@@ -33,7 +33,7 @@ class Tagihan extends Command
                 ->groupBy('orders.customer_id', 'due_date', 'order_details.id')
                 ->count();
 
-                // dd($count);
+                // dd( $first, $last, $count);
             if ($count == 0) {
                 $orderDetail = OrderDetail::select('order_details.payment_id', 'order_details.due_date', 'orders.id',)
                     ->leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
