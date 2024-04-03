@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('send:sendwasatu')->dailyAt('08:00')->timezone('Asia/Jakarta');
         $schedule->command('send:sendwadua')->dailyAt('08:10')->timezone('Asia/Jakarta');
+        $schedule->command('make:tagihan')->monthlyOn(4, '15:00')->timezone('Asia/Jakarta');
     }
 
     /**
