@@ -60,8 +60,11 @@ class PeriodeController extends Controller
             $is_active = 0;
         }
 
+        // Extract month from the requested date
+        $bulan_periode = date('Y-m', strtotime($request->bulan_periode));
+
         // Check if bulan_periode already exists
-        $existingPeriode = Periode::where('bulan_periode', $request->bulan_periode)->first();
+        $existingPeriode = Periode::whereRaw("DATE_FORMAT(bulan_periode, '%Y-%m') = ?", [$bulan_periode])->first();
         if ($existingPeriode) {
             return redirect()->back()->withInput()->withErrors(['bulan_periode' => 'Periode dengan bulan yang sama sudah ada.']);
         }else{
