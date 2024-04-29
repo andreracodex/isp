@@ -506,7 +506,7 @@
                                         </b>
                                     </sup>
                                 </label>
-                                <select name="jatuh_tempo" id="jatuh_tempo" class="form-control se" required>
+                                <select name="jatuh_tempo" id="jatuh_tempo" class="form-control select2" required>
                                     <option value="0">All Tempo</option>
                                     @foreach ($date as $jatuh)
                                         <option value="{{ $jatuh->id }}">
