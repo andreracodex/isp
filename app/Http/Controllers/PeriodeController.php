@@ -22,6 +22,9 @@ class PeriodeController extends Controller
             ->editColumn('periode_id', function (Periode $periode) {
                 return $periode->id;
             })
+            ->editColumn('bulan_periode', function (Periode $periode) {
+                return Carbon::parse($periode->bulan_periode)->format('F-Y');
+            })
             ->addColumn('action', function (Periode $periode) {
                 return "
                 <a href=". route('periode.edit', $periode->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Data'><i class='fa fa-pencil-alt'></i></a>

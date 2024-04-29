@@ -1,6 +1,6 @@
 @extends('backend.base')
 
-@section('title', 'Periode Tagihan Data')
+@section('title', 'Periode Tagihan')
 
 @section('styles')
 @endsection
