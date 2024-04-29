@@ -29,6 +29,17 @@ class OrderDetailController extends Controller
         );
     }
 
+    public function print(OrderDetail $orderdetail)
+    {
+        $orderdetail = OrderDetail::find($orderdetail->id);
+        $profile = Setting::all();
+
+        return view(
+            'backend.pages.pdf.invoice',
+            compact('profile', 'orderdetail')
+        );
+    }
+
     public function updatestatus(string $id)
     {
         $orderdetail = OrderDetail::where('id', '=', $id)->first();

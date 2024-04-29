@@ -166,6 +166,7 @@ Route::middleware('auth', 'has.role', 'auth.session')->group(function () {
         Route::get('{orderdetail}/edit', [OrderDetailController::class, 'edit'])->name('orderdetail.edit');
         Route::put('{orderdetail}/update', [OrderDetailController::class, 'update'])->name('orderdetail.update');
         Route::get('{orderdetail}/changestatus', [OrderDetailController::class, 'updatestatus'])->name('orderdetail.changestatus');
+        Route::get('{orderdetail}/print', [OrderDetailController::class, 'print'])->name('orderdetail.print');
         Route::get('{orderdetail}/delete', [OrderDetailController::class, 'delete'])->name('orderdetail.delete');
     });
 

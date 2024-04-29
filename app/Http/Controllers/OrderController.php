@@ -141,7 +141,6 @@ class OrderController extends Controller
         $date = Periode::where('is_active', 1)->get();
         $data_table = OrderDetail::where('order_id', $order->id)->orderBy('created_at', 'ASC')->get();
 
-
         if ($request->input('tempo') != null && $request->input('tempo') != 0) {
             // Non Active
             $tempo = $request->input('tempo');
@@ -161,8 +160,6 @@ class OrderController extends Controller
             // Status
             $status = $request->input('status');
             $data_table = $data_table->where('is_payed', '=', $status);
-
-
         }
 
         if ($request->ajax()) {
@@ -183,9 +180,11 @@ class OrderController extends Controller
                 return $formatted_price;
             })
             ->addColumn('action', function (OrderDetail $orderdetail) {
-                if($orderdetail->is_payed == 1){
-                    return "";
-                }else{
+                if ($orderdetail->is_payed == 1) {
+                    return "
+                    <a href=". route('orderdetail.print', $orderdetail->id) ." target='_blank' class='avtar avtar-xs btn btn-link-success btn-pc-default' data-container='body'><i class='fa fa-print'></i> </a>
+                    ";
+                } else {
                     return "
                     <button class='avtar avtar-xs btn btn-link-warning btn-pc-default updatestatus' data-id='$orderdetail->id' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Payment Status'><i class='material-icons-two-tone'>attach_money</i> </button>
                     ";
