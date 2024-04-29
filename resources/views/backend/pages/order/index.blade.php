@@ -75,6 +75,9 @@
                     url: "{{ route('order.index') }}",
                     type: "GET",
                     data: function(d) {
+                        console.log(customerid);
+                        console.log(tempo);
+                        console.log(status);
                         d.customerid = customerid;
                         d.tempo = tempo;
                         d.status = status;
