@@ -60,12 +60,18 @@ class PeriodeController extends Controller
             $is_active = 0;
         }
 
-        Periode::create([
-            'bulan_periode' => $request->bulan_periode,
-            'is_active' => $is_active,
-        ]);
+        // Check if bulan_periode already exists
+        $existingPeriode = Periode::where('bulan_periode', $request->bulan_periode)->first();
+        if ($existingPeriode) {
+            return redirect()->back()->withInput()->withErrors(['bulan_periode' => 'Periode dengan bulan yang sama sudah ada.']);
+        }else{
+            Periode::create([
+                'bulan_periode' => $request->bulan_periode,
+                'is_active' => $is_active,
+            ]);
 
-        return redirect()->route('periode.index')->with(['success' => 'Periode berhasil disimpan!']);
+            return redirect()->route('periode.index')->with(['success' => 'Periode berhasil disimpan!']);
+        }
     }
 
     public function edit(Periode $periode)
