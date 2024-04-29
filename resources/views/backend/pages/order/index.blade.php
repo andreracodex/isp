@@ -73,18 +73,18 @@
                 responsive: true,
                 ajax: {
                     url: "{{ route('order.index') }}",
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        // Do something here
-                        console.log(errorThrown);
-                        console.log(textStatus);
-                        console.log(jqXHR);
-                    }
                     type: "GET",
                     data: function(d) {
                         d.customerid = customerid;
                         d.tempo = tempo;
                         d.status = status;
                         return d
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        // Do something here
+                        console.log(errorThrown);
+                        console.log(textStatus);
+                        console.log(jqXHR);
                     }
                 },
                 buttons: [
