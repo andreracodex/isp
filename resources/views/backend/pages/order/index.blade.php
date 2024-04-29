@@ -19,7 +19,7 @@
 
             var customerid = $('#customer_id').val();
             var tempo = $('#jatuh_tempo').val();
-            var status = $('#status').val();
+            var status = $('#status_tagihan').val();
 
             // console.log(customerid, tempo);
 
