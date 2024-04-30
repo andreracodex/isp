@@ -29,11 +29,14 @@ class OrderDetailController extends Controller
         );
     }
 
-    public function print(OrderDetail $orderdetail)
+    public function print(Request $request)
     {
-        $orderdetail = OrderDetail::find($orderdetail->id);
+        $orderdetail = OrderDetail::where('uuid', $request->uuid)->first();
         $profile = Setting::all();
 
+        if($orderdetail == null){
+            return abort(403);
+        }
         return view(
             'backend.pages.pdf.invoice',
             compact('profile', 'orderdetail')

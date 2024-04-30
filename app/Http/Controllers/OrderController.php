@@ -187,7 +187,7 @@ class OrderController extends Controller
             ->addColumn('action', function (OrderDetail $orderdetail) {
                 if ($orderdetail->is_payed == 1) {
                     return "
-                    <a href=". route('orderdetail.print', $orderdetail->id) ." target='_blank' class='avtar avtar-xs btn btn-link-success btn-pc-default' data-container='body'><i class='fa fa-print'></i> </a>
+                    <a href=". route('orderdetail.print', $orderdetail->uuid)." class='avtar avtar-xs btn-link-secondary btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-print'></i></a>
                     ";
                 } else {
                     return "
