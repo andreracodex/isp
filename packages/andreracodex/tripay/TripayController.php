@@ -169,6 +169,10 @@ class TripayController extends Controller
             ->leftJoin('pakets', 'orders.paket_id', 'pakets.id')
             ->where('order_details.invoice_number', $invoices)->first();
 
+        if($detail == null){
+            return redirect()->route('tripay.merchant');
+        }
+
         $amount = intval($detail->harga_paket);
 
         $profile = Setting::all();
