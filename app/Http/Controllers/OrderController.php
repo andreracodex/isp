@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bank;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -251,26 +252,26 @@ class OrderController extends Controller
         if ($orderdetail != null) {
             $order = Order::leftJoin('customers', 'customers.id', '=', 'orders.customer_id')->where('orders.id', '=', $orderdetail->order_id)->first();
             if ($order != null) {
-                $orderdetail->update([
-                    'is_payed' => 1
-                ]);
                 $set = Setting::find(46);
                 $was = SettingsWA::find(7);
-
+                $banks = Bank::where('is_active', 1)->get();
                 if ($was->is_active == 1) {
                     // Send WhatsApp message
                     $message = "*Yth Pelanggan GNET*\n\n";
                     $message .= "Hallo Bapak/Ibu,\n";
                     $message .= "*" . $order->nama_customer . "*,\n\n";
-                    $message .= "Pembayaran internet telah berhasil dilakukan.\n";
-                    $message .= "Via : *CASH / TRANSFER*.\n";
-                    $message .= "Tanggal Jatuh Tempo : *" . Carbon::parse($orderdetail->due_date)->format('d F Y') . "*.\n";
                     $message .= "No Invocie Tagihan : *" . $orderdetail->invoice_number . "*\n";
-                    $message .= "Bulan : *" . Carbon::parse($orderdetail->due_date)->format('F Y') . "*\n\n";
-                    $message .= "Kami ingin mengucapkan terima kasih atas kepercayaan Anda menggunakan layanan internet kami.\n";
-                    $message .= "Semoga layanan yang kami berikan dapat memenuhi kebutuhan Anda dengan baik.\n";
-                    $message .= "Terima kasih atas dukungan dan kesetiaan Anda sebagai pelanggan kami.\n\n";
-                    $message .= "Hormat kami\n*PT. Global Data Network*\nJl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.\nPhone : 085731770730 / 085648747901\n";
+                    $message .= "Bulan : *" . Carbon::parse($orderdetail->due_date)->format('F Y') . "*\n";
+                    $message .= "Total Tagihan : *Rp " . number_format($orderdetail->order->paket->harga_paket, 0, ',', '.') . "*,-\n";
+                    $message .= "Jatuh Tempo : *" . Carbon::parse($orderdetail->due_date)->format('d F Y') . "*.\n\n";
+                    $message .= "Bank Tersedia :\n";
+                    $message .= "*BANK MANDIRI* : " . $banks[3]['nomor_akun_rekening'] . "\n";
+                    $message .= "*BANK BCA* : " . $banks[2]['nomor_akun_rekening'] . "\n";
+                    $message .= "*BANK BRI* : " . $banks[0]['nomor_akun_rekening'] . "\n";
+                    $message .= "*BANK BNI* : " . $banks[1]['nomor_akun_rekening'] . "\n";
+                    $message .= "A/N *PUTUT WAHYUDI*\n\n";
+                    $message .= "Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir\n\n";
+                    $message .= "Hormat kami\n*PT. Global Data Network*\nJl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.\nPhone : 085731770730 / 085648747901\n\nhttps://billing.berdikari.web.id/tripay/merchant";
 
                     $curl = curl_init();
 
