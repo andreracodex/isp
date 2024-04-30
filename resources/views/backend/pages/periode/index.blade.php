@@ -91,6 +91,10 @@
                         name: 'bulan_periode'
                     },
                     {
+                        data: 'tahun_periode',
+                        name: 'tahun_periode'
+                    },
+                    {
                         data: 'is_active',
                         name: 'is_active',
                         render: function(data, type, row) {
@@ -256,7 +260,8 @@
                                 <tr>
                                     <th style="width: 10px;">#</th>
                                     <th></th>
-                                    <th>Bulan Periode</th>
+                                    <th>Bulan Periode Tagihan</th>
+                                    <th>Tahun Periode Tagihan</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>

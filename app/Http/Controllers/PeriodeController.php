@@ -23,7 +23,10 @@ class PeriodeController extends Controller
                 return $periode->id;
             })
             ->editColumn('bulan_periode', function (Periode $periode) {
-                return Carbon::parse($periode->bulan_periode)->format('F-Y');
+                return Carbon::parse($periode->bulan_periode)->format('F Y');
+            })
+            ->editColumn('tahun_periode', function (Periode $periode) {
+                return Carbon::parse($periode->bulan_periode)->format('Y');
             })
             ->addColumn('action', function (Periode $periode) {
                 return "

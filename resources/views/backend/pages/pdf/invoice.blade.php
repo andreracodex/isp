@@ -1,125 +1,133 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Invoice Order</title>
-<meta name="robots" content="noindex,nofollow" />
-<meta name="viewport" content="width=device-width; initial-scale=1.0;" />
-<link rel="icon" href="{{ asset('/images/favicon.ico') }}" type="image/x-icon">
-<style type="text/css">
-    @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+<!DOCTYPE html>
+<html lang="en">
 
-    body {
-        margin: 0;
-        padding: 0;
-        background: #e1e1e1;
-    }
+<head>
+    <title>Invoice Order</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+    <link rel="icon" href="{{ asset('/images/favicon.ico') }}" type="image/x-icon">
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 
-    div,
-    p,
-    a,
-    li,
-    td {
-        -webkit-text-size-adjust: none;
-    }
-
-    .ReadMsgBody {
-        width: 100%;
-        background-color: #ffffff;
-    }
-
-    .ExternalClass {
-        width: 100%;
-        background-color: #ffffff;
-    }
-
-    body {
-        width: 100%;
-        height: 100%;
-        background-color: #e1e1e1;
-        margin: 0;
-        padding: 0;
-        -webkit-font-smoothing: antialiased;
-    }
-
-    html {
-        width: 100%;
-    }
-
-    p {
-        padding: 0 !important;
-        margin-top: 0 !important;
-        margin-right: 0 !important;
-        margin-bottom: 0 !important;
-        margin-left: 0 !important;
-    }
-
-    .visibleMobile {
-        display: none;
-    }
-
-    .hiddenMobile {
-        display: block;
-    }
-
-    @media only screen and (max-width: 600px) {
+        /* Your CSS styles here */
         body {
-            width: auto !important;
-        }
-
-        table[class=fullTable] {
-            width: 96% !important;
-            clear: both;
-        }
-
-        table[class=fullPadding] {
-            width: 85% !important;
-            clear: both;
-        }
-
-        table[class=col] {
-            width: 45% !important;
-        }
-
-        .erase {
-            display: none;
-        }
-    }
-
-    @media only screen and (max-width: 420px) {
-        table[class=fullTable] {
-            width: 100% !important;
-            clear: both;
-        }
-
-        table[class=fullPadding] {
-            width: 85% !important;
-            clear: both;
-        }
-
-        table[class=col] {
-            width: 100% !important;
-            clear: both;
-        }
-
-        table[class=col] td {
-            text-align: left !important;
-        }
-
-        .erase {
-            display: none;
-            font-size: 0;
-            max-height: 0;
-            line-height: 0;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
             padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        div,
+        p,
+        a,
+        li,
+        td {
+            -webkit-text-size-adjust: none;
+        }
+
+        .ReadMsgBody {
+            width: 100%;
+            background-color: #ffffff;
+        }
+
+        .ExternalClass {
+            width: 100%;
+            background-color: #ffffff;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            background-color: #e1e1e1;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        html {
+            width: 100%;
+        }
+
+        p {
+            padding: 0 !important;
+            margin-top: 0 !important;
+            margin-right: 0 !important;
+            margin-bottom: 0 !important;
+            margin-left: 0 !important;
         }
 
         .visibleMobile {
-            display: block !important;
+            display: none;
         }
 
         .hiddenMobile {
-            display: none !important;
+            display: block;
         }
-    }
-</style>
+
+        @media only screen and (max-width: 600px) {
+            body {
+                width: auto !important;
+            }
+
+            table[class=fullTable] {
+                width: 96% !important;
+                clear: both;
+            }
+
+            table[class=fullPadding] {
+                width: 85% !important;
+                clear: both;
+            }
+
+            table[class=col] {
+                width: 45% !important;
+            }
+
+            .erase {
+                display: none;
+            }
+        }
+
+        @media only screen and (max-width: 420px) {
+            table[class=fullTable] {
+                width: 100% !important;
+                clear: both;
+            }
+
+            table[class=fullPadding] {
+                width: 85% !important;
+                clear: both;
+            }
+
+            table[class=col] {
+                width: 100% !important;
+                clear: both;
+            }
+
+            table[class=col] td {
+                text-align: left !important;
+            }
+
+            .erase {
+                display: none;
+                font-size: 0;
+                max-height: 0;
+                line-height: 0;
+                padding: 0;
+            }
+
+            .visibleMobile {
+                display: block !important;
+            }
+
+            .hiddenMobile {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
 
 <!-- Header -->
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
@@ -161,9 +169,11 @@
                                                 </tr>
                                                 <tr>
                                                     <td
-                                                        style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: left;">
-                                                        Hello, {{ $orderdetail->order->customer->nama_customer }}.
-                                                        <br> Terima kasih sudah melakukan pembayaran untuk tagihan ini.
+                                                        style="font-size: 12px; color: #5b5b5b;  line-height: 18px; vertical-align: top; text-align: left;">
+                                                        Hello,
+                                                        <b>{{ $orderdetail->order->customer->nama_customer }}</b>.
+                                                        <br> Berikut detail informasi tagihan layanan yang wajib
+                                                        dibayarkan.
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -179,7 +189,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td
-                                                        style="font-size: 21px; color: #4680FF; letter-spacing: -1px; font-family: 'Open Sans', sans-serif; line-height: 1; vertical-align: top; text-align: right;">
+                                                        style="font-size: 21px; color: #4680FF; letter-spacing: -1px;  line-height: 1; vertical-align: top; text-align: right;">
                                                         Invoice
                                                     </td>
                                                 </tr>
@@ -192,9 +202,11 @@
                                                 </tr>
                                                 <tr>
                                                     <td
-                                                        style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: right;">
-                                                        <small>ORDER</small> #800000025<br />
-                                                        <small>MARCH 4TH 2016</small>
+                                                        style="font-size: 12px; color: #5b5b5b;  line-height: 18px; vertical-align: top; text-align: right;">
+                                                        Invoice Number : <b
+                                                            style="font-size: 12px; color: #232323;">{{ $orderdetail->invoice_number }}</b><br />
+                                                        Jatuh Tempo : <b
+                                                            style="font-size: 12px; color: #232323;">{{ Carbon\Carbon::parse($orderdetail->due_date)->format('d F Y') }}</b>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -231,21 +243,21 @@
                                     class="fullPadding">
                                     <tbody>
                                         <tr>
-                                            <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;"
+                                            <th style="font-size: 12px;  color: #1e2b33; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;"
                                                 width="52%" align="left">
-                                                Paket
+                                                <b>Paket</b>
                                             </th>
-                                            <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;"
+                                            <th style="font-size: 12px;  color: #1e2b33; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;"
                                                 align="left">
-                                                Jatuh Tempo
+                                                <b>Jatuh Tempo</b>
                                             </th>
-                                            <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;"
+                                            <th style="font-size: 12px;  color: #1e2b33; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;"
                                                 align="center">
-                                                Status
+                                                <b>Status</b>
                                             </th>
-                                            <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #1e2b33; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;"
+                                            <th style="font-size: 12px;  color: #1e2b33; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;"
                                                 align="right">
-                                                Tagihan
+                                                <b>Tagihan</b>
                                             </th>
                                         </tr>
                                         <tr>
@@ -255,21 +267,28 @@
                                             <td height="10" colspan="4"></td>
                                         </tr>
                                         <tr>
-                                            <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #4680FF;  line-height: 18px;  vertical-align: top; padding:10px 0;"
+                                            <td style="font-size: 12px;  color: #4680FF;  line-height: 18px;  vertical-align: top; padding:10px 0;"
                                                 class="article">
-                                                {{ $orderdetail->order->paket->nama_paket . ' ' . $orderdetail->order->paket->jeni_paket }}
+                                                {{ $orderdetail->order->paket->nama_paket . ' (' . $orderdetail->order->paket->jenis_paket . ')' }}
                                             </td>
                                             <td
-                                                style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;">
-                                                @php
-                                                    use Carbon\Carbon;
-                                                @endphp
-
-                                                {{ Carbon::parse($orderdetail->due_date)->format('d F Y') }}
+                                                style="font-size: 12px;  color: #4680FF;  line-height: 18px;  vertical-align: top; padding:10px 0;">
+                                                {{ Carbon\Carbon::parse($orderdetail->due_date)->format('d F Y') }}
                                             </td>
-                                            <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;"
-                                                align="center">{{ $orderdetail->status }}</td>
-                                            <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #1e2b33;  line-height: 18px;  vertical-align: top; padding:10px 0;"
+                                            <td align="center">
+                                                @if ($orderdetail->is_payed == 1)
+                                                    <p
+                                                        style="font-size: 12px;  color: #4680FF;  line-height: 18px;  vertical-align: top; padding:10px 0;">
+                                                        Lunas</p>
+                                                @elseif($orderdetail->is_payed == 0)
+                                                    <p
+                                                        style="font-size: 12px;  color: #ff4646;  line-height: 18px;  vertical-align: top; padding:10px 0;">
+                                                        Belum Lunas</p>
+                                                @else
+                                                    <p>Isolir</p>
+                                                @endif
+                                            </td>
+                                            <td style="font-size: 12px;  color: #4680FF;  line-height: 18px;  vertical-align: top; padding:10px 0;"
                                                 align="right">
                                                 @php
                                                     $formatted_price = Number::currency(
@@ -317,42 +336,43 @@
                                     <tbody>
                                         <tr>
                                             <td
-                                                style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; ">
-                                                Subtotal
+                                                style="font-size: 12px;  color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; ">
+                                                Biaya Admin
                                             </td>
-                                            <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; white-space:nowrap;"
-                                                width="80">
-                                                $329.90
+                                            <td
+                                                style="font-size: 12px;  color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; ">
+                                                @php
+                                                    $admin_price = Number::currency(
+                                                        $orderdetail->biaya_admin,
+                                                        'IDR',
+                                                        'id',
+                                                    );
+                                                @endphp
+                                                @if ($orderdetail->biaya_admin == 0)
+                                                    -
+                                                @else
+                                                    {{ str_replace(',00', '', $admin_price) }}
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
                                             <td
-                                                style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; ">
-                                                Shipping &amp; Handling
+                                                style="font-size: 12px;  color: #000; line-height: 22px; vertical-align: top; text-align:right; ">
+                                                <strong>Grand Total </strong>
                                             </td>
                                             <td
-                                                style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; ">
-                                                $15.00
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td
-                                                style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #000; line-height: 22px; vertical-align: top; text-align:right; ">
-                                                <strong>Grand Total (Incl.Tax)</strong>
-                                            </td>
-                                            <td
-                                                style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #000; line-height: 22px; vertical-align: top; text-align:right; ">
-                                                <strong>$344.90</strong>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td
-                                                style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #b0b0b0; line-height: 22px; vertical-align: top; text-align:right; ">
-                                                <small>TAX</small>
-                                            </td>
-                                            <td
-                                                style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #b0b0b0; line-height: 22px; vertical-align: top; text-align:right; ">
-                                                <small>$72.40</small>
+                                                style="font-size: 12px;  color: #000; line-height: 22px; vertical-align: top; text-align:right; ">
+                                                <strong>
+                                                    @php
+                                                        $grand = Number::currency(
+                                                            $orderdetail->order->paket->harga_paket +
+                                                                $orderdetail->biaya_admin,
+                                                            'IDR',
+                                                            'id',
+                                                        );
+                                                    @endphp
+                                                    {{ str_replace(',00', '', $grand) }}
+                                                </strong>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -397,8 +417,8 @@
                                                     <tbody>
                                                         <tr>
                                                             <td
-                                                                style="font-size: 11px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
-                                                                <strong>BILLING INFORMATION</strong>
+                                                                style="font-size: 12px;  color: #4680FF; line-height: 1; vertical-align: top; ">
+                                                                <strong>INFORMASI PEMBAYARAN</strong>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -406,9 +426,12 @@
                                                         </tr>
                                                         <tr>
                                                             <td
-                                                                style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
-                                                                Philip Brooks<br> Public Wales, Somewhere<br> New York
-                                                                NY<br> 4468, United States<br> T: 202-555-0133
+                                                                style="font-size: 10px;  color: #5b5b5b; line-height: 20px; vertical-align: top; ">
+                                                                <b>PT. Global Data Network</b></br>
+                                                                Jl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran,
+                                                                Kec, Tegalsari, </br>Kota Surabaya, Jawa Timur 60265.
+                                                                Phone : <a href="tel:+6285731770730">085731770730</a> /
+                                                                <a href="tel:+6285648747901">085648747901</a>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -423,8 +446,8 @@
                                                         </tr>
                                                         <tr>
                                                             <td
-                                                                style="font-size: 11px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
-                                                                <strong>PAYMENT METHOD</strong>
+                                                                style="font-size: 12px;  color: #4680FF; line-height: 1; vertical-align: top; ">
+                                                                <strong>METODE BAYAR</strong>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -432,80 +455,13 @@
                                                         </tr>
                                                         <tr>
                                                             <td
-                                                                style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
-                                                                Credit Card<br> Credit Card Type: Visa<br> Worldpay
-                                                                Transaction ID: <a href="#"
-                                                                    style="color: #4680FF; text-decoration:underline;">4185939336</a><br>
-                                                                <a href="#" style="color:#b0b0b0;">Right of
-                                                                    Withdrawal</a>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table width="480" border="0" cellpadding="0" cellspacing="0" align="center"
-                                    class="fullPadding">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <table width="220" border="0" cellpadding="0" cellspacing="0"
-                                                    align="left" class="col">
-                                                    <tbody>
-                                                        <tr class="hiddenMobile">
-                                                            <td height="35"></td>
-                                                        </tr>
-                                                        <tr class="visibleMobile">
-                                                            <td height="20"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td
-                                                                style="font-size: 11px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
-                                                                <strong>SHIPPING INFORMATION</strong>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td width="100%" height="10"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td
-                                                                style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
-                                                                Sup Inc<br> Another Place, Somewhere<br> New York NY<br>
-                                                                4468, United States<br> T: 202-555-0171
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-
-
-                                                <table width="220" border="0" cellpadding="0" cellspacing="0"
-                                                    align="right" class="col">
-                                                    <tbody>
-                                                        <tr class="hiddenMobile">
-                                                            <td height="35"></td>
-                                                        </tr>
-                                                        <tr class="visibleMobile">
-                                                            <td height="20"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td
-                                                                style="font-size: 11px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
-                                                                <strong>SHIPPING METHOD</strong>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td width="100%" height="10"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td
-                                                                style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
-                                                                UPS: U.S. Shipping Services
+                                                                style="font-size: 10px;  color: #5b5b5b; line-height: 20px; vertical-align: top; ">
+                                                                Transfer ke salah satu rekening terlampir, dan lampirkan bukti pembayaran ke WA sebagai bukti bayar</br></br>
+                                                                MANDIRI : <b>1410014462964</b></br>
+                                                                BCA : <b>8220725511</b></br>
+                                                                BRI : <b>319201004897506</b></br>
+                                                                BNI : <b>1255306543</b></br>
+                                                                AN :  <a style="font-size: 10px;  color: #4680FF;"><b>PUTUT WAHYUDI</b></a>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -543,8 +499,11 @@
                             <tbody>
                                 <tr>
                                     <td
-                                        style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: left;">
-                                        Have a nice day.
+                                        style="font-size: 10px; color: #5b5b5b;  line-height: 18px; vertical-align: top; text-align: left;">
+                                        <p>Kami ingin mengucapkan terima kasih atas kepercayaan Anda menggunakan layanan
+                                            internet kami.
+                                            Semoga layanan yang kami berikan dapat memenuhi kebutuhan Anda dengan baik.
+                                            Terima kasih atas dukungan dan kesetiaan Anda sebagai pelanggan kami.</p>
                                     </td>
                                 </tr>
                             </tbody>
