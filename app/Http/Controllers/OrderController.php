@@ -50,6 +50,7 @@ class OrderController extends Controller
         'order_details.is_active'
         )
             ->leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
+            ->where('order_details.is_payed', 0)
             ->orderBy('order_details.created_at', 'DESC')
             ->get();
 

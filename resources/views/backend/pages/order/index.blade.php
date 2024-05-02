@@ -83,7 +83,7 @@
                         d.status = status;
                         return d
                     },
-                    error: function (jqXHR, textStatus, errorThrown) {
+                    error: function(jqXHR, textStatus, errorThrown) {
                         // Do something here
                         // console.log(errorThrown);
                         // console.log(textStatus);
@@ -250,11 +250,11 @@
                 $('#order').DataTable().ajax.reload()
             });
 
-            $('#status_tagihan').on('change', function(selected) {
-                status = $('#status_tagihan').val();
-                // console.log(tempo);
-                $('#order').DataTable().ajax.reload()
-            });
+            // $('#status_tagihan').on('change', function(selected) {
+            //     status = $('#status_tagihan').val();
+            //     // console.log(tempo);
+            //     $('#order').DataTable().ajax.reload()
+            // });
 
             table.button().add(2, {
                 action: function(e, dt, button, config) {
@@ -293,6 +293,7 @@
         });
     </script>
     {{-- Update payment --}}
+
     <script type="text/javascript">
         $(document).ready(function() {
             $('#order').on('click', '.updatepayment', function() {
@@ -456,7 +457,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-2 col-md-2">
+                        {{-- <div class="col-sm-2 col-md-2">
                             <div class="mb-3">
                                 <label class="form-label headerbutton">Status Tagihan
                                 </label>
@@ -467,7 +468,7 @@
                                 </select>
                                 <div class="invalid-tooltip" style="top: 0">Status Aktif required</div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="dt-responsive table-responsive">
