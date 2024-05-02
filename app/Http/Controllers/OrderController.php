@@ -23,7 +23,7 @@ class OrderController extends Controller
     public function index(Request $request){
         $profile = Setting::all();
         $customer = Customer::all();
-        $firstMonthOfYear = Carbon::now()->startOfMonth()->subMonth(1);
+        $firstMonthOfYear = Carbon::now()->startOfMonth();
         $lastMonthOfYear = Carbon::now()->endOfYear();
         $date = Periode::whereBetween('bulan_periode', [$firstMonthOfYear, $lastMonthOfYear])->where('is_active', 1)->get();
         $data_table = OrderDetail::select('orders.id as orderid',
