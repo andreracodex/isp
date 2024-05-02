@@ -121,12 +121,6 @@
                             </svg> </span><span class="pc-mtext">Tagihan</span></a>
                 </li>
                 <li class="pc-item pc-hasmenu">
-                    <a href="#" class="pc-link"><span class="pc-micon">
-                            <svg class="pc-icon">
-                                <use xlink:href="#custom-fatrows"></use>
-                            </svg> </span><span class="pc-mtext">Arus Kas</span></a>
-                </li>
-                <li class="pc-item pc-hasmenu">
                     <a href="{{ route('laporan.index') }}" class="pc-link"><span class="pc-micon">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-graph"></use>
