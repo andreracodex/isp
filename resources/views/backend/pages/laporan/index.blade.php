@@ -72,7 +72,7 @@
                 serverSide: true,
                 responsive: true,
                 ajax: {
-                    url: "{{ route('order.index') }}",
+                    url: "{{ route('laporan.index') }}",
                     type: "GET",
                     data: function(d) {
                         // console.log(customerid);
@@ -85,9 +85,9 @@
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         // Do something here
-                        // console.log(errorThrown);
-                        // console.log(textStatus);
-                        // console.log(jqXHR);
+                        console.log(errorThrown);
+                        console.log(textStatus);
+                        console.log(jqXHR);
                     }
                 },
                 buttons: [
@@ -287,91 +287,6 @@
                 } else {
                     $("th.select-checkbox").addClass("selected");
                 }
-            });
-        });
-    </script>
-    {{-- Update payment --}}
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#order').on('click', '.updatepayment', function() {
-                let idItem = $(this).data('id');
-                Swal.fire({
-                    title: 'Konfirmasi Tagihan',
-                    text: "Anda yakin tagihan ini sudah lunas?",
-                    icon: 'warning',
-                    data: idItem,
-                    showCancelButton: true,
-                    confirmButtonColor: '#10bd9d',
-                    cancelButtonColor: '#ca2062',
-                    confirmButtonText: 'Ya, Lunas !'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            method: 'GET',
-                            url: "{{ route('orderdetail.changestatus', ':id') }}".replace(
-                                ':id', idItem),
-                            data: {
-                                _token: '{{ csrf_token() }}',
-                                id: idItem,
-                            },
-                            success: function(data) {
-                                $('#order').DataTable().ajax.reload();
-                                Swal.fire(
-                                    'Berhasil!',
-                                    'Tagihan sudah lunas',
-                                    'success'
-                                )
-                            },
-                            error: function(error) {
-                                Swal.fire('Error', 'Gagal tagihan belum lunas',
-                                    'error');
-                            }
-                        });
-                    }
-                })
-            });
-        });
-    </script>
-    {{-- Delete --}}
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#order').on('click', '.hapusOrder', function() {
-                let idItem = $(this).data('id');
-
-                Swal.fire({
-                    title: 'Konfirmasi Hapus',
-                    text: "Anda yakin ingin menghapus data ini dari list, Data ini adalah data tagihan ?",
-                    icon: 'warning',
-                    data: idItem,
-                    showCancelButton: true,
-                    confirmButtonColor: '#10bd9d',
-                    cancelButtonColor: '#ca2062',
-                    confirmButtonText: 'Ya, Dihapus !'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            method: 'GET',
-                            url: "{{ route('order.delete', ':id') }}".replace(
-                                ':id', idItem),
-                            data: {
-                                _token: '{{ csrf_token() }}',
-                                id: idItem,
-                            },
-                            success: function(data) {
-                                $('#order').DataTable().ajax.reload();
-                                Swal.fire(
-                                    'Berhasil!',
-                                    'Item berhasil dihapus',
-                                    'success'
-                                )
-                            },
-                            error: function(error) {
-                                Swal.fire('Error', 'Gagal menghapus barang', 'error');
-                                // Handle error
-                            }
-                        });
-                    }
-                })
             });
         });
     </script>

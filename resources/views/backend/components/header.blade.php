@@ -101,52 +101,17 @@
                         <svg class="pc-icon">
                             <use xlink:href="#custom-notification"></use>
                         </svg>
-                        <span class="badge bg-success pc-h-badge">3</span>
+                        <span class="badge bg-success pc-h-badge">{{ Count(App\Http\Helpers\belum_bayar()) }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown">
                         <div class="dropdown-header d-flex align-items-center justify-content-between">
                             <h5 class="m-0">Notifications</h5>
-                            <a href="#!" class="btn btn-link btn-sm">Mark all read</a>
+                            {{-- <a href="#!" class="btn btn-link btn-sm">Mark all read</a> --}}
                         </div>
                         <div class="dropdown-body text-wrap header-notification-scroll position-relative"
                             style="max-height: calc(100vh - 215px)">
-                            <p class="text-span">Today</p>
-                            <div class="card mb-2">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0">
-                                            <svg class="pc-icon text-primary">
-                                                <use xlink:href="#custom-layer"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <span class="float-end text-sm text-muted">2 min ago</span>
-                                            <h5 class="text-body mb-2">UI/UX Design</h5>
-                                            <p class="mb-0">Lorem Ipsum has been the industry's standard dummy
-                                                text ever since the 1500s, when an unknown printer took a galley of
-                                                type and scrambled it to make a type</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card mb-2">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0">
-                                            <svg class="pc-icon text-primary">
-                                                <use xlink:href="#custom-sms"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <span class="float-end text-sm text-muted">1 hour ago</span>
-                                            <h5 class="text-body mb-2">Message</h5>
-                                            <p class="mb-0">Lorem Ipsum has been the industry's standard dummy
-                                                text ever since the 1500.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            <p class="text-span">Belum Terbayar</p>
+                            @foreach (App\Http\Helpers\belum_bayar() as $belum_bayar)
                             <div class="card mb-2">
                                 <div class="card-body">
                                     <div class="d-flex">
@@ -156,37 +121,16 @@
                                             </svg>
                                         </div>
                                         <div class="flex-grow-1 ms-3">
-                                            <span class="float-end text-sm text-muted">12 hour ago</span>
-                                            <h5 class="text-body mb-2">Challenge invitation</h5>
-                                            <p class="mb-2"><span class="text-dark">Jonny aber</span> invites to
-                                                join the challenge</p>
-                                            <button class="btn btn-sm btn-outline-secondary me-2">Decline</button>
-                                            <button class="btn btn-sm btn-primary">Accept</button>
+                                            <span class="float-end text-sm text-muted">{{ Carbon\Carbon::parse($belum_bayar->due_date)->format('d F Y')}}</span>
+                                            <h5 class="text-body mb-2">{{ $belum_bayar->invoice_number }}</h5>
+                                            <p class="mb-2"><span class="text-dark">{{ $belum_bayar->order->customer->nama_customer }}</span></p>
+                                            <button class="btn btn-sm btn-outline-danger me-2">Belum Bayar</button>
+                                            <button class="btn btn-sm btn-outline-success">Sudah Bayar</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card mb-2">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0">
-                                            <svg class="pc-icon text-primary">
-                                                <use xlink:href="#custom-security-safe"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <span class="float-end text-sm text-muted">5 hour ago</span>
-                                            <h5 class="text-body mb-2">Security</h5>
-                                            <p class="mb-0">Lorem Ipsum has been the industry's standard dummy
-                                                text ever since the 1500s, when an unknown printer took a galley of
-                                                type and scrambled it to make a type</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center py-2">
-                            <a href="#!" class="link-danger">Clear all Notifications</a>
+                            @endforeach
                         </div>
                     </div>
                 </li>

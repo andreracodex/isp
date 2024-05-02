@@ -482,7 +482,7 @@
                                 <tr>
                                     <th style="width: 10px;">#</th>
                                     <th>No</th>
-                                    <th>Nama Customer & Nomor ID</th>
+                                    <th>Customer & ID</th>
                                     <th>Alamat & Lokasi</th>
                                     <th>Telpon</th>
                                     <th>Paket</th>

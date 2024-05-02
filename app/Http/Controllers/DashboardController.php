@@ -106,7 +106,7 @@ class DashboardController extends Controller
                 'pembayaran_count',
                 'payments',
                 'sudah',
-                'belum'
+                'belum',
             )
         );
     }

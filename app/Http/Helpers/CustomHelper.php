@@ -200,3 +200,14 @@ function convert_phone($phoneNumber)
         return $phoneNumber;
     }
 }
+
+function belum_bayar()
+{
+    $belum_bayar = OrderDetail::leftJoin('orders', 'order_details.order_id', 'orders.id')
+        ->leftJoin('customers', 'orders.customer_id', 'customers.id')
+        ->leftJoin('pakets', 'orders.paket_id', 'pakets.id')
+        ->where('order_details.is_payed', 0)
+        ->orderBy('order_details.created_at', 'desc')->take(10)->get();
+
+    return $belum_bayar;
+}
