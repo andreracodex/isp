@@ -113,18 +113,6 @@ class LaporanController extends Controller
                 $formatted_price = str_replace(",00", "", $formatted_price);
                 return $formatted_price;
             })
-            ->addColumn('action', function (OrderDetail $orderdetail) {
-                if($orderdetail->is_payed == 1){
-                    return "
-                    <a href=". route('laporan.view', $orderdetail->order_id)." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
-                    ";
-                }else{
-                    return "
-                    <a href=". route('laporan.view', $orderdetail->order_id)." class='avtar avtar-xs btn-link-success btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='View Data'><i class='fa fa-eye'></i></a>
-                    <button class='avtar avtar-xs btn btn-link-warning btn-pc-default updatepayment' data-id='$orderdetail->id' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Payment Status'><i class='material-icons-two-tone'>attach_money</i> </button>
-                    ";
-                }
-            })
             ->make(true);
             // <a href=". route('order.edit', $orderdetail->id) ." class='avtar avtar-xs btn-link-warning btn-pc-default' type='button' data-container='body' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit Data'><i class='fa fa-pencil-alt'></i></a>
             //     <button type='button' class='avtar avtar-xs btn-link-danger btn-pc-default hapusOrder' data-id='$orderdetail->id'><i class='fa fa-trash-alt'></i></button>

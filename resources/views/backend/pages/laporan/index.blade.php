@@ -83,7 +83,7 @@
                         d.status = status;
                         return d
                     },
-                    error: function (jqXHR, textStatus, errorThrown) {
+                    error: function(jqXHR, textStatus, errorThrown) {
                         // Do something here
                         // console.log(errorThrown);
                         // console.log(textStatus);
@@ -118,7 +118,7 @@
                     [10, 25, 50, "All"]
                 ],
                 order: [
-                    [2, 'asc']
+                    [1, 'asc']
                 ],
                 select: {
                     style: 'multi',
@@ -137,8 +137,12 @@
                     searchable: false,
                     checkboxes: {
                         selectRow: true
-                    }
-                }, ],
+                    },
+                }, {
+                    target: 4,
+                    visible: false,
+                    searchable: false
+                }],
                 // Ini Option supaya semua
                 columns: [{
                         data: 'DT_RowIndex',
@@ -211,12 +215,6 @@
                                 return '<span class="badge bg-light-primary rounded-pill f-12"> Isolir </span>';
                             }
                         }
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        searchable: false,
-                        orderable: false
                     },
                 ],
                 "initComplete": function() {
@@ -389,7 +387,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Tagihan</h2>
+                        <h2 class="mb-0">Laporan Bulanan</h2>
                     </div>
                 </div>
             </div>
@@ -435,13 +433,6 @@
                         <div class="col-sm-3 col-md-3">
                             <div class="mb-3">
                                 <label class="form-label headerbutton">Jatuh Tempo
-                                    <sup class="mt-2">
-                                        <b>
-                                            <a href="{{ route('periode.create') }}">
-                                                <i class="ti ti-plus me-1"></i>Tambah Periode
-                                            </a>
-                                        </b>
-                                    </sup>
                                 </label>
                                 <select name="jatuh_tempo" id="jatuh_tempo" class="form-control select2" required>
                                     <option value="0">All Tempo</option>
@@ -475,14 +466,13 @@
                                 <tr>
                                     <th style="width: 10px;">#</th>
                                     <th>No</th>
-                                    <th>Nama Customer & Nomor ID</th>
+                                    <th>Customer & ID</th>
                                     <th>Alamat & Lokasi</th>
                                     <th>Telpon</th>
                                     <th>Paket</th>
                                     <th>Jatuh Tempo</th>
                                     <th>Tagihan</th>
                                     <th>Status</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -490,7 +480,6 @@
                             <tfoot>
                                 <tr>
                                     <th colspan="7" style="text-align:right">Total Tagihan:</th>
-                                    <th></th>
                                     <th></th>
                                     <th></th>
                                 </tr>
