@@ -23,7 +23,9 @@ class OrderController extends Controller
     public function index(Request $request){
         $profile = Setting::all();
         $customer = Customer::all();
-        $date = Periode::where('is_active', 1)->get();
+        $firstMonthOfYear = Carbon::now()->startOfMonth()->subMonth(1);
+        $lastMonthOfYear = Carbon::now()->endOfYear();
+        $date = Periode::whereBetween('bulan_periode', [$firstMonthOfYear, $lastMonthOfYear])->where('is_active', 1)->get();
         $data_table = OrderDetail::select('orders.id as orderid',
         'orders.customer_id',
         'orders.location_id',
@@ -50,7 +52,6 @@ class OrderController extends Controller
         'order_details.is_active'
         )
             ->leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
-            ->where('order_details.is_payed', 0)
             ->orderBy('order_details.created_at', 'DESC')
             ->get();
 
@@ -76,13 +77,12 @@ class OrderController extends Controller
             $data_table = $data_table;
         }
 
-        if($request->input('status') == "null" || $request->input('status') == null){
-            // Non Active
-            $data_table = $data_table;
-        }else{
+        if($request->input('status') != "null" && $request->input('status') != null){
             // All
             $status = $request->input('status');
             $data_table = $data_table->where('is_payed', '=', $status);
+        }else{
+            $data_table = $data_table;
         }
 
         if ($request->ajax()){
