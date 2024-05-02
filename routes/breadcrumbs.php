@@ -285,3 +285,7 @@ Breadcrumbs::for('ticketcat.store', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Simpan Ticket', route('ticketcat.store'));
 });
+Breadcrumbs::for('laporan.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Laporan', route('laporan.index'));
+});

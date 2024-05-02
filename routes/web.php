@@ -9,6 +9,7 @@ use App\Http\Controllers\IndoRegionController;
 use App\Http\Controllers\InventarisController;
 use App\Http\Controllers\InventarisKategoriController;
 use App\Http\Controllers\InventarisSatuanController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
@@ -229,5 +230,10 @@ Route::middleware('auth', 'has.role', 'auth.session')->group(function () {
         Route::post('kota', [IndoRegionController::class, 'kota'])->name('region.kota');
         Route::post('kecamatan', [IndoRegionController::class, 'kecamatan'])->name('region.kecamatan');
         Route::post('kelurahan', [IndoRegionController::class, 'kelurahan'])->name('region.kelurahan');
+    });
+
+    // Laporan
+    Route::prefix('laporan')->group(function () {
+        Route::get('', [LaporanController::class, 'index'])->name('laporan.index');
     });
 });
