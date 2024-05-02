@@ -138,7 +138,11 @@
                     checkboxes: {
                         selectRow: true
                     }
-                }, ],
+                },{
+                    target: 4,
+                    visible: false,
+                    searchable: false
+                } ],
                 // Ini Option supaya semua
                 columns: [{
                         data: 'DT_RowIndex',
