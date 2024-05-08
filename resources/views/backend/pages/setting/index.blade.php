@@ -269,247 +269,259 @@
                                 </a>
                             </li>
                         @endcan
-                </ul>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="tab-content">
-            <div class="tab-pane show active" id="profile-1" role="tabpanel" aria-labelledby="profile-tab-1">
-                <div class="row">
-                    <div class="col-lg-4 col-xxl-3">
-                        <div class="card">
-                            <div class="card-body position-relative">
-                                <div class="position-absolute end-0 top-0 p-3">
-                                    <span class="badge bg-primary">New</span>
-                                </div>
-                                <div class="text-center mt-3">
-                                    <div class="chat-avtar d-inline-flex mx-auto">
-                                        <img class="rounded-circle img-fluid wid-70"
-                                            src="{{ asset(Auth::user()->real_path) }}" alt="User image">
+            <div class="tab-content">
+                <div class="tab-pane show active" id="profile-1" role="tabpanel" aria-labelledby="profile-tab-1">
+                    <div class="row">
+                        <div class="col-lg-4 col-xxl-3">
+                            <div class="card">
+                                <div class="card-body position-relative">
+                                    <div class="position-absolute end-0 top-0 p-3">
+                                        <span class="badge bg-primary">New</span>
                                     </div>
-                                    <h5 class="mb-0">
-                                        @if (Auth::user()->name != null)
-                                            {{ Auth::user()->name }}
-                                        @else
-                                            -
-                                        @endif
-                                    </h5>
-                                    <p class="text-muted text-sm">ID:@if (Auth::user()->customer != null)
-                                            {{ Auth::user()->customer->nomor_layanan }}
-                                        @else
-                                            -
-                                        @endif
-                                    </p>
-                                    <hr class="my-3 border border-secondary-subtle">
-                                    <div class="d-inline-flex align-items-center justify-content-start w-100 mb-3">
-                                        <i class="ti ti-mail me-2"></i>
-                                        <p class="mb-0">
-                                            @if (Auth::user()->email != null)
-                                                {{ Auth::user()->email }}
+                                    <div class="text-center mt-3">
+                                        <div class="chat-avtar d-inline-flex mx-auto">
+                                            <img class="rounded-circle img-fluid wid-70"
+                                                src="{{ asset(Auth::user()->real_path) }}" alt="User image">
+                                        </div>
+                                        <h5 class="mb-0">
+                                            @if (Auth::user()->name != null)
+                                                {{ Auth::user()->name }}
+                                            @else
+                                                -
+                                            @endif
+                                        </h5>
+                                        <p class="text-muted text-sm">ID:@if (Auth::user()->customer != null)
+                                                {{ Auth::user()->customer->nomor_layanan }}
                                             @else
                                                 -
                                             @endif
                                         </p>
-                                    </div>
-                                    <div class="d-inline-flex align-items-center justify-content-start w-100 mb-3">
-                                        <i class="ti ti-phone me-2"></i>
-                                        <p class="mb-0">
-                                            @if (Auth::user()->user_type != 'admin')
-                                                @if (Auth::user()->customer != null)
-                                                    {{ Auth::user()->customer->nomor_telephone }}
+                                        <hr class="my-3 border border-secondary-subtle">
+                                        <div class="d-inline-flex align-items-center justify-content-start w-100 mb-3">
+                                            <i class="ti ti-mail me-2"></i>
+                                            <p class="mb-0">
+                                                @if (Auth::user()->email != null)
+                                                    {{ Auth::user()->email }}
                                                 @else
                                                     -
                                                 @endif
-                                            @else
-                                                @if (Auth::user()->employee != null)
-                                                    {{ Auth::user()->employee->nomor_telephone }}
+                                            </p>
+                                        </div>
+                                        <div class="d-inline-flex align-items-center justify-content-start w-100 mb-3">
+                                            <i class="ti ti-phone me-2"></i>
+                                            <p class="mb-0">
+                                                @if (Auth::user()->user_type != 'admin')
+                                                    @if (Auth::user()->customer != null)
+                                                        {{ Auth::user()->customer->nomor_telephone }}
+                                                    @else
+                                                        -
+                                                    @endif
                                                 @else
-                                                    -
+                                                    @if (Auth::user()->employee != null)
+                                                        {{ Auth::user()->employee->nomor_telephone }}
+                                                    @else
+                                                        -
+                                                    @endif
                                                 @endif
-                                            @endif
-                                        </p>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-8 col-xxl-9">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Personal Detail Customer</h5>
-                            </div>
-                            <div class="card-body">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item px-0 pt-0">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <p class="mb-1 text-muted">Full Name</p>
-                                                <p class="mb-0">
-                                                    @if (Auth::user()->user_type != 'admin')
-                                                        @if (Auth::user()->customer != null)
-                                                            {{ Auth::user()->customer->nama_customer }}
+                        <div class="col-lg-8 col-xxl-9">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Personal Detail Customer</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item px-0 pt-0">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p class="mb-1 text-muted">Full Name</p>
+                                                    <p class="mb-0">
+                                                        @if (Auth::user()->user_type != 'admin')
+                                                            @if (Auth::user()->customer != null)
+                                                                {{ Auth::user()->customer->nama_customer }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @else
-                                                            -
+                                                            @if (Auth::user()->employee != null)
+                                                                {{ Auth::user()->employee->nama_karyawan }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @endif
-                                                    @else
-                                                        @if (Auth::user()->employee != null)
-                                                            {{ Auth::user()->employee->nama_karyawan }}
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="mb-1 text-muted">Gender</p>
+                                                    <p class="mb-0">
+                                                        @if (Auth::user()->user_type != 'admin')
+                                                            @if (Auth::user()->customer != null)
+                                                                {{ Auth::user()->customer->gender }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @else
-                                                            -
+                                                            @if (Auth::user()->employee != null)
+                                                                {{ Auth::user()->employee->gender }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @endif
-                                                    @endif
-                                                </p>
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p class="mb-1 text-muted">Gender</p>
-                                                <p class="mb-0">
-                                                    @if (Auth::user()->user_type != 'admin')
-                                                        @if (Auth::user()->customer != null)
-                                                            {{ Auth::user()->customer->gender }}
+                                        </li>
+                                        <li class="list-group-item px-0">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p class="mb-1 text-muted">Phone</p>
+                                                    <p class="mb-0">
+                                                        @if (Auth::user()->user_type != 'admin')
+                                                            @if (Auth::user()->customer != null)
+                                                                {{ Auth::user()->customer->nomor_telephone }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @else
-                                                            -
+                                                            @if (Auth::user()->employee != null)
+                                                                {{ Auth::user()->employee->nomor_telephone }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @endif
-                                                    @else
-                                                        @if (Auth::user()->employee != null)
-                                                            {{ Auth::user()->employee->gender }}
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="mb-1 text-muted">Kode POS</p>
+                                                    <p class="mb-0">
+                                                        @if (Auth::user()->user_type != 'admin')
+                                                            @if (Auth::user()->customer != null)
+                                                                {{ Auth::user()->customer->kodepos_customer }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @else
-                                                            -
+                                                            @if (Auth::user()->employee != null)
+                                                                {{ Auth::user()->employee->kodepos_karyawan }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @endif
-                                                    @endif
-                                                </p>
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item px-0">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <p class="mb-1 text-muted">Phone</p>
-                                                <p class="mb-0">
-                                                    @if (Auth::user()->user_type != 'admin')
-                                                        @if (Auth::user()->customer != null)
-                                                            {{ Auth::user()->customer->nomor_telephone }}
+                                        </li>
+                                        <li class="list-group-item px-0">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p class="mb-1 text-muted">Kecamatan</p>
+                                                    <p class="mb-0">
+                                                        @if (Auth::user()->user_type != 'admin')
+                                                            @if (Auth::user()->customer != null)
+                                                                {{ Auth::user()->customer->kecamatan_customer }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @else
-                                                            -
+                                                            @if (Auth::user()->employee != null)
+                                                                {{ Auth::user()->employee->kecamatan_karyawan }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @endif
-                                                    @else
-                                                        @if (Auth::user()->employee != null)
-                                                            {{ Auth::user()->employee->nomor_telephone }}
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="mb-1 text-muted">Desa</p>
+                                                    <p class="mb-0">
+                                                        @if (Auth::user()->user_type != 'admin')
+                                                            @if (Auth::user()->customer != null)
+                                                                {{ Auth::user()->customer->desa_customer }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @else
-                                                            -
+                                                            @if (Auth::user()->employee != null)
+                                                                {{ Auth::user()->employee->desa_karyawan }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                         @endif
-                                                    @endif
-                                                </p>
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p class="mb-1 text-muted">Kode POS</p>
-                                                <p class="mb-0">
-                                                    @if (Auth::user()->user_type != 'admin')
-                                                        @if (Auth::user()->customer != null)
-                                                            {{ Auth::user()->customer->kodepos_customer }}
-                                                        @else
-                                                            -
-                                                        @endif
+                                        </li>
+                                        <li class="list-group-item px-0 pb-0">
+                                            <p class="mb-1 text-muted">Alamat</p>
+                                            <p class="mb-0">
+                                                @if (Auth::user()->user_type != 'admin')
+                                                    @if (Auth::user()->customer != null)
+                                                        {{ Auth::user()->customer->alamat_customer }}
                                                     @else
-                                                        @if (Auth::user()->employee != null)
-                                                            {{ Auth::user()->employee->kodepos_karyawan }}
-                                                        @else
-                                                            -
-                                                        @endif
+                                                        -
                                                     @endif
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item px-0">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <p class="mb-1 text-muted">Kecamatan</p>
-                                                <p class="mb-0">
-                                                    @if (Auth::user()->user_type != 'admin')
-                                                        @if (Auth::user()->customer != null)
-                                                            {{ Auth::user()->customer->kecamatan_customer }}
-                                                        @else
-                                                            -
-                                                        @endif
-                                                    @else
-                                                        @if (Auth::user()->employee != null)
-                                                            {{ Auth::user()->employee->kecamatan_karyawan }}
-                                                        @else
-                                                            -
-                                                        @endif
-                                                    @endif
-                                                </p>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p class="mb-1 text-muted">Desa</p>
-                                                <p class="mb-0">
-                                                    @if (Auth::user()->user_type != 'admin')
-                                                        @if (Auth::user()->customer != null)
-                                                            {{ Auth::user()->customer->desa_customer }}
-                                                        @else
-                                                            -
-                                                        @endif
-                                                    @else
-                                                        @if (Auth::user()->employee != null)
-                                                            {{ Auth::user()->employee->desa_karyawan }}
-                                                        @else
-                                                            -
-                                                        @endif
-                                                    @endif
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item px-0 pb-0">
-                                        <p class="mb-1 text-muted">Alamat</p>
-                                        <p class="mb-0">
-                                            @if (Auth::user()->user_type != 'admin')
-                                                @if (Auth::user()->customer != null)
-                                                    {{ Auth::user()->customer->alamat_customer }}
                                                 @else
-                                                    -
+                                                    @if (Auth::user()->employee != null)
+                                                        {{ Auth::user()->employee->alamat_karyawan }}
+                                                    @else
+                                                        -
+                                                    @endif
                                                 @endif
-                                            @else
-                                                @if (Auth::user()->employee != null)
-                                                    {{ Auth::user()->employee->alamat_karyawan }}
-                                                @else
-                                                    -
-                                                @endif
-                                            @endif
-                                        </p>
-                                    </li>
-                                </ul>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="tab-pane" id="profile-2" role="tabpanel" aria-labelledby="profile-tab-2">
-                @include('backend.pages.setting.partials.form-personal')
-            </div>
-            <div class="tab-pane" id="profile-3" role="tabpanel" aria-labelledby="profile-tab-3">
-                @include('backend.pages.setting.partials.form-pin')
-            </div>
-            <div class="tab-pane" id="profile-4" role="tabpanel" aria-labelledby="profile-tab-4">
-                @include('backend.pages.setting.partials.form-password')
-            </div>
-            <div class="tab-pane" id="profile-5" role="tabpanel" aria-labelledby="profile-tab-5">
-                @include('backend.pages.setting.partials.form-roles')
-            </div>
-            <div class="tab-pane" id="profile-6" role="tabpanel" aria-labelledby="profile-tab-6">
-                @include('backend.pages.setting.partials.form-setting')
-            </div>
-            <div class="tab-pane" id="profile-7" role="tabpanel" aria-labelledby="profile-tab-7">
-                @include('backend.pages.setting.partials.form-settingwa')
-            </div>
-            <div class="tab-pane" id="profile-8" role="tabpanel" aria-labelledby="profile-tab-8">
-                @include('backend.pages.setting.partials.form-settingwamessages')
-            </div>
-            <div class="tab-pane" id="profile-9" role="tabpanel" aria-labelledby="profile-tab-9">
-                @include('backend.pages.setting.partials.form-settingtripay')
-            </div>
+                <div class="tab-pane" id="profile-2" role="tabpanel" aria-labelledby="profile-tab-2">
+                    @include('backend.pages.setting.partials.form-personal')
+                </div>
+                <div class="tab-pane" id="profile-3" role="tabpanel" aria-labelledby="profile-tab-3">
+                    @include('backend.pages.setting.partials.form-pin')
+                </div>
+                <div class="tab-pane" id="profile-4" role="tabpanel" aria-labelledby="profile-tab-4">
+                    @include('backend.pages.setting.partials.form-password')
+                </div>
+                <div class="tab-pane" id="profile-5" role="tabpanel" aria-labelledby="profile-tab-5">
+                    @include('backend.pages.setting.partials.form-roles')
+                </div>
+                <div class="tab-pane" id="profile-6" role="tabpanel" aria-labelledby="profile-tab-6">
+                    @include('backend.pages.setting.partials.form-setting')
+                </div>
+                <div class="tab-pane" id="profile-7" role="tabpanel" aria-labelledby="profile-tab-7">
+                    @include('backend.pages.setting.partials.form-settingwa')
+                </div>
+                <div class="tab-pane" id="profile-8" role="tabpanel" aria-labelledby="profile-tab-8">
+                    @include('backend.pages.setting.partials.form-settingwamessages')
+                </div>
+                <div class="tab-pane" id="profile-9" role="tabpanel" aria-labelledby="profile-tab-9">
+                    @include('backend.pages.setting.partials.form-settingtripay')
+                </div>
 
+            </div>
         </div>
+        <!-- [ sample-page ] end -->
     </div>
-    <!-- [ sample-page ] end -->
-</div>
 @endsection
+
+@push('script')
+    <!-- Ckeditor js -->
+    <script src="{{ asset('/js/plugins/ckeditor/classic/ckeditor.js') }}"></script>
+    <script>
+        (function() {
+            ClassicEditor.create(document.querySelector('#editor')).catch((error) => {
+                console.error(error);
+            });
+        })();
+    </script>
+@endpush

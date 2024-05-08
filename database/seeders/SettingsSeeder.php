@@ -282,31 +282,39 @@ class SettingsSeeder extends Seeder
                 'value' => 'T16176',
                 'created_by' => 1,
             ),
+
+            // FORMAT LAMA (TAGIHAN)
+            // array(
+            //     'name' => "wa_tagihan",
+            //     'value' => "Yth Pelanggan GNET
+
+            //     Hallo Bapak/Ibu,
+            //     _customer_,
+
+            //     No Invocie Tagihan : _invoices_ .
+            //     Bulan : _bulantahun_ .
+            //     Total Tagihan : _nominaltagihan_ .
+            //     Jatuh Tempo : _jatuhtempo_ .
+
+            //     Bank Tersedia :
+            //     BANK MANDIRI : _bankmandiri_
+            //     BANK BCA : _bankbca_
+            //     BANK BRI : _bankbri_
+            //     BANK BNI : _bankbni_
+            //     A/N PUTUT WAHYUDI
+
+            //     Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir
+
+            //     Hormat kami
+            //     PT. Global Data Network
+            //     Jl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.
+            //     Phone : 085731770730 / 085648747901",
+            //     'created_by' => 1,
+            // ),
+
             array(
                 'name' => "wa_tagihan",
-                'value' => "Yth Pelanggan GNET
-
-                Hallo Bapak/Ibu,
-                _customer_,
-
-                No Invocie Tagihan : _invoices_ .
-                Bulan : _bulantahun_ .
-                Total Tagihan : _nominaltagihan_ .
-                Jatuh Tempo : _jatuhtempo_ .
-
-                Bank Tersedia :
-                BANK MANDIRI : _bankmandiri_
-                BANK BCA : _bankbca_
-                BANK BRI : _bankbri_
-                BANK BNI : _bankbni_
-                A/N PUTUT WAHYUDI
-
-                Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir
-
-                Hormat kami
-                PT. Global Data Network
-                Jl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.
-                Phone : 085731770730 / 085648747901",
+                'value' => "<p>Yth Pelanggan</p><p>GNET Hallo Bapak/Ibu,&nbsp;<br>_customer_,&nbsp;</p><p>No Invocie Tagihan : _invoices_ .<br>Bulan : _bulantahun_ .<br>Total Tagihan : _nominaltagihan_ .<br>Jatuh Tempo : _jatuhtempo_ .</p><p>Bank Tersedia :<br>BANK MANDIRI : _bankmandiri_<br>BANK BCA : _bankbca_<br>BANK BRI : _bankbri_<br>BANK BNI : _bankbni_<br>A/N PUTUT WAHYUDI</p><p>Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir.</p><p>Hormat kami<br>PT. Global Data Network Jl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.<br>Phone : 085731770730 / 085648747901</p>",
                 'created_by' => 1,
             ),
             array(

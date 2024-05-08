@@ -148,4 +148,20 @@ class SettingsController extends Controller
 
         return redirect()->back()->with('success', 'Settings updated successfully.');
     }
+
+    public function wamessages(Request $request)
+    {
+        $settings = $request->input('settings');
+
+        foreach ($settings as $settingId => $value) {
+            $setting = Setting::find($settingId);
+
+            if ($setting) {
+                $setting->value = $value;
+                $setting->save();
+            }
+        }
+
+        return redirect()->route('settings.index')->with(['success' => 'WA Message berhasil diubah!']);
+    }
 }
