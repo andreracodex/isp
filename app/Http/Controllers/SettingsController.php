@@ -48,10 +48,13 @@ class SettingsController extends Controller
             ->orWhere('name', 'tripay_api_debug')
             ->orWhere('name', 'tripay_merchant_code')
             ->get();
+        $wamessages = Setting::where('name', 'wa_tagihan')
+            ->orWhere('name', 'wa_terbayar')
+            ->get();
         $usersetting = UserSetting::all();
         $sess = Sessions::where('user_id', Auth::user()->id)->get();
 
-        return view('backend.pages.setting.index', compact('users', 'profile', 'usersetting', 'sess', 'ip', 'roles', 'websetting', 'webwa', 'settingwatoken', 'settingtripay'));
+        return view('backend.pages.setting.index', compact('users', 'profile', 'usersetting', 'sess', 'ip', 'roles', 'websetting', 'webwa', 'settingwatoken', 'settingtripay', 'wamessages'));
     }
 
     public function store() {

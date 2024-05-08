@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('setting', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('value');
+            $table->longText('value');
             $table->string('created_by');
             $table->integer('is_active')->default(1);
             $table->timestamps();

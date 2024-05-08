@@ -219,6 +219,7 @@ Route::middleware('auth', 'has.role', 'auth.session')->group(function () {
         Route::post('/updatesetting', [SettingsController::class, 'settings'])->name('websetting.settings');
         Route::post('/updatetripay', [SettingsController::class, 'updatetripay'])->name('websetting.updatetripay');
         Route::post('/updatewa', [SettingsController::class, 'wasettings'])->name('websetting.wasettings');
+        Route::post('/updatewamessages', [SettingsController::class, 'wamessages'])->name('websetting.wamessages');
     });
 
 
