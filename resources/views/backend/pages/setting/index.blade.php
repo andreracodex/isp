@@ -524,4 +524,11 @@
             });
         })();
     </script>
+    <script>
+        (function() {
+            ClassicEditor.create(document.querySelector('#editor2')).catch((error) => {
+                console.error(error);
+            });
+        })();
+    </script>
 @endpush
