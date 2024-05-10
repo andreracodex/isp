@@ -119,10 +119,8 @@
                     <p>
                         Format Tersedia:
                         <span class="badge bg-secondary">_customer_</span>
-                        <span class="badge bg-secondary">_invoices_</span>
+                        <span class="badge bg-secondary">_tanggaldaftar_</span>
                         <span class="badge bg-secondary">_bulantahun_</span>
-                        <span class="badge bg-secondary">_metode_bayar_</span>
-                        <span class="badge bg-secondary">_tanggalbayar_ </span>
                     </p>
                 </div>
                 <div class="card-body">
