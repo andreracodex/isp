@@ -50,6 +50,7 @@ class SettingsController extends Controller
             ->get();
         $wamessages = Setting::where('name', 'wa_tagihan')
             ->orWhere('name', 'wa_terbayar')
+            ->orWhere('name', 'wa_pelanggan')
             ->get();
         $usersetting = UserSetting::all();
         $sess = Sessions::where('user_id', Auth::user()->id)->get();

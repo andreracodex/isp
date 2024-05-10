@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-12">
         <div class="card">
             <form action="{{ route('websetting.wamessages') }}" method="POST">
                 @csrf
@@ -28,6 +28,8 @@
                                         $name = 'Tagihan Belum Bayar Messages (Tagihan)';
                                     } elseif ($settings->name == 'wa_terbayar') {
                                         $name = 'Tagihan Terbayar Messages (Lunas)';
+                                    } elseif ($settings->name == 'wa_pelanggan') {
+                                        $name = 'Customer Baru Messages';
                                     } else {
                                         $name = $settings->name;
                                     }
@@ -55,7 +57,7 @@
             </form>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-12">
         <div class="card">
             <form action="{{ route('websetting.wamessages') }}" method="POST">
                 @csrf
@@ -79,6 +81,8 @@
                                         $name = 'Tagihan Belum Bayar Messages (Tagihan)';
                                     } elseif ($settings->name == 'wa_terbayar') {
                                         $name = 'Tagihan Terbayar Messages (Lunas)';
+                                    } elseif ($settings->name == 'wa_pelanggan') {
+                                        $name = 'Customer Baru Messages';
                                     } else {
                                         $name = $settings->name;
                                     }
@@ -102,6 +106,60 @@
                 <div class="card-footer text-end btn-page">
                     <div class="btn btn-outline-secondary">Cancel</div>
                     <button class="btn btn-primary" type="submit">Update Terbayar Messages</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="card">
+            <form action="{{ route('websetting.wamessages') }}" method="POST">
+                @csrf
+                <div class="card-header">
+                    <h5>WA Messages Format (Pelanggan)</h5>
+                    <p>
+                        Format Tersedia:
+                        <span class="badge bg-secondary">_customer_</span>
+                        <span class="badge bg-secondary">_invoices_</span>
+                        <span class="badge bg-secondary">_bulantahun_</span>
+                        <span class="badge bg-secondary">_metode_bayar_</span>
+                        <span class="badge bg-secondary">_tanggalbayar_ </span>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <ul class="list-group list-group-flush">
+                            @foreach ($wamessages as $settings)
+                                @php
+                                    if ($settings->name == 'wa_tagihan') {
+                                        $name = 'Tagihan Belum Bayar Messages (Tagihan)';
+                                    } elseif ($settings->name == 'wa_terbayar') {
+                                        $name = 'Tagihan Terbayar Messages (Lunas)';
+                                    } elseif ($settings->name == 'wa_pelanggan') {
+                                        $name = 'Customer Baru Messages';
+                                    } else {
+                                        $name = $settings->name;
+                                    }
+                                @endphp
+                                @if ($settings->name == 'wa_pelanggan')
+
+                                    <li class="list-group-item">
+                                        <div>
+                                            <p class="mb-1">{{ $name }} :</p>
+                                        </div>
+                                        <div class="form-check form-switch p-0">
+                                            {{-- <textarea class="form-control">{{ $settings->value }}</textarea> --}}
+                                            <textarea name="settings[{{ $settings->id }}]" id="editor3">{!! $settings->value !!}</textarea>
+                                        </div>
+                                    </li>
+                                @else
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer text-end btn-page">
+                    <div class="btn btn-outline-secondary">Cancel</div>
+                    <button class="btn btn-primary" type="submit">Update Pelanggan Messages</button>
                 </div>
             </form>
         </div>
