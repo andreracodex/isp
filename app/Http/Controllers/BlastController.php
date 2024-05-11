@@ -49,7 +49,7 @@ class BlastController extends Controller
                 curl_close($curl);
             }
 
-            return redirect()->back()->with(['success' => 'Pesan sudah dikirimkan ke customer !']);
+            return redirect()->route('blast.index')->with('success', 'Pesan Berhasil Dibuat.');
         }catch (\Exception $eror){
             return redirect()->back()->with(['error' => 'Gagal Kirim WA Blast '.$eror.'!']);
         }
