@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BankController;
+use App\Http\Controllers\BlastController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
@@ -231,6 +232,11 @@ Route::middleware('auth', 'has.role', 'auth.session')->group(function () {
         Route::post('kota', [IndoRegionController::class, 'kota'])->name('region.kota');
         Route::post('kecamatan', [IndoRegionController::class, 'kecamatan'])->name('region.kecamatan');
         Route::post('kelurahan', [IndoRegionController::class, 'kelurahan'])->name('region.kelurahan');
+    });
+
+    Route::prefix('blast')->group(function () {
+        Route::get('', [BlastController::class, 'index'])->name('blast.index');
+        Route::post('/store', [BlastController::class, 'store'])->name('blast.store');
     });
 
     // Laporan

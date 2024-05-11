@@ -289,3 +289,9 @@ Breadcrumbs::for('laporan.index', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Laporan', route('laporan.index'));
 });
+
+// Blast
+Breadcrumbs::for('blast.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Blast WA', route('blast.index'));
+});

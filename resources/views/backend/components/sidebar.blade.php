@@ -132,7 +132,13 @@
                                 <use xlink:href="#custom-24-support"></use>
                             </svg> </span><span class="pc-mtext">Ticket</span></a>
                 </li>
-
+                <li class="pc-item pc-hasmenu">
+                    <a href="{{ route('blast.index') }}" class="pc-link"><span class="pc-micon">
+                            <svg class="pc-icon">
+                                <use xlink:href="#custom-text-block"></use>
+                            </svg> </span><span class="pc-mtext">Blast WA</span></a>
+                </li>
+                {{-- Settings Section --}}
                 <li class="pc-item pc-caption">
                     <label>Settings</label>
                     <i class="ti ti-chart-arcs"></i>
