@@ -7,16 +7,16 @@
                     <h5>WA Messages Format (Tagihan)</h5>
                     <p>
                         Format Tersedia:
-                        <span class="badge bg-secondary">_customer_</span>
-                        <span class="badge bg-secondary">_invoices_</span>
-                        <span class="badge bg-secondary">_bulantahun_</span>
-                        <span class="badge bg-secondary">_nominaltagihan_</span>
-                        <span class="badge bg-secondary">_jatuhtempo_</span>
-                        <span class="badge bg-secondary">_bankmandiri_</span>
-                        <span class="badge bg-secondary">_bankbca_</span>
-                        <span class="badge bg-secondary">_bankbri_</span>
-                        <span class="badge bg-secondary">_bankbni_</span>
-                        <span class="badge bg-secondary">_linkurlpayment_</span>
+                        <span class="badge bg-secondary">%customer%</span>
+                        <span class="badge bg-secondary">%invoices%</span>
+                        <span class="badge bg-secondary">%bulantahun%</span>
+                        <span class="badge bg-secondary">%nominaltagihan%</span>
+                        <span class="badge bg-secondary">%jatuhtempo%</span>
+                        <span class="badge bg-secondary">%bankmandiri%</span>
+                        <span class="badge bg-secondary">%bankbca%</span>
+                        <span class="badge bg-secondary">%bankbri%</span>
+                        <span class="badge bg-secondary">%bankbni%</span>
+                        <span class="badge bg-secondary">%linkurlpayment%</span>
                     </p>
                 </div>
                 <div class="card-body">
@@ -65,11 +65,11 @@
                     <h5>WA Messages Format (Terbayar)</h5>
                     <p>
                         Format Tersedia:
-                        <span class="badge bg-secondary">_customer_</span>
-                        <span class="badge bg-secondary">_invoices_</span>
-                        <span class="badge bg-secondary">_bulantahun_</span>
-                        <span class="badge bg-secondary">_metode_bayar_</span>
-                        <span class="badge bg-secondary">_tanggalbayar_ </span>
+                        <span class="badge bg-secondary">%customer%</span>
+                        <span class="badge bg-secondary">%invoices%</span>
+                        <span class="badge bg-secondary">%bulantahun%</span>
+                        <span class="badge bg-secondary">%metode_bayar%</span>
+                        <span class="badge bg-secondary">%tanggalbayar%</span>
                     </p>
                 </div>
                 <div class="card-body">
@@ -118,9 +118,9 @@
                     <h5>WA Messages Format (Pelanggan)</h5>
                     <p>
                         Format Tersedia:
-                        <span class="badge bg-secondary">_customer_</span>
-                        <span class="badge bg-secondary">_tanggaldaftar_</span>
-                        <span class="badge bg-secondary">_bulantahun_</span>
+                        <span class="badge bg-secondary">%customer%</span>
+                        <span class="badge bg-secondary">%tanggaldaftar%</span>
+                        <span class="badge bg-secondary">%bulantahun%</span>
                     </p>
                 </div>
                 <div class="card-body">
@@ -139,7 +139,6 @@
                                     }
                                 @endphp
                                 @if ($settings->name == 'wa_pelanggan')
-
                                     <li class="list-group-item">
                                         <div>
                                             <p class="mb-1">{{ $name }} :</p>
