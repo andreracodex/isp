@@ -282,49 +282,19 @@ class SettingsSeeder extends Seeder
                 'value' => 'T16176',
                 'created_by' => 1,
             ),
-
-            // FORMAT LAMA (TAGIHAN)
-            // array(
-            //     'name' => "wa_tagihan",
-            //     'value' => "Yth Pelanggan GNET
-
-            //     Hallo Bapak/Ibu,
-            //     _customer_,
-
-            //     No Invocie Tagihan : _invoices_ .
-            //     Bulan : _bulantahun_ .
-            //     Total Tagihan : _nominaltagihan_ .
-            //     Jatuh Tempo : _jatuhtempo_ .
-
-            //     Bank Tersedia :
-            //     BANK MANDIRI : _bankmandiri_
-            //     BANK BCA : _bankbca_
-            //     BANK BRI : _bankbri_
-            //     BANK BNI : _bankbni_
-            //     A/N PUTUT WAHYUDI
-
-            //     Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir
-
-            //     Hormat kami
-            //     PT. Global Data Network
-            //     Jl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.
-            //     Phone : 085731770730 / 085648747901",
-            //     'created_by' => 1,
-            // ),
-
             array(
                 'name' => "wa_tagihan",
-                'value' => "<p><strong>Yth Pelanggan GNET&nbsp;</strong><br><br>Hallo Bapak/Ibu,&nbsp;<br><strong>%customer%,&nbsp;</strong></p><p>No Invocie Tagihan :<strong> %invoices%</strong>.<br>Bulan : <strong>_bulantahun%</strong>.<br>Total Tagihan : <strong>%nominaltagihan%</strong>.<br>Jatuh Tempo : <strong>%jatuhtempo%</strong> .</p><p>Bank Tersedia :<br><strong>BANK MANDIRI</strong> : <strong>%bankmandiri%.</strong><br><strong>BANK BCA</strong> : <strong>%bankbca%.</strong><br><strong>BANK BRI</strong> : <strong>%bankbri%</strong>.<br><strong>BANK BNI</strong> : <strong>%bankbni%</strong>.<br>A/N <strong>PUTUT WAHYUDI</strong></p><p>Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir.</p><p>Hormat kami<br><strong>PT. Global Data Network</strong>&nbsp;<br>Jl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.<br>Phone : 085731770730 / 085648747901<br>&nbsp;</p><p><strong>%linkurlpayment%</strong></p>",
+                'value' => "<p><strong>Yth Pelanggan GNET</strong><br><br>Hallo Bapak/Ibu,<br><strong>%customer% ,</strong></p><p>No Invocie Tagihan :<strong>%invoices%</strong>.<br>Bulan : <strong>%bulantahun%</strong>.<br>Total Tagihan : <strong>%nominaltagihan%</strong>.<br>Jatuh Tempo : <strong>%jatuhtempo%</strong> .</p><p>Bank Tersedia :<br><strong>BANK MANDIRI</strong> : <strong>%bankmandiri% .</strong><br><strong>BANK BCA</strong> : <strong>%bankbca% .</strong><br><strong>BANK BRI</strong> : <strong>%bankbri% .</strong><br><strong>BANK BNI</strong> : <strong>%bankbni% .</strong><br>A/N <strong>PUTUT WAHYUDI</strong></p><p>Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir.</p><p>Hormat kami<br><strong>PT. Global Data Network</strong><br>Jl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.<br>Phone : 085731770730 / 085648747901<br></p><p><strong>%linkurlpayment%</strong></p>",
                 'created_by' => 1,
             ),
             array(
                 'name' => "wa_terbayar",
-                'value' => "<p><strong>Yth Pelanggan GNET</strong></p><p>Hallo Bapak/Ibu,<br><strong>%customer%</strong>,</p><p>Pembayaran internet telah berhasil dilakukan.</p><p>No Invocie Tagihan : <strong>%invoices%</strong>.<br>Bulan : <strong>%bulantahun%</strong>.<br>Via : <strong>%metode_bayar%</strong>.<br>Tanggal Pembayaran : <strong>%tanggalbayar%</strong>.<br>&nbsp;</p><p>Kami ingin mengucapkan terima kasih atas kepercayaan Anda menggunakan layanan internet kami.<br>Semoga layanan yang kami berikan dapat memenuhi kebutuhan Anda dengan baik.<br>Terima kasih atas dukungan dan kesetiaan Anda sebagai pelanggan kami.</p><p>Hormat kami<br><strong>PT. Global Data Network</strong><br>Jl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.<br>Phone : 085731770730 / 085648747901<br>&nbsp;</p>",
+                'value' => "<p><strong>Yth Pelanggan GNET</strong></p><p>Hallo Bapak/Ibu,<br><strong>%customer%</strong>,</p><p>Pembayaran internet telah berhasil dilakukan.</p><p>No Invocie Tagihan : <strong>%invoices%</strong>.<br>Bulan : <strong>%bulantahun%</strong>.<br>Via : <strong>%metode_bayar%</strong>.<br>Tanggal Pembayaran : <strong>%tanggalbayar%</strong>.<br>&nbsp;</p><p>Kami ingin mengucapkan terima kasih atas kepercayaan Anda menggunakan layanan internet kami.<br>Semoga layanan yang kami berikan dapat memenuhi kebutuhan Anda dengan baik.<br>Terima kasih atas dukungan dan kesetiaan Anda sebagai pelanggan kami.</p><p>Hormat kami<br><strong>PT. Global Data Network</strong><br>Jl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.<br>Phone : 085731770730 / 085648747901<br></p>",
                 'created_by' => 1,
             ),
             array(
                 'name' => "wa_pelanggan",
-                'value' => "<p><strong>Yth Pelanggan GNET</strong></p><p>Hallo Bapak/Ibu,<br><strong>_customer_</strong>,</p><p>Selamat datang, dan selamat menikmati layanan internet terbaik GNET,<br>Terima Kasih telah menggunakan jasa layanan internet kami.<br><br>Tanggal Pendaftaran : <strong>_tanggaldaftar_ </strong>.<br>Bulan : <strong>_bulantahun_</strong> .<br>&nbsp;</p><p>Kami ingin mengucapkan terima kasih atas kepercayaan Anda menggunakan layanan internet kami.<br>Semoga layanan yang kami berikan dapat memenuhi kebutuhan Anda dengan baik.<br>Terima kasih atas dukungan dan kesetiaan Anda sebagai pelanggan kami.</p><p>Hormat kami<br><strong>PT. Global Data Network</strong><br>Jl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.<br>Phone : 085731770730 / 085648747901<br>&nbsp;</p>",
+                'value' => "<p><strong>Yth Pelanggan GNET</strong></p><p>Hallo Bapak/Ibu,<br><strong>%customer%</strong>,</p><p>Selamat datang, dan selamat menikmati layanan internet terbaik GNET,<br>Terima Kasih telah menggunakan jasa layanan internet kami.<br><br>Tanggal Pendaftaran : <strong>%tanggaldaftar%</strong>.<br>Bulan : <strong>%bulantahun%</strong> .<br>&nbsp;</p><p>Kami ingin mengucapkan terima kasih atas kepercayaan Anda menggunakan layanan internet kami.<br>Semoga layanan yang kami berikan dapat memenuhi kebutuhan Anda dengan baik.<br>Terima kasih atas dukungan dan kesetiaan Anda sebagai pelanggan kami.</p><p>Hormat kami<br><strong>PT. Global Data Network</strong><br>Jl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.<br>Phone : 085731770730 / 085648747901<br></p>",
                 'created_by' => 1,
             ),
         ));

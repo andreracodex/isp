@@ -143,14 +143,26 @@ class CustomerController extends Controller
                 $set = Setting::find(46);
                 if ($was->is_active == 1) {
                     // Send WhatsApp message
-                    $message = "*Yth Pelanggan GNET*\n\n";
-                    $message .= "Hallo Bapak/Ibu,\n";
-                    $message .= "*" . $customer->nama_customer . "*,\n";
-                    $message .= "Tanggal Pendaftaran : *" . Carbon::parse($due_date)->format('d F Y') . "*.\n\n";
-                    $message .= "Kami ingin mengucapkan terima kasih atas kepercayaan Anda menggunakan layanan internet kami.\n";
-                    $message .= "Semoga layanan yang kami berikan dapat memenuhi kebutuhan Anda dengan baik.\n";
-                    $message .= "Terima kasih atas dukungan dan kesetiaan Anda sebagai pelanggan kami.\n\n";
-                    $message .= "Hormat kami\n*PT. Global Data Network*\nJl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.\nPhone : 085731770730 / 085648747901\n";
+                    $message = Setting::find(53);
+                    // Replace <p> tags with newlines
+                    $converted = preg_replace('/<p[^>]*>/', '', $message->value);
+                    $converted = preg_replace('/<\/p>/', "\n\n", $converted);
+
+                    // Remove <strong> tags
+                    $converted = preg_replace('/<strong[^>]*>/', "*", $converted);
+                    $converted = preg_replace('/<\/strong>/', "*", $converted);
+
+                    // Remove <i> tags
+                    $converted = preg_replace('/<i[^>]*>/', "_", $converted);
+                    $converted = preg_replace('/<\/i>/', "_", $converted);
+
+                    // Remove <br> tags
+                    $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
+                    $converted = preg_replace('/&nbsp;/', '', $converted);
+
+                    $converted = preg_replace('/%customer%/', $customer->nama_customer, $converted);
+                    $converted = preg_replace('/%tanggaldaftar%/', Carbon::parse($order->installed_date)->format('d F Y'), $converted);
+                    $converted = preg_replace('/%bulantahun%/', Carbon::parse($order->installed_date)->format('F Y'), $converted);
 
                     $curl = curl_init();
 
@@ -165,7 +177,7 @@ class CustomerController extends Controller
                         CURLOPT_CUSTOMREQUEST => 'POST',
                         CURLOPT_POSTFIELDS => array(
                             'target' => convert_phone($customer->nomor_telephone),
-                            'message' => $message,
+                            'message' => $converted,
                             'countryCode' => '62', //optional
                         ),
                         CURLOPT_HTTPHEADER => array(
