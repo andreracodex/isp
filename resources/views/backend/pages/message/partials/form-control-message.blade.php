@@ -2,7 +2,8 @@
     <div class="col-md-12 mb-3">
         <label class="form-label">Customer</label>
         <select class="form-select select2 @error('customer') is-invalid @enderror" multiple="multiple" name="customer[]" id="customer">
-            <option disabled>Pilih Customer...</option>
+            <option disabled> -- Pilih Customer --</option>
+            <option value="0">All Customer</option>
             @foreach ($customers as $customer)
                 <option value="{{ $customer->id }}">
                     {{ $customer->nama_customer }}
