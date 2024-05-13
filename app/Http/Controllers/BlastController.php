@@ -22,7 +22,23 @@ class BlastController extends Controller
     {
 
         $customers = $request->customer;
-        $messages = strip_tags($request->messages);
+        $messages = $request->messages;
+        dd($messages);
+       // Replace <p> tags with newlines
+        $converted = preg_replace('/<p[^>]*>/', '', $messages);
+        $converted = preg_replace('/<\/p>/', "\n\n", $converted);
+
+        // Remove <strong> tags
+        $converted = preg_replace('/<strong[^>]*>/', '*', $converted);
+        $converted = preg_replace('/<\/strong>/', '*', $converted);
+
+        // Remove <i> tags
+        $converted = preg_replace('/<i[^>]*>/', '_', $converted);
+        $converted = preg_replace('/<\/i>/', '_', $converted);
+
+        // Remove <br> tags
+        $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
+
         try {
             if ($customers[0] == "0" || $customers[0] == 0) {
                 $custom = Customer::where('is_active', '=', 1)->get();
@@ -42,7 +58,7 @@ class BlastController extends Controller
                         CURLOPT_CUSTOMREQUEST => 'POST',
                         CURLOPT_POSTFIELDS => array(
                             'target' => convert_phone($phone),
-                            'message' => $messages,
+                            'message' => $converted,
                             'countryCode' => '62', //optional
                         ),
                         CURLOPT_HTTPHEADER => array(
@@ -72,7 +88,7 @@ class BlastController extends Controller
                         CURLOPT_CUSTOMREQUEST => 'POST',
                         CURLOPT_POSTFIELDS => array(
                             'target' => convert_phone($phone),
-                            'message' => $messages,
+                            'message' => $converted,
                             'countryCode' => '62', //optional
                         ),
                         CURLOPT_HTTPHEADER => array(
