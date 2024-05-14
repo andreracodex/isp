@@ -60,7 +60,7 @@
             <li>Status: </li>
                 <p><b><i>{{ $data['status'] }}</i></b></p>
             <li>Expired Time to Pay: </li>
-                <p><b><i>{{ date('Y-m-d H:i', $data['expired_time']) }}</i></b></p>
+                <p><b><i>{{ date('d-m-Y H:i', $data['expired_time']) }}</i></b></p>
         </ul>
 
     </div>
