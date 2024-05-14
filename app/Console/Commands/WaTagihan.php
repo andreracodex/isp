@@ -409,7 +409,7 @@ class WaTagihan extends Command
                                 CURLOPT_CUSTOMREQUEST => 'POST',
                                 CURLOPT_POSTFIELDS => array(
                                     'target' => convert_phone($customer->nomor_telephone),
-                                    'message' => $message,
+                                    'message' => $converted,
                                     'countryCode' => '62', //optional
                                 ),
                                 CURLOPT_HTTPHEADER => array(
