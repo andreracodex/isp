@@ -14,7 +14,7 @@ use function App\Http\Helpers\convert_phone;
 
 class WaTagihan extends Command
 {
-    protected $signature = 'send:sendwasatu';
+    protected $signature = 'send:notifwa';
     protected $description = 'Send Tagihan Via WA dan Email to Customer';
 
     public function handle()
