@@ -230,21 +230,50 @@ class TripayController extends Controller
         $data = json_decode($response, true)['data'];
 
         // Kirim WA
-        $message = "*Yth Pelanggan GNET*\n\n";
-        $message .= "Hallo Bapak/Ibu,\n";
-        $message .= "Customer Name :\n*".$data['customer_name']."*\n\n";
-        $message .= "Berikut detail, pembayaran melalui virtual account :\n\n";
-        $message .= "Merchant Ref : _*".$data['reference']."*_\n";
-        $message .= "Payment Name : *".$data['payment_name']."*\n";
-        $message .= "Pay Code (Virtual Number) : *".$data['pay_code']."*\n\n";
-        $message .= "Harga Paket : _*".'Rp ' . number_format($data['amount_received'], 0, ',', '.')."*_\n";
-        $message .= "Customer Fee : _*".'Rp ' . number_format($data['fee_merchant'], 0, ',', '.')."*_\n";
-        $message .= "Jumlah yang Harus Dibayar : _*".'Rp ' . number_format($data['amount'], 0, ',', '.')."*_\n";
-        $message .= "Status : *".$data['status']."*\n";
-        $message .= "Bayar Sebelum : *".date('d F Y H:i', $data['expired_time'])."*\n\n";
-        $message .= "Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir\n";
-        $message .= "Terima Kasih, Untuk perhatiannya \n\n";
-        $message .= "Hormat kami\n*PT. Global Data Network*\nJl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.\nPhone : 085731770730 / 085648747901\n\n";
+
+        // $message = "*Yth Pelanggan GNET*\n\n";
+        // $message .= "Hallo Bapak/Ibu,\n";
+        // $message .= "Customer Name :\n*".$data['customer_name']."*\n\n";
+        // $message .= "Berikut detail, pembayaran melalui virtual account :\n\n";
+        // $message .= "Merchant Ref : _*".$data['reference']."*_\n";
+        // $message .= "Payment Name : *".$data['payment_name']."*\n";
+        // $message .= "Pay Code (Virtual Number) : *".$data['pay_code']."*\n\n";
+        // $message .= "Harga Paket : _*".'Rp ' . number_format($data['amount_received'], 0, ',', '.')."*_\n";
+        // $message .= "Customer Fee : _*".'Rp ' . number_format($data['fee_merchant'], 0, ',', '.')."*_\n";
+        // $message .= "Jumlah yang Harus Dibayar : _*".'Rp ' . number_format($data['amount'], 0, ',', '.')."*_\n";
+        // $message .= "Status : *".$data['status']."*\n";
+        // $message .= "Bayar Sebelum : *".date('d F Y H:i', $data['expired_time'])."*\n\n";
+        // $message .= "Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir\n";
+        // $message .= "Terima Kasih, Untuk perhatiannya \n\n";
+        // $message .= "Hormat kami\n*PT. Global Data Network*\nJl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.\nPhone : 085731770730 / 085648747901\n\n";
+        $set = Setting::find(46);
+        $message = Setting::find(54);
+                    // Replace <p> tags with newlines
+        $converted = preg_replace('/<p[^>]*>/', '', $message->value);
+        $converted = preg_replace('/<\/p>/', "\n\n", $converted);
+
+        // Remove <strong> tags
+        $converted = preg_replace('/<strong[^>]*>/', "*", $converted);
+        $converted = preg_replace('/<\/strong>/', "*", $converted);
+
+        // Remove <i> tags
+        $converted = preg_replace('/<i[^>]*>/', "_", $converted);
+        $converted = preg_replace('/<\/i>/', "_", $converted);
+
+        // Remove <br> tags
+        $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
+        $converted = preg_replace('/&nbsp;/', '', $converted);
+
+        $converted = preg_replace('/%customer%/', $data['customer_name'], $converted);
+        $converted = preg_replace('/%merchantcode%/', $data['reference'], $converted);
+        $converted = preg_replace('/%provider%/', $data['payment_name'], $converted);
+        $converted = preg_replace('/%virtualnumber%/', $data['pay_code'], $converted);
+        $converted = preg_replace('/%harga%/', 'Rp ' . number_format($data['amount_received'], 0, ',', '.'), $converted);
+        $converted = preg_replace('/%customerfee%/', 'Rp ' . number_format($data['fee_merchant'], 0, ',', '.'), $converted);
+        $converted = preg_replace('/%nominaltagihan%/', 'Rp ' . number_format($data['amount'], 0, ',', '.'), $converted);
+        $converted = preg_replace('/%statuspayment%/', $data['status'], $converted);
+        $converted = preg_replace('/%paybefore%/', date('d F Y H:i', $data['expired_time']), $converted);
+
 
         $curl = curl_init();
 
@@ -259,11 +288,11 @@ class TripayController extends Controller
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array(
                 'target' => convert_phone($inv->nomor_telephone),
-                'message' => $message,
+                'message' => $converted,
                 'countryCode' => '62', //optional
             ),
             CURLOPT_HTTPHEADER => array(
-                'Authorization: F#3Ny@o4WUtC7SYuiEUx' //change TOKEN to your actual token
+                'Authorization: '.$set->value //change TOKEN to your actual token
             ),
         ));
 

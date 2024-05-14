@@ -297,6 +297,11 @@ class SettingsSeeder extends Seeder
                 'value' => "<p><strong>Yth Pelanggan GNET</strong></p><p>Hallo Bapak/Ibu,<br><strong>%customer%</strong>,</p><p>Selamat datang, dan selamat menikmati layanan internet terbaik GNET,<br>Terima Kasih telah menggunakan jasa layanan internet kami.<br><br>Tanggal Pendaftaran : <strong>%tanggaldaftar%</strong>.<br>Bulan : <strong>%bulantahun%</strong> .<br>&nbsp;</p><p>Kami ingin mengucapkan terima kasih atas kepercayaan Anda menggunakan layanan internet kami.<br>Semoga layanan yang kami berikan dapat memenuhi kebutuhan Anda dengan baik.<br>Terima kasih atas dukungan dan kesetiaan Anda sebagai pelanggan kami.</p><p>Hormat kami<br><strong>PT. Global Data Network</strong><br>Jl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.<br>Phone : 085648747901<br>https://www.gnet.co.id</p>",
                 'created_by' => 1,
             ),
+            array(
+                'name' => "wa_payment",
+                'value' => "<p><strong>Yth Pelanggan GNET</strong></p><p>Hallo Bapak/Ibu,<br><strong>%customer%</strong>,</p><p>Berikut detail, pembayaran melalui virtual account :</p><p>Merchant Ref : <strong>%merchantcode%</strong> .<br>Payment Name : <strong>%provider%</strong> Virtual Account<br>Pay Code (Virtual Number) : <strong>%virtualnumber%</strong> .</p><p>Harga Paket : <strong>%harga%</strong><br>Customer Fee : <strong>%customerfee%</strong><br>Jumlah yang Harus Dibayar : Rp <strong>%nominaltagihan%</strong><br>Status : <strong>%statuspayment%</strong><br>Bayar Sebelum : <strong>%paybefore%</strong></p><p>Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir<br>Terima Kasih, Untuk perhatiannya</p><p>Hormat kami<br><strong>PT. Global Data Network</strong><br>Jl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.<br>Phone : 085731770730 / 085648747901<br>https://www.gnet.co.id</p>",
+                'created_by' => 1,
+            ),
         ));
 
         Role::insert(array(
