@@ -86,6 +86,13 @@ class CustomerController extends Controller
                     'password' => bcrypt('12345678'),
                 ]);
 
+                $ppn = $request->input('is_ppn');
+                if ($ppn == 'ON' || $ppn == 'on') {
+                    $is_ppn = 1;
+                } else {
+                    $is_ppn = 0;
+                }
+
                 $active = $request->input('is_active');
                 if ($active == 'ON' || $active == 'on') {
                     $is_active = 1;
@@ -112,6 +119,7 @@ class CustomerController extends Controller
                     'kelurahan_id' => $request->kelurahan,
                     'is_active' => $is_active,
                     'is_new' => 1,
+                    'is_ppn' => $is_ppn,
                 ]);
 
                 $order = Order::create([
@@ -247,6 +255,13 @@ class CustomerController extends Controller
 
             try {
 
+                $ppn = $request->input('is_ppn');
+                if ($ppn == 'ON' || $ppn == 'on') {
+                    $is_ppn = 1;
+                } else {
+                    $is_ppn = 0;
+                }
+
                 $active = $request->input('is_active');
                 if ($active == 'ON' || $active == 'on') {
                     $is_active = 1;
@@ -257,10 +272,8 @@ class CustomerController extends Controller
                 $new = $request->input('is_new');
                 if ($new == 'ON' || $new == 'on') {
                     $is_new = 1;
-                    $due_date = $request->input('due_date');
                 } else {
                     $is_new = 0;
-                    $due_date = $request->input('due_date');
                 }
 
                 $installed = $request->input('is_installed');
@@ -287,6 +300,7 @@ class CustomerController extends Controller
                     'kelurahan_id' => $request->kelurahan,
                     'is_active' => $is_active,
                     'is_new' => $is_new,
+                    'is_ppn' => $is_ppn,
                 ]);
 
                 $order = Order::find($request->input('order_id'));

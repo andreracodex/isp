@@ -1,12 +1,12 @@
 <div class="row">
     <div class="col-md-3 mb-3">
-        {{-- <div class="form-check form-switch custom-switch-v1">
-            <input type="checkbox" class="form-check-input input-success" id="customswitchlightv1-3" name="is_new"
-                @if ($customer->is_new == 1) @checked(true) @else @checked(false) @endif>
-            <label class="form-check-label" for="customswitchlightv1-3">Pelanggan Baru <sup class="text-danger"
+        <div class="form-check form-switch custom-switch-v1">
+            <input type="checkbox" class="form-check-input input-success" id="customswitchlightv1-3" name="is_ppn"
+                @if ($customer->is_ppn == 1) @checked(true) @else @checked(false) @endif>
+            <label class="form-check-label" for="customswitchlightv1-3">PPN Aktif <sup class="text-danger"
                     data-bs-toggle="tooltip" data-bs-placement="top"
-                    data-bs-original-title="status pelanggan baru, jika non aktif pelanggan lama">*</sup></label>
-        </div> --}}
+                    data-bs-original-title="status pengenaan ppn, jika aktif dikenakan biaya ppn">*</sup></label>
+        </div>
         <div class="form-check form-switch custom-switch-v1 mt-3">
             <input type="checkbox" class="form-check-input input-success" id="customswitchlightv1-3" name="is_active"
                 @if ($customer->is_active == 1) @checked(true) @else @checked(false) @endif>
