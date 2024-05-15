@@ -32,6 +32,8 @@
                                     $name = 'Telepon';
                                 } elseif ($websetting->name == 'company_email') {
                                     $name = 'Email';
+                                } elseif ($websetting->name == 'ppn') {
+                                    $name = 'PPN';
                                 } else {
                                     $name = $websetting->name;
                                 }
