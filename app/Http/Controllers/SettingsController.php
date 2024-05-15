@@ -40,6 +40,7 @@ class SettingsController extends Controller
             ->orWhere('name', 'company_zipcode')
             ->orWhere('name', 'company_telephone')
             ->orWhere('name', 'company_email')
+            ->orWhere('name', 'ppn')
             ->get();
         $webwa = SettingsWA::all();
         $settingwatoken = Setting::where('name', 'wa_token')->get();
