@@ -37,6 +37,6 @@
     </form>
     <div class="card-footer text-end btn-page">
         <div class="btn btn-outline-secondary">Cancel</div>
-        <button type="submit" class="btn btn-primary">Update Profile</button>
+        <button type="submit" class="btn btn-primary">Update Password</button>
     </div>
 </div>

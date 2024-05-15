@@ -115,12 +115,4 @@
             </div>
         </div>
     </div>
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body text-end btn-page">
-                <div class="btn btn-outline-secondary">Cancel</div>
-                <div class="btn btn-primary">Update Settings</div>
-            </div>
-        </div>
-    </div>
 </div>

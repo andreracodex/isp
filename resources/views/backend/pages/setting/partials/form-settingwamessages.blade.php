@@ -221,7 +221,7 @@
                 </div>
                 <div class="card-footer text-end btn-page">
                     <div class="btn btn-outline-secondary">Cancel</div>
-                    <button class="btn btn-primary" type="submit">Update Pelanggan Messages</button>
+                    <button class="btn btn-primary" type="submit">Update VA Tripay Messages</button>
                 </div>
             </form>
         </div>
