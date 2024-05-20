@@ -22,6 +22,14 @@ class WaTagihan extends Command
         $customers = Customer::where('is_active', 1)->get();
         $now = Carbon::now()->format('Y-m-d');
         $set = Setting::find(46);
+        $tripay_sand_box = Setting::find(49);
+
+        if($tripay_sand_box == 'on'){
+            $tripay_url = "http://isp.test/tripay/merchant";
+        }else{
+            $tripay_url = "https://billing.berdikari.web.id/tripay/merchant";
+        }
+
         $was = SettingsWA::where('is_active', 1)->get();
         foreach ($was as $has) {
             // Notifikasi Tanggal Jatuh Tempo
@@ -59,22 +67,6 @@ class WaTagihan extends Command
                         $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
                         $converted = preg_replace('/&nbsp;/', '', $converted);
 
-                        // $message = "*Yth Pelanggan GNET*\n\n";
-                        // $message .= "Hallo Bapak/Ibu,\n";
-                        // $message .= "*" . $customer->nama_customer . "*,\n\n";
-                        // $message .= "No Invocie Tagihan : *" . $result->invoice_number . "*\n";
-                        // $message .= "Bulan : *" . Carbon::parse($now)->format('F Y') . "*\n";
-                        // $message .= "Total Tagihan : *Rp " . number_format($belum, 0, ',', '.') . "*,-\n";
-                        // $message .= "Pembayaran maksimal : *" . Carbon::parse($now)->format('d F Y') . "*.\n\n";
-                        // $message .= "Bank Tersedia :\n";
-                        // $message .= "*BANK MANDIRI* : " . $banks[3]['nomor_akun_rekening'] . "\n";
-                        // $message .= "*BANK BCA* : " . $banks[2]['nomor_akun_rekening'] . "\n";
-                        // $message .= "*BANK BRI* : " . $banks[0]['nomor_akun_rekening'] . "\n";
-                        // $message .= "*BANK BNI* : " . $banks[1]['nomor_akun_rekening'] . "\n";
-                        // $message .= "A/N *PUTUT WAHYUDI*\n\n";
-                        // $message .= "Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir\n\n";
-                        // $message .= "Hormat kami\n*PT. Global Data Network*\nJl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.\nPhone : 085731770730 / 085648747901\n\nhttps://billing.berdikari.web.id/tripay/merchant";
-
                         $converted = preg_replace('/%customer%/', $customer->nama_customer, $converted);
                         $converted = preg_replace('/%invoices%/', $result->invoice_number, $converted);
                         $converted = preg_replace('/%bulantahun%/', Carbon::parse($now)->format('F Y'), $converted);
@@ -84,7 +76,7 @@ class WaTagihan extends Command
                         $converted = preg_replace('/%bankbca%/', $banks[2]['nomor_akun_rekening'], $converted);
                         $converted = preg_replace('/%bankbri%/', $banks[0]['nomor_akun_rekening'], $converted);
                         $converted = preg_replace('/%bankbni%/', $banks[1]['nomor_akun_rekening'], $converted);
-                        $converted = preg_replace('/%linkurlpayment%/', 'https://billing.berdikari.web.id/tripay/merchant', $converted);
+                        $converted = preg_replace('/%linkurlpayment%/', $tripay_url, $converted);
 
                         $curl = curl_init();
 
@@ -159,21 +151,6 @@ class WaTagihan extends Command
                             // Remove <br> tags
                             $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
                             $converted = preg_replace('/&nbsp;/', '', $converted);
-                            // $message = "*Yth Pelanggan GNET*\n\n";
-                            // $message .= "Hallo Bapak/Ibu,\n";
-                            // $message .= "*" . $customer->nama_customer . "*,\n\n";
-                            // $message .= "No Invocie Tagihan : *" . $due_date_one->invoice_number . "*\n";
-                            // $message .= "Bulan : *" . Carbon::parse($due_date_one->due_date)->format('F Y') . "*\n";
-                            // $message .= "Total Tagihan : *Rp " . number_format($belum, 0, ',', '.') . "*,-\n";
-                            // $message .= "Pembayaran maksimal : *" . Carbon::parse($due_date_one->due_date)->format('d F Y') . "*.\n\n";
-                            // $message .= "Bank Tersedia :\n";
-                            // $message .= "*BANK MANDIRI* : " . $banks[3]['nomor_akun_rekening'] . "\n";
-                            // $message .= "*BANK BCA* : " . $banks[2]['nomor_akun_rekening'] . "\n";
-                            // $message .= "*BANK BRI* : " . $banks[0]['nomor_akun_rekening'] . "\n";
-                            // $message .= "*BANK BNI* : " . $banks[1]['nomor_akun_rekening'] . "\n";
-                            // $message .= "A/N *PUTUT WAHYUDI*\n\n";
-                            // $message .= "Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir\n\n";
-                            // $message .= "Hormat kami\n*PT. Global Data Network*\nJl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.\nPhone : 085731770730 / 085648747901\n\nhttps://billing.berdikari.web.id/tripay/merchant";
 
                             $converted = preg_replace('/%customer%/', $customer->nama_customer, $converted);
                             $converted = preg_replace('/%invoices%/', $due_date_one->invoice_number, $converted);
@@ -184,7 +161,7 @@ class WaTagihan extends Command
                             $converted = preg_replace('/%bankbca%/', $banks[2]['nomor_akun_rekening'], $converted);
                             $converted = preg_replace('/%bankbri%/', $banks[0]['nomor_akun_rekening'], $converted);
                             $converted = preg_replace('/%bankbni%/', $banks[1]['nomor_akun_rekening'], $converted);
-                            $converted = preg_replace('/%linkurlpayment%/', 'https://billing.berdikari.web.id/tripay/merchant', $converted);
+                            $converted = preg_replace('/%linkurlpayment%/', $tripay_url, $converted);
 
                             $curl = curl_init();
 
@@ -264,22 +241,6 @@ class WaTagihan extends Command
                             $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
                             $converted = preg_replace('/&nbsp;/', '', $converted);
 
-                            // $message = "*Yth Pelanggan GNET*\n\n";
-                            // $message .= "Hallo Bapak/Ibu,\n";
-                            // $message .= "*" . $customer->nama_customer . "*,\n\n";
-                            // $message .= "No Invocie Tagihan : *" . $due_date_three->invoice_number . "*\n";
-                            // $message .= "Bulan : *" . Carbon::parse($due_date_three->due_date)->format('F Y') . "*\n";
-                            // $message .= "Total Tagihan : *Rp " . number_format($belum, 0, ',', '.') . "*,-\n";
-                            // $message .= "Pembayaran maksimal : *" . Carbon::parse($due_date_three->due_date)->format('d F Y') . "*.\n\n";
-                            // $message .= "Bank Tersedia :\n";
-                            // $message .= "*BANK MANDIRI* : " . $banks[3]['nomor_akun_rekening'] . "\n";
-                            // $message .= "*BANK BCA* : " . $banks[2]['nomor_akun_rekening'] . "\n";
-                            // $message .= "*BANK BRI* : " . $banks[0]['nomor_akun_rekening'] . "\n";
-                            // $message .= "*BANK BNI* : " . $banks[1]['nomor_akun_rekening'] . "\n";
-                            // $message .= "A/N *PUTUT WAHYUDI*\n\n";
-                            // $message .= "Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir\n\n";
-                            // $message .= "Hormat kami\n*PT. Global Data Network*\nJl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.\nPhone : 085731770730 / 085648747901\n\nhttps://billing.berdikari.web.id/tripay/merchant";
-
                             $converted = preg_replace('/%customer%/', $customer->nama_customer, $converted);
                             $converted = preg_replace('/%invoices%/', $due_date_three->invoice_number, $converted);
                             $converted = preg_replace('/%bulantahun%/', Carbon::parse($due_date_three->due_date)->format('F Y'), $converted);
@@ -289,7 +250,7 @@ class WaTagihan extends Command
                             $converted = preg_replace('/%bankbca%/', $banks[2]['nomor_akun_rekening'], $converted);
                             $converted = preg_replace('/%bankbri%/', $banks[0]['nomor_akun_rekening'], $converted);
                             $converted = preg_replace('/%bankbni%/', $banks[1]['nomor_akun_rekening'], $converted);
-                            $converted = preg_replace('/%linkurlpayment%/', 'https://billing.berdikari.web.id/tripay/merchant', $converted);
+                            $converted = preg_replace('/%linkurlpayment%/', $tripay_url, $converted);
 
                             $curl = curl_init();
 
@@ -369,22 +330,6 @@ class WaTagihan extends Command
                             $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
                             $converted = preg_replace('/&nbsp;/', '', $converted);
 
-                            // $message = "*Yth Pelanggan GNET*\n\n";
-                            // $message .= "Hallo Bapak/Ibu,\n";
-                            // $message .= "*" . $customer->nama_customer . "*,\n\n";
-                            // $message .= "No Invocie Tagihan : *" . $due_date_seven->invoice_number . "*\n";
-                            // $message .= "Bulan : *" . Carbon::parse($due_date_seven->due_date)->format('F Y') . "*\n";
-                            // $message .= "Total Tagihan : *Rp " . number_format($belum, 0, ',', '.') . "*,-\n";
-                            // $message .= "Pembayaran maksimal : *" . Carbon::parse($due_date_seven->due_date)->format('d F Y') . "*.\n\n";
-                            // $message .= "Bank Tersedia :\n";
-                            // $message .= "*BANK MANDIRI* : " . $banks[3]['nomor_akun_rekening'] . "\n";
-                            // $message .= "*BANK BCA* : " . $banks[2]['nomor_akun_rekening'] . "\n";
-                            // $message .= "*BANK BRI* : " . $banks[0]['nomor_akun_rekening'] . "\n";
-                            // $message .= "*BANK BNI* : " . $banks[1]['nomor_akun_rekening'] . "\n";
-                            // $message .= "A/N *PUTUT WAHYUDI*\n\n";
-                            // $message .= "Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir\n\n";
-                            // $message .= "Hormat kami\n*PT. Global Data Network*\nJl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.\nPhone : 085731770730 / 085648747901\n\nhttps://billing.berdikari.web.id/tripay/merchant";
-
                             $converted = preg_replace('/%customer%/', $customer->nama_customer, $converted);
                             $converted = preg_replace('/%invoices%/', $due_date_seven->invoice_number, $converted);
                             $converted = preg_replace('/%bulantahun%/', Carbon::parse($due_date_seven->due_date)->format('F Y'), $converted);
@@ -394,7 +339,7 @@ class WaTagihan extends Command
                             $converted = preg_replace('/%bankbca%/', $banks[2]['nomor_akun_rekening'], $converted);
                             $converted = preg_replace('/%bankbri%/', $banks[0]['nomor_akun_rekening'], $converted);
                             $converted = preg_replace('/%bankbni%/', $banks[1]['nomor_akun_rekening'], $converted);
-                            $converted = preg_replace('/%linkurlpayment%/', 'https://billing.berdikari.web.id/tripay/merchant', $converted);
+                            $converted = preg_replace('/%linkurlpayment%/', $tripay_url, $converted);
 
                             $curl = curl_init();
 

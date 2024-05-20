@@ -20,14 +20,26 @@ class TripayController extends Controller
     {
         $profile = Setting::all();
         $tripays = strtoupper($tripay);
-        if ($tripays != 'MANDIRIVA' && $tripays != 'BCAVA' && $tripays != 'BRIVA' && $tripays != 'BNIVA' && $tripays != 'ALFAMART' && $tripays != 'ALFAMIDI' && $tripays != 'INDOMARET') {
+        if ($tripays != 'MYBVA' &&
+            $tripays != 'PERMATAVA' &&
+            $tripays != 'BNIVA' &&
+            $tripays != 'BRIVA' &&
+            $tripays != 'MANDIRIVA' &&
+            $tripays != 'BCAVA' &&
+            $tripays != 'CIMBVA' &&
+            $tripays != 'ALFAMART' &&
+            $tripays != 'INDOMARET' &&
+            $tripays != 'ALFAMIDI' &&
+            $tripays != 'OVO' &&
+            $tripays != 'DANA' &&
+            $tripays != 'SHOPEEPAY') {
             return view('tripay::failed', compact('profile'));
         }
         $apiKey = env('TRIPAY_API_KEY');
         $baseURL = env('TRIPAY_API_DEBUG') ? 'https://tripay.co.id/api-sandbox/' : 'https://tripay.co.id/api/';
         $payload = ['code' => $tripays];
 
-
+        dd($baseURL);
         $curl = curl_init();
 
         curl_setopt_array($curl, [
@@ -230,22 +242,6 @@ class TripayController extends Controller
         $data = json_decode($response, true)['data'];
 
         // Kirim WA
-
-        // $message = "*Yth Pelanggan GNET*\n\n";
-        // $message .= "Hallo Bapak/Ibu,\n";
-        // $message .= "Customer Name :\n*".$data['customer_name']."*\n\n";
-        // $message .= "Berikut detail, pembayaran melalui virtual account :\n\n";
-        // $message .= "Merchant Ref : _*".$data['reference']."*_\n";
-        // $message .= "Payment Name : *".$data['payment_name']."*\n";
-        // $message .= "Pay Code (Virtual Number) : *".$data['pay_code']."*\n\n";
-        // $message .= "Harga Paket : _*".'Rp ' . number_format($data['amount_received'], 0, ',', '.')."*_\n";
-        // $message .= "Customer Fee : _*".'Rp ' . number_format($data['fee_merchant'], 0, ',', '.')."*_\n";
-        // $message .= "Jumlah yang Harus Dibayar : _*".'Rp ' . number_format($data['amount'], 0, ',', '.')."*_\n";
-        // $message .= "Status : *".$data['status']."*\n";
-        // $message .= "Bayar Sebelum : *".date('d F Y H:i', $data['expired_time'])."*\n\n";
-        // $message .= "Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir\n";
-        // $message .= "Terima Kasih, Untuk perhatiannya \n\n";
-        // $message .= "Hormat kami\n*PT. Global Data Network*\nJl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.\nPhone : 085731770730 / 085648747901\n\n";
         $set = Setting::find(46);
         $message = Setting::find(54);
                     // Replace <p> tags with newlines
