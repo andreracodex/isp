@@ -142,6 +142,10 @@ Breadcrumbs::for('inve.store', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');
     $trail->push('Simpan Inventaris', route('inve.store'));
 });
+Breadcrumbs::for('inve.move', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
+    $trail->push('Pindah Inventaris', route('inve.move'));
+});
 Breadcrumbs::for('inve.view', function (BreadcrumbTrail $trail): void {
     $trail->push('Detail Inventaris', route('inve.view', 'inve'));
 });
