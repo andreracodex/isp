@@ -30,6 +30,7 @@ class CustomerImport implements ToCollection, WithHeadingRow
                 'location' => 'nullable',
                 'installed_date' => 'nullable|date',
                 'email' => 'required|email:dns|unique:users',
+                'is_ppn' => 'required',
             ]);
 
             // If validation fails for any required fields, skip the row
@@ -60,6 +61,7 @@ class CustomerImport implements ToCollection, WithHeadingRow
                 'kodepos_customer' => $row['kodepos_customer'],
                 'kelurahan_id' => 3578180003,
                 'nomor_telephone' => $row['nomor_telephone'],
+                'is_ppn' => $row['is_ppn'],
             ]);
 
             // Create order record if 'paket' and 'location' are provided
@@ -84,6 +86,7 @@ class CustomerImport implements ToCollection, WithHeadingRow
                 'is_payed' => 1,
                 'invoice_number' => $invoiceNumber,
                 'uuid' => Str::uuid(64),
+                'ppn' => $row['is_ppn'],
             ]);
         }
     }

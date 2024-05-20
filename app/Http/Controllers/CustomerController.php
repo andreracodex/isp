@@ -144,6 +144,7 @@ class CustomerController extends Controller
                     'due_date' => $due_date,
                     'is_active' => $is_active,
                     'is_payed' => 1,
+                    'ppn' => $is_ppn,
                     'invoice_number' => $invoiceNumber,
                     'uuid' => Str::uuid(64),
                 ]);
