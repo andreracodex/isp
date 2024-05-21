@@ -3,13 +3,16 @@
 namespace Andreracodex\Tripay;
 
 use App\Http\Controllers\Controller;
+use App\Models\Invoice;
 use App\Models\OrderDetail;
 use App\Models\Setting;
 use App\Models\ShortURL;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Number;
 
 use function App\Http\Helpers\convert_phone;
@@ -18,88 +21,123 @@ class TripayController extends Controller
 {
     public function instruction($tripay)
     {
-        $profile = Setting::all();
-        $tripays = strtoupper($tripay);
-        if ($tripays != 'MYBVA' &&
-            $tripays != 'PERMATAVA' &&
-            $tripays != 'BNIVA' &&
-            $tripays != 'BRIVA' &&
-            $tripays != 'MANDIRIVA' &&
-            $tripays != 'BCAVA' &&
-            $tripays != 'CIMBVA' &&
-            $tripays != 'ALFAMART' &&
-            $tripays != 'INDOMARET' &&
-            $tripays != 'ALFAMIDI' &&
-            $tripays != 'OVO' &&
-            $tripays != 'DANA' &&
-            $tripays != 'SHOPEEPAY') {
-            return view('tripay::failed', compact('profile'));
-        }
-        $apiKey = env('TRIPAY_API_KEY');
-        $baseURL = env('TRIPAY_API_DEBUG') ? 'https://tripay.co.id/api-sandbox/' : 'https://tripay.co.id/api/';
-        $payload = ['code' => $tripays];
+        try {
+            $validChannels = [
+                'MYBVA', 'PERMATAVA', 'BNIVA', 'BRIVA', 'MANDIRIVA', 'BCAVA', 'MUAMALATVA',
+                'CIMBVA', 'BSIVA', 'OCBCVA', 'DANAMONVA', 'OTHERBANKVA', 'ALFAMART',
+                'INDOMARET', 'ALFAMIDI', 'OVO', 'QRIS', 'QRISC', 'QRIS2', 'DANA', 'SHOPEEPAY',
+                'QRIS_SHOPEEPAY'
+            ];
 
-        dd($baseURL);
-        $curl = curl_init();
+            $profile = Setting::all();
+            $tripays = strtoupper($tripay);
 
-        curl_setopt_array($curl, [
-            CURLOPT_FRESH_CONNECT  => true,
-            CURLOPT_URL            => $baseURL . 'payment/instruction?' . http_build_query($payload),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HEADER         => false,
-            CURLOPT_HTTPHEADER     => ['Authorization: Bearer ' . $apiKey],
-            CURLOPT_FAILONERROR    => false,
-            CURLOPT_IPRESOLVE      => CURL_IPRESOLVE_V4
-        ]);
+            if (!in_array($tripays, $validChannels)) {
+                return view('tripay::failed', compact('profile'));
+            }
 
-        $response = curl_exec($curl);
-        $error = curl_error($curl);
+            $apiKey = Setting::find(47);
+            $tripaySandBox = Setting::find(49);
+            $tripayUrl = $tripaySandBox->value == 'on'
+                ? "https://tripay.co.id/api-sandbox/"
+                : "https://tripay.co.id/api/";
 
-        curl_close($curl);
-        if ($response) {
-            $data = json_decode($response, true)['data'];
-            return view('tripay::instruction', compact('data', 'profile'));
+            $payload = ['code' => $tripays];
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, [
+                CURLOPT_FRESH_CONNECT  => true,
+                CURLOPT_URL            => $tripayUrl . 'payment/instruction?' . http_build_query($payload),
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HEADER         => false,
+                CURLOPT_HTTPHEADER     => ['Authorization: Bearer ' . $apiKey->value],
+                CURLOPT_FAILONERROR    => false,
+                CURLOPT_IPRESOLVE      => CURL_IPRESOLVE_V4
+            ]);
+
+            $response = curl_exec($curl);
+            $error = curl_error($curl);
+
+            curl_close($curl);
+
+            if ($response) {
+                $data = json_decode($response, true)['data'];
+                return view('tripay::instruction', compact('data', 'profile'));
+            } else {
+                // Log the error for debugging purposes
+                Log::error('Tripay API request failed', ['error' => $error]);
+                abort(404, 'Unable to fetch data from Tripay API');
+            }
+        } catch (Exception $error) {
+            // Log the exception for debugging purposes
+            Log::error('Exception occurred', ['exception' => $error]);
+            abort(404, 'An error occurred');
         }
     }
 
     public function merchant()
     {
-        $profile = Setting::all();
-        $apiKey = env('TRIPAY_API_KEY');
-        $baseURL = env('TRIPAY_API_DEBUG') ? 'https://tripay.co.id/api-sandbox/' : 'https://tripay.co.id/api/';
+        try {
+            $profile = Setting::all();
+            $apiKey = Setting::find(47);
+            $tripaySandBox = Setting::find(49);
 
-        $curl = curl_init();
+            $tripayUrl = $tripaySandBox->value == 'on'
+                ? "https://tripay.co.id/api-sandbox/"
+                : "https://tripay.co.id/api/";
 
-        curl_setopt_array($curl, array(
-            CURLOPT_FRESH_CONNECT  => true,
-            CURLOPT_URL            => $baseURL . 'merchant/payment-channel',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HEADER         => false,
-            CURLOPT_HTTPHEADER     => ['Authorization: Bearer ' . $apiKey],
-            CURLOPT_FAILONERROR    => false,
-            CURLOPT_IPRESOLVE      => CURL_IPRESOLVE_V4
-        ));
+            $curl = curl_init();
 
-        $response = curl_exec($curl);
-        $error = curl_error($curl);
+            curl_setopt_array($curl, [
+                CURLOPT_FRESH_CONNECT  => true,
+                CURLOPT_URL            => $tripayUrl . 'merchant/payment-channel',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HEADER         => false,
+                CURLOPT_HTTPHEADER     => ['Authorization: Bearer ' . $apiKey->value],
+                CURLOPT_FAILONERROR    => false,
+                CURLOPT_IPRESOLVE      => CURL_IPRESOLVE_V4
+            ]);
 
-        curl_close($curl);
+            $response = curl_exec($curl);
+            $error = curl_error($curl);
 
-        if ($response) {
-            $data = json_decode($response, true)['data'];
+            curl_close($curl);
 
-            return view('tripay::merchant', compact('data', 'profile'));
+            if ($response) {
+                $data = json_decode($response, true)['data'];
+
+                return view('tripay::merchant', compact('data', 'profile'));
+            } else {
+                // Log the error for debugging purposes
+                Log::error('Tripay API request failed', ['error' => $error]);
+                abort(404, 'Unable to fetch data from Tripay API');
+            }
+        } catch (Exception $error) {
+            // Log the exception for debugging purposes
+            Log::error('Exception occurred', ['exception' => $error]);
+            abort(404, 'An error occurred');
         }
+    }
+
+    public function failed(){
+        $profile = Setting::all();
+        return view('tripay::failed', compact('profile'));
     }
 
     public function transaction($tripay, $invoices, $amount)
     {
         $profile = Setting::all();
-        $apiKey = env('TRIPAY_API_KEY');
-        $privateKey   = env('TRIPAY_API_SECRET');
-        $merchantCode = env('TRIPAY_MERCHANT_CODE');
-        $base = env('APP_URL');
-        $baseURL = env('TRIPAY_API_DEBUG') ? 'https://tripay.co.id/api-sandbox/' : 'https://tripay.co.id/api/';
+        $apiKey = Setting::find(47);
+        $privateKey   = Setting::find(48);
+        $merchantCode = Setting::find(50);
+        $tripay_sand_box = Setting::find(49);
+        if($tripay_sand_box->value == 'on'){
+            $tripay_url = "https://tripay.co.id/api-sandbox/";
+        }else{
+            $tripay_url = "https://tripay.co.id/api/";
+        }
+
         $merchantRef  = $invoices;
         $amount       = $amount;
 
@@ -124,19 +162,19 @@ class TripayController extends Controller
                     'quantity'    => 1,
                 ],
             ],
-            'return_url'   => $baseURL . '/tripay/redirect',
+            'return_url'   => $tripay_url . '/tripay/redirect',
             'expired_time' => (time() + (24 * 60 * 60)), // 24 jam
-            'signature'    => hash_hmac('sha256', $merchantCode . $merchantRef . $amount, $privateKey)
+            'signature'    => hash_hmac('sha256', $merchantCode->value . $merchantRef . $amount, $privateKey->value)
         ];
 
         $curl = curl_init();
 
         curl_setopt_array($curl, [
             CURLOPT_FRESH_CONNECT  => true,
-            CURLOPT_URL            =>  $baseURL . 'transaction/create',
+            CURLOPT_URL            =>  $tripay_url . 'transaction/create',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HEADER         => false,
-            CURLOPT_HTTPHEADER     => ['Authorization: Bearer ' . $apiKey],
+            CURLOPT_HTTPHEADER     => ['Authorization: Bearer ' . $apiKey->value],
             CURLOPT_FAILONERROR    => false,
             CURLOPT_POST           => true,
             CURLOPT_POSTFIELDS     => http_build_query($data),
@@ -155,6 +193,77 @@ class TripayController extends Controller
     public function callback()
     {
         return view('tripay::callback', compact('callback'));
+    }
+
+    public function handle(Request $request)
+    {
+        $privateKey = Setting::find(47);
+        $callbackSignature = $request->server('HTTP_X_CALLBACK_SIGNATURE');
+        $json = $request->getContent();
+        $signature = hash_hmac('sha256', $json, $privateKey->value);
+
+        if ($signature !== (string) $callbackSignature) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid signature',
+            ]);
+        }
+
+        if ('payment_status' !== (string) $request->server('HTTP_X_CALLBACK_EVENT')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unrecognized callback event, no action was taken',
+            ]);
+        }
+
+        $data = json_decode($json);
+
+        if (JSON_ERROR_NONE !== json_last_error()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid data sent by tripay',
+            ]);
+        }
+
+        $invoiceId = $data->merchant_ref;
+        $tripayReference = $data->reference;
+        $status = strtoupper((string) $data->status);
+
+        if ($data->is_closed_payment === 1) {
+            $invoice = OrderDetail::where('id', $invoiceId)
+                ->where('tripay_reference', $tripayReference)
+                ->where('status', '=', 'UNPAID')
+                ->first();
+
+            if (! $invoice) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No invoice found or already paid: ' . $invoiceId,
+                ]);
+            }
+
+            switch ($status) {
+                case 'PAID':
+                    $invoice->update(['status' => 'PAID']);
+                    break;
+
+                case 'EXPIRED':
+                    $invoice->update(['status' => 'EXPIRED']);
+                    break;
+
+                case 'FAILED':
+                    $invoice->update(['status' => 'FAILED']);
+                    break;
+
+                default:
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Unrecognized payment status',
+                    ]);
+            }
+
+            return response()->json(['success' => true]);
+        }
     }
 
     public function short(Request $request)
@@ -182,17 +291,22 @@ class TripayController extends Controller
             ->where('order_details.invoice_number', $invoices)->first();
 
         if($detail == null){
-            return redirect()->route('tripay.merchant');
+            return redirect()->route('tripay.failed')->with('erorrs', 'Inovice Number Not Found');
         }
 
         $amount = intval($detail->harga_paket);
 
         $profile = Setting::all();
-        $apiKey = env('TRIPAY_API_KEY');
-        $privateKey   = env('TRIPAY_API_SECRET');
-        $merchantCode = env('TRIPAY_MERCHANT_CODE');
-        $base = env('APP_URL');
-        $baseURL = env('TRIPAY_API_DEBUG') ? 'https://tripay.co.id/api-sandbox/' : 'https://tripay.co.id/api/';
+        $apiKey = Setting::find(47);
+        $privateKey   = Setting::find(48);
+        $merchantCode = Setting::find(50);
+        $tripay_sand_box = Setting::find(49);
+        if($tripay_sand_box->value == 'on'){
+            $tripay_url = "https://tripay.co.id/api-sandbox/";
+        }else{
+            $tripay_url = "https://tripay.co.id/api/";
+        }
+
         $merchantRef  = $invoices;
 
         $inv = OrderDetail::leftJoin('orders', 'order_details.order_id', 'orders.id')
@@ -216,19 +330,19 @@ class TripayController extends Controller
                     'quantity'    => 1,
                 ],
             ],
-            'return_url'   => $baseURL . '/tripay/redirect',
+            'return_url'   => $tripay_url . '/tripay/redirect',
             'expired_time' => (time() + (24 * 60 * 60)), // 24 jam
-            'signature'    => hash_hmac('sha256', $merchantCode . $merchantRef . $amount, $privateKey)
+            'signature'    => hash_hmac('sha256', $merchantCode->value . $merchantRef . $amount, $privateKey->value)
         ];
 
         $curl = curl_init();
 
         curl_setopt_array($curl, [
             CURLOPT_FRESH_CONNECT  => true,
-            CURLOPT_URL            =>  $baseURL . 'transaction/create',
+            CURLOPT_URL            =>  $tripay_url . 'transaction/create',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HEADER         => false,
-            CURLOPT_HTTPHEADER     => ['Authorization: Bearer ' . $apiKey],
+            CURLOPT_HTTPHEADER     => ['Authorization: Bearer ' . $apiKey->value],
             CURLOPT_FAILONERROR    => false,
             CURLOPT_POST           => true,
             CURLOPT_POSTFIELDS     => http_build_query($data),
@@ -241,6 +355,10 @@ class TripayController extends Controller
         curl_close($curl);
         $data = json_decode($response, true)['data'];
 
+        $inv->reference = $data['reference'];
+        $inv->fee_customer = $data['fee_customer'];
+        $inv->fee_merchant = $data['fee_merchant'];
+        $inv->save();
         // Kirim WA
         $set = Setting::find(46);
         $message = Setting::find(54);
@@ -260,15 +378,18 @@ class TripayController extends Controller
         $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
         $converted = preg_replace('/&nbsp;/', '', $converted);
 
+        $url_cara_bayar = route('tripay.instruction', $data['payment_method']);
+
         $converted = preg_replace('/%customer%/', $data['customer_name'], $converted);
         $converted = preg_replace('/%merchantcode%/', $data['reference'], $converted);
         $converted = preg_replace('/%provider%/', $data['payment_name'], $converted);
         $converted = preg_replace('/%virtualnumber%/', $data['pay_code'], $converted);
         $converted = preg_replace('/%harga%/', 'Rp ' . number_format($data['amount_received'], 0, ',', '.'), $converted);
-        $converted = preg_replace('/%customerfee%/', 'Rp ' . number_format($data['fee_merchant'], 0, ',', '.'), $converted);
+        $converted = preg_replace('/%customerfee%/', 'Rp ' . number_format($data['fee_customer'], 0, ',', '.'), $converted);
         $converted = preg_replace('/%nominaltagihan%/', 'Rp ' . number_format($data['amount'], 0, ',', '.'), $converted);
         $converted = preg_replace('/%statuspayment%/', $data['status'], $converted);
         $converted = preg_replace('/%paybefore%/', date('d F Y H:i', $data['expired_time']), $converted);
+        $converted = preg_replace('/%carabayar%/', $url_cara_bayar, $converted);
 
 
         $curl = curl_init();
@@ -295,12 +416,5 @@ class TripayController extends Controller
         $response = curl_exec($curl);
         curl_close($curl);
         return view('tripay::result', compact('data', 'profile'));
-    }
-
-    public function redirect($code)
-    {
-        $shortURL = ShortURL::where('short_code', $code)->firstOrFail();
-
-        return redirect($shortURL->original_url);
     }
 }

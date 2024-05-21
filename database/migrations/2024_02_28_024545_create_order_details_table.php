@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('invoice_number');
             $table->unsignedBigInteger('payment_id')->nullable();
             $table->foreign('payment_id')->references('id')->on('payment_types');
+            $table->text('reference')->nullable();
+            $table->double('fee_customer')->default(0);
+            $table->double('fee_merchant')->default(0);
             $table->text('pay_image')->nullable();
             $table->text('pay_description')->nullable();
             $table->double('diskon')->default(0);

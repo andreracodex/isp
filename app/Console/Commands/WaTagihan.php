@@ -24,7 +24,7 @@ class WaTagihan extends Command
         $set = Setting::find(46);
         $tripay_sand_box = Setting::find(49);
 
-        if($tripay_sand_box == 'on'){
+        if($tripay_sand_box->value == 'on'){
             $tripay_url = "http://isp.test/tripay/merchant";
         }else{
             $tripay_url = "https://billing.berdikari.web.id/tripay/merchant";

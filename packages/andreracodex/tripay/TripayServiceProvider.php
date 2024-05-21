@@ -24,7 +24,6 @@ class TripayServiceProvider extends ServiceProvider
 
         $this->loadRoutesFrom(__DIR__.'/routes/routes.php');
         $this->publishes([
-            __DIR__.'/config/tripays.php' => config_path('tripays.php'),
             __DIR__.'/views/tripay' => resource_path('views/tripay'),
         ]);
     }

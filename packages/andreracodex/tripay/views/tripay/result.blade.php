@@ -49,12 +49,12 @@
                 <p><b><i>{{ $data['customer_email'] }}</i></b></p>
             <li>Customer Phone:</li>
                 <p><b><i>{{ $data['customer_phone'] }}</i></b></p>
-            <li>Jumlah yang Harus Dibayar:</li>
-                <p><b><i>{{ Number::currency($data['amount'], in: 'IDR', locale: 'id') }}</i></b></p>
-            <li>Customer Fee: </li>
-                <p><b><i>{{ Number::currency($data['fee_merchant'], in: 'IDR', locale: 'id') }}</i></b></p>
             <li>Harga Paket: </li>
                 <p><b><i>{{ Number::currency($data['amount_received'], in: 'IDR', locale: 'id') }}</i></b></p>
+            <li>Customer Fee: </li>
+                <p><b><i>{{ Number::currency($data['fee_customer'], in: 'IDR', locale: 'id') }}</i></b></p>
+            <li>Jumlah yang Harus Dibayar:</li>
+                <p><b><i>{{ Number::currency($data['amount'], in: 'IDR', locale: 'id') }}</i></b></p>
             <li>Pay Code (Virtual Number): </li>
                 <p><b><i>{{ $data['pay_code'] }}</i></b></p>
             <li>Status: </li>
@@ -62,7 +62,8 @@
             <li>Expired Time to Pay: </li>
                 <p><b><i>{{ date('d-m-Y H:i', $data['expired_time']) }}</i></b></p>
         </ul>
-
+        </br>
+        <h4><a href="{{ route('tripay.instruction', $data['payment_method']) }}" onclick="">Tata Cara Pembayaran</a></h4>
     </div>
 
     <script src="{{ asset('/js/jquery.min.js') }}"></script>

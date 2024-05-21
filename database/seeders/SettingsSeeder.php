@@ -264,22 +264,22 @@ class SettingsSeeder extends Seeder
             // tripay
             array(
                 'name' => "tripay_api_key",
-                'value' => 'DmtwE8WcgKBDYbIwAvB3PoFGWPmfgxeCzzhrSBf6',
+                'value' => 'DEV-ECXMRgVAk66itZxbPiL7YbKcmTXqbZiW2DsYjUQ4',
                 'created_by' => 1,
             ),
             array(
                 'name' => "tripay_api_secret",
-                'value' => 'zw1x5-sKnfk-U4B1q-hGnPS-ItHxy',
+                'value' => 'wEq5z-mqjM1-xXb8j-BGMwT-C9pid',
                 'created_by' => 1,
             ),
             array(
                 'name' => "tripay_api_debug",
-                'value' => 'off',
+                'value' => 'on',
                 'created_by' => 1,
             ),
             array(
                 'name' => "tripay_merchant_code",
-                'value' => 'T16176',
+                'value' => 'T16140',
                 'created_by' => 1,
             ),
             array(
@@ -299,7 +299,7 @@ class SettingsSeeder extends Seeder
             ),
             array(
                 'name' => "wa_payment",
-                'value' => "<p><strong>Yth Pelanggan GNET</strong></p><p>Hallo Bapak/Ibu,<br><strong>%customer%</strong>,</p><p>Berikut detail, pembayaran melalui virtual account :</p><p>Merchant Ref : <strong>%merchantcode%</strong> .<br>Payment Name : <strong>%provider%</strong> <br>Pay Code (Virtual Number) : <strong>%virtualnumber%</strong> .</p><p>Harga Paket : <strong>%harga%</strong><br>Customer Fee : <strong>%customerfee%</strong><br>Jumlah yang Harus Dibayar : <strong>%nominaltagihan%</strong><br>Status : <strong>%statuspayment%</strong><br>Bayar Sebelum : <strong>%paybefore%</strong></p><p>Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir<br>Terima Kasih, Untuk perhatiannya</p><p>Hormat kami<br><strong>PT. Global Data Network</strong><br>Jl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.<br>Phone : 085731770730 / 085648747901<br>https://www.gnet.co.id</p>",
+                'value' => "<p><strong>Yth Pelanggan GNET</strong></p><p>Hallo Bapak/Ibu,<br><strong>%customer%</strong>,</p><p>Berikut detail, pembayaran melalui virtual account :</p><p>Merchant Ref : <strong>%merchantcode%</strong> .<br>Payment Name : <strong>%provider%</strong>&nbsp;<br>Pay Code (Virtual Number) : <strong>%virtualnumber%</strong> .</p><p>Harga Paket : <strong>%harga%</strong><br>Customer Fee : <strong>%customerfee%</strong><br>Jumlah yang Harus Dibayar : <strong>%nominaltagihan%</strong><br>Status : <strong>%statuspayment%</strong><br>Bayar Sebelum : <strong>%paybefore%</strong></p><p>Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir<br>Terima Kasih, Untuk perhatiannya</p><p>Untuk detail cara bayar dapat klik link dibawah ini<br>Cara Bayar : <strong>%carabayar%</strong></p><p>Hormat kami<br><strong>PT. Global Data Network</strong><br>Jl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.<br>Phone : 085731770730 / 085648747901<br>https://www.gnet.co.id</p>",
                 'created_by' => 1,
             ),
             array(

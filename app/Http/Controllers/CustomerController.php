@@ -18,6 +18,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
@@ -329,9 +330,22 @@ class CustomerController extends Controller
 
     public function import()
     {
-        Excel::import(new CustomerImport, request()->file('file'));
+        try {
+            Excel::import(new CustomerImport, request()->file('file'));
+            return redirect()->back()->with('success', 'Customer imported successfully.');
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            // Handle validation errors
+            $failures = $e->failures();
+            return redirect()->back()->with('errors', 'Customer import failed due to validation errors.')->withErrors($failures);
+        } catch (\Maatwebsite\Excel\Exceptions\NoTypeDetectedException $e) {
+            // Handle file type errors
+            return redirect()->back()->with('errors', 'Customer import failed due to invalid file type.');
+        } catch (Exception $error) {
+            // Log the error
+            Log::error('Customer import failed: ' . $error->getMessage());
+            return redirect()->back()->with('errors', 'Customer import failed.');
+        }
 
-        return redirect()->back()->with('success', 'Customer imported successfully.');
     }
 
     public function delete(String $id)

@@ -250,6 +250,13 @@ class OrderController extends Controller
 
     public function sendwa(Request $request, OrderDetail $order){
         $orderdetail = OrderDetail::where('id', '=', $order->id)->first();
+        $tripay_sand_box = Setting::find(49);
+
+        if($tripay_sand_box->value == "on"){
+            $tripay_url = "http://isp.test/tripay/merchant";
+        }else{
+            $tripay_url = "https://billing.berdikari.web.id/tripay/merchant";
+        }
 
         if ($orderdetail != null) {
             $order = Order::leftJoin('customers', 'customers.id', '=', 'orders.customer_id')->where('orders.id', '=', $orderdetail->order_id)->first();
@@ -284,7 +291,7 @@ class OrderController extends Controller
                     $converted = preg_replace('/%bankbca%/', $banks[2]['nomor_akun_rekening'], $converted);
                     $converted = preg_replace('/%bankbri%/', $banks[0]['nomor_akun_rekening'], $converted);
                     $converted = preg_replace('/%bankbni%/', $banks[1]['nomor_akun_rekening'], $converted);
-                    $converted = preg_replace('/%linkurlpayment%/', 'https://billing.berdikari.web.id/tripay/merchant', $converted);
+                    $converted = preg_replace('/%linkurlpayment%/', $tripay_url, $converted);
 
                     $curl = curl_init();
 

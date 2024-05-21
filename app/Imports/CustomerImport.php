@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\User;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -21,12 +22,12 @@ class CustomerImport implements ToCollection, WithHeadingRow
             // Validate the row data
             $validator = validator($row->toArray(), [
                 'nama_customer' => 'required',
-                'gender' => 'required', // Adjust validation rules as per your requirements
+                'gender' => 'required',
                 'nomor_ktp' => 'required',
                 'alamat_customer' => 'required',
                 'kodepos_customer' => 'required',
                 'nomor_telephone' => 'required',
-                'paket' => 'nullable', // Assuming 'paket' and 'location' are optional fields
+                'paket' => 'nullable',
                 'location' => 'nullable',
                 'installed_date' => 'nullable|date',
                 'email' => 'required|email:dns|unique:users',
@@ -35,13 +36,13 @@ class CustomerImport implements ToCollection, WithHeadingRow
 
             // If validation fails for any required fields, skip the row
             if ($validator->fails()) {
+                // Optionally log the errors
+                Log::info('Validation failed for row: ', $validator->errors()->all());
                 continue;
             }
 
-            // strip out all whitespace
-            $username = preg_replace('/\s*/', '', $row['nama_customer']);
-            // convert the string to all lowercase
-            $username = strtolower($username);
+            // Strip out all whitespace and convert the string to lowercase
+            $username = strtolower(preg_replace('/\s*/', '', $row['nama_customer']));
 
             $user = User::create([
                 'name' => $row['nama_customer'],
@@ -59,7 +60,7 @@ class CustomerImport implements ToCollection, WithHeadingRow
                 'nomor_ktp' => $row['nomor_ktp'],
                 'alamat_customer' => $row['alamat_customer'],
                 'kodepos_customer' => $row['kodepos_customer'],
-                'kelurahan_id' => 3578180003,
+                'kelurahan_id' => 3578180003, // This value might need to be dynamic
                 'nomor_telephone' => $row['nomor_telephone'],
                 'is_ppn' => $row['is_ppn'],
             ]);
@@ -75,17 +76,16 @@ class CustomerImport implements ToCollection, WithHeadingRow
             ]);
 
             $currentYear = date('Y');
-            // Generate a random number between 1111 and 9999
             $randomNumber = rand(1111, 9999);
-            // Concatenate the current year, date, and random number to create the invoice number
             $invoiceNumber = 'INV' . $currentYear . $randomNumber;
+
             OrderDetail::create([
                 'order_id' => $order->id,
                 'due_date' => $row['due_date'],
                 'is_active' => 1,
                 'is_payed' => 1,
                 'invoice_number' => $invoiceNumber,
-                'uuid' => Str::uuid(64),
+                'uuid' => Str::uuid(),
                 'ppn' => $row['is_ppn'],
             ]);
         }
