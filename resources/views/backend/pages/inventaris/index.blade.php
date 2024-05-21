@@ -62,16 +62,14 @@
                         target: 0
                     }
                 },
-                columnDefs: [
-                    {
-                        targets: 0,
-                        orderable: false,
-                        searchable: false,
-                        checkboxes: {
-                            selectRow: true
-                        }
-                    },
-                ],
+                columnDefs: [{
+                    targets: 0,
+                    orderable: false,
+                    searchable: false,
+                    checkboxes: {
+                        selectRow: true
+                    }
+                }, ],
                 // Ini Option supaya semua
                 columns: [{
                         data: 'DT_RowIndex',
@@ -246,6 +244,10 @@
                             <a href="{{ route('inve.create') }}" type="button"
                                 class="btn btn-sm btn-outline-primary d-inline-flex">
                                 <i class="ti ti-plus me-1"></i>Inventaris</a>
+
+                            <a href="{{ route('inve.move') }}" type="button"
+                                class="btn btn-sm btn-outline-success d-inline-flex">
+                                <i class="ti ti-share me-1"></i>Pindah</a>
 
                             {{-- <a href="{{ route('invekategori.index') }}" type="button"
                                 class="btn btn-sm btn-outline-primary d-inline-flex">

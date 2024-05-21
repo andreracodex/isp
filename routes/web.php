@@ -141,7 +141,9 @@ Route::middleware('auth', 'has.role', 'auth.session')->group(function () {
     Route::prefix('inve')->group(function () {
         Route::get('', [InventarisController::class, 'index'])->name('inve.index');
         Route::get('/create', [InventarisController::class, 'create'])->name('inve.create');
+        Route::get('/move', [InventarisController::class, 'move'])->name('inve.move');
         Route::post('/store', [InventarisController::class, 'store'])->name('inve.store');
+        Route::post('/moveInve', [InventarisController::class, 'moveInve'])->name('inve.moveInve');
         Route::get('{inve}/view', [InventarisController::class, 'view'])->name('inve.view');
         Route::get('{inve}/edit', [InventarisController::class, 'edit'])->name('inve.edit');
         Route::put('{inve}/update', [InventarisController::class, 'update'])->name('inve.update');

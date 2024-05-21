@@ -62,6 +62,17 @@ class InventarisController extends Controller
         );
     }
 
+    public function move()
+    {
+        $inventaris = Inventaris::orderBy('nama_barang', 'ASC')->get();
+        $locations = Location::all();
+        $profile = Setting::all();
+
+        return view('backend.pages.inventaris.move',
+            compact('profile', 'inventaris', 'locations')
+        );
+    }
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -90,6 +101,24 @@ class InventarisController extends Controller
         ]);
 
         return redirect()->route('inve.index')->with(['success' => 'Data berhasil disimpan!']);
+    }
+
+    public function moveInve(Request $request)
+    {
+        $this->validate($request, [
+            'location' => 'required',
+            'inve' => 'required',
+        ]);
+
+        foreach ($request->inve as $val) {
+            $inventaris = Inventaris::findOrFail($val);
+
+            $inventaris->update([
+                'location_id' => $request->location,
+            ]);
+        }
+
+        return redirect()->route('inve.index')->with(['success' => 'Inventaris berhasil dipindahkan!']);
     }
 
     public function view(Inventaris $inve)
