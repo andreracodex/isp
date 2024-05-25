@@ -81,8 +81,8 @@
     <script src="{{ asset('/js/plugins/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('/js/plugins/Jarallax.js') }}"></script>
     <!-- [Page Specific JS] end -->
-    @include('tripay::header')
-    @include('tripay::footer')
+    @include('tripay::base.header')
+    @include('tripay::base.footer')
 </body>
 
 </html>
