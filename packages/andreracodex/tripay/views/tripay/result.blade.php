@@ -63,7 +63,7 @@
                 <p><b><i>{{ date('d-m-Y H:i', $data['expired_time']) }}</i></b></p>
         </ul>
         </br>
-        <h4><a href="{{ route('tripay.instruction', $data['payment_method']) }}" onclick="">Tata Cara Pembayaran</a></h4>
+        <h4><a href="{{ route('tripay.instruction', [$data['payment_method'], $data['pay_code']]) }}" onclick="">Tata Cara Pembayaran</a></h4>
     </div>
 
     <script src="{{ asset('/js/jquery.min.js') }}"></script>

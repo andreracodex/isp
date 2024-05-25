@@ -7,19 +7,22 @@ use App\Models\Invoice;
 use App\Models\OrderDetail;
 use App\Models\Setting;
 use App\Models\ShortURL;
+use App\Models\Transaction;
 use Carbon\Carbon;
 use Exception;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Number;
+use Psy\Readline\Transient;
 
 use function App\Http\Helpers\convert_phone;
 
 class TripayController extends Controller
 {
-    public function instruction($tripay)
+    public function instruction($tripay, $paycode)
     {
         try {
             $validChannels = [
@@ -42,7 +45,7 @@ class TripayController extends Controller
                 ? "https://tripay.co.id/api-sandbox/"
                 : "https://tripay.co.id/api/";
 
-            $payload = ['code' => $tripays];
+            $payload = ['code' => $tripays, 'pay_code' => $paycode];
 
             $curl = curl_init();
 
@@ -76,7 +79,7 @@ class TripayController extends Controller
         }
     }
 
-    public function merchant()
+    public function showmerchant()
     {
         try {
             $profile = Setting::all();
@@ -120,9 +123,9 @@ class TripayController extends Controller
         }
     }
 
-    public function failed(){
+    public function failed($errors){
         $profile = Setting::all();
-        return view('tripay::failed', compact('profile'));
+        return view('tripay::failed', compact('profile', 'errors'));
     }
 
     public function transaction($tripay, $invoices, $amount)
@@ -131,12 +134,10 @@ class TripayController extends Controller
         $apiKey = Setting::find(47);
         $privateKey   = Setting::find(48);
         $merchantCode = Setting::find(50);
-        $tripay_sand_box = Setting::find(49);
-        if($tripay_sand_box->value == 'on'){
-            $tripay_url = "https://tripay.co.id/api-sandbox/";
-        }else{
-            $tripay_url = "https://tripay.co.id/api/";
-        }
+        $tripaySandBox = Setting::find(49);
+        $tripayUrl = $tripaySandBox->value == 'on'
+        ? "https://tripay.co.id/api-sandbox/"
+        : "https://tripay.co.id/api/";
 
         $merchantRef  = $invoices;
         $amount       = $amount;
@@ -162,7 +163,8 @@ class TripayController extends Controller
                     'quantity'    => 1,
                 ],
             ],
-            'return_url'   => $tripay_url . '/tripay/redirect',
+            'callback_url' => $tripayUrl . 'tripay/callback',
+            'return_url'   => $tripayUrl . 'tripay/redirect',
             'expired_time' => (time() + (24 * 60 * 60)), // 24 jam
             'signature'    => hash_hmac('sha256', $merchantCode->value . $merchantRef . $amount, $privateKey->value)
         ];
@@ -171,7 +173,7 @@ class TripayController extends Controller
 
         curl_setopt_array($curl, [
             CURLOPT_FRESH_CONNECT  => true,
-            CURLOPT_URL            =>  $tripay_url . 'transaction/create',
+            CURLOPT_URL            =>  $tripayUrl . 'transaction/create',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HEADER         => false,
             CURLOPT_HTTPHEADER     => ['Authorization: Bearer ' . $apiKey->value],
@@ -266,22 +268,6 @@ class TripayController extends Controller
         }
     }
 
-    public function short(Request $request)
-    {
-        // $request->validate([
-        //     'url' => 'required|url',
-        // ]);
-
-        // $shortURL = ShortURL::create([
-        //     'original_url' => $request->url,
-        //     'short_code' => Str::random(6), // Generate a random short code
-        // ]);
-
-        // return response()->json([
-        //     'short_url' => route('short-url.redirect', $shortURL->short_code),
-        // ]);
-    }
-
     public function merchantstore(Request $request){
         $invoices = $request->input('invoice_number');
         $tripay = $request->input('code');
@@ -291,7 +277,8 @@ class TripayController extends Controller
             ->where('order_details.invoice_number', $invoices)->first();
 
         if($detail == null){
-            return redirect()->route('tripay.failed')->with('erorrs', 'Inovice Number Not Found');
+            $errors = "Invoice Number Not Found";
+            return redirect()->route('tripay.failed', $errors);
         }
 
         $amount = intval($detail->harga_paket);
@@ -330,7 +317,8 @@ class TripayController extends Controller
                     'quantity'    => 1,
                 ],
             ],
-            'return_url'   => $tripay_url . '/tripay/redirect',
+            'callback_url'   => $tripay_url . 'tripay/callback',
+            'return_url'   => $tripay_url . 'tripay/redirect',
             'expired_time' => (time() + (24 * 60 * 60)), // 24 jam
             'signature'    => hash_hmac('sha256', $merchantCode->value . $merchantRef . $amount, $privateKey->value)
         ];
@@ -378,7 +366,7 @@ class TripayController extends Controller
         $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
         $converted = preg_replace('/&nbsp;/', '', $converted);
 
-        $url_cara_bayar = route('tripay.instruction', $data['payment_method']);
+        $url_cara_bayar = route('tripay.instruction', [$data['payment_method'], $data['pay_code']]);
 
         $converted = preg_replace('/%customer%/', $data['customer_name'], $converted);
         $converted = preg_replace('/%merchantcode%/', $data['reference'], $converted);
@@ -390,7 +378,6 @@ class TripayController extends Controller
         $converted = preg_replace('/%statuspayment%/', $data['status'], $converted);
         $converted = preg_replace('/%paybefore%/', date('d F Y H:i', $data['expired_time']), $converted);
         $converted = preg_replace('/%carabayar%/', $url_cara_bayar, $converted);
-
 
         $curl = curl_init();
 
@@ -415,6 +402,88 @@ class TripayController extends Controller
 
         $response = curl_exec($curl);
         curl_close($curl);
+
+        Transaction::create($data);
+
         return view('tripay::result', compact('data', 'profile'));
+    }
+
+    public function checkstatus($reference){
+        try{
+            $profile = Setting::all();
+            $apiKey = Setting::find(47);
+            $privateKey   = Setting::find(48);
+            $merchantCode = Setting::find(50);
+            $tripay_sand_box = Setting::find(49);
+            if($tripay_sand_box->value == 'on'){
+                $tripay_url = "https://tripay.co.id/api-sandbox/";
+            }else{
+                $tripay_url = "https://tripay.co.id/api/";
+            }
+            $payload = ['reference'	=> $reference];
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, [
+                CURLOPT_FRESH_CONNECT  => true,
+                CURLOPT_URL            => $tripay_url . 'transaction/detail?'.http_build_query($payload),
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HEADER         => false,
+                CURLOPT_HTTPHEADER     => ['Authorization: Bearer '.$apiKey->value],
+                CURLOPT_FAILONERROR    => false,
+                CURLOPT_IPRESOLVE      => CURL_IPRESOLVE_V4
+            ]);
+
+            $response = curl_exec($curl);
+            $error = curl_error($curl);
+
+            curl_close($curl);
+
+            $test = json_decode($response, TRUE);
+            $data = $test['data'];
+            if($test['success'] == true){
+                // Status Payed
+                if($data['status'] == "PAID"){
+                    // PAID
+                    $ordel = OrderDetail::where('invoice_number', $data['merchant_ref'])->first();
+                    $ordel->is_payed = 1;
+                    $ordel->save();
+
+                    $transdel = Transaction::where('merchant_ref', $data['merchant_ref'])->first();
+                    $transdel->status = "PAID";
+                    $transdel->save();
+                }else if($data['status'] == "EXPIRED"){
+                    // EXPIRED
+                    $transdel = Transaction::where('merchant_ref', $data['merchant_ref'])->first();
+                    $transdel->status = "EXPIRED";
+                    $transdel->save();
+                }else if($data['status'] == "REFUND"){
+                    // REFUND
+                    $transdel = Transaction::where('merchant_ref', $data['merchant_ref'])->first();
+                    $transdel->status = "REFUND";
+                    $transdel->save();
+                }else if($data['status'] == "FAILED"){
+                    // FAILED
+                    $transdel = Transaction::where('merchant_ref', $data['merchant_ref'])->first();
+                    $transdel->status = "FAILED";
+                    $transdel->save();
+                }else{
+                    // UNPAID
+                    $transdel = Transaction::where('merchant_ref', $data['merchant_ref'])->first();
+                    $transdel->status = "UNPAID";
+                    $transdel->save();
+                }
+                return view('tripay::checkstatus', compact('data', 'profile'));
+            }else{
+                $errors = "Ref Transaction Not Found";
+                return redirect()->route('tripay.failed', $errors);
+            }
+
+
+        }catch (\Exception $e) {
+            $errors = "Execption Transaction Not Found";
+            return redirect()->route('tripay.failed', $errors);
+        }
+
     }
 }

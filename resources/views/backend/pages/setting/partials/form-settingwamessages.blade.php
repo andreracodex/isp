@@ -184,6 +184,7 @@
                         <span class="badge bg-secondary">%nominaltagihan%</span>
                         <span class="badge bg-secondary">%statuspayment%</span>
                         <span class="badge bg-secondary">%paybefore%</span>
+                        <span class="badge bg-secondary">%carabayar%</span>
                     </p>
                 </div>
                 <div class="card-body">
