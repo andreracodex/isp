@@ -481,7 +481,7 @@ class TripayController extends Controller
 
 
         }catch (\Exception $e) {
-            $errors = "Execption Transaction Not Found";
+            $errors = "Ref Transaction Not Found";
             return redirect()->route('tripay.failed', $errors);
         }
 

@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    @include('tripay::header')
+
 
     <div class="container" style="margin-top: 100px;">
         <div class="card social-profile">
@@ -58,52 +58,9 @@
     <script src="{{ asset('/js/plugins/wow.min.js') }}"></script>
     <script src="{{ asset('/js/plugins/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('/js/plugins/Jarallax.js') }}"></script>
-    <script>
-        // Start [ Menu hide/show on scroll ]
-        let ost = 0;
-        document.addEventListener('scroll', function() {
-            let cOst = document.documentElement.scrollTop;
-            if (cOst == 0) {
-                document.querySelector('.navbar').classList.add('top-nav-collapse');
-            } else if (cOst > ost) {
-                document.querySelector('.navbar').classList.add('top-nav-collapse');
-                document.querySelector('.navbar').classList.remove('default');
-            } else {
-                document.querySelector('.navbar').classList.add('default');
-                document.querySelector('.navbar').classList.remove('top-nav-collapse');
-            }
-            ost = cOst;
-        });
-        // End [ Menu hide/show on scroll ]
-        var wow = new WOW({
-            animateClass: 'animated'
-        });
-        wow.init();
-
-        // slider start
-        $('.screen-slide').owlCarousel({
-            loop: true,
-            margin: 30,
-            center: true,
-            nav: false,
-            dotsContainer: '.app_dotsContainer',
-            URLhashListener: true,
-            items: 1
-        });
-        $('.workspace-slider').owlCarousel({
-            loop: true,
-            margin: 30,
-            center: true,
-            nav: false,
-            dotsContainer: '.workspace-card-block',
-            URLhashListener: true,
-            items: 1.5
-        });
-        // slider end
-        // marquee start
-    </script>
     <!-- [Page Specific JS] end -->
-    @include('tripay::footer')
+    @include('tripay::base.header')
+    @include('tripay::base.footer')
 </body>
 
 </html>
