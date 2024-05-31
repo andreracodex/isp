@@ -232,9 +232,9 @@ class TripayController extends Controller
         $status = strtoupper((string) $data->status);
 
         if ($data->is_closed_payment === 1) {
-            $invoice = OrderDetail::where('id', $invoiceId)
-                ->where('tripay_reference', $tripayReference)
-                ->where('status', '=', 'UNPAID')
+            $invoice = OrderDetail::where('invoice_number', $invoiceId)
+                ->where('reference', $tripayReference)
+                ->where('is_payed', '=', 0)
                 ->first();
 
             if (! $invoice) {
@@ -246,15 +246,27 @@ class TripayController extends Controller
 
             switch ($status) {
                 case 'PAID':
-                    $invoice->update(['status' => 'PAID']);
+                    $invoice->update(['is_payed' => 1]);
+
+                    $paid = Transaction::where('merchant_ref', $invoiceId)->first();
+                    $paid->status = "PAID";
+                    $paid->save();
                     break;
 
                 case 'EXPIRED':
-                    $invoice->update(['status' => 'EXPIRED']);
+                    $invoice->update(['is_payed' => 0]);
+
+                    $exp = Transaction::where('merchant_ref', $invoiceId)->first();
+                    $exp->status = "EXPIRED";
+                    $exp->save();
                     break;
 
                 case 'FAILED':
-                    $invoice->update(['status' => 'FAILED']);
+                    $invoice->update(['is_payed' => 0]);
+
+                    $failed = Transaction::where('merchant_ref', $invoiceId)->first();
+                    $failed->status = "FAILED";
+                    $failed->save();
                     break;
 
                 default:
