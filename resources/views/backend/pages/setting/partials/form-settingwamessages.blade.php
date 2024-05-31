@@ -7,16 +7,25 @@
                     <h5>WA Messages Format (Tagihan)</h5>
                     <p>
                         Format Tersedia:
-                        <span class="badge bg-secondary">%customer%</span>
-                        <span class="badge bg-secondary">%invoices%</span>
-                        <span class="badge bg-secondary">%bulantahun%</span>
-                        <span class="badge bg-secondary">%nominaltagihan%</span>
-                        <span class="badge bg-secondary">%jatuhtempo%</span>
-                        <span class="badge bg-secondary">%bankmandiri%</span>
-                        <span class="badge bg-secondary">%bankbca%</span>
-                        <span class="badge bg-secondary">%bankbri%</span>
-                        <span class="badge bg-secondary">%bankbni%</span>
-                        <span class="badge bg-secondary">%linkurlpayment%</span>
+                        <span class="badge bg-dark">%customer%</span>
+                        <span class="badge bg-dark">%invoices%</span>
+                        <span class="badge bg-dark">%bulantahun%</span>
+                        <span class="badge bg-dark">%nominaltagihan%</span>
+                        <span class="badge bg-dark">%jatuhtempo%</span>
+                        <span class="badge bg-dark">%bankmandiri%</span>
+                        <span class="badge bg-dark">%bankbca%</span>
+                        <span class="badge bg-dark">%bankbri%</span>
+                        <span class="badge bg-dark">%bankbni%</span>
+                        <span class="badge bg-dark">%linkurlpayment%</span>
+                    </p>
+                    <p>
+                        Format Utama:
+                        <span class="badge bg-danger">%aliasperusahaan%</span>
+                        <span class="badge bg-danger">%namaperusahaan%</span>
+                        <span class="badge bg-danger">%alamatperusahaan%</span>
+                        <span class="badge bg-danger">%phone%</span>
+                        <span class="badge bg-danger">%phonealternate%</span>
+                        <span class="badge bg-danger">%urlperusahaan%</span>
                     </p>
                 </div>
                 <div class="card-body">
@@ -67,11 +76,20 @@
                     <h5>WA Messages Format (Terbayar)</h5>
                     <p>
                         Format Tersedia:
-                        <span class="badge bg-secondary">%customer%</span>
-                        <span class="badge bg-secondary">%invoices%</span>
-                        <span class="badge bg-secondary">%bulantahun%</span>
-                        <span class="badge bg-secondary">%metode_bayar%</span>
-                        <span class="badge bg-secondary">%tanggalbayar%</span>
+                        <span class="badge bg-dark">%customer%</span>
+                        <span class="badge bg-dark">%invoices%</span>
+                        <span class="badge bg-dark">%bulantahun%</span>
+                        <span class="badge bg-dark">%metode_bayar%</span>
+                        <span class="badge bg-dark">%tanggalbayar%</span>
+                    </p>
+                    <p>
+                        Format Utama:
+                        <span class="badge bg-danger">%aliasperusahaan%</span>
+                        <span class="badge bg-danger">%namaperusahaan%</span>
+                        <span class="badge bg-danger">%alamatperusahaan%</span>
+                        <span class="badge bg-danger">%phone%</span>
+                        <span class="badge bg-danger">%phonealternate%</span>
+                        <span class="badge bg-danger">%urlperusahaan%</span>
                     </p>
                 </div>
                 <div class="card-body">
@@ -122,9 +140,18 @@
                     <h5>WA Messages Format (Pelanggan)</h5>
                     <p>
                         Format Tersedia:
-                        <span class="badge bg-secondary">%customer%</span>
-                        <span class="badge bg-secondary">%tanggaldaftar%</span>
-                        <span class="badge bg-secondary">%bulantahun%</span>
+                        <span class="badge bg-dark">%customer%</span>
+                        <span class="badge bg-dark">%tanggaldaftar%</span>
+                        <span class="badge bg-dark">%bulantahun%</span>
+                    </p>
+                    <p>
+                        Format Utama:
+                        <span class="badge bg-danger">%aliasperusahaan%</span>
+                        <span class="badge bg-danger">%namaperusahaan%</span>
+                        <span class="badge bg-danger">%alamatperusahaan%</span>
+                        <span class="badge bg-danger">%phone%</span>
+                        <span class="badge bg-danger">%phonealternate%</span>
+                        <span class="badge bg-danger">%urlperusahaan%</span>
                     </p>
                 </div>
                 <div class="card-body">
@@ -175,16 +202,27 @@
                     <h5>WA Messages Pembayaran Tripay (Virtual Account)</h5>
                     <p>
                         Format Tersedia:
-                        <span class="badge bg-secondary">%customer%</span>
-                        <span class="badge bg-secondary">%merchantcode%</span>
-                        <span class="badge bg-secondary">%provider%</span>
-                        <span class="badge bg-secondary">%virtualnumber%</span>
-                        <span class="badge bg-secondary">%harga%</span>
-                        <span class="badge bg-secondary">%customerfee%</span>
-                        <span class="badge bg-secondary">%nominaltagihan%</span>
-                        <span class="badge bg-secondary">%statuspayment%</span>
-                        <span class="badge bg-secondary">%paybefore%</span>
-                        <span class="badge bg-secondary">%carabayar%</span>
+                        <span class="badge bg-dark">%customer%</span>
+                        <span class="badge bg-dark">%merchantcode%</span>
+                        <span class="badge bg-dark">%provider%</span>
+                        <span class="badge bg-dark">%virtualnumber%</span>
+                        <span class="badge bg-dark">%harga%</span>
+                        <span class="badge bg-dark">%customerfee%</span>
+                        <span class="badge bg-dark">%merchantfee%</span>
+                        <span class="badge bg-dark">%nominaltagihan%</span>
+                        <span class="badge bg-dark">%statuspayment%</span>
+                        <span class="badge bg-dark">%paybefore%</span>
+                        <span class="badge bg-dark">%carabayar%</span>
+                        <span class="badge bg-dark">%checkout%</span>
+                    </p>
+                    <p>
+                        Format Utama:
+                        <span class="badge bg-danger">%aliasperusahaan%</span>
+                        <span class="badge bg-danger">%namaperusahaan%</span>
+                        <span class="badge bg-danger">%alamatperusahaan%</span>
+                        <span class="badge bg-danger">%phone%</span>
+                        <span class="badge bg-danger">%phonealternate%</span>
+                        <span class="badge bg-danger">%urlperusahaan%</span>
                     </p>
                 </div>
                 <div class="card-body">

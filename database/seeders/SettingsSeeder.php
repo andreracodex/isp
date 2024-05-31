@@ -121,13 +121,13 @@ class SettingsSeeder extends Seeder
                 'created_by' => 1,
             ),
             array(
-                'name' => "footer_title_notes",
-                'value' => '',
+                'name' => "alternative_phone_prefix",
+                'value' => '085648747901',
                 'created_by' => 1,
             ),
             array(
-                'name' => "footer_title_notes_2",
-                'value' => ' ',
+                'name' => "url_system_prefix",
+                'value' => 'https://www.gnet.co.id',
                 'created_by' => 1,
             ),
             array(
@@ -152,7 +152,7 @@ class SettingsSeeder extends Seeder
             ),
             array(
                 'name' => "company_city",
-                'value' => 'Surabaya',
+                'value' => 'Kota Surabaya',
                 'created_by' => 1,
             ),
             array(
@@ -172,7 +172,7 @@ class SettingsSeeder extends Seeder
             ),
             array(
                 'name' => "company_telephone",
-                'value' => '(+62)857 3177 0730',
+                'value' => '085731770730',
                 'created_by' => 1,
             ),
             array(
@@ -284,27 +284,22 @@ class SettingsSeeder extends Seeder
             ),
             array(
                 'name' => "wa_tagihan",
-                'value' => "<p><strong>Yth Pelanggan GNET</strong><br><br>Hallo Bapak/Ibu,<br><strong>%customer% ,</strong></p><p>No Invocie Tagihan :<strong>%invoices%</strong>.<br>Bulan : <strong>%bulantahun%</strong>.<br>Total Tagihan : <strong>%nominaltagihan%</strong>.<br>Jatuh Tempo : <strong>%jatuhtempo%</strong> .</p><p>Bank Tersedia :<br>BANK MANDIRI : <strong>%bankmandiri% .</strong><br>BANK BCA : <strong>%bankbca% .</strong><br>BANK BRI : <strong>%bankbri% .</strong><br>BANK BNI : <strong>%bankbni% .</strong><br>A/N <strong>PUTUT WAHYUDI</strong></p><p>Link Pembayaran : <strong>%linkurlpayment%</strong></p><p>Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir.</p><p>Hormat kami<br><strong>PT. Global Data Network</strong><br>Jl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.<br>Phone : 085648747901<br>https://www.gnet.co.id</p>",
+                'value' => "<p><strong>Yth Pelanggan %aliasperusahaan%</strong><br><br>Hallo Bapak/Ibu,<br><strong>%customer% ,</strong></p><p>No Invocie Tagihan : <strong>%invoices%</strong>.<br>Bulan : <strong>%bulantahun%</strong>.<br>Total Tagihan : <strong>%nominaltagihan%</strong>.<br>Jatuh Tempo : <strong>%jatuhtempo%</strong> .</p><p>Bank Tersedia :<br>BANK MANDIRI : <strong>%bankmandiri% .</strong><br>BANK BCA : <strong>%bankbca% .</strong><br>BANK BRI : <strong>%bankbri% .</strong><br>BANK BNI : <strong>%bankbni% .</strong><br>A/N <strong>PUTUT WAHYUDI</strong></p><p>Link Pembayaran : <strong>%linkurlpayment%</strong></p><p>Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir.</p><p>Hormat kami,<br><strong>%namaperusahaan%</strong><br><strong>%alamatperusahaan%</strong><br>Phone : <strong>%phone%</strong> / <strong>%phonealternate%</strong> <br><strong>%urlperusahaan%</strong></p>",
                 'created_by' => 1,
             ),
             array(
                 'name' => "wa_terbayar",
-                'value' => "<p><strong>Yth Pelanggan GNET</strong></p><p>Hallo Bapak/Ibu,<br><strong>%customer%</strong>,</p><p>Pembayaran internet telah berhasil dilakukan.</p><p>No Invocie Tagihan : <strong>%invoices%</strong>.<br>Bulan : <strong>%bulantahun%</strong>.<br>Via : <strong>%metode_bayar%</strong>.<br>Tanggal Pembayaran : <strong>%tanggalbayar%</strong>.<br>&nbsp;</p><p>Kami ingin mengucapkan terima kasih atas kepercayaan Anda menggunakan layanan internet kami.<br>Semoga layanan yang kami berikan dapat memenuhi kebutuhan Anda dengan baik.<br>Terima kasih atas dukungan dan kesetiaan Anda sebagai pelanggan kami.</p><p>Hormat kami<br><strong>PT. Global Data Network</strong><br>Jl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.<br>Phone : 085648747901<br>https://www.gnet.co.id</p>",
+                'value' => "<p><strong>Yth Pelanggan %aliasperusahaan%</strong></p><p>Hallo Bapak/Ibu,<br><strong>%customer%</strong>,</p><p>Pembayaran internet telah berhasil dilakukan.</p><p>No Invocie Tagihan : <strong>%invoices%</strong>.<br>Bulan : <strong>%bulantahun%</strong>.<br>Via : <strong>%metode_bayar%</strong>.<br>Tanggal Pembayaran : <strong>%tanggalbayar%</strong>.<br>&nbsp;</p><p>Kami ingin mengucapkan terima kasih atas kepercayaan Anda menggunakan layanan internet kami.<br>Semoga layanan yang kami berikan dapat memenuhi kebutuhan Anda dengan baik.<br>Terima kasih atas dukungan dan kesetiaan Anda sebagai pelanggan kami.</p><p>Hormat kami,<br><strong>%namaperusahaan%</strong><br><strong>%alamatperusahaan%</strong><br>Phone : <strong>%phone%</strong> / <strong>%phonealternate%</strong> <br><strong>%urlperusahaan%</strong></p>",
                 'created_by' => 1,
             ),
             array(
                 'name' => "wa_pelanggan",
-                'value' => "<p><strong>Yth Pelanggan GNET</strong></p><p>Hallo Bapak/Ibu,<br><strong>%customer%</strong>,</p><p>Selamat datang, dan selamat menikmati layanan internet terbaik GNET,<br>Terima Kasih telah menggunakan jasa layanan internet kami.<br><br>Tanggal Pendaftaran : <strong>%tanggaldaftar%</strong>.<br>Bulan : <strong>%bulantahun%</strong> .<br>&nbsp;</p><p>Kami ingin mengucapkan terima kasih atas kepercayaan Anda menggunakan layanan internet kami.<br>Semoga layanan yang kami berikan dapat memenuhi kebutuhan Anda dengan baik.<br>Terima kasih atas dukungan dan kesetiaan Anda sebagai pelanggan kami.</p><p>Hormat kami<br><strong>PT. Global Data Network</strong><br>Jl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.<br>Phone : 085648747901<br>https://www.gnet.co.id</p>",
+                'value' => "<p><strong>Yth Pelanggan %aliasperusahaan%</strong></p><p>Hallo Bapak/Ibu,<br><strong>%customer%</strong>,</p><p>Selamat datang, dan selamat menikmati layanan internet terbaik %aliasperusahaan%,<br>Terima Kasih telah menggunakan jasa layanan internet kami.<br><br>Tanggal Pendaftaran : <strong>%tanggaldaftar%</strong>.<br>Bulan : <strong>%bulantahun%</strong> .<br>&nbsp;</p><p>Kami ingin mengucapkan terima kasih atas kepercayaan Anda menggunakan layanan internet kami.<br>Semoga layanan yang kami berikan dapat memenuhi kebutuhan Anda dengan baik.<br>Terima kasih atas dukungan dan kesetiaan Anda sebagai pelanggan kami.</p><p>Hormat kami,<br><strong>%namaperusahaan%</strong><br><strong>%alamatperusahaan%</strong><br>Phone : <strong>%phone%</strong> / <strong>%phonealternate%</strong> <br><strong>%urlperusahaan%</strong></p>",
                 'created_by' => 1,
             ),
             array(
                 'name' => "wa_payment",
-                'value' => "<p><strong>Yth Pelanggan GNET</strong></p><p>Hallo Bapak/Ibu,<br><strong>%customer%</strong>,</p><p>Berikut detail, pembayaran melalui virtual account :</p><p>Merchant Ref : <strong>%merchantcode%</strong> .<br>Payment Name : <strong>%provider%</strong>&nbsp;<br>Pay Code (Virtual Number) : <strong>%virtualnumber%</strong> .</p><p>Harga Paket : <strong>%harga%</strong><br>Customer Fee : <strong>%customerfee%</strong><br>Jumlah yang Harus Dibayar : <strong>%nominaltagihan%</strong><br>Status : <strong>%statuspayment%</strong><br>Bayar Sebelum : <strong>%paybefore%</strong></p><p>Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir<br>Terima Kasih, Untuk perhatiannya</p><p>Untuk detail cara bayar dapat klik link dibawah ini<br>Cara Bayar : <strong>%carabayar%</strong></p><p>Hormat kami<br><strong>PT. Global Data Network</strong><br>Jl. Dinoyo Tenun No 109, RT.006/RW.003, Kel, Keputran, Kec, Tegalsari, Kota Surabaya, Jawa Timur 60265.<br>Phone : 085731770730 / 085648747901<br>https://www.gnet.co.id</p>",
-                'created_by' => 1,
-            ),
-            array(
-                'name' => "ppn",
-                'value' => '11',
+                'value' => "<p><strong>Yth Pelanggan %aliasperusahaan%</strong></p><p>Hallo Bapak/Ibu,<br><strong>%customer%</strong>,</p><p>Berikut detail, pembayaran melalui virtual account :</p><p>Merchant Ref : <strong>%merchantcode%.</strong><br>Payment Name : <strong>%provider%.</strong><br>Pay Code (Virtual Number) : <strong>%virtualnumber%.</strong></p><p>Harga Paket : <strong>%harga%</strong><br>Customer Fee : <strong>%customerfee%</strong><br>Merchant Fee : <strong>%merchantfee%</strong><br>Jumlah yang Harus Dibayar : <strong>%nominaltagihan%</strong><br>Status : <strong>%statuspayment%</strong><br>Bayar Sebelum : <strong>%paybefore%</strong></p><p>Segera lakukan pembayaran sebelum tanggal jatuh tempo, untuk mencegah isolir<br>Terima Kasih, Untuk perhatiannya</p><p>Untuk detail cara bayar dapat klik link dibawah ini<br>Cara Bayar : <strong>%carabayar%</strong><br>Check Out : <strong>%checkout%</strong></p><p>Hormat kami<br><strong>%namaperusahaan%</strong><br><strong>%alamatperusahaan%</strong><br>Phone : <strong>%phone%</strong> / <strong>%phonealternate%</strong><br><strong>%urlperusahaan%</strong><br></p>",
                 'created_by' => 1,
             ),
         ));

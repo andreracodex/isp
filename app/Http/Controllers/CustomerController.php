@@ -174,6 +174,25 @@ class CustomerController extends Controller
                     $converted = preg_replace('/%tanggaldaftar%/', Carbon::parse($order->installed_date)->format('d F Y'), $converted);
                     $converted = preg_replace('/%bulantahun%/', Carbon::parse($order->installed_date)->format('F Y'), $converted);
 
+                     // Nama Perusahaan dan Keterangan Lainnya
+                    $aliasperusahaan = Setting::find(6);
+                    $namaperusahaan = Setting::find(23);
+                    $val1 = Setting::find(24);
+                    $val2 = Setting::find(25);
+                    $val3 = Setting::find(26);
+                    $val4 = Setting::find(27);
+                    $alamatperusahaan = ($val1->value.', '.$val2->value.', '.$val3->value.' - '.$val4->value);
+                    $phone = Setting::find(29);
+                    $phonealternate = Setting::find(19);
+                    $urlperusahaan = Setting::find(20);
+
+                    $converted = preg_replace('/%aliasperusahaan%/', $aliasperusahaan->value, $converted);
+                    $converted = preg_replace('/%namaperusahaan%/', $namaperusahaan->value, $converted);
+                    $converted = preg_replace('/%alamatperusahaan%/', $alamatperusahaan, $converted);
+                    $converted = preg_replace('/%phone%/', $phone->value , $converted);
+                    $converted = preg_replace('/%phonealternate%/', $phonealternate->value, $converted);
+                    $converted = preg_replace('/%urlperusahaan%/', $urlperusahaan->value, $converted);
+
                     $curl = curl_init();
 
                     curl_setopt_array($curl, array(

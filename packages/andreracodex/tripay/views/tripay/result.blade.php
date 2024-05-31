@@ -51,6 +51,8 @@
                 <p><b><i>{{ $data['customer_phone'] }}</i></b></p>
             <li>Harga Paket: </li>
                 <p><b><i>{{ Number::currency($data['amount_received'], in: 'IDR', locale: 'id') }}</i></b></p>
+            <li>Merchant Fee: </li>
+                <p><b><i>{{ Number::currency($data['fee_merchant'], in: 'IDR', locale: 'id') }}</i></b></p>
             <li>Customer Fee: </li>
                 <p><b><i>{{ Number::currency($data['fee_customer'], in: 'IDR', locale: 'id') }}</i></b></p>
             <li>Jumlah yang Harus Dibayar:</li>
@@ -60,7 +62,7 @@
             <li>Status: </li>
                 <p><b><i>{{ $data['status'] }}</i></b></p>
             <li>Expired Time to Pay: </li>
-                <p><b><i>{{ date('d-m-Y H:i', $data['expired_time']) }}</i></b></p>
+                <p><b><i>{{ date('d/m/Y H:i', $data['expired_time']) }}</i></b></p>
         </ul>
         </br>
         <h4><a href="{{ route('tripay.instruction', [$data['payment_method'], $data['pay_code']]) }}" onclick="">Tata Cara Pembayaran</a></h4>

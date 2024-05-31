@@ -269,143 +269,170 @@ class TripayController extends Controller
     }
 
     public function merchantstore(Request $request){
-        $invoices = $request->input('invoice_number');
-        $tripay = $request->input('code');
+        try{
+            $invoices = $request->input('invoice_number');
+            $tripay = $request->input('code');
 
-        $detail = OrderDetail::leftJoin('orders', 'order_details.order_id', 'orders.id')
-            ->leftJoin('pakets', 'orders.paket_id', 'pakets.id')
-            ->where('order_details.invoice_number', $invoices)->first();
+            $detail = OrderDetail::leftJoin('orders', 'order_details.order_id', 'orders.id')
+                ->leftJoin('pakets', 'orders.paket_id', 'pakets.id')
+                ->where('order_details.invoice_number', $invoices)->first();
 
-        if($detail == null){
-            $errors = "Invoice Number Not Found";
-            return redirect()->route('tripay.failed', $errors);
-        }
+            if($detail == null){
+                $errors = "Invoice Number Not Found";
+                return redirect()->route('tripay.failed', $errors);
+            }
 
-        $amount = intval($detail->harga_paket);
+            $amount = intval($detail->harga_paket);
 
-        $profile = Setting::all();
-        $apiKey = Setting::find(47);
-        $privateKey   = Setting::find(48);
-        $merchantCode = Setting::find(50);
-        $tripay_sand_box = Setting::find(49);
-        if($tripay_sand_box->value == 'on'){
-            $tripay_url = "https://tripay.co.id/api-sandbox/";
-        }else{
-            $tripay_url = "https://tripay.co.id/api/";
-        }
+            $profile = Setting::all();
+            $apiKey = Setting::find(47);
+            $privateKey   = Setting::find(48);
+            $merchantCode = Setting::find(50);
+            $tripay_sand_box = Setting::find(49);
+            if($tripay_sand_box->value == 'on'){
+                $tripay_url = "https://tripay.co.id/api-sandbox/";
+            }else{
+                $tripay_url = "https://tripay.co.id/api/";
+            }
 
-        $merchantRef  = $invoices;
+            $merchantRef  = $invoices;
 
-        $inv = OrderDetail::leftJoin('orders', 'order_details.order_id', 'orders.id')
-            ->leftJoin('customers', 'orders.customer_id', 'customers.id')
-            ->leftJoin('users', 'customers.user_id', 'users.id')
-            ->leftJoin('pakets', 'orders.paket_id', 'pakets.id')
-            ->where('order_details.invoice_number', $invoices)->first();
+            $inv = OrderDetail::leftJoin('orders', 'order_details.order_id', 'orders.id')
+                ->leftJoin('customers', 'orders.customer_id', 'customers.id')
+                ->leftJoin('users', 'customers.user_id', 'users.id')
+                ->leftJoin('pakets', 'orders.paket_id', 'pakets.id')
+                ->where('order_details.invoice_number', $invoices)->first();
 
-        $data = [
-            'method'         => $tripay,
-            'merchant_ref'   => $merchantRef,
-            'amount'         => $amount,
-            'customer_name'  => $inv->nama_customer,
-            'customer_email' => $inv->email,
-            'customer_phone' => $inv->nomor_telephone,
-            'order_items'    => [
-                [
-                    'sku'         => $inv->nama_paket,
-                    'name'        => $inv->jenis_paket,
-                    'price'       => $amount,
-                    'quantity'    => 1,
+            $data = [
+                'method'         => $tripay,
+                'merchant_ref'   => $merchantRef,
+                'amount'         => $amount,
+                'customer_name'  => $inv->nama_customer,
+                'customer_email' => $inv->email,
+                'customer_phone' => $inv->nomor_telephone,
+                'order_items'    => [
+                    [
+                        'sku'         => $inv->nama_paket,
+                        'name'        => $inv->jenis_paket,
+                        'price'       => $amount,
+                        'quantity'    => 1,
+                    ],
                 ],
-            ],
-            'callback_url'   => $tripay_url . 'tripay/callback',
-            'return_url'   => $tripay_url . 'tripay/redirect',
-            'expired_time' => (time() + (24 * 60 * 60)), // 24 jam
-            'signature'    => hash_hmac('sha256', $merchantCode->value . $merchantRef . $amount, $privateKey->value)
-        ];
+                'callback_url'   => $tripay_url . 'tripay/callback',
+                'return_url'   => $tripay_url . 'tripay/redirect',
+                'expired_time' => (time() + (24 * 60 * 60)), // 24 jam
+                'signature'    => hash_hmac('sha256', $merchantCode->value . $merchantRef . $amount, $privateKey->value)
+            ];
 
-        $curl = curl_init();
+            $curl = curl_init();
 
-        curl_setopt_array($curl, [
-            CURLOPT_FRESH_CONNECT  => true,
-            CURLOPT_URL            =>  $tripay_url . 'transaction/create',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HEADER         => false,
-            CURLOPT_HTTPHEADER     => ['Authorization: Bearer ' . $apiKey->value],
-            CURLOPT_FAILONERROR    => false,
-            CURLOPT_POST           => true,
-            CURLOPT_POSTFIELDS     => http_build_query($data),
-            CURLOPT_IPRESOLVE      => CURL_IPRESOLVE_V4
-        ]);
+            curl_setopt_array($curl, [
+                CURLOPT_FRESH_CONNECT  => true,
+                CURLOPT_URL            =>  $tripay_url . 'transaction/create',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HEADER         => false,
+                CURLOPT_HTTPHEADER     => ['Authorization: Bearer ' . $apiKey->value],
+                CURLOPT_FAILONERROR    => false,
+                CURLOPT_POST           => true,
+                CURLOPT_POSTFIELDS     => http_build_query($data),
+                CURLOPT_IPRESOLVE      => CURL_IPRESOLVE_V4
+            ]);
 
-        $response = curl_exec($curl);
-        $error = curl_error($curl);
+            $response = curl_exec($curl);
+            $error = curl_error($curl);
 
-        curl_close($curl);
-        $data = json_decode($response, true)['data'];
+            curl_close($curl);
 
-        $inv->reference = $data['reference'];
-        $inv->fee_customer = $data['fee_customer'];
-        $inv->fee_merchant = $data['fee_merchant'];
-        $inv->save();
-        // Kirim WA
-        $set = Setting::find(46);
-        $message = Setting::find(54);
-                    // Replace <p> tags with newlines
-        $converted = preg_replace('/<p[^>]*>/', '', $message->value);
-        $converted = preg_replace('/<\/p>/', "\n\n", $converted);
+            $data = json_decode($response, true)['data'];
 
-        // Remove <strong> tags
-        $converted = preg_replace('/<strong[^>]*>/', "*", $converted);
-        $converted = preg_replace('/<\/strong>/', "*", $converted);
+            $inv->reference = $data['reference'];
+            $inv->fee_customer = $data['fee_customer'];
+            $inv->fee_merchant = $data['fee_merchant'];
+            $inv->save();
+            // Kirim WA
+            $set = Setting::find(46);
+            $message = Setting::find(54);
+                        // Replace <p> tags with newlines
+            $converted = preg_replace('/<p[^>]*>/', '', $message->value);
+            $converted = preg_replace('/<\/p>/', "\n\n", $converted);
 
-        // Remove <i> tags
-        $converted = preg_replace('/<i[^>]*>/', "_", $converted);
-        $converted = preg_replace('/<\/i>/', "_", $converted);
+            // Remove <strong> tags
+            $converted = preg_replace('/<strong[^>]*>/', "*", $converted);
+            $converted = preg_replace('/<\/strong>/', "*", $converted);
 
-        // Remove <br> tags
-        $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
-        $converted = preg_replace('/&nbsp;/', '', $converted);
+            // Remove <i> tags
+            $converted = preg_replace('/<i[^>]*>/', "_", $converted);
+            $converted = preg_replace('/<\/i>/', "_", $converted);
 
-        $url_cara_bayar = route('tripay.instruction', [$data['payment_method'], $data['pay_code']]);
+            // Remove <br> tags
+            $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
+            $converted = preg_replace('/&nbsp;/', '', $converted);
 
-        $converted = preg_replace('/%customer%/', $data['customer_name'], $converted);
-        $converted = preg_replace('/%merchantcode%/', $data['reference'], $converted);
-        $converted = preg_replace('/%provider%/', $data['payment_name'], $converted);
-        $converted = preg_replace('/%virtualnumber%/', $data['pay_code'], $converted);
-        $converted = preg_replace('/%harga%/', 'Rp ' . number_format($data['amount_received'], 0, ',', '.'), $converted);
-        $converted = preg_replace('/%customerfee%/', 'Rp ' . number_format($data['fee_customer'], 0, ',', '.'), $converted);
-        $converted = preg_replace('/%nominaltagihan%/', 'Rp ' . number_format($data['amount'], 0, ',', '.'), $converted);
-        $converted = preg_replace('/%statuspayment%/', $data['status'], $converted);
-        $converted = preg_replace('/%paybefore%/', date('d F Y H:i', $data['expired_time']), $converted);
-        $converted = preg_replace('/%carabayar%/', $url_cara_bayar, $converted);
+            $url_cara_bayar = route('tripay.instruction', [$data['payment_method'], $data['pay_code']]);
+            $converted = preg_replace('/%customer%/', $data['customer_name'], $converted);
+            $converted = preg_replace('/%merchantcode%/', $data['reference'], $converted);
+            $converted = preg_replace('/%provider%/', $data['payment_name'], $converted);
+            $converted = preg_replace('/%virtualnumber%/', $data['pay_code'], $converted);
+            $converted = preg_replace('/%harga%/', 'Rp ' . number_format($data['amount_received'], 0, ',', '.'), $converted);
+            $converted = preg_replace('/%customerfee%/', 'Rp ' . number_format($data['fee_customer'], 0, ',', '.'), $converted);
+            $converted = preg_replace('/%merchantfee%/', 'Rp ' . number_format($data['fee_merchant'], 0, ',', '.'), $converted);
+            $converted = preg_replace('/%nominaltagihan%/', 'Rp ' . number_format($data['amount'], 0, ',', '.'), $converted);
+            $converted = preg_replace('/%statuspayment%/', $data['status'], $converted);
+            $converted = preg_replace('/%paybefore%/', date('d F Y H:i', $data['expired_time']), $converted);
+            $converted = preg_replace('/%carabayar%/', $url_cara_bayar, $converted);
+            $converted = preg_replace('/%checkout%/',$data['checkout_url'], $converted);
 
-        $curl = curl_init();
+            // Nama Perusahaan dan Keterangan Lainnya
+            $aliasperusahaan = Setting::find(6);
+            $namaperusahaan = Setting::find(23);
+            $val1 = Setting::find(24);
+            $val2 = Setting::find(25);
+            $val3 = Setting::find(26);
+            $val4 = Setting::find(27);
+            $alamatperusahaan = ($val1->value.', '.$val2->value.', '.$val3->value.' - '.$val4->value);
+            $phone = Setting::find(29);
+            $phonealternate = Setting::find(19);
+            $urlperusahaan = Setting::find(20);
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.fonnte.com/send',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array(
-                'target' => convert_phone($inv->nomor_telephone),
-                'message' => $converted,
-                'countryCode' => '62', //optional
-            ),
-            CURLOPT_HTTPHEADER => array(
-                'Authorization: '.$set->value //change TOKEN to your actual token
-            ),
-        ));
+            $converted = preg_replace('/%aliasperusahaan%/', $aliasperusahaan->value, $converted);
+            $converted = preg_replace('/%namaperusahaan%/', $namaperusahaan->value, $converted);
+            $converted = preg_replace('/%alamatperusahaan%/', $alamatperusahaan, $converted);
+            $converted = preg_replace('/%phone%/', $phone->value , $converted);
+            $converted = preg_replace('/%phonealternate%/', $phonealternate->value, $converted);
+            $converted = preg_replace('/%urlperusahaan%/', $urlperusahaan->value, $converted);
 
-        $response = curl_exec($curl);
-        curl_close($curl);
+            if($data){
+                $curl = curl_init();
 
-        Transaction::create($data);
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => 'https://api.fonnte.com/send',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => array(
+                        'target' => convert_phone($inv->nomor_telephone),
+                        'message' => $converted,
+                        'countryCode' => '62', //optional
+                    ),
+                    CURLOPT_HTTPHEADER => array(
+                        'Authorization: '.$set->value //change TOKEN to your actual token
+                    ),
+                ));
 
-        return view('tripay::result', compact('data', 'profile'));
+                $response = curl_exec($curl);
+                curl_close($curl);
+
+                Transaction::create($data);
+            }
+
+            return view('tripay::result', compact('data', 'profile'));
+        }catch(Exception $errors){
+            return view('tripay::failed', compact('profile', $errors));
+        }
     }
 
     public function checkstatus($reference){

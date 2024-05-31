@@ -32,7 +32,11 @@
                                     $name = 'Telepon';
                                 } elseif ($websetting->name == 'company_email') {
                                     $name = 'Email';
-                                } elseif ($websetting->name == 'ppn') {
+                                } elseif ($websetting->name == 'alternative_phone_prefix') {
+                                    $name = 'Phone Alternate';
+                                } elseif ($websetting->name == 'url_system_prefix') {
+                                    $name = 'Url System';
+                                } elseif ($websetting->name == 'tax_fee') {
                                     $name = 'PPN';
                                 } else {
                                     $name = $websetting->name;
