@@ -197,12 +197,13 @@ class TripayController extends Controller
         return view('tripay::callback', compact('callback'));
     }
 
+    protected $privateKey = 'DEV-ECXMRgVAk66itZxbPiL7YbKcmTXqbZiW2DsYjUQ4';
+
     public function handle(Request $request)
     {
-        $privateKey = Setting::find(47);
         $callbackSignature = $request->server('HTTP_X_CALLBACK_SIGNATURE');
         $json = $request->getContent();
-        $signature = hash_hmac('sha256', $json, $privateKey->value);
+        $signature = hash_hmac('sha256', $json, $this->privateKey);
 
         if ($signature !== (string) $callbackSignature) {
             return response()->json([
