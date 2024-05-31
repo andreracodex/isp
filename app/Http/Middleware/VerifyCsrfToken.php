@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        'http://isp.test'
+        'https://billing.berdikari.web.id/tripay/'
     ];
 }
