@@ -41,16 +41,15 @@ class BlastController extends Controller
         $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
         $converted = preg_replace('/&nbsp;/', '', $converted);
 
-        try {
-            if ($customers[0] == "0" || $customers[0] == 0) {
-                $custom = Customer::where('is_active', '=', 1)->get();
-                $now = Carbon::now()->format('Y-m-d');
+        if ($customers[0] == "0") {
+            $custom = Customer::where('is_active', '=', 1)->get();
+            $now = Carbon::now()->format('Y-m-d');
 
+            try{
                 foreach ($custom as $cust) {
-                    $phone  = Customer::where('id', '=', $cust->id)->first();
                     $curl = curl_init();
                     $set = Setting::find(46);
-                    $converted = preg_replace('/%customer%/', $phone->nama_customer, $converted);
+                    $converted = preg_replace('/%customer%/', $cust->nama_customer, $converted);
                     $converted = preg_replace('/%bulantahun%/', Carbon::parse($now)->format('F Y'), $converted);
 
                     curl_setopt_array($curl, array(
@@ -63,7 +62,7 @@ class BlastController extends Controller
                         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                         CURLOPT_CUSTOMREQUEST => 'POST',
                         CURLOPT_POSTFIELDS => array(
-                            'target' => convert_phone($phone->nomor_telephone),
+                            'target' => convert_phone($cust->nomor_telephone),
                             'message' => $converted,
                             'countryCode' => '62', //optional
                         ),
@@ -75,44 +74,43 @@ class BlastController extends Controller
                     $response = curl_exec($curl);
                     curl_close($curl);
                 }
-
-                return redirect()->route('blast.index')->with('success', 'Pesan Berhasil Dibuat.');
-            } else {
-                $now = Carbon::now()->format('Y-m-d');
-                foreach ($customers as $customer) {
-                    $phone  = Customer::where('id', '=', $customer)->first();
-                    $curl = curl_init();
-                    $set = Setting::find(46);
-                    $converted = preg_replace('/%customer%/', $phone->nama_customer, $converted);
-                    $converted = preg_replace('/%bulantahun%/', Carbon::parse($now)->format('F Y'), $converted);
-
-                    curl_setopt_array($curl, array(
-                        CURLOPT_URL => 'https://api.fonnte.com/send',
-                        CURLOPT_RETURNTRANSFER => true,
-                        CURLOPT_ENCODING => '',
-                        CURLOPT_MAXREDIRS => 10,
-                        CURLOPT_TIMEOUT => 0,
-                        CURLOPT_FOLLOWLOCATION => true,
-                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                        CURLOPT_CUSTOMREQUEST => 'POST',
-                        CURLOPT_POSTFIELDS => array(
-                            'target' => convert_phone($phone->nomor_telephone),
-                            'message' => $converted,
-                            'countryCode' => '62', //optional
-                        ),
-                        CURLOPT_HTTPHEADER => array(
-                            'Authorization: ' . $set->value //change TOKEN to your actual token
-                        ),
-                    ));
-
-                    $response = curl_exec($curl);
-                    curl_close($curl);
-                }
-
-                return redirect()->route('blast.index')->with('success', 'Pesan Berhasil Dibuat.');
+            }catch (\Exception $eror){
+                return back()->with('erorrs','Erors Found'.$eror.'');
             }
-        } catch (\Exception $eror) {
-            return redirect()->back()->with(['error' => 'Gagal Kirim WA Blast ' . $eror . '!']);
+
+        } else {
+            $now = Carbon::now()->format('Y-m-d');
+            foreach ($customers as $customer) {
+                $phone  = Customer::where('id', '=', $customer)->first();
+                $curl = curl_init();
+                $set = Setting::find(46);
+                $converted = preg_replace('/%customer%/', $phone->nama_customer, $converted);
+                $converted = preg_replace('/%bulantahun%/', Carbon::parse($now)->format('F Y'), $converted);
+
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => 'https://api.fonnte.com/send',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => array(
+                        'target' => convert_phone($phone->nomor_telephone),
+                        'message' => $converted,
+                        'countryCode' => '62', //optional
+                    ),
+                    CURLOPT_HTTPHEADER => array(
+                        'Authorization: ' . $set->value //change TOKEN to your actual token
+                    ),
+                ));
+
+                $response = curl_exec($curl);
+                curl_close($curl);
+            }
+
+            return redirect()->route('blast.index')->with('success', 'Pesan Berhasil Dibuat.');
         }
     }
 }
