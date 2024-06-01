@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Yajra\DataTables\Facades\DataTables;
 
 use function App\Http\Helpers\convert_phone;
@@ -43,10 +44,14 @@ class BlastController extends Controller
         try {
             if ($customers[0] == "0" || $customers[0] == 0) {
                 $custom = Customer::where('is_active', '=', 1)->get();
+                $now = Carbon::now()->format('Y-m-d');
+
                 foreach ($custom as $cust) {
-                    $phone  = Customer::where('id', '=', $cust->id)->first()->nomor_telephone;
+                    $phone  = Customer::where('id', '=', $cust->id)->first();
                     $curl = curl_init();
                     $set = Setting::find(46);
+                    $converted = preg_replace('/%customer%/', $phone->nama_customer, $converted);
+                    $converted = preg_replace('/%bulantahun%/', Carbon::parse($now)->format('F Y'), $converted);
 
                     curl_setopt_array($curl, array(
                         CURLOPT_URL => 'https://api.fonnte.com/send',
@@ -58,7 +63,7 @@ class BlastController extends Controller
                         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                         CURLOPT_CUSTOMREQUEST => 'POST',
                         CURLOPT_POSTFIELDS => array(
-                            'target' => convert_phone($phone),
+                            'target' => convert_phone($phone->nomor_telephone),
                             'message' => $converted,
                             'countryCode' => '62', //optional
                         ),
@@ -73,10 +78,13 @@ class BlastController extends Controller
 
                 return redirect()->route('blast.index')->with('success', 'Pesan Berhasil Dibuat.');
             } else {
+                $now = Carbon::now()->format('Y-m-d');
                 foreach ($customers as $customer) {
-                    $phone  = Customer::where('id', '=', $customer)->first()->nomor_telephone;
+                    $phone  = Customer::where('id', '=', $customer)->first();
                     $curl = curl_init();
                     $set = Setting::find(46);
+                    $converted = preg_replace('/%customer%/', $phone->nama_customer, $converted);
+                    $converted = preg_replace('/%bulantahun%/', Carbon::parse($now)->format('F Y'), $converted);
 
                     curl_setopt_array($curl, array(
                         CURLOPT_URL => 'https://api.fonnte.com/send',
@@ -88,7 +96,7 @@ class BlastController extends Controller
                         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                         CURLOPT_CUSTOMREQUEST => 'POST',
                         CURLOPT_POSTFIELDS => array(
-                            'target' => convert_phone($phone),
+                            'target' => convert_phone($phone->nomor_telephone),
                             'message' => $converted,
                             'countryCode' => '62', //optional
                         ),

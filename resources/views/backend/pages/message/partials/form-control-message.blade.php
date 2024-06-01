@@ -17,6 +17,10 @@
     </div>
     <div class="col-md-12 mb-3">
         <label class="form-label" for="komplain_customer">Isi Pesan WA Blast <sup class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="wajib di isi untuk pesan">*</sup></label>
+        <p>
+            <span class="badge bg-secondary">%customer%</span>
+            <span class="badge bg-secondary">%bulantahun%</span>
+        </p>
         <textarea class="form-control" placeholder="Blast Messages" id="messages" name="messages" required=""></textarea>
         <div class="invalid-feedback"> Harap isi komplain. </div>
     </div>
