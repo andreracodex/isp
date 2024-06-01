@@ -25,30 +25,30 @@ class BlastController extends Controller
         $customers = $request->customer;
         $messages = $request->messages;
 
-        // Replace <p> tags with newlines
-        $converted = preg_replace('/<p[^>]*>/', '', $messages);
-        $converted = preg_replace('/<\/p>/', "\n\n", $converted);
-
-        // Remove <strong> tags
-        $converted = preg_replace('/<strong[^>]*>/', "*", $converted);
-        $converted = preg_replace('/<\/strong>/', "*", $converted);
-
-        // Remove <i> tags
-        $converted = preg_replace('/<i[^>]*>/', "_", $converted);
-        $converted = preg_replace('/<\/i>/', "_", $converted);
-
-        // Remove <br> tags
-        $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
-        $converted = preg_replace('/&nbsp;/', '', $converted);
-
         if ($customers[0] == "0") {
             $custom = Customer::where('is_active', '=', 1)->get();
             $now = Carbon::now()->format('Y-m-d');
 
-            try{
+            try {
                 foreach ($custom as $cust) {
                     $curl = curl_init();
                     $set = Setting::find(46);
+                    // Replace <p> tags with newlines
+                    $converted = preg_replace('/<p[^>]*>/', '', $messages);
+                    $converted = preg_replace('/<\/p>/', "\n\n", $converted);
+
+                    // Remove <strong> tags
+                    $converted = preg_replace('/<strong[^>]*>/', "*", $converted);
+                    $converted = preg_replace('/<\/strong>/', "*", $converted);
+
+                    // Remove <i> tags
+                    $converted = preg_replace('/<i[^>]*>/', "_", $converted);
+                    $converted = preg_replace('/<\/i>/', "_", $converted);
+
+                    // Remove <br> tags
+                    $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
+                    $converted = preg_replace('/&nbsp;/', '', $converted);
+
                     $converted = preg_replace('/%customer%/', $cust->nama_customer, $converted);
                     $converted = preg_replace('/%bulantahun%/', Carbon::parse($now)->format('F Y'), $converted);
 
@@ -73,44 +73,68 @@ class BlastController extends Controller
 
                     $response = curl_exec($curl);
                     curl_close($curl);
-                }
-            }catch (\Exception $eror){
-                return back()->with('erorrs','Erors Found'.$eror.'');
-            }
 
+                    $converted = $messages;
+                }
+                return redirect()->route('blast.index')->with('success', 'Pesan Berhasil Dibuat.');
+            } catch (\Exception $eror) {
+                return redirect()->route('blast.index')->with('erorrs', 'Pesan Gagal Dibuat.');
+            }
         } else {
             $now = Carbon::now()->format('Y-m-d');
-            foreach ($customers as $customer) {
-                $phone  = Customer::where('id', '=', $customer)->first();
-                $curl = curl_init();
-                $set = Setting::find(46);
-                $converted = preg_replace('/%customer%/', $phone->nama_customer, $converted);
-                $converted = preg_replace('/%bulantahun%/', Carbon::parse($now)->format('F Y'), $converted);
+            try {
+                foreach ($customers as $customer) {
+                    $phone  = Customer::where('id', '=', $customer)->first();
+                    $curl = curl_init();
+                    $set = Setting::find(46);
+                     // Replace <p> tags with newlines
+                    $converted = preg_replace('/<p[^>]*>/', '', $messages);
+                    $converted = preg_replace('/<\/p>/', "\n\n", $converted);
 
-                curl_setopt_array($curl, array(
-                    CURLOPT_URL => 'https://api.fonnte.com/send',
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => '',
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 0,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS => array(
-                        'target' => convert_phone($phone->nomor_telephone),
-                        'message' => $converted,
-                        'countryCode' => '62', //optional
-                    ),
-                    CURLOPT_HTTPHEADER => array(
-                        'Authorization: ' . $set->value //change TOKEN to your actual token
-                    ),
-                ));
+                    // Remove <strong> tags
+                    $converted = preg_replace('/<strong[^>]*>/', "*", $converted);
+                    $converted = preg_replace('/<\/strong>/', "*", $converted);
 
-                $response = curl_exec($curl);
-                curl_close($curl);
+                    // Remove <i> tags
+                    $converted = preg_replace('/<i[^>]*>/', "_", $converted);
+                    $converted = preg_replace('/<\/i>/', "_", $converted);
+
+                    // Remove <br> tags
+                    $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
+                    $converted = preg_replace('/&nbsp;/', '', $converted);
+
+                    $converted = preg_replace('/%customer%/', $phone->nama_customer, $converted);
+                    $converted = preg_replace('/%bulantahun%/', Carbon::parse($now)->format('F Y'), $converted);
+
+                    curl_setopt_array($curl, array(
+                        CURLOPT_URL => 'https://api.fonnte.com/send',
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => '',
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_FOLLOWLOCATION => true,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => 'POST',
+                        CURLOPT_POSTFIELDS => array(
+                            'target' => convert_phone($phone->nomor_telephone),
+                            'message' => $converted,
+                            'countryCode' => '62', //optional
+                        ),
+                        CURLOPT_HTTPHEADER => array(
+                            'Authorization: ' . $set->value //change TOKEN to your actual token
+                        ),
+                    ));
+
+                    $response = curl_exec($curl);
+                    curl_close($curl);
+
+                    $converted = $messages;
+                }
+
+                return redirect()->route('blast.index')->with('success', 'Pesan Berhasil Dibuat.');
+            } catch (\Exception $eror) {
+                return redirect()->route('blast.index')->with('erorrs', 'Pesan Gagal Dibuat.');
             }
-
-            return redirect()->route('blast.index')->with('success', 'Pesan Berhasil Dibuat.');
         }
     }
 }
