@@ -12,6 +12,8 @@ Route::prefix('tripay')->group(function () {
     Route::get('/merchant', [TripayController::class, 'showmerchant'])->name('tripay.merchant');
     // Failed to get Invoice Number
     Route::get('/failed/{errors}', [TripayController::class, 'failed'])->name('tripay.failed');
+
+    Route::get('/success/{great}', [TripayController::class, 'great'])->name('tripay.great');
     // Tripay Transaction Virtual Number
     Route::post('/merchantstore', [TripayController::class, 'merchantstore'])->name('tripay.merchantstore');
 

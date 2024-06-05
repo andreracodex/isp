@@ -129,6 +129,11 @@ class TripayController extends Controller
         return view('tripay::failed', compact('profile', 'errors'));
     }
 
+    public function great($great){
+        $profile = Setting::all();
+        return view('tripay::great', compact('profile', 'great'));
+    }
+
     public function transaction($tripay, $invoices, $amount)
     {
         $profile = Setting::all();
@@ -360,6 +365,11 @@ class TripayController extends Controller
             if($detail == null){
                 $errors = "Invoice Number Not Found";
                 return redirect()->route('tripay.failed', $errors);
+            }
+
+            if($detail['is_payed'] == 1){
+                $errors = "Invoice Already Payed";
+                return redirect()->route('tripay.great', $errors);
             }
 
             $amount = intval($detail->harga_paket);
