@@ -192,18 +192,12 @@ class TripayController extends Controller
         return view('tripay::result', compact('data', 'profile'));
     }
 
-    public function callback()
-    {
-        return view('tripay::callback', compact('callback'));
-    }
-
-    protected $privateKey = 'DEV-ECXMRgVAk66itZxbPiL7YbKcmTXqbZiW2DsYjUQ4';
-
     public function handle(Request $request)
     {
+        $privateKey   = Setting::find(48);
         $callbackSignature = $request->server('HTTP_X_CALLBACK_SIGNATURE');
         $json = $request->getContent();
-        $signature = hash_hmac('sha256', $json, $this->privateKey);
+        $signature = hash_hmac('sha256', $json, $privateKey);
 
         if ($signature !== (string) $callbackSignature) {
             return response()->json([
@@ -248,26 +242,14 @@ class TripayController extends Controller
             switch ($status) {
                 case 'PAID':
                     $invoice->update(['is_payed' => 1]);
-
-                    $paid = Transaction::where('merchant_ref', $invoiceId)->first();
-                    $paid->status = "PAID";
-                    $paid->save();
                     break;
 
                 case 'EXPIRED':
                     $invoice->update(['is_payed' => 0]);
-
-                    $exp = Transaction::where('merchant_ref', $invoiceId)->first();
-                    $exp->status = "EXPIRED";
-                    $exp->save();
                     break;
 
                 case 'FAILED':
                     $invoice->update(['is_payed' => 0]);
-
-                    $failed = Transaction::where('merchant_ref', $invoiceId)->first();
-                    $failed->status = "FAILED";
-                    $failed->save();
                     break;
 
                 default:
