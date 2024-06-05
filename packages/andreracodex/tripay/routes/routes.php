@@ -23,4 +23,4 @@ Route::prefix('tripay')->group(function () {
 });
 
 
-Route::get('callback', [TripayCallbackController::class, 'handle']);
+Route::post('callback', [TripayCallbackController::class, 'handle']);
