@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        'https://billing.berdikari.web.id/tripay/'
+        'https://billing.berdikari.web.id/tripay/callback'
     ];
 }
