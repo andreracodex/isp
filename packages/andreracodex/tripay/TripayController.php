@@ -506,9 +506,12 @@ class TripayController extends Controller
                 $response = curl_exec($curl);
                 curl_close($curl);
 
-                $check = Transaction::where('merchant_ref','=', $inv->invoice_number)->first();
-                if($check){
-                    $check->delete();
+                $check = Transaction::where('merchant_ref','=', $inv->invoice_number)->get();
+                if($check->count() > 2){
+                    $check_last = Transaction::where('merchant_ref','=', $inv->invoice_number)
+                    ->where('status','=','UNPAID')
+                    ->first();
+                    $check_last->delete();
                 }else{
                     Transaction::create($data);
                 }
