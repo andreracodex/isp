@@ -426,7 +426,7 @@ class TripayController extends Controller
 
             return view('tripay::result', compact('data', 'profile'));
         }catch(Exception $errors){
-            $errors = "Oops! Something went wrong";
+            $errors = "Oops! Something went wrong nomor Invoice tidak tepat";
             return view('tripay::failed', compact('profile', $errors));
         }
     }
