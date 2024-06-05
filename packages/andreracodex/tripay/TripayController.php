@@ -268,7 +268,7 @@ class TripayController extends Controller
                         'message' => 'Unrecognized payment status',
                     ]);
             }
-
+            $set = Setting::find(46);
             $message = Setting::find(52);
             // Replace <p> tags with newlines
             $converted = preg_replace('/<p[^>]*>/', '', $message->value);
@@ -304,7 +304,7 @@ class TripayController extends Controller
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => 'POST',
                 CURLOPT_POSTFIELDS => array(
-                    'target' => convert_phone($order->nomor_telephone),
+                    'target' => convert_phone($details->order->customer->nomor_telephone),
                     'message' => $converted,
                     'countryCode' => '62', //optional
                 ),
