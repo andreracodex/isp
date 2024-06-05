@@ -1,6 +1,7 @@
 
 <?php
 
+use Andreracodex\Tripay\TripayCallbackController;
 use Andreracodex\Tripay\TripayController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,11 +16,11 @@ Route::prefix('tripay')->group(function () {
     Route::post('/merchantstore', [TripayController::class, 'merchantstore'])->name('tripay.merchantstore');
     Route::get('/transaction/{tripay}/{invoices}/{amount}', [TripayController::class, 'transaction'])->name('tripay.transaction');
 
-    Route::post('/callback', [TripayController::class, 'handle'])->name('tripay.callback');
+
     Route::get('/redirect', [TripayController::class, 'redirect'])->name('tripay.redirect');
 
     Route::get('/checkstatus/{reference}', [TripayController::class, 'checkstatus'])->name('tripay.checkstatus');
 });
 
 
-
+Route::get('callback', [TripayCallbackController::class, 'handle']);
