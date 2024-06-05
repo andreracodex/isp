@@ -235,6 +235,10 @@ class TripayController extends Controller
                 ->where('status', '=', 'UNPAID')
                 ->first();
 
+            $details = OrderDetail::where('reference', $tripayReference)
+                ->where('is_payed', 0)
+                ->first();
+
             if (! $invoice) {
                 return response()->json([
                     'success' => false,
@@ -245,14 +249,17 @@ class TripayController extends Controller
             switch ($status) {
                 case 'PAID':
                     $invoice->update(['status' => 'PAID']);
+                    $details->update(['is_payed' => 1]);
                     break;
 
                 case 'EXPIRED':
                     $invoice->update(['status' => 'EXPIRED']);
+                    $details->update(['is_payed' => 0]);
                     break;
 
                 case 'FAILED':
                     $invoice->update(['status' => 'FAILED']);
+                    $details->update(['is_payed' => 0]);
                     break;
 
                 default:
