@@ -232,12 +232,13 @@ class TripayController extends Controller
         $status = strtoupper((string) $data->status);
 
         if ($data->is_closed_payment === 1) {
-            $invoice = Transaction::where('reference', $tripayReference)
-                ->where('status', '=', 'UNPAID')
-                ->first();
 
             $details = OrderDetail::where('reference', $tripayReference)
                 ->where('is_payed', 0)
+                ->first();
+
+            $invoice = Transaction::where('reference', $tripayReference)
+                ->where('status', '=', 'UNPAID')
                 ->first();
 
             if (! $invoice) {
@@ -274,8 +275,8 @@ class TripayController extends Controller
                         $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
                         $converted = preg_replace('/&nbsp;/', '', $converted);
 
-                        $converted = preg_replace('/%customer%/', $details->order->customer->nama_customer, $converted);
-                        $converted = preg_replace('/%invoices%/', $details->invoice_number, $converted);
+                        $converted = preg_replace('/%customer%/', $invoice->customer_name, $converted);
+                        $converted = preg_replace('/%invoices%/', $invoice->merchant_ref, $converted);
                         $converted = preg_replace('/%bulantahun%/', Carbon::parse($details->due_date)->format('F Y'), $converted);
                         $converted = preg_replace('/%metode_bayar%/', $metode_bayar, $converted);
                         $converted = preg_replace('/%tanggalbayar%/', Carbon::now()->format('d F Y'), $converted);
@@ -311,7 +312,7 @@ class TripayController extends Controller
                             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                             CURLOPT_CUSTOMREQUEST => 'POST',
                             CURLOPT_POSTFIELDS => array(
-                                'target' => convert_phone($details->order->customer->nomor_telephone),
+                                'target' => convert_phone($invoice->customer_phone),
                                 'message' => $converted,
                                 'countryCode' => '62', //optional
                             ),
@@ -505,7 +506,12 @@ class TripayController extends Controller
                 $response = curl_exec($curl);
                 curl_close($curl);
 
-                Transaction::create($data);
+                $check = Transaction::where('merchant_ref','=', $inv->invoice_number)->first();
+                if($check){
+                    $check->delete();
+                }else{
+                    Transaction::create($data);
+                }
             }
 
             return view('tripay::result', compact('data', 'profile'));
