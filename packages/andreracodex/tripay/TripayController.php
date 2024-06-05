@@ -230,9 +230,9 @@ class TripayController extends Controller
         $status = strtoupper((string) $data->status);
 
         if ($data->is_closed_payment === 1) {
-            $invoice = OrderDetail::where('invoice_number', $invoiceId)
+            $invoice = Transaction::where('merchant_ref', $invoiceId)
                 ->where('reference', $tripayReference)
-                ->where('is_payed', '=', 0)
+                ->where('status', '=', 'UNPAID')
                 ->first();
 
             if (! $invoice) {
