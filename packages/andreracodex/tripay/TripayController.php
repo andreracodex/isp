@@ -202,6 +202,7 @@ class TripayController extends Controller
         if ($signature !== (string) $callbackSignature) {
             return response()->json([
                 'success' => false,
+                'json' => json_encode($json),
                 'signature' => $signature,
                 'callback' => $callbackSignature,
                 'message' => 'Invalid signature',
