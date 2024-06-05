@@ -268,7 +268,7 @@ class TripayController extends Controller
                         'message' => 'Unrecognized payment status',
                     ]);
             }
-            $set = Setting::find(46);
+            $sets = Setting::find(46);
             $message = Setting::find(52);
             // Replace <p> tags with newlines
             $converted = preg_replace('/<p[^>]*>/', '', $message->value);
@@ -309,7 +309,7 @@ class TripayController extends Controller
                     'countryCode' => '62', //optional
                 ),
                 CURLOPT_HTTPHEADER => array(
-                    'Authorization: ' . $set->value //change TOKEN to your actual token
+                    'Authorization: ' . $sets->value //change TOKEN to your actual token
                 ),
             ));
 
