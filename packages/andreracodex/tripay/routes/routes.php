@@ -14,13 +14,15 @@ Route::prefix('tripay')->group(function () {
     Route::get('/failed/{errors}', [TripayController::class, 'failed'])->name('tripay.failed');
     // Tripay Transaction Virtual Number
     Route::post('/merchantstore', [TripayController::class, 'merchantstore'])->name('tripay.merchantstore');
+
     Route::get('/transaction/{tripay}/{invoices}/{amount}', [TripayController::class, 'transaction'])->name('tripay.transaction');
 
+    Route::post('/callback', [TripayController::class, 'handle']);
 
     Route::get('/redirect', [TripayController::class, 'redirect'])->name('tripay.redirect');
-
+    // Check Status Transaction
     Route::get('/checkstatus/{reference}', [TripayController::class, 'checkstatus'])->name('tripay.checkstatus');
 });
 
 
-Route::post('callback', [TripayCallbackController::class, 'handle']);
+
