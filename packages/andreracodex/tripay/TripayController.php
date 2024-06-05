@@ -197,16 +197,19 @@ class TripayController extends Controller
         $privateKey   = Setting::find(48);
         $callbackSignature = $request->server('HTTP_X_CALLBACK_SIGNATURE');
         $json = $request->getContent();
-        $signature = hash_hmac('sha256', $json, $privateKey);
+        $res = json_decode($json);
+        dd($res);
+        $signature = hash_hmac('sha256', $res['merchant_code'] . $res['merchant_ref'] . $res['amount'], $privateKey->value);
+        // $signature = hash_hmac('sha256', $json, $privateKey);
 
-        // if ($signature !== (string) $callbackSignature) {
-        //     return response()->json([
-        //         'success' => false,
-        //         'signature' => $signature,
-        //         'callback' => $callbackSignature,
-        //         'message' => 'Invalid signature',
-        //     ]);
-        // }
+        if ($signature !== (string) $callbackSignature) {
+            return response()->json([
+                'success' => false,
+                'signature' => $signature,
+                'callback' => $callbackSignature,
+                'message' => 'Invalid signature',
+            ]);
+        }
 
         if ('payment_status' !== (string) $request->server('HTTP_X_CALLBACK_EVENT')) {
             return response()->json([
