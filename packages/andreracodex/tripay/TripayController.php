@@ -269,7 +269,7 @@ class TripayController extends Controller
                     ]);
             }
 
-            return response()->json(['success' => true]);
+            return view('tripay::checkstatus', compact('data', 'profile'));
         }
     }
 
