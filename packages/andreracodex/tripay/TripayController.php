@@ -367,6 +367,7 @@ class TripayController extends Controller
                 return redirect()->route('tripay.failed', $errors);
             }
 
+            dd($detail);
             if($detail['is_payed'] == 1){
                 $errors = "Invoice Already Payed";
                 return redirect()->route('tripay.great', $errors);
