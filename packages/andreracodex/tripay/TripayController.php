@@ -199,10 +199,11 @@ class TripayController extends Controller
         $json = $request->getContent();
         $signature = hash_hmac('sha256', $json, $privateKey);
 
-        dd($signature, $callbackSignature);
         if ($signature !== (string) $callbackSignature) {
             return response()->json([
                 'success' => false,
+                'signature' => $signature,
+                'callback' => $callbackSignature,
                 'message' => 'Invalid signature',
             ]);
         }
