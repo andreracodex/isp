@@ -45,6 +45,7 @@ class TripayCallbackController extends Controller
         $tripayReference = $data->reference;
         $status = strtoupper((string) $data->status);
 
+        dd($tripayReference);
         if ($data->is_closed_payment === 1) {
             $invoice = Transaction::where('reference', $tripayReference)
                 ->where('status', '=', 'UNPAID')
