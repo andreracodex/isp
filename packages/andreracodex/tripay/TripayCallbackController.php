@@ -50,7 +50,7 @@ class TripayCallbackController extends Controller
                 ->where('status', '=', 'UNPAID')
                 ->first();
 
-            dd($invoice);
+            dd($invoice, $status);
             if (! $invoice) {
                 return response()->json([
                     'success' => false,
