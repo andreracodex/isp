@@ -19,7 +19,6 @@
 
             var customerid = $('#customer_id').val();
             var tempo = $('#jatuh_tempo').val();
-            var status = $('#status_tagihan').val();
 
             // console.log(customerid, tempo);
 
@@ -80,7 +79,6 @@
                         // console.log(status);
                         d.customerid = customerid;
                         d.tempo = tempo;
-                        d.status = status;
                         return d
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
@@ -250,12 +248,6 @@
 
             $('#jatuh_tempo').on('change', function(selected) {
                 tempo = $('#jatuh_tempo').val();
-                // console.log(tempo);
-                $('#order').DataTable().ajax.reload()
-            });
-
-            $('#status_tagihan').on('change', function(selected) {
-                status = $('#status_tagihan').val();
                 // console.log(tempo);
                 $('#order').DataTable().ajax.reload()
             });
@@ -463,18 +455,6 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-2 col-md-2">
-                            <div class="mb-3">
-                                <label class="form-label headerbutton">Status Tagihan
-                                </label>
-                                <select name="status_tagihan" id="status_tagihan" class="form-control select2" required>
-                                    <option value="null">All</option>
-                                    <option value="0">Belum Lunas</option>
-                                    <option value="1">Lunas</option>
-                                </select>
-                                <div class="invalid-tooltip" style="top: 0">Status Aktif required</div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="dt-responsive table-responsive">

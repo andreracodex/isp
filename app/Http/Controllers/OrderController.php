@@ -23,7 +23,7 @@ class OrderController extends Controller
     public function index(Request $request){
         $profile = Setting::all();
         $customer = Customer::all();
-        $firstMonthOfYear = Carbon::now()->startOfMonth();
+        $firstMonthOfYear = Carbon::now()->startOfYear();
         $lastMonthOfYear = Carbon::now()->endOfYear();
         $date = Periode::whereBetween('bulan_periode', [$firstMonthOfYear, $lastMonthOfYear])->where('is_active', 1)->get();
         $data_table = OrderDetail::select('orders.id as orderid',
@@ -53,10 +53,10 @@ class OrderController extends Controller
         )
             ->leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
             ->orderBy('order_details.created_at', 'DESC')
+            ->where('order_details.is_payed', 0)
             ->whereBetween('order_details.due_date', [$firstMonthOfYear, $lastMonthOfYear])
             ->get();
 
-        // dd($data_table);
         if($request->input('customerid') != null && $request->input('customerid') != 0){
             // Non Active
             $customer_id = $request->input('customerid');
@@ -75,14 +75,6 @@ class OrderController extends Controller
             $data_table = $data_table->whereBetween('due_date', [$from, $to]);
         }else{
             // All
-            $data_table = $data_table;
-        }
-
-        if($request->input('status') != "null" && $request->input('status') != null){
-            // All
-            $status = $request->input('status');
-            $data_table = $data_table->where('is_payed', '=', $status);
-        }else{
             $data_table = $data_table;
         }
 
