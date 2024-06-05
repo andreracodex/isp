@@ -217,6 +217,7 @@ class TripayController extends Controller
 
         $data = json_decode($json);
 
+        dd($data);
         if (JSON_ERROR_NONE !== json_last_error()) {
             return response()->json([
                 'success' => false,
@@ -229,8 +230,7 @@ class TripayController extends Controller
         $status = strtoupper((string) $data->status);
 
         if ($data->is_closed_payment === 1) {
-            $invoice = Transaction::where('merchant_ref', $invoiceId)
-                ->where('reference', $tripayReference)
+            $invoice = Transaction::where('reference', $tripayReference)
                 ->where('status', '=', 'UNPAID')
                 ->first();
 
