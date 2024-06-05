@@ -66,7 +66,7 @@
 
 -   View = Tagihan Terbayar -- done
 -   View = Tagihan Belum Terbayar -- done
--   View = Total Saldo
+-   View = Total Saldo -- done
 
 New Revisi :
 
@@ -76,9 +76,9 @@ New Revisi :
 
 2. Tagihan
 
--   View Data, Edit Data = Error Page
+-   View Data, Edit Data = Error Page -- done
 -   Tab Menu Status = Status Lunas atau Belum tidak sesuai jatuh temponya -- done
--   Tagihan Pelanggan = Double Tagihan
+-   Tagihan Pelanggan = Double Tagihan -- done
 -   Tambahan Menu Dropdown = Lunas dan Belum bayar sesuai tagihan pelanggan agar tidak tercampur
 -   Edit Data = Pembayaran dikonfirmasi jika ada pelanggan yg bayar cash ( ceklist/uncheck wa gate kirim bukti bayar melalui whatsapp )
 
