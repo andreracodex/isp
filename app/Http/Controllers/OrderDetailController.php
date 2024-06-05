@@ -51,22 +51,7 @@ class OrderDetailController extends Controller
             if ($orderdetail->is_payed == 0) {
                 $order = Order::leftJoin('customers', 'customers.id', '=', 'orders.customer_id')->where('orders.id', '=', $orderdetail->order_id)->first();
                 if ($order != null) {
-                    if($request->name == "cash"){
-                        $metode_bayar = "CASH";
-                        // $orderdetail->update([
-                        //     'is_payed' => 2
-                        // ]);
-                    }elseif($request->name == "transfer"){
-                        $metode_bayar = "TRANSFER";
-                        // $orderdetail->update([
-                        //     'is_payed' => 1
-                        // ]);
-                    }else{
-                        $metode_bayar = "E-Wallet";
-                        // $orderdetail->update([
-                        //     'is_payed' => 3
-                        // ]);
-                    }
+                    $metode_bayar = 'CASH';
                     $orderdetail->update([
                         'is_payed' => 1
                     ]);
