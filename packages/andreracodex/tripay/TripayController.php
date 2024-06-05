@@ -269,6 +269,53 @@ class TripayController extends Controller
                     ]);
             }
 
+            $message = Setting::find(52);
+            // Replace <p> tags with newlines
+            $converted = preg_replace('/<p[^>]*>/', '', $message->value);
+            $converted = preg_replace('/<\/p>/', "\n\n", $converted);
+
+            // Remove <strong> tags
+            $converted = preg_replace('/<strong[^>]*>/', "*", $converted);
+            $converted = preg_replace('/<\/strong>/', "*", $converted);
+
+            // Remove <i> tags
+            $converted = preg_replace('/<i[^>]*>/', "_", $converted);
+            $converted = preg_replace('/<\/i>/', "_", $converted);
+
+            // Remove <br> tags
+            $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
+            $converted = preg_replace('/&nbsp;/', '', $converted);
+
+            $converted = preg_replace('/%customer%/', $details->order->customer->nama_customer, $converted);
+            $converted = preg_replace('/%invoices%/', $details->invoice_number, $converted);
+            $converted = preg_replace('/%bulantahun%/', Carbon::parse($details->due_date)->format('F Y'), $converted);
+            $converted = preg_replace('/%metode_bayar%/', 'Tripay', $converted);
+            $converted = preg_replace('/%tanggalbayar%/', Carbon::now()->format('d F Y'), $converted);
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://api.fonnte.com/send',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => array(
+                    'target' => convert_phone($order->nomor_telephone),
+                    'message' => $converted,
+                    'countryCode' => '62', //optional
+                ),
+                CURLOPT_HTTPHEADER => array(
+                    'Authorization: ' . $set->value //change TOKEN to your actual token
+                ),
+            ));
+
+            $response = curl_exec($curl);
+            curl_close($curl);
+
             return response()->json(['success' => true]);
         }
     }
