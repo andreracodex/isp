@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\OrderDetail;
 use App\Models\Setting;
+use App\Models\SettingsWA;
 use App\Models\ShortURL;
 use App\Models\Transaction;
 use Carbon\Carbon;
@@ -250,6 +251,79 @@ class TripayController extends Controller
                 case 'PAID':
                     $invoice->update(['status' => 'PAID']);
                     $details->update(['is_payed' => 1]);
+
+                    $set = Setting::find(46);
+                    $was = SettingsWA::find(7);
+
+                    if ($was->is_active == 1) {
+                        $message = Setting::find(52);
+                        $metode_bayar = 'Tripay Merchant';
+                        // Replace <p> tags with newlines
+                        $converted = preg_replace('/<p[^>]*>/', '', $message->value);
+                        $converted = preg_replace('/<\/p>/', "\n\n", $converted);
+
+                        // Remove <strong> tags
+                        $converted = preg_replace('/<strong[^>]*>/', "*", $converted);
+                        $converted = preg_replace('/<\/strong>/', "*", $converted);
+
+                        // Remove <i> tags
+                        $converted = preg_replace('/<i[^>]*>/', "_", $converted);
+                        $converted = preg_replace('/<\/i>/', "_", $converted);
+
+                        // Remove <br> tags
+                        $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
+                        $converted = preg_replace('/&nbsp;/', '', $converted);
+
+                        $converted = preg_replace('/%customer%/', $details->order->customer->nama_customer, $converted);
+                        $converted = preg_replace('/%invoices%/', $details->invoice_number, $converted);
+                        $converted = preg_replace('/%bulantahun%/', Carbon::parse($details->due_date)->format('F Y'), $converted);
+                        $converted = preg_replace('/%metode_bayar%/', $metode_bayar, $converted);
+                        $converted = preg_replace('/%tanggalbayar%/', Carbon::now()->format('d F Y'), $converted);
+
+                        // Nama Perusahaan dan Keterangan Lainnya
+                        $aliasperusahaan = Setting::find(6);
+                        $namaperusahaan = Setting::find(23);
+                        $val1 = Setting::find(24);
+                        $val2 = Setting::find(25);
+                        $val3 = Setting::find(26);
+                        $val4 = Setting::find(27);
+                        $alamatperusahaan = ($val1->value.', '.$val2->value.', '.$val3->value.' - '.$val4->value);
+                        $phone = Setting::find(29);
+                        $phonealternate = Setting::find(19);
+                        $urlperusahaan = Setting::find(20);
+
+                        $converted = preg_replace('/%aliasperusahaan%/', $aliasperusahaan->value, $converted);
+                        $converted = preg_replace('/%namaperusahaan%/', $namaperusahaan->value, $converted);
+                        $converted = preg_replace('/%alamatperusahaan%/', $alamatperusahaan, $converted);
+                        $converted = preg_replace('/%phone%/', $phone->value , $converted);
+                        $converted = preg_replace('/%phonealternate%/', $phonealternate->value, $converted);
+                        $converted = preg_replace('/%urlperusahaan%/', $urlperusahaan->value, $converted);
+
+                        $curl = curl_init();
+
+                        curl_setopt_array($curl, array(
+                            CURLOPT_URL => 'https://api.fonnte.com/send',
+                            CURLOPT_RETURNTRANSFER => true,
+                            CURLOPT_ENCODING => '',
+                            CURLOPT_MAXREDIRS => 10,
+                            CURLOPT_TIMEOUT => 0,
+                            CURLOPT_FOLLOWLOCATION => true,
+                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                            CURLOPT_CUSTOMREQUEST => 'POST',
+                            CURLOPT_POSTFIELDS => array(
+                                'target' => convert_phone($details->order->customer->nomor_telephone),
+                                'message' => $converted,
+                                'countryCode' => '62', //optional
+                            ),
+                            CURLOPT_HTTPHEADER => array(
+                                'Authorization: ' . $set->value //change TOKEN to your actual token
+                            ),
+                        ));
+
+                        $response = curl_exec($curl);
+                        curl_close($curl);
+                    };
+
                     break;
 
                 case 'EXPIRED':
@@ -268,53 +342,6 @@ class TripayController extends Controller
                         'message' => 'Unrecognized payment status',
                     ]);
             }
-            $sets = Setting::find(46);
-            $message = Setting::find(52);
-            // Replace <p> tags with newlines
-            $converted = preg_replace('/<p[^>]*>/', '', $message->value);
-            $converted = preg_replace('/<\/p>/', "\n\n", $converted);
-
-            // Remove <strong> tags
-            $converted = preg_replace('/<strong[^>]*>/', "*", $converted);
-            $converted = preg_replace('/<\/strong>/', "*", $converted);
-
-            // Remove <i> tags
-            $converted = preg_replace('/<i[^>]*>/', "_", $converted);
-            $converted = preg_replace('/<\/i>/', "_", $converted);
-
-            // Remove <br> tags
-            $converted = preg_replace('/<br[^>]*>/', "\n", $converted);
-            $converted = preg_replace('/&nbsp;/', '', $converted);
-
-            $converted = preg_replace('/%customer%/', $details->order->customer->nama_customer, $converted);
-            $converted = preg_replace('/%invoices%/', $details->invoice_number, $converted);
-            $converted = preg_replace('/%bulantahun%/', Carbon::parse($details->due_date)->format('F Y'), $converted);
-            $converted = preg_replace('/%metode_bayar%/', 'Tripay', $converted);
-            $converted = preg_replace('/%tanggalbayar%/', Carbon::now()->format('d F Y'), $converted);
-
-            $curl = curl_init();
-
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://api.fonnte.com/send',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array(
-                    'target' => convert_phone($details->order->customer->nomor_telephone),
-                    'message' => $converted,
-                    'countryCode' => '62', //optional
-                ),
-                CURLOPT_HTTPHEADER => array(
-                    'Authorization: ' . $sets->value //change TOKEN to your actual token
-                ),
-            ));
-
-            $response = curl_exec($curl);
-            curl_close($curl);
 
             return response()->json(['success' => true]);
         }
