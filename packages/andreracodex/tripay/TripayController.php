@@ -198,8 +198,7 @@ class TripayController extends Controller
         $callbackSignature = $request->server('HTTP_X_CALLBACK_SIGNATURE');
         $json = $request->getContent();
         $res = json_decode($json);
-        dd($res->reference);
-        $signature = hash_hmac('sha256', $res['reference'] . $res['merchant_ref'] . $res['total_amount'], $privateKey->value);
+        $signature = hash_hmac('sha256', $res->reference . $res->merchant_ref . $res->total_amount, $privateKey->value);
         // $signature = hash_hmac('sha256', $json, $privateKey);
 
         if ($signature !== (string) $callbackSignature) {
