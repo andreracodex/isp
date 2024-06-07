@@ -207,14 +207,14 @@ class TripayController extends Controller
         // $signature = hash_hmac('sha256', $res->reference . $res->merchant_ref . $res->total_amount, $privateKey->value);
         $signature = hash_hmac('sha256', $json, $privateKey);
 
-        // if ($signature !== (string) $callbackSignature) {
-        //     return response()->json([
-        //         'success' => false,
-        //         'signature' => $signature,
-        //         'callback' => $callbackSignature,
-        //         'message' => 'Invalid signature',
-        //     ]);
-        // }
+        if ($signature !== (string) $callbackSignature) {
+            return response()->json([
+                'success' => false,
+                'signature' => $signature,
+                'callback' => $callbackSignature,
+                'message' => 'Invalid signature',
+            ]);
+        }
 
         if ('payment_status' !== (string) $request->server('HTTP_X_CALLBACK_EVENT')) {
             return response()->json([
