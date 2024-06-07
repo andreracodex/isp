@@ -37,7 +37,7 @@
 
     <div class="container" style="margin-top: 100px;">
         <div class="card social-profile">
-            <img src="{{ asset('/images/application/img-profile-cover.jpg') }}" alt="" class="w-100 card-img-top">
+            <img src="{{ asset('/images/application/img-profile-great.jpg') }}" alt="" class="w-100 card-img-top">
         </div>
         <h1>Thank You,</h1>
         <h3>Great, {{ $great }}</h3>
