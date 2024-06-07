@@ -246,7 +246,7 @@ class TripayController extends Controller
                 ->where('status', '=', 'UNPAID')
                 ->first();
 
-            if (! $invoice) {
+            if (!$invoice) {
                 return response()->json([
                     'success' => false,
                     'message' => 'No invoice found or already paid: ' . $invoiceId,
