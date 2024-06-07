@@ -134,6 +134,13 @@ class TripayController extends Controller
         return view('tripay::great', compact('profile', 'great'));
     }
 
+    public function redirect(){
+        $great = 'Payment Sucessful';
+        $profile = Setting::all();
+        return view('tripay::great', compact('profile', 'great'));
+    }
+
+
     public function transaction($tripay, $invoices, $amount)
     {
         $profile = Setting::all();
@@ -172,7 +179,7 @@ class TripayController extends Controller
             'callback_url' => $tripayUrl . 'tripay/callback',
             'return_url'   => $tripayUrl . 'tripay/redirect',
             'expired_time' => (time() + (24 * 60 * 60)), // 24 jam
-            'signature'    => hash_hmac('sha256', $merchantCode->value . $merchantRef . $amount, $privateKey->value)
+            'signature'    => hash_hmac('sha256', $merchantCode->value.$merchantRef.$amount, $privateKey->value)
         ];
 
         $curl = curl_init();
@@ -411,7 +418,7 @@ class TripayController extends Controller
                 'callback_url'   => $tripay_url . 'tripay/callback',
                 'return_url'   => $tripay_url . 'tripay/redirect',
                 'expired_time' => (time() + (24 * 60 * 60)), // 24 jam
-                'signature'    => hash_hmac('sha256', $merchantCode->value . $merchantRef . $amount, $privateKey->value)
+                'signature'    => hash_hmac('sha256', $merchantCode->value.$merchantRef.$amount, $privateKey->value)
             ];
 
             $curl = curl_init();
