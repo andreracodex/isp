@@ -534,7 +534,7 @@ class TripayController extends Controller
         }
     }
 
-    public function checkstatus($reference){
+    public function checkstatus(Request $request){
         try{
             $profile = Setting::all();
             $apiKey = Setting::find(47);
@@ -546,7 +546,11 @@ class TripayController extends Controller
             }else{
                 $tripay_url = "https://tripay.co.id/api/";
             }
-            $payload = ['reference'	=> $reference];
+            $request->validate([
+                'reference'=> 'required',
+            ]);
+
+            $payload = ['reference'	=>  $request->reference];
 
             $curl = curl_init();
 
@@ -574,7 +578,6 @@ class TripayController extends Controller
                     $ordel = OrderDetail::where('invoice_number', $data['merchant_ref'])->first();
                     $ordel->is_payed = 1;
                     $ordel->save();
-
                     $transdel = Transaction::where('merchant_ref', $data['merchant_ref'])->first();
                     $transdel->status = "PAID";
                     $transdel->save();
@@ -593,11 +596,14 @@ class TripayController extends Controller
                     $transdel = Transaction::where('merchant_ref', $data['merchant_ref'])->first();
                     $transdel->status = "FAILED";
                     $transdel->save();
-                }else{
+                }else if($data['status'] == "UNPAID"){
                     // UNPAID
                     $transdel = Transaction::where('merchant_ref', $data['merchant_ref'])->first();
                     $transdel->status = "UNPAID";
                     $transdel->save();
+                }else{
+                    $errors = "Status Payment Not Valid";
+                    return redirect()->route('tripay.failed', $errors);
                 }
                 return view('tripay::checkstatus', compact('data', 'profile'));
             }else{

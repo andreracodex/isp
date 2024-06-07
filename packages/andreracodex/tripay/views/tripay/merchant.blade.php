@@ -94,8 +94,43 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="modal fade modal-animate anim-blur" id="popupcheck" tabindex="-1"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Check Status Payment</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                </button>
+                            </div>
+                            <form action="{{ route('tripay.checkstatus') }}" enctype="multipart/form-data" method="POST"
+                            class="needs-validation" novalidate="">
+                            @csrf
+                                <div class="modal-body">
+                                    <label class="form-label" for="reference">Refrence Number Tagihan <sup
+                                            class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            data-bs-original-title="wajib di isi untuk pemberitahuan melalui email">*</sup></label>
+                                    <input type="text" class="form-control" name="reference" id="reference"
+                                        value="" placeholder="Refrence Number" required>
+                                    <div class="valid-feedback"> Looks good! </div>
+                                    <div class="invalid-feedback"> Harap isi refrensi number tagihan. </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary shadow-2">Save changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             @endforeach
         </div>
+        <h4> <a href="#" data-pc-animate="blur" data-bs-toggle="modal"
+            data-bs-target="#popupcheck">
+            Check Status Bayar
+        </a></h4>
     </div>
 
     <script src="{{ asset('/js/jquery.min.js') }}"></script>

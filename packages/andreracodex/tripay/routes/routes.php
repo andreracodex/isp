@@ -23,7 +23,7 @@ Route::prefix('tripay')->group(function () {
 
     Route::get('/redirect', [TripayController::class, 'redirect'])->name('tripay.redirect');
     // Check Status Transaction
-    Route::get('/checkstatus/{reference}', [TripayController::class, 'checkstatus'])->name('tripay.checkstatus');
+    Route::post('/checkstatus', [TripayController::class, 'checkstatus'])->name('tripay.checkstatus');
 });
 
 
