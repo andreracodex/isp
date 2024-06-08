@@ -13,11 +13,13 @@ Route::prefix('tripay')->group(function () {
     // Failed to get Invoice Number
     Route::get('/failed/{errors}', [TripayController::class, 'failed'])->name('tripay.failed');
 
+    Route::get('/trans/{trans}', [TripayController::class, 'trans'])->name('tripay.trans');
+
     Route::get('/success/{great}', [TripayController::class, 'great'])->name('tripay.great');
     // Tripay Transaction Virtual Number
     Route::post('/merchantstore', [TripayController::class, 'merchantstore'])->name('tripay.merchantstore');
 
-    Route::get('/transaction/{tripay}/{invoices}/{amount}', [TripayController::class, 'transaction'])->name('tripay.transaction');
+    // Route::get('/transaction/{tripay}/{invoices}/{amount}', [TripayController::class, 'transaction'])->name('tripay.transaction');
 
     Route::post('/callback', [TripayController::class, 'handle']);
 

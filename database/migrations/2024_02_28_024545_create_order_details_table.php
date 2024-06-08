@@ -23,7 +23,7 @@ return new class extends Migration
             $table->double('fee_customer')->default(0);
             $table->double('fee_merchant')->default(0);
             $table->text('pay_image')->nullable();
-            $table->text('pay_description')->nullable();
+            $table->text('pay_signature')->nullable();
             $table->double('diskon')->default(0);
             $table->double('biaya_admin')->default(0);
             $table->double('ppn')->default(0);

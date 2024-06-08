@@ -18,7 +18,7 @@ class OrderDetail extends Model
         'invoice_number',
         'payment_id',
         'pay_image',
-        'pay_description',
+        'pay_signature',
         'diskon',
         'biaya_admin',
         'ppn',

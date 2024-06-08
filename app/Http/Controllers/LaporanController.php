@@ -35,7 +35,7 @@ class LaporanController extends Controller
         'order_details.invoice_number',
         'order_details.payment_id',
         'order_details.pay_image',
-        'order_details.pay_description',
+        'order_details.pay_signature',
         'order_details.diskon',
         'order_details.biaya_admin',
         'order_details.ppn',

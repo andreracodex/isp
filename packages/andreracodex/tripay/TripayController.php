@@ -11,6 +11,7 @@ use App\Models\ShortURL;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Exception;
+use GuzzleHttp\Psr7\Request as Psr7Request;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -134,6 +135,13 @@ class TripayController extends Controller
         return view('tripay::great', compact('profile', 'great'));
     }
 
+    public function trans($trans){
+        $profile = Setting::all();
+        $transactions = Transaction::where('merchant_ref', $trans)->first();
+        $trans = 'Nampaknya masih ada Transaction Sebelumnya :';
+        return view('tripay::trans', compact('profile', 'transactions', 'trans'));
+    }
+
     public function redirect(){
         $great = 'Payment Sucessful';
         $profile = Setting::all();
@@ -141,69 +149,69 @@ class TripayController extends Controller
     }
 
 
-    public function transaction($tripay, $invoices, $amount)
-    {
-        $profile = Setting::all();
-        $apiKey = Setting::find(47);
-        $privateKey   = Setting::find(48);
-        $merchantCode = Setting::find(50);
-        $tripaySandBox = Setting::find(49);
-        $tripayUrl = $tripaySandBox->value == 'on'
-        ? "https://tripay.co.id/api-sandbox/"
-        : "https://tripay.co.id/api/";
+    // public function transaction($tripay, $invoices, $amount)
+    // {
+    //     $profile = Setting::all();
+    //     $apiKey = Setting::find(47);
+    //     $privateKey   = Setting::find(48);
+    //     $merchantCode = Setting::find(50);
+    //     $tripaySandBox = Setting::find(49);
+    //     $tripayUrl = $tripaySandBox->value == 'on'
+    //     ? "https://tripay.co.id/api-sandbox/"
+    //     : "https://tripay.co.id/api/";
 
-        $merchantRef  = $invoices;
-        $amount       = $amount;
+    //     $merchantRef  = $invoices;
+    //     $amount       = $amount;
 
-        $inv = OrderDetail::leftJoin('orders', 'order_details.order_id', 'orders.id')
-            ->leftJoin('customers', 'orders.customer_id', 'customers.id')
-            ->leftJoin('users', 'customers.user_id', 'users.id')
-            ->leftJoin('pakets', 'orders.paket_id', 'pakets.id')
-            ->where('order_details.invoice_number', $invoices)->first();
+    //     $inv = OrderDetail::leftJoin('orders', 'order_details.order_id', 'orders.id')
+    //         ->leftJoin('customers', 'orders.customer_id', 'customers.id')
+    //         ->leftJoin('users', 'customers.user_id', 'users.id')
+    //         ->leftJoin('pakets', 'orders.paket_id', 'pakets.id')
+    //         ->where('order_details.invoice_number', $invoices)->first();
 
-        $data = [
-            'method'         => $tripay,
-            'merchant_ref'   => $merchantRef,
-            'amount'         => $amount,
-            'customer_name'  => $inv->nama_customer,
-            'customer_email' => $inv->email,
-            'customer_phone' => $inv->nomor_telephone,
-            'order_items'    => [
-                [
-                    'sku'         => $inv->nama_paket,
-                    'name'        => $inv->jenis_paket,
-                    'price'       => $amount,
-                    'quantity'    => 1,
-                ],
-            ],
-            'callback_url' => $tripayUrl . 'tripay/callback',
-            'return_url'   => $tripayUrl . 'tripay/redirect',
-            'expired_time' => (time() + (24 * 60 * 60)), // 24 jam
-            'signature'    => hash_hmac('sha256', $merchantCode->value.$merchantRef.$amount, $privateKey->value)
-        ];
+    //     $data = [
+    //         'method'         => $tripay,
+    //         'merchant_ref'   => $merchantRef,
+    //         'amount'         => $amount,
+    //         'customer_name'  => $inv->nama_customer,
+    //         'customer_email' => $inv->email,
+    //         'customer_phone' => $inv->nomor_telephone,
+    //         'order_items'    => [
+    //             [
+    //                 'sku'         => $inv->nama_paket,
+    //                 'name'        => $inv->jenis_paket,
+    //                 'price'       => $amount,
+    //                 'quantity'    => 1,
+    //             ],
+    //         ],
+    //         'callback_url' => $tripayUrl . 'tripay/callback',
+    //         'return_url'   => $tripayUrl . 'tripay/redirect',
+    //         'expired_time' => (time() + (24 * 60 * 60)), // 24 jam
+    //         'signature'    => hash_hmac('sha256', $merchantCode->value.$merchantRef.$amount, $privateKey->value)
+    //     ];
 
-        $curl = curl_init();
+    //     $curl = curl_init();
 
-        curl_setopt_array($curl, [
-            CURLOPT_FRESH_CONNECT  => true,
-            CURLOPT_URL            =>  $tripayUrl . 'transaction/create',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HEADER         => false,
-            CURLOPT_HTTPHEADER     => ['Authorization: Bearer ' . $apiKey->value],
-            CURLOPT_FAILONERROR    => false,
-            CURLOPT_POST           => true,
-            CURLOPT_POSTFIELDS     => http_build_query($data),
-            CURLOPT_IPRESOLVE      => CURL_IPRESOLVE_V4
-        ]);
+    //     curl_setopt_array($curl, [
+    //         CURLOPT_FRESH_CONNECT  => true,
+    //         CURLOPT_URL            =>  $tripayUrl . 'transaction/create',
+    //         CURLOPT_RETURNTRANSFER => true,
+    //         CURLOPT_HEADER         => false,
+    //         CURLOPT_HTTPHEADER     => ['Authorization: Bearer ' . $apiKey->value],
+    //         CURLOPT_FAILONERROR    => false,
+    //         CURLOPT_POST           => true,
+    //         CURLOPT_POSTFIELDS     => http_build_query($data),
+    //         CURLOPT_IPRESOLVE      => CURL_IPRESOLVE_V4
+    //     ]);
 
-        $response = curl_exec($curl);
-        $error = curl_error($curl);
+    //     $response = curl_exec($curl);
+    //     $error = curl_error($curl);
 
-        curl_close($curl);
-        $data = json_decode($response, true)['data'];
+    //     curl_close($curl);
+    //     $data = json_decode($response, true)['data'];
 
-        return view('tripay::result', compact('data', 'profile'));
-    }
+    //     return view('tripay::result', compact('data', 'profile'));
+    // }
 
     public function handle(Request $request)
     {
@@ -368,19 +376,25 @@ class TripayController extends Controller
             $detail = OrderDetail::leftJoin('orders', 'order_details.order_id', 'orders.id')
                 ->leftJoin('pakets', 'orders.paket_id', 'pakets.id')
                 ->where('order_details.invoice_number', $invoices)->first();
+            $transaction = Transaction::where('merchant_ref', $invoices)->get();
+            $count = count($transaction);
+
+            // if($count >= 1){
+            //     $trans = $invoices;
+            //     return redirect()->route('tripay.trans', $trans);
+            // }
 
             if($detail == null){
-                $errors = "Invoice Number Not Found";
+                $errors = "Nomor Invoice Tidak Ditemukan";
                 return redirect()->route('tripay.failed', $errors);
             }
 
             if($detail->is_payed == 1){
-                $errors = "Invoice Already Payed";
+                $errors = "Nomor Invoice Sudah Dibayarkan";
                 return redirect()->route('tripay.great', $errors);
             }
 
             $amount = intval($detail->harga_paket);
-
             $profile = Setting::all();
             $apiKey = Setting::find(47);
             $privateKey   = Setting::find(48);
@@ -420,7 +434,7 @@ class TripayController extends Controller
                 'expired_time' => (time() + (24 * 60 * 60)), // 24 jam
                 'signature'    => hash_hmac('sha256', $merchantCode->value.$merchantRef.$amount, $privateKey->value)
             ];
-
+            $signature = $data['signature'];
             $curl = curl_init();
 
             curl_setopt_array($curl, [
@@ -445,6 +459,7 @@ class TripayController extends Controller
             $inv->reference = $data['reference'];
             $inv->fee_customer = $data['fee_customer'];
             $inv->fee_merchant = $data['fee_merchant'];
+            $inv->pay_signature = $signature;
             $inv->save();
             // Kirim WA
             $set = Setting::find(46);
@@ -522,22 +537,14 @@ class TripayController extends Controller
 
                 $response = curl_exec($curl);
                 curl_close($curl);
-
-                $check = Transaction::where('merchant_ref','=', $inv->invoice_number)->get();
-                if($check->count() > 2){
-                    $check_last = Transaction::where('merchant_ref','=', $inv->invoice_number)
-                    ->where('status','=','UNPAID')
-                    ->first();
-                    $check_last->delete();
-                }else{
-                    Transaction::create($data);
-                }
+                Transaction::create($data);
             }
-
             return view('tripay::result', compact('data', 'profile'));
+
         }catch(Exception $errors){
-            $errors = "Oops! Something went wrong nomor Invoice tidak tepat";
-            return view('tripay::failed', compact('profile', $errors));
+            $profile = Setting::all();
+            // $errors = "Call Customer Services";
+            return view('tripay::failed', ['profile' => $profile, 'errors' => $errors]);
         }
     }
 
