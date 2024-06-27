@@ -241,7 +241,8 @@ class OrderController extends Controller
     }
 
     public function sendwa(Request $request, OrderDetail $order){
-        $orderdetail = OrderDetail::where('id', '=', $order->id)->first();
+        $orderdetail = OrderDetail::where('order_id', '=', $order->id)->where('is_payed','=', 0)->first();
+        // dd($order->id);
         $tripay_sand_box = Setting::find(49);
 
         if($tripay_sand_box->value == "on"){
